@@ -1,0 +1,50 @@
+name: Actualizar Galería de Fotos
+
+on:
+  push:
+    paths:
+      - 'fotos/**'
+
+jobs:
+  build-gallery:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Generar gallery.json desde /fotos
+        run: |
+          echo "[]" > fotos/gallery.json
+          python3 - <<'EOF'
+          import os, json
+
+          extensions = {'.jpg', '.jpeg', '.png', '.webp', '.gif'}
+          fotos_dir = 'fotos'
+          output = []
+
+          for filename in sorted(os.listdir(fotos_dir)):
+              ext = os.path.splitext(filename)[1].lower()
+              if ext in extensions:
+                  name = os.path.splitext(filename)[0].replace('-', ' ').replace('_', ' ').title()
+                  output.append({
+                      "archivo": filename,
+                      "titulo": name,
+                      "ruta": f"fotos/{filename}"
+                  })
+
+          with open(f'{fotos_dir}/gallery.json', 'w', encoding='utf-8') as f:
+              json.dump(output, f, ensure_ascii=False, indent=2)
+
+          print(f"✅ Galería generada con {len(output)} fotos.")
+          EOF
+
+      - name: Commit gallery.json actualizado
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add fotos/gallery.json
+          git diff --staged --quiet || git commit -m "🖼️ Auto: actualizar galería [skip ci]"
+          git push
