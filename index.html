@@ -559,22 +559,22 @@
     const MESES = ['', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
       'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
-    fetch(`https://res.cloudinary.com/${CLOUD}/image/list/utrecht.json`)
+    fetch('./fotos/gallery.json')
       .then(r => r.json())
-      .then(data => renderGaleria(data.resources || []))
-      .catch(() => {
-        fetch('./fotos/gallery.json')
-          .then(r => r.json())
-          .then(fotos => {
-            const resources = fotos.map(f => ({
-              public_id: f.public_id || f.archivo,
-              created_at: f.fecha ? f.fecha + 'T00:00:00Z' : new Date().toISOString(),
-              _url: f.url || f.ruta
-            }));
-            renderGaleria(resources);
+      .then(fotos => {
+        const resources = fotos
+          .filter(f => {
+            const id = (f.public_id || f.archivo || '').toLowerCase();
+            return !id.includes('avatar') && !id.startsWith('samples/');
           })
-          .catch(() => { document.getElementById('n-fotos').textContent = '0'; });
-      });
+          .map(f => ({
+            public_id: f.public_id || f.archivo,
+            created_at: f.fecha ? f.fecha + 'T00:00:00Z' : new Date().toISOString(),
+            _url: f.url
+          }));
+        renderGaleria(resources);
+      })
+      .catch(() => { document.getElementById('n-fotos').textContent = '0'; });
 
     function renderGaleria(resources) {
       if (!resources.length) return;
