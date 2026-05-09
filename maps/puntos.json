@@ -1,77 +1,704 @@
 [
   {
-    "nombre": "Utrecht 30 km",
-    "archivo": "utrecht-30km.gpx",
-    "emoji": "🚴",
-    "distancia": "30 km circular",
-    "duracion": "~2h",
-    "dificultad": "Fácil",
-    "momento": "Cualquier día",
-    "descripcion": "Ruta circular desde el centro de Utrecht. La más urbana y accesible. Perfecta para conocer los barrios y salidas naturales de la ciudad.",
-    "destino_coords": [
-      52.09343,
-      5.11657
+    "nombre": "Domtoren",
+    "tipo": "Imprescindible",
+    "coordenadas": [
+      52.0906,
+      5.1213
     ],
-    "fuente": "https://www.routeyou.com"
+    "nota": "El punto más alto de Utrecht. Súbela una vez, la vista vale cada escalón.",
+    "color": "orange",
+    "foto": ""
   },
   {
-    "nombre": "Ronda Castillo de Haar y Slot Zuylen",
-    "archivo": "kasteel-de-haar.gpx",
-    "emoji": "🏰",
-    "distancia": "40 km circular",
-    "duracion": "~2h 40min",
-    "dificultad": "Fácil",
-    "momento": "Fin de semana",
-    "descripcion": "Mi ruta favorita. Dos castillos en un mismo trayecto — Kasteel de Haar y Slot Zuylen. Sale por Leidsche Rijn, el tramo final por Haarzuilens es de cuento.",
-    "destino_coords": [
+    "nombre": "Oudegracht",
+    "tipo": "Imprescindible",
+    "coordenadas": [
+      52.0915,
+      5.119
+    ],
+    "nota": "Perfecto para pasear al atardecer. Las terrazas bajas son únicas en el mundo.",
+    "color": "orange",
+    "foto": ""
+  },
+  {
+    "nombre": "Biblioteca Neude",
+    "tipo": "Imprescindible",
+    "coordenadas": [
+      52.0924,
+      5.1233
+    ],
+    "nota": "La plaza central. La biblioteca dentro del antiguo edificio postal es impresionante.",
+    "color": "orange",
+    "foto": ""
+  },
+  {
+    "nombre": "Hoog Catharijne",
+    "tipo": "Imprescindible",
+    "coordenadas": [
+      52.0887,
+      5.1104
+    ],
+    "nota": "El camino cubierto desde la estación. Útil en invierno pero confuso la primera vez.",
+    "color": "orange",
+    "foto": ""
+  },
+  {
+    "nombre": "Griftpark",
+    "tipo": "Parque",
+    "coordenadas": [
+      52.0974,
+      5.1287
+    ],
+    "nota": "El parque perfecto para leer un libro. Menos turístico que el Wilhelminapark.",
+    "color": "blue",
+    "foto": ""
+  },
+  {
+    "nombre": "Ruta Bici Vecht",
+    "tipo": "Imprescindible",
+    "coordenadas": [
+      52.105,
+      5.142
+    ],
+    "nota": "La ruta junto al río Vecht. Ideal para los domingos sin prisa.",
+    "color": "orange",
+    "foto": ""
+  },
+  {
+    "nombre": "Casa Rietveld Schröder",
+    "tipo": "Imprescindible",
+    "descripcion": "Monumento a visitar",
+    "coordenadas": [
+      52.0853,
+      5.1476
+    ],
+    "nota": "Patrimonio UNESCO. Obra maestra del De Stijl. Visita obligatoria.",
+    "color": "orange",
+    "google_maps_url": "http://maps.google.com/?cid=14310927392420034785",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Thermen Maarssen",
+    "tipo": "Recomendado",
+    "descripcion": "El mejor resort spa de lujo de Utrecht, con piscinas termales, saunas y tratamientos de belleza",
+    "coordenadas": [
+      52.1463548,
+      5.0830963
+    ],
+    "nota": "⭐ 5/5 · Westbroeksebinnenweg 2a, 3612 AH Tienhoven, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0x6900a70e5858b867",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Papi’s Comfort Kitchen",
+    "tipo": "Recomendado",
+    "descripcion": "Mi lugar de reference del confort food en Utrecht, pide un pollo con gofres",
+    "coordenadas": [
+      52.0832773,
+      5.1232179
+    ],
+    "nota": "⭐ 5/5 · Twijnstraat 15, 3511 ZG Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0x19a58d0d70b1ed02",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "La Calle",
+    "tipo": "Recomendado",
+    "descripcion": "Tacos mexicanos muy buenos y a buen precio",
+    "coordenadas": [
+      52.0992171,
+      5.1160176
+    ],
+    "nota": "⭐ 5/5 · Adelaarstraat 25-A, 3514 CA Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0x626e8a46159dfc8",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Kippig Delivery",
+    "tipo": "Recomendado",
+    "descripcion": "El pollo para llevar más rico de Utrecht, con patatas fritas riquísimas",
+    "coordenadas": [
+      52.0943788,
+      5.1183141
+    ],
+    "nota": "⭐ 5/5 · Loeff Berchmakerstraat 15, 3512 TC Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0x8c2eaabe3cc7054e",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Pitot",
+    "tipo": "Recomendado",
+    "descripcion": "Un italiano de calidad con opciones vegetarianas y veganas, con un menú que cambia cada temporada",
+    "coordenadas": [
+      52.0930373,
+      5.1029349
+    ],
+    "nota": "⭐ 5/5 · Vleutenseweg 95, 3532 HA Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0xbb3265971561bb5a",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Chillz",
+    "tipo": "Recomendado",
+    "descripcion": "Comida mediterranea de calidad",
+    "coordenadas": [
+      52.0880963,
+      5.1212235
+    ],
+    "nota": "⭐ 5/5 · Oudegracht aan de Werf 211, 3511 NH Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0xb342905c04732796",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "LOX Leidsche Rijn",
+    "tipo": "Recomendado",
+    "descripcion": "Bagels estilo neoyorquino con ingredientes de calidad y opciones vegetarianas",
+    "coordenadas": [
+      52.0947284,
+      5.0654728
+    ],
+    "nota": "⭐ 5/5 · Lissabonpromenade 6, 3541 DP Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0xe99995d17f3c3d19",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "The Streetfood Club Utrecht",
+    "tipo": "Recomendado",
+    "descripcion": "El sitio a donde ir cuando no sabes a dónde ir, todo muy rico",
+    "coordenadas": [
+      52.0929923,
+      5.1221492
+    ],
+    "nota": "⭐ 5/5 · Janskerkhof 9, 3512 BK Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0xb6864ff257b2ba1b",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Restaurant San Siro",
+    "tipo": "Recomendado",
+    "descripcion": "Un excelente lugar para comer bien de precio, con comida italiana de calidad y un ambiente acogedor",
+    "coordenadas": [
+      52.0915251,
+      5.1204843
+    ],
+    "nota": "⭐ 5/5 · Oudkerkhof 9, 3512 GH Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0x3ed2e841e9e96d80",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Tuincentrum Steck Utrecht",
+    "tipo": "Recomendado",
+    "descripcion": "Mi vivero de plantas favorito, enorme y muy buena atencion, con cafeteria y restaurante",
+    "coordenadas": [
+      52.1183538,
+      5.1332917
+    ],
+    "nota": "⭐ 5/5 · Gageldijk 3, 3566 ME Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0x8d311e04751b37aa",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Kwalitaria Leidsche Rijn - Utrecht",
+    "tipo": "Recomendado",
+    "descripcion": "Ni se te ocurra venir aqui",
+    "coordenadas": [
+      52.0973384,
+      5.0623945
+    ],
+    "nota": "⭐ 1/5 · Grauwaartsingel 446, 3541 DA Utrecht, Países Bajos",
+    "color": "red",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0x76a9e824bf4bb096",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Lotus Health Studio",
+    "tipo": "Recomendado",
+    "descripcion": "Servicio de masajes y tratamientos de belleza",
+    "coordenadas": [
+      52.1280389,
+      5.0393972
+    ],
+    "nota": "⭐ 5/5 · Industrieweg 58, 3606 AS Maarssen, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0x1be3d44487459079",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Casa di Roma",
+    "tipo": "Recomendado",
+    "descripcion": "Pizza rica para llevar a casa con masa fina y crujiente",
+    "coordenadas": [
+      52.0951037,
+      5.129871
+    ],
+    "nota": "⭐ 5/5 · Biltstraat 75, 3572 AJ Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0xb09778f2caa2d791",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "De Bakkert in de Hondekop",
+    "tipo": "Recomendado",
+    "descripcion": "Panaderia de calidad, cierra a las 13.30 y se agota todo muy rápido",
+    "coordenadas": [
+      52.1001913,
+      5.0954751
+    ],
+    "nota": "⭐ 5/5 · Wisselstraat 7, 3551 WG Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0xaf3e0ffcb65bb191",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Vegitalian",
+    "tipo": "Recomendado",
+    "descripcion": "Restaurante vegetariano de pizzas y pasta",
+    "coordenadas": [
+      52.0929051,
+      5.1193188
+    ],
+    "nota": "⭐ 5/5 · Schoutenstraat 17, 3512 GA Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0xe8979e3183f143b3",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Casa Ferreira",
+    "tipo": "Recomendado",
+    "descripcion": "Portugal, pasteles de nata y café de calidad",
+    "coordenadas": [
+      52.0920614,
+      5.1174798
+    ],
+    "nota": "⭐ 5/5 · Vinkenburgstraat 2, 3512 AB Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0x16fafca61d02d9b0",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Farina - Italian Comfort Food",
+    "tipo": "Recomendado",
+    "descripcion": "Comida italiana de calidad, incluido postres",
+    "coordenadas": [
+      52.0825596,
+      5.1232664
+    ],
+    "nota": "⭐ 5/5 · Twijnstraat 53, 3511 ZH Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0xb95b25c9ead14e06",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Firma Pickles Burgers & Wines",
+    "tipo": "Recomendado",
+    "descripcion": "Hamburguesas pequeñas y muy caras",
+    "coordenadas": [
+      52.092098,
+      5.1162155
+    ],
+    "nota": "⭐ 2/5 · Drieharingstraat 1, 3511 BH Utrecht, Países Bajos",
+    "color": "red",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0xd785a782899cfdd6",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Ombretta Utrecht",
+    "tipo": "Recomendado",
+    "descripcion": "Bocatas italianos take-away, dejate llevar por las sugerencias del chef",
+    "coordenadas": [
+      52.09464,
+      5.1194398
+    ],
+    "nota": "⭐ 5/5 · Hardebollenstraat 4, 3512 TP Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0x23e1c1af55d8cb79",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Trattoria da Roberto Utrecht 🇮🇹",
+    "tipo": "Recomendado",
+    "descripcion": "No te pierdas la mejor trattoria de Utrecht",
+    "coordenadas": [
+      52.0826627,
+      5.1399587
+    ],
+    "nota": "⭐ 5/5 · Bosboomstraat 24, 3582 KH Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0xac3ac91e71ce5cff",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Restaurant Badhuis",
+    "tipo": "Recomendado",
+    "descripcion": "Mi restaurante favorito de Utrecht, con menú de temporada y productos locales",
+    "coordenadas": [
+      52.1028912,
+      5.1231799
+    ],
+    "nota": "⭐ 5/5 · Willem van Noortplein 19, 3514 GK Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0x544bc26a74512eaf",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Takumi Ramen Utrecht Vredenburg",
+    "tipo": "Recomendado",
+    "descripcion": "La cadena de ramen, gyozas y baos más famosa extendida en Europa",
+    "coordenadas": [
+      52.0932324,
+      5.1139201
+    ],
+    "nota": "⭐ 5/5 · Vredenburg 21, 3511 BB Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0xbdbb3ff21c0a923c",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Have A Roll Utrecht",
+    "tipo": "Recomendado",
+    "descripcion": "Rollos de canela variados y muy dulces",
+    "coordenadas": [
+      52.0901704,
+      5.1198854
+    ],
+    "nota": "⭐ 5/5 · Zadelstraat 4, 3511 LT Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0xbd19b417265ba1bf",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Restaurant Gys Utrecht",
+    "tipo": "Recomendado",
+    "descripcion": "El vegetariano más famoso de Utrecht, con opciones veganas y sin gluten",
+    "coordenadas": [
+      52.0974242,
+      5.1060164
+    ],
+    "nota": "⭐ 5/5 · Amsterdamsestraatweg 113, 3513 CV Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0x6de0446721679556",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Soep-er Utrecht",
+    "tipo": "Recomendado",
+    "descripcion": "El lugar de las sopas en Utrecht",
+    "coordenadas": [
+      52.0908673,
+      5.1204254
+    ],
+    "nota": "⭐ 5/5 · Vismarkt 16, 3511 KS Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0x6ba073dd85a0cbbc",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "SHOKUDO Japanese Food & Design",
+    "tipo": "Recomendado",
+    "descripcion": "Comida japonesa de muy buena calidad y contundente",
+    "coordenadas": [
+      52.0980231,
+      5.1290807
+    ],
+    "nota": "⭐ 5/5 · Kleinesingel 41, 3572 CG Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0xd2ad375f92e5a74",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Sissy-Boy",
+    "tipo": "Recomendado",
+    "descripcion": "Si buscas ropa diferente a la habitual ven a ver mi tienda favorita de Utrecht",
+    "coordenadas": [
+      52.0906693,
+      5.1179044
+    ],
+    "nota": "⭐ 5/5 · Steenweg 40, 3511 JS Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0x2f179ea954e0c5d8",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Los Amigos Leidsche Rijn",
+    "tipo": "Recomendado",
+    "descripcion": "Tapas españolas de calidad",
+    "coordenadas": [
+      52.0975624,
+      5.0629243
+    ],
+    "nota": "⭐ 5/5 · Brusselplein 1, 3541 CH Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0x22e212b0478bf779",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Juuls Hummus",
+    "tipo": "Recomendado",
+    "descripcion": "Boles de hummus con carne o berenjena riquísimos",
+    "coordenadas": [
+      52.0888925,
+      5.1362975
+    ],
+    "nota": "⭐ 5/5 · Baanstraat 1, 3581 VS Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0x2bef9fe46f3ca699",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "30 ML Coffee Roasters",
+    "tipo": "Recomendado",
+    "descripcion": "El café de especialidad más cercano a la estación central",
+    "coordenadas": [
+      52.0931638,
+      5.1137724
+    ],
+    "nota": "⭐ 4/5 · Vredenburg 23, 3511 RN Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0xe179f09caab3f50",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Restaurant Sevilla",
+    "tipo": "Recomendado",
+    "descripcion": "Buena terraza al sol de tarde y productos españoles",
+    "coordenadas": [
+      52.0922778,
+      5.1222757
+    ],
+    "nota": "⭐ 5/5 · Korte Jansstraat 5, 3512 GM Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0xc148f4a4431552b9",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Cibari",
+    "tipo": "Recomendado",
+    "descripcion": "Tacos y burritos Tex-Mex",
+    "coordenadas": [
+      52.1009322,
+      5.0998679
+    ],
+    "nota": "⭐ 5/5 · Amsterdamsestraatweg 257, 3551 CE Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0xb8e704486771e8c4",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Coffee Leute Brauhaus",
+    "tipo": "Recomendado",
+    "descripcion": "Café y cerveza artesanal en un ambiente acogedor",
+    "coordenadas": [
+      52.0794752,
+      5.1225502
+    ],
+    "nota": "⭐ 5/5 · Westerkade 30, 3511 HC Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0x80e7da7bb3b72205",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Hoog Catharijne",
+    "tipo": "Recomendado",
+    "descripcion": "El centro comercial más grande de Utrecht, con tiendas de moda, restaurantes",
+    "coordenadas": [
+      52.0902775,
+      5.1125297
+    ],
+    "nota": "⭐ 5/5 · Godebaldkwartier 54, 3511 DX Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0xd8d238a33c06a6bb",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Umai Ramen",
+    "tipo": "Recomendado",
+    "descripcion": "Ramen de alta calidad con una amplia selección de sabores",
+    "coordenadas": [
+      52.0979371,
+      5.0654432
+    ],
+    "nota": "⭐ 3/5 · Brusselplein 85, 3541 CH Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0xbad0772f998b2d",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Café Tilt!",
+    "tipo": "Recomendado",
+    "descripcion": "Café con una amplia selección de bebidas y comidas ligeras",
+    "coordenadas": [
+      52.0947714,
+      5.1256512
+    ],
+    "nota": "⭐ 4/5 · Lange Jufferstraat 62, 3512 EE Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0x99983cbc3e6d5359",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Karibu - breakfast, coffee, brunch, drinks and events",
+    "tipo": "Recomendado",
+    "descripcion": "Desayuno, café, brunch, bebidas y eventos",
+    "coordenadas": [
+      52.098652,
+      5.1249032
+    ],
+    "nota": "⭐ 5/5 · Hooghiemstraplein 55, 3514 AX Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0xe1bf2c1356244b92",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Museo del ferrocarril de Utrecht",
+    "tipo": "Imprescindible",
+    "descripcion": "Museo histórico con exposiciones permanentes y temporales",
+    "coordenadas": [
+      52.0879257,
+      5.1311934
+    ],
+    "nota": "⭐ 5/5 · Maliebaanstation 16, 3581 XW Utrecht, Países Bajos",
+    "color": "orange",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0x80a5b3dcfb9e5e47",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "De Nijverheid Kunstcentrum- Café - Expositie - Culturele Vrijhaven",
+    "tipo": "Recomendado",
+    "descripcion": "Centro cultural con exposiciones de arte y actividades",
+    "coordenadas": [
+      52.1003377,
+      5.0835733
+    ],
+    "nota": "⭐ 4/5 · Nijverheidskade 15, 3534 AZ Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0xdad333cfdedfa8cb",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Vlaamsch Broodhuys Twijnstraat Utrecht",
+    "tipo": "Recomendado",
+    "descripcion": "Panadería y pastelería con productos locales",
+    "coordenadas": [
+      52.082731,
+      5.1236212
+    ],
+    "nota": "⭐ 4/5 · Twijnstraat 34, 3511 ZL Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0x638781b41f321d78",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Pathé Utrecht Leidsche Rijn",
+    "tipo": "Recomendado",
+    "descripcion": "Cine con sesiones de película y comodidades, mi cine favorito con sala IMAX",
+    "coordenadas": [
+      52.0966748,
+      5.0697616
+    ],
+    "nota": "⭐ 5/5 · Berlijnplein 100, 3541 CM Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0x780d45f7e5b3ac34",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Brandstof Lunchroom & Bedrijfscatering",
+    "tipo": "Recomendado",
+    "descripcion": "Catering y restaurante con comidas deliciosas",
+    "coordenadas": [
+      52.1018334,
+      5.0977258
+    ],
+    "nota": "⭐ 5/5 · Amsterdamsestraatweg 314, 3551 CT Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0xd288dcc4a356f1db",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Castillo de Haar",
+    "tipo": "Imprescindible",
+    "coordenadas": [
       52.1214185,
       4.9863057
     ],
-    "fuente": "https://www.routeyou.com"
+    "nota": "⭐ 5/5 · Kasteellaan 1, 3455 RR Utrecht, Países Bajos",
+    "color": "orange",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0x87d27ff36625ecd8",
+    "reseña_propia": true
   },
   {
-    "nombre": "Vechtstreek en forma de 8",
-    "archivo": "vechtstreek-8.gpx",
-    "emoji": "🌊",
-    "distancia": "39 km en 8",
-    "duracion": "~2h 40min",
-    "dificultad": "Fácil",
-    "momento": "Domingos",
-    "descripcion": "Ruta en forma de ocho por el Vechtstreek. Dos loops distintos que se cruzan en el centro — puedes hacer uno o los dos según el tiempo que tengas.",
-    "destino_coords": [
-      52.17175,
-      5.00182
+    "nombre": "Bunk Restaurant Utrecht",
+    "tipo": "Recomendado",
+    "descripcion": "Restaurante con una amplia selección de platos deliciosos, es una antigua iglesia reconvertida en restaurante",
+    "coordenadas": [
+      52.0936687,
+      5.1117195
     ],
-    "fuente": "https://www.routeyou.com"
+    "nota": "⭐ 5/5 · Catharijnekade 9, 3511 RT Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0xe506b57657ccb0f3",
+    "reseña_propia": true
   },
   {
-    "nombre": "Utrecht junto al Vecht",
-    "archivo": "vecht-norte.gpx",
-    "emoji": "🏡",
-    "distancia": "47 km circular",
-    "duracion": "~3h",
-    "dificultad": "Moderada",
-    "momento": "Sábados con tiempo",
-    "descripcion": "La ruta más larga junto al río Vecht. Mansiones del Siglo de Oro, molinos y prados de vacas. Ideal con bici eléctrica si quieres ir sin prisa.",
-    "destino_coords": [
-      52.12328,
-      5.06885
+    "nombre": "Zocherpark",
+    "tipo": "Parque",
+    "descripcion": "Parque con instalaciones para deportes y actividades al aire libre",
+    "coordenadas": [
+      52.0886009,
+      5.1278539
     ],
-    "fuente": "https://www.routeyou.com"
+    "nota": "⭐ 5/5 · Lepelenburg 101, 3512 NJ Utrecht, Países Bajos",
+    "color": "blue",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0x340715f68a9a0ab7",
+    "reseña_propia": true
   },
   {
-    "nombre": "Bunnik — Línea de Agua del Sur",
-    "archivo": "waterlinie-sur.gpx",
-    "emoji": "🏯",
-    "distancia": "44 km circular",
-    "duracion": "~2h 55min",
-    "dificultad": "Moderada",
-    "momento": "Sábados de mañana",
-    "descripcion": "Los fuertes de la Nueva Línea de Agua Holandesa al sur — Patrimonio UNESCO. Sale por Bunnik y recorre el sistema defensivo de fuertes históricos junto al Kromme Rijn.",
-    "destino_coords": [
-      52.07069,
-      5.17682
+    "nombre": "Park Lepelenburg",
+    "tipo": "Parque",
+    "descripcion": "Parque con instalaciones para deportes y actividades al aire libre",
+    "coordenadas": [
+      52.0894913,
+      5.1282834
     ],
-    "fuente": "https://www.routeyou.com"
+    "nota": "⭐ 5/5 · 3512 NJ Utrecht, Países Bajos",
+    "color": "blue",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0xea93fb21d7a949d1",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Familie van Rijk",
+    "tipo": "Recomendado",
+    "descripcion": "Vino, embutidos, quesos y bocatas de calidad para llevar a casa",
+    "coordenadas": [
+      52.1044828,
+      5.0938765
+    ],
+    "nota": "⭐ 5/5 · Amsterdamsestraatweg 379, 3551 CK Utrecht, Países Bajos",
+    "color": "green",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0x9c3ee455372a8580",
+    "reseña_propia": true
+  },
+  {
+    "nombre": "Slot Zuylen",
+    "tipo": "Imprescindible",
+    "descripcion": "Castillo medieval del siglo XVIII con jardines y un museo",
+    "coordenadas": [
+      52.1271179,
+      5.0731494
+    ],
+    "nota": "⭐ 5/5 · Tournooiveld 1, 3611 AS Oud Zuilen, Países Bajos",
+    "color": "orange",
+    "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0xb8ccd46b73ce45ed",
+    "reseña_propia": true
   }
 ]
