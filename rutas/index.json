@@ -1,0 +1,80 @@
+[
+  {
+    "nombre": "Castillo de Haar",
+    "archivo": "kasteel-de-haar.gpx",
+    "emoji": "🏰",
+    "distancia": "27 km ida y vuelta",
+    "duracion": "~1h 40min",
+    "dificultad": "Fácil",
+    "momento": "Cualquier día",
+    "descripcion": "Mi ruta favorita. Sale desde el centro por Leidsche Rijn y llega al castillo más grande de los Países Bajos. El tramo final por Haarzuilens es de cuento. Vuelta por el Máximapark.",
+    "destino_coords": [52.1214185, 4.9863057],
+    "fuente": "https://www.komoot.com/smarttour/4973119",
+    "highlights": ["Kasteel de Haar", "Máximapark", "Haarzuilens", "Leidsche Rijn"]
+  },
+  {
+    "nombre": "Río Vecht hacia el norte",
+    "archivo": "vecht-norte.gpx",
+    "emoji": "🌊",
+    "distancia": "35-40 km circular",
+    "duracion": "~2h 15min",
+    "dificultad": "Fácil",
+    "momento": "Domingos sin prisa",
+    "descripcion": "El camino junto al Vecht hacia Maarssen y más allá. Mansiones del Siglo de Oro holandés, molinos de viento, pontones y prados de vacas. El más tranquilo de todos.",
+    "destino_coords": [52.1463548, 5.0830963],
+    "fuente": "https://www.komoot.com/smarttour/e1863842552",
+    "highlights": ["Slot Zuylen", "Maarssen", "Thermen Maarssen", "Vecht oevers"]
+  },
+  {
+    "nombre": "Amelisweerd y Kromme Rijn",
+    "archivo": "amelisweerd.gpx",
+    "emoji": "🌳",
+    "distancia": "20 km circular",
+    "duracion": "~1h 15min",
+    "dificultad": "Fácil",
+    "momento": "Después del trabajo",
+    "descripcion": "El bosque más cercano al centro. Robles centenarios, el río Kromme Rijn y el Fort Rhijnauwen. Termina con café en el Theehuis Rhijnauwen con vistas al agua. La ruta más corta y más bonita.",
+    "destino_coords": [52.0620, 5.1700],
+    "fuente": "https://www.komoot.com/guide/65590/cycling-in-utrecht",
+    "highlights": ["Amelisweerd", "Fort Rhijnauwen", "Kromme Rijn", "Theehuis Rhijnauwen"]
+  },
+  {
+    "nombre": "Fortenlinie Waterlinie",
+    "archivo": "waterlinie.gpx",
+    "emoji": "🏯",
+    "distancia": "45 km circular",
+    "duracion": "~2h 30min",
+    "dificultad": "Moderada",
+    "momento": "Sábados de mañana",
+    "descripcion": "La línea de fuertes de la Nueva Línea de Agua Holandesa, Patrimonio UNESCO. Sale por el Vecht, pasa por Breukelen y vuelve por los fuertes históricos.",
+    "destino_coords": [52.2000, 5.0100],
+    "fuente": "https://www.holland-cycling.com/where-to-go/day-trips/195-utrecht-forts-cycle-route",
+    "highlights": ["Fort bij Vechten", "Fort Rhijnauwen", "Breukelen", "Vecht"]
+  },
+  {
+    "nombre": "Slot Zuylen circular",
+    "archivo": "slot-zuylen.gpx",
+    "emoji": "🏰",
+    "distancia": "18 km circular",
+    "duracion": "~1h 10min",
+    "dificultad": "Fácil",
+    "momento": "Tardecita entre semana",
+    "descripcion": "La ruta más corta con castillo. Slot Zuylen es del año 1250, uno de los más antiguos del Vecht. Poca gente, caminos junto al río, vistas al agua en cada curva.",
+    "destino_coords": [52.1238, 5.0596],
+    "fuente": "https://www.fietsknoop.nl/fietsroute/20905588/rondje-slot-zuylen-kasteel-de-haar",
+    "highlights": ["Slot Zuylen", "Oud-Zuilen", "Vecht oevers"]
+  },
+  {
+    "nombre": "Utrechtse Heuvelrug (Zeist)",
+    "archivo": "heuvelrug-zeist.gpx",
+    "emoji": "🌲",
+    "distancia": "50 km circular",
+    "duracion": "~2h 30min",
+    "dificultad": "Moderada",
+    "momento": "Fin de semana",
+    "descripcion": "La única ruta con algo de desnivel. Bosques y brezales del Parque Nacional Utrechtse Heuvelrug hacia Zeist. En agosto los brezales son morados. El contraste con la ciudad es brutal.",
+    "destino_coords": [52.0880, 5.2280],
+    "fuente": "https://www.komoot.com/guide/65589/road-cycling-routes-in-utrecht",
+    "highlights": ["Zeist", "Utrechtse Heuvelrug", "Kaapse Bossen", "Brezales"]
+  }
+]

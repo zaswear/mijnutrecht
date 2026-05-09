@@ -339,14 +339,21 @@
 
   <!-- ══════════════ GALERÍA ══════════════ -->
   <section id="fotos" class="max-w-5xl mx-auto px-4 mb-20">
-    <h2 class="hero-title text-3xl font-bold mb-2">Galería</h2>
-    <p class="text-utrecht-dark/60 mb-6 text-sm">Fotos propias. Actualizada automáticamente al subir imágenes al repositorio.</p>
+    <div class="flex items-end justify-between mb-6">
+      <div>
+        <h2 class="hero-title text-3xl font-bold mb-1">Galería</h2>
+        <p class="text-utrecht-dark/60 text-sm">Una selección aleatoria. Diferente cada vez que visitas.</p>
+      </div>
+      <button id="btn-ver-todas"
+        style="display:none"
+        class="text-sm font-medium text-utrecht-canal hover:underline whitespace-nowrap ml-4">
+      </button>
+    </div>
     <div id="galeria" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      <!-- Se rellena con JS desde fotos/gallery.json -->
       <div class="foto-card col-span-2 md:col-span-3 lg:col-span-4">
         <div class="foto-placeholder rounded-lg text-center flex flex-col gap-2" style="height:180px">
           <span class="text-3xl">📷</span>
-          <span>Sube imágenes a <code>/fotos</code> para que aparezcan aquí</span>
+          <span>Cargando fotos...</span>
         </div>
       </div>
     </div>
@@ -493,10 +500,12 @@
     const MESES  = ['','Enero','Febrero','Marzo','Abril','Mayo','Junio',
                     'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 
+    const PREVIEW_COUNT = 8;
+
     fetch('./fotos/gallery.json')
       .then(r => r.json())
       .then(fotos => {
-        const resources = fotos
+        const all = fotos
           .filter(f => {
             const id = (f.public_id || f.archivo || '').toLowerCase();
             return !id.includes('avatar') && !id.startsWith('samples/');
@@ -506,16 +515,33 @@
             created_at: f.fecha ? f.fecha + 'T00:00:00Z' : new Date().toISOString(),
             _url: f.url
           }));
-        renderGaleria(resources);
+
+        document.getElementById('n-fotos').textContent = all.length;
+
+        // Shuffle and show preview
+        const shuffled = [...all].sort(() => Math.random() - 0.5);
+        const preview  = shuffled.slice(0, PREVIEW_COUNT);
+        const rest     = shuffled.slice(PREVIEW_COUNT);
+
+        renderGaleria(preview, false);
+
+        // "Ver todas" button
+        if (rest.length > 0) {
+          const btn = document.getElementById('btn-ver-todas');
+          btn.textContent = `Ver todas las fotos (${all.length}) →`;
+          btn.style.display = 'inline-block';
+          btn.addEventListener('click', () => {
+            renderGaleria(rest, true); // append remaining
+            btn.style.display = 'none';
+          });
+        }
       })
       .catch(() => { document.getElementById('n-fotos').textContent = '0'; });
 
-    function renderGaleria(resources) {
+    function renderGaleria(resources, append = false) {
       if (!resources.length) return;
-      resources.sort((a, b) => (b.created_at || '').localeCompare(a.created_at || ''));
-      document.getElementById('n-fotos').textContent = resources.length;
       const grid = document.getElementById('galeria');
-      grid.innerHTML = '';
+      if (!append) grid.innerHTML = '';
       resources.forEach(r => {
         const src = r._url ||
           `https://res.cloudinary.com/${CLOUD}/image/upload/f_auto,q_auto,w_600/${r.public_id}.jpg`;
