@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,12 +11,12 @@
   <!-- Leaflet.js -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Leaflet GPX plugin -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 
   <script>
     tailwind.config = {
@@ -29,14 +28,90 @@
           },
           colors: {
             utrecht: {
-              canal: '#2a5c8a',
-              brick: '#b5533c',
-              cream: '#f5f0e8',
-              dark: '#1a1a2e',
-              mist: '#e8ecf0',
+              canal:   '#2a5c8a',
+              brick:   '#b5533c',
+              cream:   '#f5f0e8',
+              dark:    '#1a1a2e',
+              mist:    '#e8ecf0',
             }
           }
         }
+      }
+    }
+
+
+    // ── RUTAS GPX ─────────────────────────────────────────
+    const rutaColors = ['#ea580c','#2563eb','#16a34a','#9333ea','#e11d48'];
+    let rutaLayers = {};
+
+    fetch('./rutas/index.json')
+      .then(r => r.json())
+      .then(rutas => {
+        const lista = document.getElementById('rutas-list');
+        lista.innerHTML = '';
+        document.getElementById('n-rutas').textContent = rutas.length;
+
+        rutas.forEach((ruta, i) => {
+          const color = rutaColors[i % rutaColors.length];
+
+          // Tarjeta
+          const card = document.createElement('div');
+          card.className = 'bg-white rounded-xl p-5 shadow-sm border border-utrecht-mist flex items-start gap-4 cursor-pointer hover:shadow-md transition-shadow';
+          card.innerHTML = `
+            <div class="text-3xl">${ruta.emoji || '🚴'}</div>
+            <div class="flex-1">
+              <p class="font-semibold">${ruta.nombre}</p>
+              <p class="text-sm text-utrecht-dark/50 mb-1">${ruta.distancia} · ${ruta.dificultad} · ${ruta.momento}</p>
+              <p class="text-sm text-utrecht-dark/70 mb-2">${ruta.descripcion}</p>
+              <div class="flex gap-3 items-center">
+                <button onclick="toggleRuta('${ruta.archivo}', '${color}', this)"
+                  class="text-xs font-medium px-3 py-1 rounded-full border-2 transition-all"
+                  style="border-color:${color}; color:${color}">
+                  Ver en mapa
+                </button>
+                ${ruta.archivo ? `<a href="rutas/${ruta.archivo}" class="text-xs text-utrecht-canal font-medium hover:underline">↓ GPX</a>` : '<span class="text-xs text-utrecht-dark/30 italic">GPX próximamente</span>'}
+              </div>
+            </div>`;
+          lista.appendChild(card);
+
+          // Pre-cargar en mapa si tiene GPX
+          if (ruta.archivo) cargarGPX(ruta.archivo, color);
+        });
+      })
+      .catch(() => {
+        // Sin index.json, mostrar placeholder
+        document.getElementById('rutas-list').innerHTML = `
+          <div class="col-span-2 text-center py-8 text-utrecht-dark/40 text-sm">
+            Añade rutas creando <code>rutas/index.json</code>
+          </div>`;
+      });
+
+    function cargarGPX(archivo, color) {
+      if (rutaLayers[archivo]) return;
+      new L.GPX(`rutas/${archivo}`, {
+        async: true,
+        polyline_options: { color, weight: 4, opacity: .85 },
+        marker_options: { startIconUrl: null, endIconUrl: null, shadowUrl: null }
+      }).on('loaded', function(e) {
+        rutaLayers[archivo] = e.target;
+        e.target.remove(); // cargado pero oculto hasta que el usuario lo activa
+      }).addTo(map);
+    }
+
+    function toggleRuta(archivo, color, btn) {
+      const layer = rutaLayers[archivo];
+      if (!layer) return;
+      if (map.hasLayer(layer)) {
+        map.removeLayer(layer);
+        btn.textContent = 'Ver en mapa';
+        btn.style.background = '';
+        btn.style.color = color;
+      } else {
+        layer.addTo(map);
+        map.fitBounds(layer.getBounds(), { padding: [40, 40] });
+        btn.textContent = 'Ocultar';
+        btn.style.background = color;
+        btn.style.color = '#fff';
       }
     }
 
@@ -62,74 +137,45 @@
       document.getElementById('lightbox-img').src = item.src.replace('w_600', 'w_1800');
       document.getElementById('lightbox-caption').textContent = item.titulo;
     }
-    document.getElementById('lightbox').addEventListener('click', function (e) {
+    document.getElementById('lightbox').addEventListener('click', function(e) {
       if (e.target === this) closeLightbox();
     });
     document.addEventListener('keydown', e => {
       if (!document.getElementById('lightbox').classList.contains('open')) return;
       if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowLeft') moveLightbox(-1);
+      if (e.key === 'ArrowLeft')  moveLightbox(-1);
       if (e.key === 'ArrowRight') moveLightbox(1);
     });
   </script>
 
   <style>
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: #f5f0e8;
-    }
+    body { font-family: 'DM Sans', sans-serif; background: #f5f0e8; }
 
     /* ── Nav ── */
-    nav a {
-      transition: color .2s;
-    }
-
-    nav a:hover {
-      color: #b5533c;
-    }
+    nav a { transition: color .2s; }
+    nav a:hover { color: #b5533c; }
 
     /* ── Hero ── */
-    .hero-title {
-      font-family: 'Playfair Display', serif;
-    }
+    .hero-title { font-family: 'Playfair Display', serif; }
 
     /* ── Mapa ── */
-    #map {
-      height: 480px;
-      border-radius: .75rem;
-      z-index: 0;
-    }
+    #map { height: 480px; border-radius: .75rem; z-index: 0; }
 
     /* ── Galería ── */
     .foto-card {
       overflow: hidden;
       border-radius: .5rem;
       background: #fff;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
       transition: transform .25s, box-shadow .25s;
     }
-
-    .foto-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, .14);
-    }
-
-    .foto-card img {
-      width: 100%;
-      height: 220px;
-      object-fit: cover;
-      display: block;
-    }
-
+    .foto-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.14); }
+    .foto-card img { width: 100%; height: 220px; object-fit: cover; display: block; }
     .foto-placeholder {
-      width: 100%;
-      height: 220px;
+      width: 100%; height: 220px;
       background: linear-gradient(135deg, #dde4ec 0%, #c8d5e3 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #8a9ab0;
-      font-size: .85rem;
+      display: flex; align-items: center; justify-content: center;
+      color: #8a9ab0; font-size: .85rem;
     }
 
     /* ── Filtros del mapa ── */
@@ -142,35 +188,12 @@
       border: 2px solid transparent;
       transition: all .2s;
     }
-
-    .filtro-btn.active {
-      border-color: #1a1a2e;
-    }
-
-    .filtro-btn[data-color="green"] {
-      background: #d1fae5;
-      color: #065f46;
-    }
-
-    .filtro-btn[data-color="red"] {
-      background: #fee2e2;
-      color: #991b1b;
-    }
-
-    .filtro-btn[data-color="blue"] {
-      background: #dbeafe;
-      color: #1e40af;
-    }
-
-    .filtro-btn[data-color="orange"] {
-      background: #ffedd5;
-      color: #9a3412;
-    }
-
-    .filtro-btn[data-color="all"] {
-      background: #1a1a2e;
-      color: #fff;
-    }
+    .filtro-btn.active { border-color: #1a1a2e; }
+    .filtro-btn[data-color="green"]  { background: #d1fae5; color: #065f46; }
+    .filtro-btn[data-color="red"]    { background: #fee2e2; color: #991b1b; }
+    .filtro-btn[data-color="blue"]   { background: #dbeafe; color: #1e40af; }
+    .filtro-btn[data-color="orange"] { background: #ffedd5; color: #9a3412; }
+    .filtro-btn[data-color="all"]    { background: #1a1a2e; color: #fff; }
 
     /* ── Leaflet popup ── */
     .leaflet-popup-content-wrapper {
@@ -183,114 +206,48 @@
       background: #fff;
       border-radius: .75rem;
       padding: 1.25rem;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, .06);
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
     }
-
-    .stars {
-      color: #f59e0b;
-      letter-spacing: 2px;
-    }
+    .stars { color: #f59e0b; letter-spacing: 2px; }
 
     /* ── Lightbox ── */
     #lightbox {
-      display: none;
-      position: fixed;
-      inset: 0;
-      z-index: 1000;
-      background: rgba(10, 10, 20, .92);
-      backdrop-filter: blur(6px);
-      align-items: center;
-      justify-content: center;
-      cursor: zoom-out;
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      background: rgba(10,10,20,.92); backdrop-filter: blur(6px);
+      align-items: center; justify-content: center; cursor: zoom-out;
     }
-
-    #lightbox.open {
-      display: flex;
-    }
-
+    #lightbox.open { display: flex; }
     #lightbox img {
-      max-width: min(92vw, 1200px);
-      max-height: 90vh;
-      object-fit: contain;
-      border-radius: .5rem;
-      box-shadow: 0 24px 80px rgba(0, 0, 0, .6);
+      max-width: min(92vw, 1200px); max-height: 90vh;
+      object-fit: contain; border-radius: .5rem;
+      box-shadow: 0 24px 80px rgba(0,0,0,.6);
       animation: lb-in .2s ease;
     }
-
-    @keyframes lb-in {
-      from {
-        opacity: 0;
-        transform: scale(.96);
-      }
-
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-
+    @keyframes lb-in { from { opacity:0; transform:scale(.96); } to { opacity:1; transform:scale(1); } }
     #lightbox-caption {
-      position: fixed;
-      bottom: 1.5rem;
-      left: 0;
-      right: 0;
-      text-align: center;
-      color: rgba(255, 255, 255, .6);
-      font-size: .85rem;
-      font-family: 'DM Sans', sans-serif;
-      pointer-events: none;
+      position: fixed; bottom: 1.5rem; left: 0; right: 0;
+      text-align: center; color: rgba(255,255,255,.6);
+      font-size: .85rem; font-family: 'DM Sans', sans-serif; pointer-events: none;
     }
-
     #lightbox-close {
-      position: fixed;
-      top: 1.25rem;
-      right: 1.5rem;
-      color: rgba(255, 255, 255, .7);
-      font-size: 1.75rem;
-      cursor: pointer;
-      line-height: 1;
-      background: none;
-      border: none;
+      position: fixed; top: 1.25rem; right: 1.5rem;
+      color: rgba(255,255,255,.7); font-size: 1.75rem;
+      cursor: pointer; line-height: 1; background: none; border: none;
       transition: color .15s;
     }
-
-    #lightbox-close:hover {
-      color: #fff;
+    #lightbox-close:hover { color: #fff; }
+    #lightbox-prev, #lightbox-next {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      color: rgba(255,255,255,.7); font-size: 2.5rem;
+      cursor: pointer; background: none; border: none;
+      padding: 1rem; transition: color .15s;
     }
-
-    #lightbox-prev,
-    #lightbox-next {
-      position: fixed;
-      top: 50%;
-      transform: translateY(-50%);
-      color: rgba(255, 255, 255, .7);
-      font-size: 2.5rem;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 1rem;
-      transition: color .15s;
-    }
-
-    #lightbox-prev:hover,
-    #lightbox-next:hover {
-      color: #fff;
-    }
-
-    #lightbox-prev {
-      left: 1rem;
-    }
-
-    #lightbox-next {
-      right: 1rem;
-    }
-
-    .foto-card {
-      cursor: zoom-in;
-    }
+    #lightbox-prev:hover, #lightbox-next:hover { color: #fff; }
+    #lightbox-prev { left: 1rem; }
+    #lightbox-next { right: 1rem; }
+    .foto-card { cursor: zoom-in; }
   </style>
 </head>
-
 <body class="text-utrecht-dark">
 
   <!-- ══════════════ NAV ══════════════ -->
@@ -303,10 +260,7 @@
         <a href="#reviews">Reseñas</a>
         <a href="#rutas">Rutas</a>
         <a href="https://github.com/zaswear/mijnutrecht" target="_blank" class="flex items-center gap-1">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-            <path
-              d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-          </svg>
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
           GitHub
         </a>
       </div>
@@ -333,27 +287,23 @@
           background: #f5f0e8;
         "></div>
         <!-- Foto -->
-        <img src="fotos/avatar.png" alt="Foto de perfil" style="
+        <img
+          src="fotos/avatar.png"
+          alt="Foto de perfil"
+          style="
             width: 96px; height: 96px;
             border-radius: 50%;
             object-fit: cover;
             object-position: center 15%;
             position: relative;
             display: block;
-          " />
+          "
+        />
       </div>
     </div>
 
     <style>
-      @keyframes spin {
-        from {
-          transform: rotate(0deg);
-        }
-
-        to {
-          transform: rotate(360deg);
-        }
-      }
+      @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     </style>
 
     <p class="text-sm font-medium text-utrecht-canal uppercase tracking-widest mb-3">Utrecht, Países Bajos</p>
@@ -364,12 +314,9 @@
       Una bitácora visual honesta de mi ciudad adoptiva — sin folletos turísticos, con criterio propio.
     </p>
     <div class="flex justify-center gap-8 mt-8 text-sm text-utrecht-dark/50">
-      <span id="count-fotos" class="flex flex-col items-center"><strong class="text-2xl font-bold text-utrecht-dark"
-          id="n-fotos">—</strong> fotos</span>
-      <span id="count-puntos" class="flex flex-col items-center"><strong class="text-2xl font-bold text-utrecht-dark"
-          id="n-puntos">—</strong> lugares</span>
-      <span class="flex flex-col items-center"><strong class="text-2xl font-bold text-utrecht-dark">∞</strong>
-        rutas</span>
+      <span id="count-fotos" class="flex flex-col items-center"><strong class="text-2xl font-bold text-utrecht-dark" id="n-fotos">—</strong> fotos</span>
+      <span id="count-puntos" class="flex flex-col items-center"><strong class="text-2xl font-bold text-utrecht-dark" id="n-puntos">—</strong> lugares</span>
+      <span class="flex flex-col items-center"><strong class="text-2xl font-bold text-utrecht-dark" id="n-rutas">—</strong> rutas</span>
     </div>
   </header>
 
@@ -393,8 +340,7 @@
   <!-- ══════════════ GALERÍA ══════════════ -->
   <section id="fotos" class="max-w-5xl mx-auto px-4 mb-20">
     <h2 class="hero-title text-3xl font-bold mb-2">Galería</h2>
-    <p class="text-utrecht-dark/60 mb-6 text-sm">Fotos propias. Actualizada automáticamente al subir imágenes al
-      repositorio.</p>
+    <p class="text-utrecht-dark/60 mb-6 text-sm">Fotos propias. Actualizada automáticamente al subir imágenes al repositorio.</p>
     <div id="galeria" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       <!-- Se rellena con JS desde fotos/gallery.json -->
       <div class="foto-card col-span-2 md:col-span-3 lg:col-span-4">
@@ -418,8 +364,7 @@
           <span class="stars">★★★★★</span>
         </div>
         <p class="text-xs text-utrecht-dark/40 mb-2 uppercase tracking-wide">Café · Centrum</p>
-        <p class="text-sm text-utrecht-dark/70">El mejor café de especialidad de la ciudad. Cola los fines de semana,
-          pero vale la espera. El croissant de mantequilla es de otro nivel.</p>
+        <p class="text-sm text-utrecht-dark/70">El mejor café de especialidad de la ciudad. Cola los fines de semana, pero vale la espera. El croissant de mantequilla es de otro nivel.</p>
       </div>
       <div class="review-card">
         <div class="flex justify-between items-start mb-2">
@@ -427,8 +372,7 @@
           <span class="stars">★★★☆☆</span>
         </div>
         <p class="text-xs text-utrecht-dark/40 mb-2 uppercase tracking-wide">Eetcafé · Wittevrouwenstraat</p>
-        <p class="text-sm text-utrecht-dark/70">Ambiente local auténtico. La comida es correcta, no espectacular. Lo
-          mejor: la cerveza local y que no hay turistas.</p>
+        <p class="text-sm text-utrecht-dark/70">Ambiente local auténtico. La comida es correcta, no espectacular. Lo mejor: la cerveza local y que no hay turistas.</p>
       </div>
       <div class="review-card border-l-4 border-utrecht-brick">
         <div class="flex justify-between items-start mb-2">
@@ -436,8 +380,7 @@
           <span class="stars">★☆☆☆☆</span>
         </div>
         <p class="text-xs text-utrecht-dark/40 mb-2 uppercase tracking-wide">Centro comercial · Estación</p>
-        <p class="text-sm text-utrecht-dark/70">Trampa para turistas. Todo caro, todo mediocre. Útil para refugiarse de
-          la lluvia y poco más.</p>
+        <p class="text-sm text-utrecht-dark/70">Trampa para turistas. Todo caro, todo mediocre. Útil para refugiarse de la lluvia y poco más.</p>
       </div>
       <div class="review-card">
         <p class="text-sm text-utrecht-dark/40 italic">
@@ -450,37 +393,15 @@
   <!-- ══════════════ RUTAS ══════════════ -->
   <section id="rutas" class="max-w-5xl mx-auto px-4 mb-24">
     <h2 class="hero-title text-3xl font-bold mb-2">Rutas en Bici</h2>
-    <p class="text-utrecht-dark/60 mb-6 text-sm">Archivos GPX listos para descargar y cargar en tu Garmin o teléfono.
-    </p>
+    <p class="text-utrecht-dark/60 mb-6 text-sm">Cargadas desde Komoot. Se dibujan en el mapa al hacer click.</p>
     <div id="rutas-list" class="grid md:grid-cols-2 gap-4">
-      <div class="bg-white rounded-xl p-5 shadow-sm border border-utrecht-mist flex items-start gap-4">
-        <div class="text-3xl">🚴</div>
-        <div>
-          <p class="font-semibold">Ruta Vecht</p>
-          <p class="text-sm text-utrecht-dark/50 mb-1">~18 km · Fácil · Domingos</p>
-          <p class="text-sm text-utrecht-dark/70">El río Vecht al norte de Utrecht. Caminos de arcilla, poca gente.
-            Ideal para desconectar.</p>
-          <a href="rutas/vecht.gpx" class="mt-2 inline-block text-xs text-utrecht-canal font-medium hover:underline">↓
-            Descargar GPX</a>
-        </div>
-      </div>
-      <div class="bg-white rounded-xl p-5 shadow-sm border border-utrecht-mist flex items-start gap-4">
-        <div class="text-3xl">🌿</div>
-        <div>
-          <p class="font-semibold">Amelisweerd</p>
-          <p class="text-sm text-utrecht-dark/50 mb-1">~12 km · Fácil · Tardecita</p>
-          <p class="text-sm text-utrecht-dark/70">El bosque al sureste de la ciudad. Árboles enormes, ardillas y ruido
-            cero.</p>
-          <span class="mt-2 inline-block text-xs text-utrecht-dark/30 italic">GPX próximamente</span>
-        </div>
-      </div>
+      <!-- Se rellena dinámicamente desde rutas/index.json -->
     </div>
   </section>
 
   <!-- ══════════════ FOOTER ══════════════ -->
   <footer class="border-t border-utrecht-mist bg-utrecht-cream py-8 text-center text-sm text-utrecht-dark/40">
-    <p>Hecho con ☕ en Utrecht · <a href="https://github.com/zaswear/mijnutrecht"
-        class="hover:text-utrecht-canal transition-colors">Código en GitHub</a></p>
+    <p>Hecho con ☕ en Utrecht · <a href="https://github.com/zaswear/mijnutrecht" class="hover:text-utrecht-canal transition-colors">Código en GitHub</a></p>
   </footer>
 
   <!-- ══════════════ JS ══════════════ -->
@@ -494,9 +415,9 @@
     }).addTo(map);
 
     const colorMap = {
-      green: '#16a34a',
-      red: '#dc2626',
-      blue: '#2563eb',
+      green:  '#16a34a',
+      red:    '#dc2626',
+      blue:   '#2563eb',
       orange: '#ea580c',
     };
 
@@ -523,13 +444,26 @@
         document.getElementById('n-puntos').textContent = data.length;
 
         data.forEach(lugar => {
+          const gmapsLink = lugar.google_maps_url
+            ? `<a href="${lugar.google_maps_url}" target="_blank" rel="noopener"
+                style="display:inline-block;margin-top:.5rem;font-size:.75rem;color:#16a34a;font-weight:600;text-decoration:none">
+                🗺 Ver en Google Maps →</a>`
+            : '';
+          const tipoStr = lugar.tipo
+            ? (Array.isArray(lugar.tipo) ? lugar.tipo.join(' · ') : lugar.tipo).toUpperCase()
+            : '';
+          const descripcion = lugar.descripcion
+            ? `<p style="margin:.3rem 0 .2rem;font-size:.82rem;color:#555;font-style:italic">${lugar.descripcion}</p>`
+            : '';
           const marker = L.marker(lugar.coordenadas, { icon: makeIcon(lugar.color) })
             .addTo(map)
             .bindPopup(`
-              <div style="font-family:'DM Sans',sans-serif; min-width:160px">
-                <strong style="font-size:1rem">${lugar.nombre}</strong><br>
-                <span style="font-size:.75rem;color:#888;text-transform:uppercase;letter-spacing:1px">${lugar.tipo}</span><br>
-                <p style="margin-top:.4rem;font-size:.85rem;color:#333">${lugar.nota}</p>
+              <div style="font-family:'DM Sans',sans-serif; min-width:190px; max-width:240px">
+                <strong style="font-size:1rem">${lugar.nombre}</strong>
+                ${descripcion}
+                <p style="margin:.3rem 0 .1rem;font-size:.83rem;color:#333">${lugar.nota}</p>
+                ${gmapsLink}
+                ${tipoStr ? `<div style="margin-top:.5rem;font-size:.65rem;color:#aaa;letter-spacing:.08em">${tipoStr}</div>` : ''}
               </div>
             `);
           marker._color = lugar.color;
@@ -555,9 +489,9 @@
     });
 
     // ── GALERÍA — carga directa desde Cloudinary ─────────
-    const CLOUD = 'dkn49zkfr';
-    const MESES = ['', 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
-      'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+    const CLOUD  = 'dkn49zkfr';
+    const MESES  = ['','Enero','Febrero','Marzo','Abril','Mayo','Junio',
+                    'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 
     fetch('./fotos/gallery.json')
       .then(r => r.json())
@@ -568,7 +502,7 @@
             return !id.includes('avatar') && !id.startsWith('samples/');
           })
           .map(f => ({
-            public_id: f.public_id || f.archivo,
+            public_id:  f.public_id || f.archivo,
             created_at: f.fecha ? f.fecha + 'T00:00:00Z' : new Date().toISOString(),
             _url: f.url
           }));
@@ -585,7 +519,7 @@
       resources.forEach(r => {
         const src = r._url ||
           `https://res.cloudinary.com/${CLOUD}/image/upload/f_auto,q_auto,w_600/${r.public_id}.jpg`;
-        const dt = r.created_at ? new Date(r.created_at) : new Date();
+        const dt    = r.created_at ? new Date(r.created_at) : new Date();
         const titulo = `Utrecht · ${MESES[dt.getMonth() + 1]} ${dt.getFullYear()}`;
         const div = document.createElement('div');
         div.className = 'foto-card';
@@ -611,5 +545,4 @@
     <div id="lightbox-caption"></div>
   </div>
 </body>
-
 </html>
