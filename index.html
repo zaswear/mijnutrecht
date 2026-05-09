@@ -462,43 +462,44 @@
       });
     });
 
-    // ── GALERÍA — carga directa desde Cloudinary ─────────
-    const CLOUD  = 'dkn49zkfr';
-    const MESES  = ['','Enero','Febrero','Marzo','Abril','Mayo','Junio',
-                    'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-
+    // ── GALERÍA — carga automática desde Cloudinary API ──
+    const CLOUD      = 'dkn49zkfr';
+    const API_KEY    = '535915498563789';
+    const API_SECRET = 'EGvnEoV3AizC4UeiueEKBWUq9II';
+    const MESES      = ['','Enero','Febrero','Marzo','Abril','Mayo','Junio',
+                        'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
     const PREVIEW_COUNT = 8;
 
-    fetch('./fotos/gallery.json')
+    fetch(`https://api.cloudinary.com/v1_1/${CLOUD}/resources/image?max_results=500&direction=desc`, {
+      headers: { 'Authorization': 'Basic ' + btoa(API_KEY + ':' + API_SECRET) }
+    })
       .then(r => r.json())
-      .then(fotos => {
-        const all = fotos
-          .filter(f => {
-            const id = (f.public_id || f.archivo || '').toLowerCase();
+      .then(data => {
+        const all = (data.resources || [])
+          .filter(r => {
+            const id = r.public_id.toLowerCase();
             return !id.includes('avatar') && !id.startsWith('samples/');
           })
-          .map(f => ({
-            public_id:  f.public_id || f.archivo,
-            created_at: f.fecha ? f.fecha + 'T00:00:00Z' : new Date().toISOString(),
-            _url: f.url
+          .map(r => ({
+            public_id:  r.public_id,
+            created_at: r.created_at,
+            _url: `https://res.cloudinary.com/${CLOUD}/image/upload/f_auto,q_auto,w_600/${r.public_id}.${r.format}`
           }));
 
         document.getElementById('n-fotos').textContent = all.length;
 
-        // Shuffle and show preview
         const shuffled = [...all].sort(() => Math.random() - 0.5);
         const preview  = shuffled.slice(0, PREVIEW_COUNT);
         const rest     = shuffled.slice(PREVIEW_COUNT);
 
         renderGaleria(preview, false);
 
-        // "Ver todas" button
         if (rest.length > 0) {
           const btn = document.getElementById('btn-ver-todas');
           btn.textContent = `Ver todas las fotos (${all.length}) →`;
           btn.style.display = 'inline-block';
           btn.addEventListener('click', () => {
-            renderGaleria(rest, true); // append remaining
+            renderGaleria(rest, true);
             btn.style.display = 'none';
           });
         }
