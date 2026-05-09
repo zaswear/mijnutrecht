@@ -68,5 +68,105 @@
     "foto": "flora/fotos/linde.jpg",
     "descripcion": "El tilo europeo es el árbol urbano más característico de Utrecht: sus avenidas históricas, los bordes del Oudegracht y los parques están llenos de tilos centenarios. En junio y julio florecen llenando el aire de un perfume dulce y característico que inunda el centro. Sus pequeñas flores amarillentas también son un recurso fundamental para las abejas urbanas.",
     "donde_ver": "Oudegracht, Maliebaan, Wilhelminapark, Lepelenburg"
+  },
+  {
+    "nombre": "Narcis",
+    "nombre_cientifico": "Narcissus pseudonarcissus",
+    "emoji": "🌼",
+    "temporada": "primavera",
+    "meses": "Marzo – Abril",
+    "foto": "flora/fotos/narcis.jpg",
+    "descripcion": "El narciso es, junto al tulipán, la flor que mejor representa la primavera holandesa. Sus trompetas amarillas o blancas cubren los parques de Utrecht desde mediados de marzo. A diferencia del tulipán, es una planta silvestre en algunas zonas del Heuvelrug, donde crece en grupos naturales bajo los árboles. El Keukenhof, a 45 minutos en bici, tiene miles de variedades.",
+    "donde_ver": "Wilhelminapark, Griftpark, Máximapark"
+  },
+  {
+    "nombre": "Hyacint",
+    "nombre_cientifico": "Hyacinthus orientalis",
+    "emoji": "💐",
+    "temporada": "primavera",
+    "meses": "Marzo – Abril",
+    "foto": "flora/fotos/hyacint.jpg",
+    "descripcion": "El jacinto holandés es famoso en todo el mundo por su perfume intenso y sus densos racimos de flores moradas, rosas o blancas. Los Países Bajos son el mayor productor mundial de bulbos de jacinto. En Utrecht los encontrarás en los mercados de flores de primavera y en los jardines privados. Cuando florecen en masa, su olor puede percibirse desde la acera.",
+    "donde_ver": "Janskerkhof (Plantenmarkt), jardines privados, balcones"
+  },
+  {
+    "nombre": "Kastanjeboom",
+    "nombre_cientifico": "Aesculus hippocastanum",
+    "emoji": "🌰",
+    "temporada": "primavera",
+    "meses": "Mayo",
+    "foto": "flora/fotos/kastanje.jpg",
+    "descripcion": "El castaño de Indias es el árbol más visible de las calles y parques de Utrecht en mayo: sus grandes flores blancas en pirámide —llamadas 'velas'— transforman cada árbol en un candelabro natural. En otoño caen las castañas brillantes que los niños holandeses recogen con entusiasmo. El Maliebaan y el Wilhelminapark tienen algunos ejemplares centenarios.",
+    "donde_ver": "Maliebaan, Wilhelminapark, Lepelenburg, Heuvelrug"
+  },
+  {
+    "nombre": "Magnolia",
+    "nombre_cientifico": "Magnolia × soulangeana",
+    "emoji": "🌸",
+    "temporada": "primavera",
+    "meses": "Marzo – Abril",
+    "foto": "flora/fotos/magnolia.jpg",
+    "descripcion": "La magnolia japonesa es una de las flores más espectaculares del inicio de la primavera en Utrecht: florece antes de que salgan las hojas, cubriendo el árbol de grandes pétalos blancos y rosados. Hay magnolias memorables en los jardines de las casas del barrio Wittevrouwen y en el Wilhelminapark. El espectáculo dura solo dos o tres semanas, así que hay que estar atentos.",
+    "donde_ver": "Wittevrouwen, Wilhelminapark, Twijnstraat"
+  },
+  {
+    "nombre": "Roos",
+    "nombre_cientifico": "Rosa",
+    "emoji": "🌹",
+    "temporada": "verano",
+    "meses": "Junio – Septiembre",
+    "foto": "flora/fotos/roos.jpg",
+    "descripcion": "Los Países Bajos son el mayor exportador mundial de rosas cortadas. En Utrecht las encontrarás en los mercados, en los jardines privados y en los parques públicos durante todo el verano. El Griftpark tiene un jardín de rosas especialmente cuidado. Las variedades son incontables: desde rosas silvestres en los márgenes de caminos hasta híbridos de jardín de todos los colores.",
+    "donde_ver": "Griftpark, Wilhelminapark, Máximapark"
+  },
+  {
+    "nombre": "Zonnebloem",
+    "nombre_cientifico": "Helianthus annuus",
+    "emoji": "🌻",
+    "temporada": "verano",
+    "meses": "Julio – Septiembre",
+    "foto": "flora/fotos/zonnebloem.jpg",
+    "descripcion": "Los girasoles aparecen en los campos agrícolas de la provincia de Utrecht a partir de julio, formando manchas amarillas visibles desde las rutas ciclistas. También se cultivan en jardines y balcones por toda la ciudad. En los mercados de verano son una compra habitual: un ramo de girasoles es el souvenir floral de los meses más cálidos.",
+    "donde_ver": "Campos en rutas al Vecht, mercados de verano, Máximapark"
+  },
+  {
+    "nombre": "Lavendel",
+    "nombre_cientifico": "Lavandula angustifolia",
+    "emoji": "💜",
+    "temporada": "verano",
+    "meses": "Junio – Agosto",
+    "foto": "flora/fotos/lavendel.jpg",
+    "descripcion": "La lavanda es una presencia habitual en los jardines y parterres de Utrecht, especialmente en los barrios históricos. Sus espigas moradas y su perfume característico son inconfundibles en los meses de verano. Aunque no es nativa de los Países Bajos, se ha adaptado bien al clima y convive con las plantas autóctonas en parques y jardines comunitarios.",
+    "donde_ver": "Jardines del centro, Wittevrouwen, Wilhelminapark"
+  },
+  {
+    "nombre": "Aster",
+    "nombre_cientifico": "Aster amellus",
+    "emoji": "🌸",
+    "temporada": "otoño",
+    "meses": "Septiembre – Octubre",
+    "foto": "flora/fotos/aster.jpg",
+    "descripcion": "Los asteres son las flores que toman el relevo del verano cuando la mayoría de las plantas ya han terminado. Sus pétalos radiantes en morado, rosa o blanco alegran los parques y jardines de Utrecht en septiembre y octubre. Son muy populares en los mercados de otoño y fundamentales para las abejas y mariposas, que aún buscan néctar antes del invierno.",
+    "donde_ver": "Griftpark, Máximapark, jardines y balcones"
+  },
+  {
+    "nombre": "Esdoorn",
+    "nombre_cientifico": "Acer platanoides",
+    "emoji": "🍁",
+    "temporada": "otoño",
+    "meses": "Octubre – Noviembre",
+    "foto": "flora/fotos/esdoorn.jpg",
+    "descripcion": "El arce noruego es uno de los árboles que más color aporta al otoño en Utrecht. Sus hojas —que pueden ser verdes o púrpuras según la variedad— se tornan amarillas, naranjas y rojas en octubre antes de caer. Junto con el castaño y el haya, define el aspecto de las avenidas arboladas del barrio Wittevrouwen y del Heuvelrug en los meses de otoño.",
+    "donde_ver": "Maliebaan, Wittevrouwen, Utrechtse Heuvelrug"
+  },
+  {
+    "nombre": "Beuk",
+    "nombre_cientifico": "Fagus sylvatica",
+    "emoji": "🌲",
+    "temporada": "otoño",
+    "meses": "Octubre – Noviembre",
+    "foto": "flora/fotos/beuk.jpg",
+    "descripcion": "El haya común es el árbol dominante en los bosques del Utrechtse Heuvelrug. Sus bosques son especialmente impresionantes en otoño, cuando las hojas se tiñen de cobrizos y dorados intensos antes de caer. En verano, el dosel cerrado crea una penumbra verde y fresca ideal para ciclistas. Algunos hayas del Heuvelrug tienen más de 200 años.",
+    "donde_ver": "Utrechtse Heuvelrug (Zeist, Driebergen, Amerongen)"
   }
 ]
