@@ -675,19 +675,6 @@
     "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Coffee+Leute+Brauhaus+52.0794752,5.1225502"
   },
   {
-    "nombre": "Hoog Catharijne",
-    "tipo": "Recomendado",
-    "coordenadas": [
-      52.090278,
-      5.112528
-    ],
-    "descripcion": "El centro comercial más grande de Utrecht, con tiendas de moda, restaurantes y ocio.",
-    "nota": "Un buen lugar para compras rápidas o resguardarse del frío.",
-    "color": "green",
-    "foto": "",
-    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Hoog+Catharijne+52.0902775,5.1125297"
-  },
-  {
     "nombre": "Umai Ramen",
     "tipo": "Recomendado",
     "coordenadas": [

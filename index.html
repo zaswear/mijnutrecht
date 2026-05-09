@@ -61,15 +61,18 @@
             <div class="text-3xl">${ruta.emoji || '🚴'}</div>
             <div class="flex-1">
               <p class="font-semibold">${ruta.nombre}</p>
-              <p class="text-sm text-utrecht-dark/50 mb-1">${ruta.distancia} · ${ruta.dificultad} · ${ruta.momento}</p>
+              <p class="text-sm text-utrecht-dark/50 mb-1">${ruta.distancia} · ${ruta.duracion} · ${ruta.dificultad}${ruta.desnivel ? ' · ↑ ' + ruta.desnivel : ''}</p>
               <p class="text-sm text-utrecht-dark/70 mb-2">${ruta.descripcion}</p>
-              <div class="flex gap-3 items-center">
+              ${ruta.highlights ? `<div class="flex flex-wrap gap-1 mb-3">${ruta.highlights.map(h => `<span class="text-xs bg-utrecht-mist text-utrecht-dark/60 px-2 py-0.5 rounded-full">${h}</span>`).join('')}</div>` : ''}
+              <div class="flex gap-3 items-center flex-wrap">
                 <button onclick="toggleRuta('${ruta.archivo}', '${color}', this)"
                   class="text-xs font-medium px-3 py-1 rounded-full border-2 transition-all"
                   style="border-color:${color}; color:${color}">
                   Ver en mapa
                 </button>
-                ${ruta.archivo ? `<a href="rutas/${ruta.archivo}" class="text-xs text-utrecht-canal font-medium hover:underline">↓ GPX</a>` : '<span class="text-xs text-utrecht-dark/30 italic">GPX próximamente</span>'}
+                ${ruta.archivo
+                  ? `<a href="rutas/${ruta.archivo}" class="text-xs text-utrecht-canal font-medium hover:underline">↓ GPX</a>`
+                  : `<a href="${ruta.fuente}" target="_blank" rel="noopener" class="text-xs text-utrecht-canal font-medium hover:underline">Ver ruta →</a>`}
               </div>
             </div>`;
           lista.appendChild(card);
@@ -137,8 +140,10 @@
       document.getElementById('lightbox-img').src = item.src.replace('w_600', 'w_1800');
       document.getElementById('lightbox-caption').textContent = item.titulo;
     }
-    document.getElementById('lightbox').addEventListener('click', function(e) {
-      if (e.target === this) closeLightbox();
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('lightbox').addEventListener('click', function(e) {
+        if (e.target === this) closeLightbox();
+      });
     });
     document.addEventListener('keydown', e => {
       if (!document.getElementById('lightbox').classList.contains('open')) return;
