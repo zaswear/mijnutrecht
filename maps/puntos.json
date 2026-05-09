@@ -3,8 +3,8 @@
     "nombre": "Domtoren",
     "tipo": "Imprescindible",
     "coordenadas": [
-      52.09064,
-      5.12125
+      52.090636,
+      5.121319
     ],
     "descripcion": "La torre gótica más alta de los Países Bajos y el símbolo absoluto de Utrecht.",
     "nota": "Súbela al menos una vez: la vista recompensa cada escalón.",
@@ -17,8 +17,8 @@
     "nombre": "Oudegracht",
     "tipo": "Imprescindible",
     "coordenadas": [
-      52.0915,
-      5.119
+      52.093352,
+      5.116794
     ],
     "descripcion": "El canal histórico que atraviesa Utrecht, famoso por sus muelles bajos únicos en el mundo.",
     "nota": "Perfecto para pasear al atardecer; las terrazas junto al agua son mágicas.",
@@ -31,8 +31,8 @@
     "nombre": "Biblioteca Neude",
     "tipo": "Imprescindible",
     "coordenadas": [
-      52.0924,
-      5.1233
+      52.093097,
+      5.118202
     ],
     "descripcion": "La biblioteca central de Utrecht, ubicada en el antiguo edificio postal, una joya arquitectónica renovada.",
     "nota": "La plaza es el corazón de la ciudad y la biblioteca por dentro es impresionante.",
@@ -45,8 +45,8 @@
     "nombre": "Hoog Catharijne",
     "tipo": "Imprescindible",
     "coordenadas": [
-      52.0887,
-      5.1104
+      52.090842,
+      5.111974
     ],
     "descripcion": "El mayor centro comercial de Utrecht, un corredor clave entre la estación y el centro histórico.",
     "nota": "Muy útil en invierno, aunque la primera vez puede ser un laberinto.",
@@ -59,8 +59,8 @@
     "nombre": "Griftpark",
     "tipo": "Parque",
     "coordenadas": [
-      52.0974,
-      5.1287
+      52.100508,
+      5.126903
     ],
     "descripcion": "Un parque amplio y moderno con zonas verdes, estanques y vistas abiertas.",
     "nota": "Perfecto para leer un libro y mucho menos turístico que Wilhelminapark.",
@@ -72,8 +72,8 @@
     "nombre": "Domkerk (Catedral de San Martín)",
     "tipo": "Imprescindible",
     "coordenadas": [
-      52.0903,
-      5.1214
+      52.090859,
+      5.122467
     ],
     "descripcion": "La catedral gótica de Utrecht, con un claustro espectacular y un jardín interior silencioso.",
     "nota": "Entra al claustro: es un oasis en pleno centro.",
@@ -86,8 +86,8 @@
     "nombre": "Pieterskerk",
     "tipo": "Imprescindible",
     "coordenadas": [
-      52.0897,
-      5.1321
+      52.091279,
+      5.124419
     ],
     "descripcion": "La iglesia románica más antigua de Utrecht, del siglo XI, un lugar lleno de historia.",
     "nota": "Un rincón silencioso y precioso, perfecto para desconectar.",
@@ -100,8 +100,8 @@
     "nombre": "Academiegebouw",
     "tipo": "Imprescindible",
     "coordenadas": [
-      52.0909,
-      5.1219
+      52.090265,
+      5.122520
     ],
     "descripcion": "El edificio histórico de la Universidad de Utrecht, un icono neorrenacentista.",
     "nota": "Un lugar elegante y lleno de vida académica.",
@@ -114,8 +114,8 @@
     "nombre": "Park Oog in Al",
     "tipo": "Parque",
     "coordenadas": [
-      52.0861,
-      5.0888
+      52.086880,
+      5.091230
     ],
     "descripcion": "Un parque tranquilo en el oeste de Utrecht, rodeado de canales y zonas verdes.",
     "nota": "Ideal para tumbarse al sol y desconectar del ruido.",
@@ -127,8 +127,8 @@
     "nombre": "Wilhelminapark",
     "tipo": "Parque",
     "coordenadas": [
-      52.0867,
-      5.1432
+      52.088327,
+      5.140561
     ],
     "descripcion": "El parque más emblemático de Utrecht, con amplias praderas y un lago central.",
     "nota": "Perfecto para un picnic de verano.",
@@ -140,8 +140,8 @@
     "nombre": "Julianapark",
     "tipo": "Parque",
     "coordenadas": [
-      52.1035,
-      5.1031
+      52.106439,
+      5.087249
     ],
     "descripcion": "Un parque histórico en el norte de Utrecht, famoso por su fauna y zonas amplias.",
     "nota": "Los pavos reales le dan un toque único.",
@@ -153,8 +153,8 @@
     "nombre": "Máximapark",
     "tipo": "Parque",
     "coordenadas": [
-      52.1027,
-      5.0289
+      52.10144,
+      5.02470
     ],
     "descripcion": "Un parque enorme con lagos, jardines temáticos y rutas perfectas para caminar o ir en bici.",
     "nota": "Un imprescindible si vives en Leidsche Rijn.",
@@ -166,8 +166,8 @@
     "nombre": "Fort Rijnauwen",
     "tipo": "Imprescindible",
     "coordenadas": [
-      52.0717,
-      5.1818
+      52.075075,
+      5.177779
     ],
     "descripcion": "El fuerte más grande del Waterlinie, rodeado de naturaleza y rutas guiadas.",
     "nota": "Un lugar fascinante para entender la historia defensiva del país.",
@@ -180,8 +180,8 @@
     "nombre": "Paushuize",
     "tipo": "Imprescindible",
     "coordenadas": [
-      52.0898,
-      5.1237
+      52.090453,
+      5.124106
     ],
     "descripcion": "La residencia histórica del único papa neerlandés, un edificio elegante y lleno de historia.",
     "nota": "Uno de los edificios más bonitos de Utrecht.",
@@ -194,8 +194,8 @@
     "nombre": "Janskerk",
     "tipo": "Imprescindible",
     "coordenadas": [
-      52.0931,
-      5.1227
+      52.093341,
+      5.121818
     ],
     "descripcion": "Una iglesia del siglo XI con un interior sorprendente y un papel clave en la historia local.",
     "nota": "Un lugar histórico que merece una visita tranquila.",
@@ -208,8 +208,8 @@
     "nombre": "Ruta Bici Vecht",
     "tipo": "Imprescindible",
     "coordenadas": [
-      52.105,
-      5.142
+      52.12,
+      5.05
     ],
     "descripcion": "Una ruta ciclista preciosa que sigue el río Vecht entre casas señoriales y naturaleza.",
     "nota": "Ideal para un domingo sin prisa.",
@@ -222,8 +222,8 @@
     "nombre": "Casa Rietveld Schröder",
     "tipo": "Imprescindible",
     "coordenadas": [
-      52.0853,
-      5.1476
+      52.085278,
+      5.147594
     ],
     "descripcion": "Obra maestra del movimiento De Stijl y Patrimonio de la Humanidad por la UNESCO.",
     "nota": "Una visita obligatoria para amantes de la arquitectura.",
@@ -236,8 +236,8 @@
     "nombre": "Beatrixpark",
     "tipo": "Parque",
     "coordenadas": [
-      52.0839,
-      5.0997
+      52.070241,
+      5.135036
     ],
     "descripcion": "Un parque amplio y tranquilo, perfecto para correr o pasear.",
     "nota": "Un espacio verde muy agradable para desconectar.",
@@ -249,8 +249,8 @@
     "nombre": "Thermen Maarssen",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.1463548,
-      5.0830963
+      52.146111,
+      5.083355
     ],
     "descripcion": "Un resort de spa de lujo con piscinas termales, saunas y tratamientos de bienestar.",
     "nota": "Un lugar perfecto para desconectar por completo.",
@@ -259,24 +259,24 @@
     "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Thermen+Maarssen+52.1463548,5.0830963"
   },
   {
-    "nombre": "Papi’s Comfort Kitchen",
+    "nombre": "Papis Comfort Kitchen",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0832773,
-      5.1232179
+      52.083291,
+      5.123379
     ],
     "descripcion": "Restaurante especializado en comfort food con platos contundentes y sabores caseros.",
     "nota": "Mi referencia en Utrecht: pide el pollo con gofres.",
     "color": "green",
     "foto": "",
-    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Papi’s+Comfort+Kitchen+52.0832773,5.1232179"
+    "google_maps_url": "https://www.google.com/maps/search/?api=1&query=Papis+Comfort+Kitchen+52.0832773,5.1232179"
   },
   {
     "nombre": "La Calle",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0992171,
-      5.1160176
+      52.099190,
+      5.116086
     ],
     "descripcion": "Taquería con auténticos sabores mexicanos y precios accesibles.",
     "nota": "Tacos muy buenos y a muy buen precio.",
@@ -288,8 +288,8 @@
     "nombre": "Kippig Delivery",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0943788,
-      5.1183141
+      52.094380,
+      5.118293
     ],
     "descripcion": "Local especializado en pollo para llevar, con raciones generosas y acompañamientos sabrosos.",
     "nota": "El pollo más rico de Utrecht y unas patatas fritas increíbles.",
@@ -301,8 +301,8 @@
     "nombre": "Pitot",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0930373,
-      5.1029349
+      52.093062,
+      5.103013
     ],
     "descripcion": "Restaurante italiano con opciones vegetarianas y veganas, y un menú que cambia por temporada.",
     "nota": "Un italiano de calidad que nunca falla.",
@@ -314,8 +314,8 @@
     "nombre": "Chillz",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0880963,
-      5.1212235
+      52.088126,
+      5.121335
     ],
     "descripcion": "Restaurante mediterráneo con platos frescos y sabrosos en un entorno acogedor.",
     "nota": "Comida mediterránea de calidad en pleno Oudegracht.",
@@ -327,8 +327,8 @@
     "nombre": "LOX Leidsche Rijn",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0947284,
-      5.0654728
+      52.094723,
+      5.065354
     ],
     "descripcion": "Cafetería especializada en bagels estilo neoyorquino con ingredientes frescos y opciones vegetarianas.",
     "nota": "Bagels de calidad en el corazón de Leidsche Rijn.",
@@ -340,8 +340,8 @@
     "nombre": "The Streetfood Club Utrecht",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0929923,
-      5.1221492
+      52.093037,
+      5.122164
     ],
     "descripcion": "Restaurante vibrante con cocina internacional y ambiente moderno, ideal para grupos.",
     "nota": "El sitio al que ir cuando no sabes dónde ir: todo está rico.",
@@ -353,8 +353,8 @@
     "nombre": "Restaurant San Siro",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0915251,
-      5.1204843
+      52.091623,
+      5.120388
     ],
     "descripcion": "Restaurante italiano acogedor con platos tradicionales y precios razonables.",
     "nota": "Comida italiana de calidad en un ambiente muy agradable.",
@@ -366,8 +366,8 @@
     "nombre": "Tuincentrum Steck Utrecht",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.1183538,
-      5.1332917
+      52.118350,
+      5.133579
     ],
     "descripcion": "Un vivero enorme con plantas, decoración, cafetería y un ambiente muy cuidado.",
     "nota": "Mi vivero favorito: variedad, calidad y muy buena atención.",
@@ -377,10 +377,10 @@
   },
   {
     "nombre": "Kwalitaria Leidsche Rijn - Utrecht",
-    "tipo": "Recomendado",
+    "tipo": "Evitar",
     "coordenadas": [
-      52.0973384,
-      5.0623945
+      52.087922,
+      5.054113
     ],
     "descripcion": "Cadena de comida rápida neerlandesa con hamburguesas, snacks y platos sencillos.",
     "nota": "Ni se te ocurra venir aquí.",
@@ -392,8 +392,8 @@
     "nombre": "Lotus Health Studio",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.1280389,
-      5.0393972
+      52.128036,
+      5.039369
     ],
     "descripcion": "Centro de masajes y tratamientos de belleza con un ambiente relajante y profesional.",
     "nota": "Un lugar ideal para desconectar con un masaje de calidad.",
@@ -405,8 +405,8 @@
     "nombre": "Casa di Roma",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0951037,
-      5.129871
+      52.095155,
+      5.129864
     ],
     "descripcion": "Pizzería para llevar con masa fina y crujiente, elaborada al estilo tradicional italiano.",
     "nota": "Pizza rica y ligera, perfecta para llevar a casa.",
@@ -418,8 +418,8 @@
     "nombre": "De Bakkert in de Hondekop",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.1001913,
-      5.0954751
+      52.100306,
+      5.095516
     ],
     "descripcion": "Panadería artesanal conocida por su pan fresco y productos que se agotan rápido.",
     "nota": "Llega pronto: cierra a las 13:30 y todo vuela.",
@@ -431,8 +431,8 @@
     "nombre": "Vegitalian",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0929051,
-      5.1193188
+      52.092902,
+      5.119310
     ],
     "descripcion": "Restaurante vegetariano especializado en pizzas y pasta con ingredientes frescos.",
     "nota": "Un vegetariano moderno y muy sabroso en pleno centro.",
@@ -444,8 +444,8 @@
     "nombre": "Casa Ferreira",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0920614,
-      5.1174798
+      52.092086,
+      5.117470
     ],
     "descripcion": "Cafetería portuguesa con pasteles de nata auténticos y café de calidad.",
     "nota": "Un rincón portugués delicioso en Utrecht.",
@@ -457,8 +457,8 @@
     "nombre": "Farina - Italian Comfort Food",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0825596,
-      5.1232664
+      52.082610,
+      5.123349
     ],
     "descripcion": "Restaurante italiano especializado en comfort food, con platos caseros y postres excelentes.",
     "nota": "Comida italiana de calidad, incluidos los postres.",
@@ -468,10 +468,10 @@
   },
   {
     "nombre": "Firma Pickles Burgers & Wines",
-    "tipo": "Recomendado",
+    "tipo": "Evitar",
     "coordenadas": [
-      52.092098,
-      5.1162155
+      51.920321,
+      4.486633
     ],
     "descripcion": "Restaurante especializado en hamburguesas gourmet y vinos, con un menú creativo.",
     "nota": "Hamburguesas pequeñas y muy caras.",
@@ -483,8 +483,8 @@
     "nombre": "Ombretta Utrecht",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.09464,
-      5.1194398
+      52.094636,
+      5.119425
     ],
     "descripcion": "Pequeño local italiano especializado en bocadillos artesanales preparados al momento.",
     "nota": "Déjate llevar por las sugerencias del chef.",
@@ -496,8 +496,8 @@
     "nombre": "Trattoria da Roberto Utrecht 🇮🇹",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0826627,
-      5.1399587
+      52.082653,
+      5.139987
     ],
     "descripcion": "Trattoria italiana tradicional con platos caseros y ambiente familiar.",
     "nota": "La mejor trattoria de Utrecht: auténtica y deliciosa.",
@@ -509,8 +509,8 @@
     "nombre": "Restaurant Badhuis",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.1028912,
-      5.1231799
+      52.102868,
+      5.123186
     ],
     "descripcion": "Restaurante de cocina local con menú de temporada y productos frescos.",
     "nota": "Mi restaurante favorito de Utrecht: siempre impecable.",
@@ -522,8 +522,8 @@
     "nombre": "Takumi Ramen Utrecht Vredenburg",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0932324,
-      5.1139201
+      52.093186,
+      5.113937
     ],
     "descripcion": "Cadena de ramen famosa en Europa, con platos contundentes y sabrosos.",
     "nota": "Ramen, gyozas y baos que nunca fallan.",
@@ -535,8 +535,8 @@
     "nombre": "Have A Roll Utrecht",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0901704,
-      5.1198854
+      52.090176,
+      5.119846
     ],
     "descripcion": "Pastelería especializada en rollos de canela con sabores variados.",
     "nota": "Muy dulces y muy buenos.",
@@ -548,8 +548,8 @@
     "nombre": "Restaurant Gys Utrecht",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0974242,
-      5.1060164
+      52.097444,
+      5.105998
     ],
     "descripcion": "Restaurante vegetariano y vegano con opciones sin gluten y platos saludables.",
     "nota": "El vegetariano más famoso de Utrecht.",
@@ -561,8 +561,8 @@
     "nombre": "Soep-er Utrecht",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0908673,
-      5.1204254
+      52.090913,
+      5.120455
     ],
     "descripcion": "Pequeño local especializado en sopas caseras con ingredientes frescos.",
     "nota": "El lugar de las sopas en Utrecht.",
@@ -574,8 +574,8 @@
     "nombre": "SHOKUDO Japanese Food & Design",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0980231,
-      5.1290807
+      52.098066,
+      5.129094
     ],
     "descripcion": "Restaurante japonés con platos contundentes y una estética cuidada.",
     "nota": "Comida japonesa de muy buena calidad.",
@@ -587,8 +587,8 @@
     "nombre": "Sissy-Boy",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0906693,
-      5.1179044
+      52.091506,
+      5.112502
     ],
     "descripcion": "Tienda de moda y decoración con estilo propio y productos únicos.",
     "nota": "Mi tienda favorita de Utrecht para ropa diferente.",
@@ -600,8 +600,8 @@
     "nombre": "Los Amigos Leidsche Rijn",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0975624,
-      5.0629243
+      52.097565,
+      5.062978
     ],
     "descripcion": "Restaurante de tapas españolas con platos tradicionales y ambiente acogedor.",
     "nota": "Tapas españolas de calidad en Leidsche Rijn.",
@@ -613,8 +613,8 @@
     "nombre": "Juuls Hummus",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0888925,
-      5.1362975
+      52.088899,
+      5.136261
     ],
     "descripcion": "Local especializado en bowls de hummus con carne, verduras o berenjena.",
     "nota": "Riquísimo, especialmente el bowl con berenjena.",
@@ -626,8 +626,8 @@
     "nombre": "30 ML Coffee Roasters",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0931638,
-      5.1137724
+      52.093230,
+      5.113771
     ],
     "descripcion": "Cafetería de especialidad con tuestes propios y una ubicación muy cercana a la estación central.",
     "nota": "El café de especialidad más cercano a la estación.",
@@ -639,8 +639,8 @@
     "nombre": "Restaurant Sevilla",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0922778,
-      5.1222757
+      52.092212,
+      5.122327
     ],
     "descripcion": "Restaurante con productos españoles y una terraza soleada ideal por la tarde.",
     "nota": "Buena terraza al sol y productos españoles auténticos.",
@@ -652,8 +652,8 @@
     "nombre": "Cibari",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.1009322,
-      5.0998679
+      52.100950,
+      5.099861
     ],
     "descripcion": "Restaurante Tex-Mex especializado en tacos y burritos con sabores intensos.",
     "nota": "Tacos y burritos muy buenos.",
@@ -665,8 +665,8 @@
     "nombre": "Coffee Leute Brauhaus",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0794752,
-      5.1225502
+      52.079472,
+      5.122556
     ],
     "descripcion": "Café y cervecería artesanal en un local acogedor junto al canal.",
     "nota": "Un sitio perfecto para café o cerveza en un ambiente tranquilo.",
@@ -678,8 +678,8 @@
     "nombre": "Hoog Catharijne",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0902775,
-      5.1125297
+      52.090278,
+      5.112528
     ],
     "descripcion": "El centro comercial más grande de Utrecht, con tiendas de moda, restaurantes y ocio.",
     "nota": "Un buen lugar para compras rápidas o resguardarse del frío.",
@@ -691,8 +691,8 @@
     "nombre": "Umai Ramen",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0979371,
-      5.0654432
+      52.097944,
+      5.065444
     ],
     "descripcion": "Restaurante de ramen con una amplia selección de sabores y platos japoneses.",
     "nota": "Ramen de buena calidad en Leidsche Rijn.",
@@ -704,8 +704,8 @@
     "nombre": "Café Tilt!",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0947714,
-      5.1256512
+      52.094778,
+      5.125639
     ],
     "descripcion": "Café moderno con bebidas variadas y comidas ligeras en un ambiente relajado.",
     "nota": "Un sitio agradable para tomar algo y descansar.",
@@ -717,8 +717,8 @@
     "nombre": "Karibu - breakfast, coffee, brunch, drinks and events",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.098652,
-      5.1249032
+      52.098639,
+      5.124917
     ],
     "descripcion": "Café y restaurante de brunch con platos frescos y un ambiente luminoso.",
     "nota": "Un sitio perfecto para desayunar o brunchear.",
@@ -730,8 +730,8 @@
     "nombre": "Museo del ferrocarril de Utrecht",
     "tipo": "Imprescindible",
     "coordenadas": [
-      52.0879257,
-      5.1311934
+      52.088611,
+      5.131667
     ],
     "descripcion": "Museo histórico ubicado en una antigua estación, con locomotoras, exposiciones y actividades interactivas.",
     "nota": "Un museo espectacular tanto para adultos como para niños.",
@@ -744,8 +744,8 @@
     "nombre": "De Nijverheid Kunstcentrum",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.1003377,
-      5.0835733
+      52.100333,
+      5.083556
     ],
     "descripcion": "Centro cultural alternativo con exposiciones, talleres y un ambiente creativo.",
     "nota": "Un espacio artístico muy vivo y diferente.",
@@ -757,8 +757,8 @@
     "nombre": "Vlaamsch Broodhuys Twijnstraat Utrecht",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.082731,
-      5.1236212
+      52.082722,
+      5.123611
     ],
     "descripcion": "Panadería y pastelería artesanal con productos locales de alta calidad.",
     "nota": "Pan y bollería excelentes en una de las calles más bonitas.",
@@ -770,8 +770,8 @@
     "nombre": "Pathé Utrecht Leidsche Rijn",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0966748,
-      5.0697616
+      52.096667,
+      5.06975
     ],
     "descripcion": "Cine moderno con salas amplias, buena calidad de imagen y una sala IMAX.",
     "nota": "Mi cine favorito de Utrecht.",
@@ -783,8 +783,8 @@
     "nombre": "Brandstof Lunchroom & Bedrijfscatering",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.1018334,
-      5.0977258
+      52.101833,
+      5.097722
     ],
     "descripcion": "Cafetería y servicio de catering con platos frescos y caseros.",
     "nota": "Comida deliciosa y ambiente muy agradable.",
@@ -796,8 +796,8 @@
     "nombre": "Castillo de Haar",
     "tipo": "Imprescindible",
     "coordenadas": [
-      52.1214185,
-      4.9863057
+      52.121389,
+      4.986389
     ],
     "descripcion": "El castillo más grande de los Países Bajos, rodeado de jardines espectaculares y arquitectura neogótica.",
     "nota": "Una visita imprescindible para entender la historia y el lujo de la región.",
@@ -810,8 +810,8 @@
     "nombre": "Bunk Restaurant Utrecht",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.0936687,
-      5.1117195
+      52.093667,
+      5.111722
     ],
     "descripcion": "Restaurante ubicado en una antigua iglesia reconvertida, con platos modernos y ambiente único.",
     "nota": "Un sitio espectacular tanto por la comida como por el espacio.",
@@ -823,8 +823,8 @@
     "nombre": "Zocherpark",
     "tipo": "Parque",
     "coordenadas": [
-      52.0886009,
-      5.1278539
+      52.088611,
+      5.127861
     ],
     "descripcion": "Parque histórico que rodea el centro, ideal para pasear, hacer deporte o relajarse.",
     "nota": "Un parque precioso junto al agua.",
@@ -836,8 +836,8 @@
     "nombre": "Park Lepelenburg",
     "tipo": "Parque",
     "coordenadas": [
-      52.0894913,
-      5.1282834
+      52.089472,
+      5.128278
     ],
     "descripcion": "Parque céntrico con zonas abiertas, ideal para eventos, deporte y descanso.",
     "nota": "Un clásico para tumbarse al sol en verano.",
@@ -849,8 +849,8 @@
     "nombre": "Familie van Rijk",
     "tipo": "Recomendado",
     "coordenadas": [
-      52.1044828,
-      5.0938765
+      52.104472,
+      5.093889
     ],
     "descripcion": "Tienda gourmet con vinos, quesos, embutidos y bocadillos de alta calidad.",
     "nota": "Perfecto para llevarte algo rico a casa.",
@@ -862,8 +862,8 @@
     "nombre": "Slot Zuylen",
     "tipo": "Imprescindible",
     "coordenadas": [
-      52.1271179,
-      5.0731494
+      52.127222,
+      5.073056
     ],
     "descripcion": "Castillo medieval del siglo XVIII con jardines cuidados y un museo histórico.",
     "nota": "Un castillo precioso a las afueras de Utrecht.",
