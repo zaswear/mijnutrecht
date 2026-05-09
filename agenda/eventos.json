@@ -1,0 +1,92 @@
+[
+  {
+    "nombre": "Markt Vredenburg",
+    "emoji": "🛒",
+    "tipo": "mercado",
+    "descripcion": "El mercado más grande de Utrecht: frutas, verduras, quesos, ropa y artesanía. Llena por completo la plaza de Vredenburg y las calles adyacentes.",
+    "cuando": "Martes, jueves, viernes y sábados",
+    "horario": "8:00 – 17:00",
+    "lugar": "Vredenburg",
+    "recurrente": true
+  },
+  {
+    "nombre": "Lapjesmarkt",
+    "emoji": "🧵",
+    "tipo": "mercado",
+    "descripcion": "El mercado de telas más conocido de los Países Bajos, con una tradición de más de un siglo. Metros y metros de tejidos, botones, encajes y todo lo necesario para coser.",
+    "cuando": "Sábados",
+    "horario": "9:00 – 17:00",
+    "lugar": "Breedstraat / Wittevrouwenstraat",
+    "recurrente": true
+  },
+  {
+    "nombre": "Plantenmarkt",
+    "emoji": "🌿",
+    "tipo": "mercado",
+    "descripcion": "Un mercado especializado en plantas de interior y exterior, semillas y bulbos. Muy popular en primavera cuando los tulipanes y geranios llenan los puestos de color.",
+    "cuando": "Primer sábado del mes (abril – octubre)",
+    "horario": "9:00 – 16:00",
+    "lugar": "Janskerkhof",
+    "recurrente": true
+  },
+  {
+    "nombre": "Koningsdag",
+    "emoji": "🟠",
+    "tipo": "festivo",
+    "descripcion": "El cumpleaños del rey Guillermo Alejandro convierte Utrecht en un mercadillo gigante al aire libre. Todo el mundo viste de naranja, hay música en vivo por toda la ciudad y el Oudegracht se llena de barcas festivas.",
+    "cuando": "27 de abril",
+    "horario": "Todo el día",
+    "lugar": "Centro de Utrecht",
+    "recurrente": true
+  },
+  {
+    "nombre": "Bevrijdingsdag",
+    "emoji": "🕊️",
+    "tipo": "festivo",
+    "descripcion": "Día de la Liberación, conmemoración del fin de la ocupación nazi en 1945. En Utrecht el Bevrijdingsfestival se celebra en el Máximapark con música en directo, charlas y actividades culturales gratuitas.",
+    "cuando": "5 de mayo",
+    "horario": "Todo el día",
+    "lugar": "Máximapark",
+    "recurrente": true
+  },
+  {
+    "nombre": "Sinterklaas",
+    "emoji": "🎅",
+    "tipo": "festivo",
+    "descripcion": "La llegada de Sinterklaas al centro de Utrecht, con desfile por las calles y el Oudegracht lleno de niños esperando con sus zapatos. Es la antesala de la noche de regalos del 5 de diciembre (Pakjesavond).",
+    "cuando": "Tercer sábado de noviembre",
+    "horario": "A partir de las 11:00",
+    "lugar": "Oudegracht / Centro",
+    "recurrente": true
+  },
+  {
+    "nombre": "Navidad en Utrecht",
+    "emoji": "🎄",
+    "tipo": "festivo",
+    "descripcion": "El mercado navideño ocupa la plaza del Domplein y sus alrededores. Pistas de hielo, puestos de glühwein, artesanía local y luces por todo el centro histórico.",
+    "cuando": "Mediados de diciembre",
+    "horario": "12:00 – 21:00",
+    "lugar": "Domplein / Vredenburg",
+    "recurrente": true
+  },
+  {
+    "nombre": "Trajectum Lumen",
+    "emoji": "💡",
+    "tipo": "festival",
+    "descripcion": "Ruta de arte luminoso que transforma el casco histórico en un museo al aire libre. Obras de artistas internacionales iluminan fachadas, canales y rincones escondidos de la ciudad. Se recorre a pie en unos 90 minutos.",
+    "cuando": "Octubre – diciembre (otoño / invierno)",
+    "horario": "A partir del anochecer",
+    "lugar": "Casco histórico",
+    "recurrente": true
+  },
+  {
+    "nombre": "Nederlands Film Festival",
+    "emoji": "🎬",
+    "tipo": "festival",
+    "descripcion": "El festival de cine más importante de los Países Bajos celebra lo mejor del cine neerlandés del año. Proyecciones en el TivoliVredenburg, Springhaver, Louis Hartlooper Complex y otros cines de la ciudad. Se entrega el Gouden Kalf (Becerro de Oro).",
+    "cuando": "Última semana de septiembre",
+    "horario": "Todo el día",
+    "lugar": "TivoliVredenburg / Springhaver / Louis Hartlooper",
+    "recurrente": true
+  }
+]

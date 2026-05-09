@@ -1,0 +1,72 @@
+[
+  {
+    "nombre": "Tulp",
+    "nombre_cientifico": "Tulipa gesneriana",
+    "emoji": "🌷",
+    "temporada": "primavera",
+    "meses": "Marzo – Mayo",
+    "foto": "flora/fotos/tulp.jpg",
+    "descripcion": "El tulipán es el símbolo floral de los Países Bajos por excelencia. En los Países Bajos se cultivan más de 3.000 millones de tulipanes al año. En Utrecht los verás en los parques, en los jardines privados y en los mercados de primavera. El Máximapark y los alrededores de Leidsche Rijn se tiñen de rojo, amarillo y morado entre marzo y mayo.",
+    "donde_ver": "Máximapark, Wilhelminapark, Griftpark"
+  },
+  {
+    "nombre": "Krokus",
+    "nombre_cientifico": "Crocus vernus",
+    "emoji": "🌸",
+    "temporada": "primavera",
+    "meses": "Febrero – Marzo",
+    "foto": "flora/fotos/krokus.jpg",
+    "descripcion": "El azafrán de primavera es una de las primeras flores en aparecer tras el invierno, a veces incluso empujando a través de la nieve. Sus alfombras de flores moradas, blancas y amarillas son una señal inequívoca de que la primavera ha llegado. En Utrecht los encontrarás en los parques del centro desde finales de febrero.",
+    "donde_ver": "Wilhelminapark, Griftpark, Lepelenburg"
+  },
+  {
+    "nombre": "Koolzaad",
+    "nombre_cientifico": "Brassica napus",
+    "emoji": "🌼",
+    "temporada": "primavera",
+    "meses": "Abril – Mayo",
+    "foto": "flora/fotos/koolzaad.jpg",
+    "descripcion": "La colza tiñe de amarillo intenso los campos de la provincia de Utrecht en abril y mayo. Es uno de los cultivos más importantes de los Países Bajos —sus semillas producen aceite— y sus flores crean paisajes espectaculares visibles desde la bicicleta. En las rutas hacia el Heuvelrug o hacia el Vecht los campos de colza son inevitables.",
+    "donde_ver": "Campo abierto en rutas al Heuvelrug y Vecht"
+  },
+  {
+    "nombre": "Klaproos",
+    "nombre_cientifico": "Papaver rhoeas",
+    "emoji": "🌺",
+    "temporada": "verano",
+    "meses": "Mayo – Julio",
+    "foto": "flora/fotos/klaproos.jpg",
+    "descripcion": "La amapola común, de un rojo encendido, aparece en bordes de caminos, campos de cereal y terrenos sin cultivar. En los Países Bajos se asocia también al recuerdo de las víctimas de guerra. En los alrededores de Utrecht, especialmente en los márgenes de las rutas ciclistas hacia el Heuvelrug, las manchas rojas en los campos son una de las imágenes más bonitas del verano.",
+    "donde_ver": "Rutas al Heuvelrug, Máximapark, bordes de canales"
+  },
+  {
+    "nombre": "Heide",
+    "nombre_cientifico": "Calluna vulgaris",
+    "emoji": "💜",
+    "temporada": "verano",
+    "meses": "Agosto – Septiembre",
+    "foto": "flora/fotos/heide.jpg",
+    "descripcion": "El brezo común cubre grandes extensiones del Utrechtse Heuvelrug, transformando los bosques y brezales en un mar morado durante agosto y septiembre. Es uno de los espectáculos naturales más llamativos de la región. La ruta ciclista al Heuvelrug pasa directamente por zonas de brezo en flor. Las abejas lo adoran.",
+    "donde_ver": "Utrechtse Heuvelrug (Amerongen, Doorn, Zeist)"
+  },
+  {
+    "nombre": "Sneeuwklokje",
+    "nombre_cientifico": "Galanthus nivalis",
+    "emoji": "🤍",
+    "temporada": "invierno",
+    "meses": "Enero – Febrero",
+    "foto": "flora/fotos/sneeuwklokje.jpg",
+    "descripcion": "La campanilla de invierno es la primera flor del año: brota incluso con nieve en el suelo, de ahí su nombre neerlandés ('copos de nieve'). Sus diminutas flores blancas colgantes anuncian el final del invierno. En los parques y jardines históricos de Utrecht, como el Wilhelminapark, aparecen en grupos a partir de enero.",
+    "donde_ver": "Wilhelminapark, Lepelenburg, jardines históricos"
+  },
+  {
+    "nombre": "Linde",
+    "nombre_cientifico": "Tilia × europaea",
+    "emoji": "🌳",
+    "temporada": "verano",
+    "meses": "Junio – Julio",
+    "foto": "flora/fotos/linde.jpg",
+    "descripcion": "El tilo europeo es el árbol urbano más característico de Utrecht: sus avenidas históricas, los bordes del Oudegracht y los parques están llenos de tilos centenarios. En junio y julio florecen llenando el aire de un perfume dulce y característico que inunda el centro. Sus pequeñas flores amarillentas también son un recurso fundamental para las abejas urbanas.",
+    "donde_ver": "Oudegracht, Maliebaan, Wilhelminapark, Lepelenburg"
+  }
+]
