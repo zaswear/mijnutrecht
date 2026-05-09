@@ -462,17 +462,13 @@
       });
     });
 
-    // ── GALERÍA — carga automática desde Cloudinary API ──
+    // ── GALERÍA — carga automática desde Cloudinary (tag: gallery) ──
     const CLOUD      = 'dkn49zkfr';
-    const API_KEY    = '535915498563789';
-    const API_SECRET = 'EGvnEoV3AizC4UeiueEKBWUq9II';
     const MESES      = ['','Enero','Febrero','Marzo','Abril','Mayo','Junio',
                         'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
     const PREVIEW_COUNT = 8;
 
-    fetch(`https://api.cloudinary.com/v1_1/${CLOUD}/resources/image?max_results=500&direction=desc`, {
-      headers: { 'Authorization': 'Basic ' + btoa(API_KEY + ':' + API_SECRET) }
-    })
+    fetch(`https://res.cloudinary.com/${CLOUD}/image/list/gallery.json`)
       .then(r => r.json())
       .then(data => {
         const all = (data.resources || [])
