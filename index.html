@@ -234,6 +234,20 @@
       box-shadow: 0 2px 8px rgba(0,0,0,.05);
     }
 
+    /* ── Ver más / Ver menos ── */
+    .ver-mas-btn {
+      font-size: .85rem;
+      font-weight: 500;
+      color: #2a5c8a;
+      border: 1.5px solid rgba(42,92,138,.35);
+      padding: .45rem 1.2rem;
+      border-radius: 999px;
+      background: none;
+      cursor: pointer;
+      transition: background .2s, color .2s;
+    }
+    .ver-mas-btn:hover { background: #2a5c8a; color: #fff; }
+
     /* ── Leaflet popup ── */
     .leaflet-popup-content-wrapper {
       border-radius: .5rem !important;
@@ -428,7 +442,7 @@
   <section id="barrios" class="max-w-5xl mx-auto px-4 mb-20">
     <h2 class="hero-title text-3xl font-bold mb-2">Barrios</h2>
     <p class="text-utrecht-dark/60 mb-6 text-sm">Seis rincones de Utrecht que merece la pena conocer.</p>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" id="barrios-grid">
 
       <div class="barrio-card">
         <div class="text-3xl mb-3">🏛️</div>
@@ -679,28 +693,55 @@
           '<p class="text-sm text-utrecht-dark/40 col-span-3 text-center py-6">No se pudo cargar la agenda.</p>';
       });
 
+    function makeAgendaCard(ev) {
+      const card = document.createElement('div');
+      card.className = 'agenda-card';
+      card.innerHTML = `
+        <div class="text-3xl mb-3">${ev.emoji}</div>
+        <h3 class="font-semibold mb-1">${ev.nombre}</h3>
+        <p class="text-xs text-utrecht-canal font-medium uppercase tracking-wide mb-2">${ev.cuando}</p>
+        <p class="text-sm text-utrecht-dark/70 mb-3">${ev.descripcion}</p>
+        <div class="flex flex-wrap gap-x-4 gap-y-1 text-xs text-utrecht-dark/50">
+          <span>🕐 ${ev.horario}</span>
+          <span>📍 ${ev.lugar}</span>
+        </div>
+      `;
+      return card;
+    }
+
     function renderAgenda(eventos) {
+      const LIMIT = 3;
       const grid = document.getElementById('agenda-grid');
+      document.getElementById('agenda-ver-mas')?.remove();
       grid.innerHTML = '';
       if (!eventos.length) {
         grid.innerHTML = '<p class="text-sm text-utrecht-dark/40 col-span-3 text-center py-6">Sin eventos en esta categoría.</p>';
         return;
       }
-      eventos.forEach(ev => {
-        const card = document.createElement('div');
-        card.className = 'agenda-card';
-        card.innerHTML = `
-          <div class="text-3xl mb-3">${ev.emoji}</div>
-          <h3 class="font-semibold mb-1">${ev.nombre}</h3>
-          <p class="text-xs text-utrecht-canal font-medium uppercase tracking-wide mb-2">${ev.cuando}</p>
-          <p class="text-sm text-utrecht-dark/70 mb-3">${ev.descripcion}</p>
-          <div class="flex flex-wrap gap-x-4 gap-y-1 text-xs text-utrecht-dark/50">
-            <span>🕐 ${ev.horario}</span>
-            <span>📍 ${ev.lugar}</span>
-          </div>
-        `;
-        grid.appendChild(card);
-      });
+      const cards = eventos.map(makeAgendaCard);
+      cards.slice(0, LIMIT).forEach(c => grid.appendChild(c));
+      if (cards.length > LIMIT) {
+        const extras = cards.slice(LIMIT);
+        let expanded = false;
+        const wrap = document.createElement('div');
+        wrap.id = 'agenda-ver-mas';
+        wrap.className = 'mt-5 text-center';
+        const btn = document.createElement('button');
+        btn.className = 'ver-mas-btn';
+        btn.textContent = `Ver ${extras.length} más →`;
+        btn.addEventListener('click', () => {
+          expanded = !expanded;
+          if (expanded) {
+            extras.forEach(c => grid.appendChild(c));
+            btn.textContent = 'Ver menos ↑';
+          } else {
+            extras.forEach(c => c.remove());
+            btn.textContent = `Ver ${extras.length} más →`;
+          }
+        });
+        wrap.appendChild(btn);
+        grid.after(wrap);
+      }
     }
 
     // ── FLORA ─────────────────────────────────────────────
@@ -721,31 +762,83 @@
       })
       .catch(() => {});
 
+    // ── BARRIOS — mostrar 3 de 6, desplegable ──────────────
+    document.addEventListener('DOMContentLoaded', () => {
+      const LIMIT = 3;
+      const grid = document.getElementById('barrios-grid');
+      if (!grid) return;
+      const cards = Array.from(grid.querySelectorAll('.barrio-card'));
+      cards.slice(LIMIT).forEach(c => c.style.display = 'none');
+      if (cards.length > LIMIT) {
+        const extras = cards.slice(LIMIT);
+        let expanded = false;
+        const wrap = document.createElement('div');
+        wrap.className = 'mt-5 text-center';
+        const btn = document.createElement('button');
+        btn.className = 'ver-mas-btn';
+        btn.textContent = `Ver ${extras.length} más →`;
+        btn.addEventListener('click', () => {
+          expanded = !expanded;
+          extras.forEach(c => c.style.display = expanded ? '' : 'none');
+          btn.textContent = expanded ? 'Ver menos ↑' : `Ver ${extras.length} más →`;
+        });
+        wrap.appendChild(btn);
+        grid.after(wrap);
+      }
+    });
+
+    function makePlanteCard(p) {
+      const card = document.createElement('div');
+      card.className = 'planta-card';
+      card.innerHTML = `
+        <img src="${p.foto}" alt="${p.nombre}" loading="lazy" onerror="this.style.display='none'" />
+        <div class="p-4">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-xl">${p.emoji}</span>
+            <h3 class="font-semibold">${p.nombre}</h3>
+          </div>
+          <p class="text-xs text-utrecht-dark/40 italic mb-2">${p.nombre_cientifico}</p>
+          <p class="text-xs font-medium text-utrecht-canal mb-2">${p.meses}</p>
+          <p class="text-sm text-utrecht-dark/70 leading-relaxed">${p.descripcion}</p>
+          <p class="text-xs text-utrecht-dark/40 mt-3">📍 ${p.donde_ver}</p>
+        </div>
+      `;
+      return card;
+    }
+
     function renderFlora(plantas) {
+      const LIMIT = 4;
       const grid = document.getElementById('flora-grid');
+      document.getElementById('flora-ver-mas')?.remove();
       grid.innerHTML = '';
       if (!plantas.length) {
         grid.innerHTML = '<p class="text-sm text-utrecht-dark/40 col-span-4 text-center py-6">Sin plantas en esta temporada.</p>';
         return;
       }
-      plantas.forEach(p => {
-        const card = document.createElement('div');
-        card.className = 'planta-card';
-        card.innerHTML = `
-          <img src="${p.foto}" alt="${p.nombre}" loading="lazy" onerror="this.style.display='none'" />
-          <div class="p-4">
-            <div class="flex items-center gap-2 mb-1">
-              <span class="text-xl">${p.emoji}</span>
-              <h3 class="font-semibold">${p.nombre}</h3>
-            </div>
-            <p class="text-xs text-utrecht-dark/40 italic mb-2">${p.nombre_cientifico}</p>
-            <p class="text-xs font-medium text-utrecht-canal mb-2">${p.meses}</p>
-            <p class="text-sm text-utrecht-dark/70 leading-relaxed">${p.descripcion}</p>
-            <p class="text-xs text-utrecht-dark/40 mt-3">📍 ${p.donde_ver}</p>
-          </div>
-        `;
-        grid.appendChild(card);
-      });
+      const cards = plantas.map(makePlanteCard);
+      cards.slice(0, LIMIT).forEach(c => grid.appendChild(c));
+      if (cards.length > LIMIT) {
+        const extras = cards.slice(LIMIT);
+        let expanded = false;
+        const wrap = document.createElement('div');
+        wrap.id = 'flora-ver-mas';
+        wrap.className = 'mt-5 text-center';
+        const btn = document.createElement('button');
+        btn.className = 'ver-mas-btn';
+        btn.textContent = `Ver ${extras.length} más →`;
+        btn.addEventListener('click', () => {
+          expanded = !expanded;
+          if (expanded) {
+            extras.forEach(c => grid.appendChild(c));
+            btn.textContent = 'Ver menos ↑';
+          } else {
+            extras.forEach(c => c.remove());
+            btn.textContent = `Ver ${extras.length} más →`;
+          }
+        });
+        wrap.appendChild(btn);
+        grid.after(wrap);
+      }
     }
   </script>
 
