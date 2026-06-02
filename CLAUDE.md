@@ -35,6 +35,10 @@ mijnutrecht/
 │   ├── vecht-norte.gpx
 │   ├── vechtstreek-8.gpx
 │   └── waterlinie-sur.gpx
+├── scripts/                ← Scripts de automatización (no se publican)
+│   ├── scrape-restaurants.js   ← Scraper Eet.nu → entradas para puntos.json
+│   ├── screenshot-test.sh      ← Test visual con agent-browser diff
+│   └── .screenshots/           ← Imágenes generadas (gitignored)
 └── CLAUDE.md               ← Este archivo
 ```
 
@@ -135,9 +139,40 @@ Lista de fotos servidas desde Cloudinary. **NUNCA incluir avatar.png aquí.**
 
 ---
 
+## Scripts de automatización (`scripts/`)
+
+Requieren `agent-browser` instalado globalmente (`npm install -g agent-browser`).
+
+### `scrape-restaurants.js`
+Scrapea Eet.nu Utrecht y genera entradas JSON listas para pegar en `maps/puntos.json`.
+Geocodifica direcciones vía Nominatim (OpenStreetMap, sin API key).
+
+```bash
+node scripts/scrape-restaurants.js              # 3 páginas por defecto
+node scripts/scrape-restaurants.js --pages=5    # más páginas
+node scripts/scrape-restaurants.js --output=./maps/scraped.json
+```
+
+El archivo de salida incluye campos `_fuente` y `_geocoded` de diagnóstico — eliminarlos antes de hacer push.
+
+### `screenshot-test.sh`
+Test visual de regresión usando `agent-browser diff screenshot`.
+
+```bash
+./scripts/screenshot-test.sh baseline   # guarda referencia antes de cambiar
+./scripts/screenshot-test.sh compare    # compara estado actual vs referencia
+./scripts/screenshot-test.sh live       # compara local vs GitHub Pages
+./scripts/screenshot-test.sh auto       # smoke test rápido (dos capturas seguidas)
+```
+
+Los screenshots se guardan en `scripts/.screenshots/` (gitignored).
+
+---
+
 ## Convenciones
 - No usar frameworks JS pesados — todo vanilla JS en el `index.html`
 - No añadir carpetas nuevas sin actualizar este CLAUDE.md
 - Los JSON deben ser válidos — validar antes de hacer push
 - Las coordenadas siempre en formato `[latitud, longitud]`
 - Nunca subir API keys al repo
+- Los archivos en `scripts/` son herramientas locales, no se despliegan
