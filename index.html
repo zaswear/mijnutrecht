@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mijn Utrecht</title>
+  <title>Mijn Utrecht · Mi guía de la ciudad</title>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -16,7 +16,7 @@
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
 
   <script>
     tailwind.config = {
@@ -24,289 +24,116 @@
         extend: {
           fontFamily: {
             serif: ['Playfair Display', 'Georgia', 'serif'],
-            sans: ['DM Sans', 'sans-serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
           },
           colors: {
             utrecht: {
-              canal:   '#2a5c8a',
-              brick:   '#b5533c',
-              cream:   '#f5f0e8',
-              dark:    '#1a1a2e',
-              mist:    '#e8ecf0',
+              red:      '#c81919',
+              redHover: '#a31414',
+              cream:    '#FAF7F2',
+              creamDark:'#f0e9dd',
+              navy:     '#0F172A',
+              brick:    '#9E4F3F',
+              mist:     '#e2e8f0',
+              sage:     '#4E6E58',
             }
           }
         }
       }
     }
-
-
-    // ── RUTAS GPX ─────────────────────────────────────────
-    const rutaColors = ['#ea580c','#2563eb','#16a34a','#9333ea','#e11d48'];
-    let rutaLayers = {};
-
-    fetch('./rutas/index.json')
-      .then(r => r.json())
-      .then(rutas => {
-        const lista = document.getElementById('rutas-list');
-        lista.innerHTML = '';
-        document.getElementById('n-rutas').textContent = rutas.length;
-
-        rutas.forEach((ruta, i) => {
-          const color = rutaColors[i % rutaColors.length];
-
-          // Tarjeta
-          const card = document.createElement('div');
-          card.className = 'bg-white rounded-xl p-5 shadow-sm border border-utrecht-mist flex items-start gap-4 cursor-pointer hover:shadow-md transition-shadow';
-          card.innerHTML = `
-            <div class="text-3xl">${ruta.emoji || '🚴'}</div>
-            <div class="flex-1">
-              <p class="font-semibold">${ruta.nombre}</p>
-              <p class="text-sm text-utrecht-dark/50 mb-1">${ruta.distancia} · ${ruta.duracion} · ${ruta.dificultad}${ruta.desnivel ? ' · ↑ ' + ruta.desnivel : ''}</p>
-              <p class="text-sm text-utrecht-dark/70 mb-2">${ruta.descripcion}</p>
-              ${ruta.highlights ? `<div class="flex flex-wrap gap-1 mb-3">${ruta.highlights.map(h => `<span class="text-xs bg-utrecht-mist text-utrecht-dark/60 px-2 py-0.5 rounded-full">${h}</span>`).join('')}</div>` : ''}
-              <div class="flex gap-3 items-center flex-wrap">
-                <button onclick="toggleRuta('${ruta.archivo}', '${color}', this)"
-                  class="text-xs font-medium px-3 py-1 rounded-full border-2 transition-all"
-                  style="border-color:${color}; color:${color}">
-                  Ver en mapa
-                </button>
-                ${ruta.archivo
-                  ? `<a href="rutas/${ruta.archivo}" class="text-xs text-utrecht-canal font-medium hover:underline">↓ GPX</a>`
-                  : `<a href="${ruta.fuente}" target="_blank" rel="noopener" class="text-xs text-utrecht-canal font-medium hover:underline">Ver ruta →</a>`}
-              </div>
-            </div>`;
-          lista.appendChild(card);
-
-          // Pre-cargar en mapa si tiene GPX
-          if (ruta.archivo) cargarGPX(ruta.archivo, color);
-        });
-      })
-      .catch(() => {
-        // Sin index.json, mostrar placeholder
-        document.getElementById('rutas-list').innerHTML = `
-          <div class="col-span-2 text-center py-8 text-utrecht-dark/40 text-sm">
-            Añade rutas creando <code>rutas/index.json</code>
-          </div>`;
-      });
-
-    function cargarGPX(archivo, color) {
-      if (rutaLayers[archivo]) return;
-      new L.GPX(`rutas/${archivo}`, {
-        async: true,
-        polyline_options: { color, weight: 4, opacity: .85 },
-        marker_options: { startIconUrl: null, endIconUrl: null, shadowUrl: null }
-      }).on('loaded', function(e) {
-        rutaLayers[archivo] = e.target;
-        e.target.remove(); // cargado pero oculto hasta que el usuario lo activa
-      }).addTo(map);
-    }
-
-    function toggleRuta(archivo, color, btn) {
-      const layer = rutaLayers[archivo];
-      if (!layer) return;
-      if (map.hasLayer(layer)) {
-        map.removeLayer(layer);
-        btn.textContent = 'Ver en mapa';
-        btn.style.background = '';
-        btn.style.color = color;
-      } else {
-        layer.addTo(map);
-        map.fitBounds(layer.getBounds(), { padding: [40, 40] });
-        btn.textContent = 'Ocultar';
-        btn.style.background = color;
-        btn.style.color = '#fff';
-      }
-    }
-
-    // ── LIGHTBOX ──────────────────────────────────────────
-    let lbItems = [];
-    let lbIndex = 0;
-
-    function openLightbox(src, titulo, index) {
-      lbIndex = index;
-      document.getElementById('lightbox-img').src = src.replace('w_600', 'w_1800');
-      document.getElementById('lightbox-caption').textContent = titulo;
-      document.getElementById('lightbox').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-    function closeLightbox() {
-      document.getElementById('lightbox').classList.remove('open');
-      document.getElementById('lightbox-img').src = '';
-      document.body.style.overflow = '';
-    }
-    function moveLightbox(dir) {
-      lbIndex = (lbIndex + dir + lbItems.length) % lbItems.length;
-      const item = lbItems[lbIndex];
-      document.getElementById('lightbox-img').src = item.src.replace('w_600', 'w_1800');
-      document.getElementById('lightbox-caption').textContent = item.titulo;
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('lightbox').addEventListener('click', function(e) {
-        if (e.target === this) closeLightbox();
-      });
-    });
-    document.addEventListener('keydown', e => {
-      if (!document.getElementById('lightbox').classList.contains('open')) return;
-      if (e.key === 'Escape') closeLightbox();
-      if (e.key === 'ArrowLeft')  moveLightbox(-1);
-      if (e.key === 'ArrowRight') moveLightbox(1);
-    });
   </script>
 
   <style>
-    body { font-family: 'DM Sans', sans-serif; background: #f5f0e8; }
-
-    /* ── Nav ── */
-    nav a { transition: color .2s; }
-    nav a:hover { color: #b5533c; }
-
-    /* ── Hero ── */
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--utrecht-cream, #FAF7F2);
+    }
     .hero-title { font-family: 'Playfair Display', serif; }
-
-    /* ── Mapa ── */
-    #map { height: 480px; border-radius: .75rem; z-index: 0; }
-
-    /* ── Galería ── */
-    .foto-card {
+    
+    /* Custom tab navigation styles */
+    .nav-link {
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    /* Scroll container tweaks */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    
+    /* Map element styling */
+    #map {
+      height: 520px;
+      border-radius: 1rem;
+      z-index: 10;
+      border: 1px solid #e2e8f0;
+    }
+    
+    /* Image slider comparison styling */
+    .comparison-slider-container {
+      position: relative;
       overflow: hidden;
-      border-radius: .5rem;
-      background: #fff;
-      box-shadow: 0 2px 8px rgba(0,0,0,.08);
-      transition: transform .25s, box-shadow .25s;
+      border-radius: 1rem;
+      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.15), 0 8px 10px -6px rgb(0 0 0 / 0.15);
     }
-    .foto-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.14); }
-    .foto-card img { width: 100%; height: 220px; object-fit: cover; display: block; }
-    .foto-placeholder {
-      width: 100%; height: 220px;
-      background: linear-gradient(135deg, #dde4ec 0%, #c8d5e3 100%);
-      display: flex; align-items: center; justify-content: center;
-      color: #8a9ab0; font-size: .85rem;
-    }
-
-    /* ── Filtros del mapa ── */
-    .filtro-btn {
-      padding: .35rem .9rem;
-      border-radius: 999px;
-      font-size: .8rem;
-      font-weight: 500;
-      cursor: pointer;
-      border: 2px solid transparent;
-      transition: all .2s;
-    }
-    .filtro-btn.active { border-color: #1a1a2e; }
-    .filtro-btn[data-color="green"]  { background: #d1fae5; color: #065f46; }
-    .filtro-btn[data-color="red"]    { background: #fee2e2; color: #991b1b; }
-    .filtro-btn[data-color="blue"]   { background: #dbeafe; color: #1e40af; }
-    .filtro-btn[data-color="orange"] { background: #ffedd5; color: #9a3412; }
-    .filtro-btn[data-color="all"]    { background: #1a1a2e; color: #fff; }
-    .filtro-btn[data-tipo], .filtro-btn[data-temporada] { background: #e8ecf0; color: #1a1a2e; }
-    .filtro-btn[data-tipo].active, .filtro-btn[data-temporada].active { background: #1a1a2e; color: #f5f0e8; border-color: #1a1a2e; }
-
-    /* ── Agenda cards ── */
-    .agenda-card {
-      background: #fff;
-      border-radius: .75rem;
-      padding: 1.25rem;
-      border: 1px solid #e8ecf0;
-      box-shadow: 0 2px 8px rgba(0,0,0,.05);
-      transition: transform .2s, box-shadow .2s;
-    }
-    .agenda-card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,.1); }
-
-    /* ── Flora cards ── */
-    .planta-card {
-      background: #fff;
-      border-radius: .75rem;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,.06);
-      border: 1px solid #e8ecf0;
-      transition: transform .2s, box-shadow .2s;
-    }
-    .planta-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.12); }
-    .planta-card img { width: 100%; height: 180px; object-fit: cover; display: block; }
-
-    /* ── Barrio cards ── */
-    .barrio-card {
-      background: #fff;
-      border-radius: .75rem;
-      padding: 1.25rem;
-      border: 1px solid #e8ecf0;
-      box-shadow: 0 2px 8px rgba(0,0,0,.05);
-    }
-
-    /* ── Ver más / Ver menos ── */
-    .ver-mas-btn {
-      font-size: .85rem;
-      font-weight: 500;
-      color: #2a5c8a;
-      border: 1.5px solid rgba(42,92,138,.35);
-      padding: .45rem 1.2rem;
-      border-radius: 999px;
-      background: none;
-      cursor: pointer;
-      transition: background .2s, color .2s;
-    }
-    .ver-mas-btn:hover { background: #2a5c8a; color: #fff; }
-
-    /* ── Leaflet popup ── */
+    
+    /* Leaflet popup styling override */
     .leaflet-popup-content-wrapper {
-      border-radius: .5rem !important;
-      font-family: 'DM Sans', sans-serif;
+      border-radius: 0.75rem !important;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1) !important;
+      border: 1px solid #f1f5f9;
+    }
+    .leaflet-popup-tip {
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1) !important;
     }
 
-    /* ── Reviews card ── */
-    .review-card {
-      background: #fff;
-      border-radius: .75rem;
-      padding: 1.25rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    /* Card hover premium effects */
+    .premium-card {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
     }
-    .stars { color: #f59e0b; letter-spacing: 2px; }
+    .premium-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px -10px rgba(15, 23, 42, 0.15);
+    }
 
-    /* ── Lightbox ── */
+    /* Lightbox styling */
     #lightbox {
       display: none; position: fixed; inset: 0; z-index: 1000;
-      background: rgba(10,10,20,.92); backdrop-filter: blur(6px);
+      background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(8px);
       align-items: center; justify-content: center; cursor: zoom-out;
     }
     #lightbox.open { display: flex; }
     #lightbox img {
-      max-width: min(92vw, 1200px); max-height: 90vh;
-      object-fit: contain; border-radius: .5rem;
-      box-shadow: 0 24px 80px rgba(0,0,0,.6);
-      animation: lb-in .2s ease;
+      max-width: min(92vw, 1200px); max-height: 85vh;
+      object-fit: contain; border-radius: 0.75rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      animation: zoomIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
-    @keyframes lb-in { from { opacity:0; transform:scale(.96); } to { opacity:1; transform:scale(1); } }
-    #lightbox-caption {
-      position: fixed; bottom: 1.5rem; left: 0; right: 0;
-      text-align: center; color: rgba(255,255,255,.6);
-      font-size: .85rem; font-family: 'DM Sans', sans-serif; pointer-events: none;
+    @keyframes zoomIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+    
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
     }
-    #lightbox-close {
-      position: fixed; top: 1.25rem; right: 1.5rem;
-      color: rgba(255,255,255,.7); font-size: 1.75rem;
-      cursor: pointer; line-height: 1; background: none; border: none;
-      transition: color .15s;
+    ::-webkit-scrollbar-track {
+      background: #FAF7F2;
     }
-    #lightbox-close:hover { color: #fff; }
-    #lightbox-prev, #lightbox-next {
-      position: fixed; top: 50%; transform: translateY(-50%);
-      color: rgba(255,255,255,.7); font-size: 2.5rem;
-      cursor: pointer; background: none; border: none;
-      padding: 1rem; transition: color .15s;
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
     }
-    #lightbox-prev:hover, #lightbox-next:hover { color: #fff; }
-    #lightbox-prev { left: 1rem; }
-    #lightbox-next { right: 1rem; }
-    .foto-card { cursor: zoom-in; }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
   </style>
 </head>
-<body class="text-utrecht-dark">
+<body class="text-utrecht-navy antialiased min-h-screen pb-20 md:pb-0">
 
   <!-- ══════════════ DOM TOWER WATERMARK ══════════════ -->
   <div style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:-1;" aria-hidden="true">
-    <svg viewBox="0 0 80 418" width="210" style="transform:scaleY(0.7);transform-origin:center center;opacity:.10;" xmlns="http://www.w3.org/2000/svg">
-      <path fill="#d4a898" fill-rule="evenodd" d="
+    <svg viewBox="0 0 80 418" width="210" style="transform:scaleY(0.7);transform-origin:center center;opacity:.06;" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#bc5a45" fill-rule="evenodd" d="
         M 40 2 L 54 90 L 54 248 L 58 248 L 58 260 L 56 260 L 56 338
         L 62 338 L 62 350 L 60 350 L 60 398 L 65 398 L 65 410 L 15 410
         L 15 398 L 20 398 L 20 350 L 18 350 L 18 338 L 24 338 L 24 260
@@ -327,220 +154,638 @@
     </svg>
   </div>
 
-  <!-- ══════════════ NAV ══════════════ -->
-  <nav class="sticky top-0 z-50 bg-utrecht-cream/90 backdrop-blur border-b border-utrecht-mist">
-    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
-      <span class="hero-title text-xl font-bold text-utrecht-canal">Mijn Utrecht</span>
-      <div class="flex gap-6 text-sm font-medium text-utrecht-dark/70">
-        <a href="#mapa">Mapa</a>
-        <a href="#fotos">Fotos</a>
-        <a href="#rutas">Rutas</a>
-        <a href="#agenda">Agenda</a>
-        <a href="#barrios">Barrios</a>
-        <a href="#flora">Flora</a>
-        <a href="https://github.com/zaswear/mijnutrecht" target="_blank" class="flex items-center gap-1">
-          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
-          GitHub
-        </a>
+  <!-- ══════════════ NAV ESCRITORIO (TOP) ══════════════ -->
+  <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="text-2xl">🚲</span>
+        <span class="hero-title text-xl font-bold tracking-tight text-utrecht-red">Mijn Utrecht</span>
+      </div>
+      <!-- Enlaces escritorio -->
+      <div class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-600">
+        <button onclick="switchTab('guia')" class="nav-link px-2 py-1 text-utrecht-red border-b-2 border-utrecht-red" data-tab="guia">Guía de Viaje</button>
+        <button onclick="switchTab('alma')" class="nav-link px-2 py-1" data-tab="alma">El Alma</button>
+        <button onclick="switchTab('slider')" class="nav-link px-2 py-1" data-tab="slider">Ayer y Hoy</button>
+        <button onclick="switchTab('diccionario')" class="nav-link px-2 py-1" data-tab="diccionario">Glosario</button>
+        <button onclick="switchTab('mapa')" class="nav-link px-2 py-1" data-tab="mapa">Mapa y Rutas</button>
+        <button onclick="switchTab('galeria')" class="nav-link px-2 py-1" data-tab="galeria">Galería</button>
+      </div>
+      <div class="flex items-center gap-3">
+        <span class="text-xs font-semibold px-2.5 py-1 bg-slate-100 rounded-full border text-slate-600">ESPAÑOL</span>
       </div>
     </div>
   </nav>
 
-  <!-- ══════════════ HERO ══════════════ -->
-  <header class="max-w-5xl mx-auto px-4 pt-16 pb-12 text-center">
+  <!-- ══════════════ NAV MÓVIL (BOTTOM) ══════════════ -->
+  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-slate-200 shadow-2xl safe-bottom">
+    <div class="flex justify-around items-center py-2 px-1">
+      <button onclick="switchTab('guia')" class="nav-link flex flex-col items-center gap-1 text-slate-500 py-1 px-3 rounded-xl transition-all" data-tab="guia">
+        <span class="text-xl">🚲</span>
+        <span class="text-[9px] font-bold tracking-tight">Guía</span>
+      </button>
+      <button onclick="switchTab('alma')" class="nav-link flex flex-col items-center gap-1 text-slate-500 py-1 px-3 rounded-xl transition-all" data-tab="alma">
+        <span class="text-xl">🏰</span>
+        <span class="text-[9px] font-bold tracking-tight">El Alma</span>
+      </button>
+      <button onclick="switchTab('slider')" class="nav-link flex flex-col items-center gap-1 text-slate-500 py-1 px-3 rounded-xl transition-all" data-tab="slider">
+        <span class="text-xl">⏳</span>
+        <span class="text-[9px] font-bold tracking-tight">Ayer/Hoy</span>
+      </button>
+      <button onclick="switchTab('diccionario')" class="nav-link flex flex-col items-center gap-1 text-slate-500 py-1 px-3 rounded-xl transition-all" data-tab="diccionario">
+        <span class="text-xl">📖</span>
+        <span class="text-[9px] font-bold tracking-tight">Glosario</span>
+      </button>
+      <button onclick="switchTab('mapa')" class="nav-link flex flex-col items-center gap-1 text-slate-500 py-1 px-3 rounded-xl transition-all" data-tab="mapa">
+        <span class="text-xl">🗺️</span>
+        <span class="text-[9px] font-bold tracking-tight">Mapa</span>
+      </button>
+      <button onclick="switchTab('galeria')" class="nav-link flex flex-col items-center gap-1 text-slate-500 py-1 px-3 rounded-xl transition-all" data-tab="galeria">
+        <span class="text-xl">📷</span>
+        <span class="text-[9px] font-bold tracking-tight">Fotos</span>
+      </button>
+    </div>
+  </nav>
 
-    <!-- Avatar redondo con anillo animado -->
-    <div class="flex justify-center mb-6">
+  <!-- ══════════════ CABECERA (HERO) ══════════════ -->
+  <header class="max-w-4xl mx-auto px-4 pt-10 pb-6 text-center">
+    <div class="flex justify-center mb-4">
       <div class="relative">
-        <!-- Anillo decorativo exterior -->
-        <div style="
-          position:absolute; inset:-5px;
-          border-radius:50%;
-          background: conic-gradient(from 0deg, #2a5c8a, #b5533c, #f5c97a, #2a5c8a);
-          animation: spin 8s linear infinite;
-        "></div>
-        <!-- Anillo blanco separador -->
-        <div style="
-          position:absolute; inset:-2px;
-          border-radius:50%;
-          background: #f5f0e8;
-        "></div>
-        <!-- Foto -->
-        <img
-          src="fotos/avatar.png"
-          alt="Foto de perfil"
-          style="
-            width: 96px; height: 96px;
-            border-radius: 50%;
-            object-fit: cover;
-            object-position: center 15%;
-            position: relative;
-            display: block;
-          "
-        />
+        <div style="position:absolute; inset:-4px; border-radius:50%; background: conic-gradient(from 0deg, #c81919, #9E4F3F, #eab308, #c81919); animation: spin 10s linear infinite;"></div>
+        <div style="position:absolute; inset:-2px; border-radius:50%; background: #FAF7F2;"></div>
+        <img src="fotos/avatar.png" alt="Zaswear" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; object-position: center 15%; position: relative; display: block;" />
       </div>
     </div>
-
-    <style>
-      @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-    </style>
-
-    <p class="text-sm font-medium text-utrecht-canal uppercase tracking-widest mb-3">Utrecht, Países Bajos</p>
-    <h1 class="hero-title text-5xl md:text-6xl font-bold text-utrecht-dark leading-tight mb-4">
-      Mijn Utrecht
-    </h1>
-    <p class="text-lg text-utrecht-dark/60 max-w-xl mx-auto">
-      Una bitácora visual honesta de mi ciudad adoptiva — sin folletos turísticos, con criterio propio.
+    <style>@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }</style>
+    
+    <p class="text-xs font-bold text-utrecht-red uppercase tracking-widest mb-1">Guía Local e Histórica</p>
+    <h1 class="hero-title text-4xl md:text-5xl font-extrabold text-utrecht-navy tracking-tight mb-2">Mijn Utrecht</h1>
+    <p class="text-sm md:text-base text-slate-600 max-w-xl mx-auto">
+      Una historia de amor a mi ciudad adoptiva neerlandesa, escrita en español para quienes vienen a visitarme.
     </p>
-    <div class="flex justify-center gap-8 mt-8 text-sm text-utrecht-dark/50">
-      <span id="count-fotos" class="flex flex-col items-center"><strong class="text-2xl font-bold text-utrecht-dark" id="n-fotos">—</strong> fotos</span>
-      <span id="count-puntos" class="flex flex-col items-center"><strong class="text-2xl font-bold text-utrecht-dark" id="n-puntos">—</strong> lugares</span>
-      <span class="flex flex-col items-center"><strong class="text-2xl font-bold text-utrecht-dark" id="n-rutas">—</strong> rutas</span>
+
+    <div class="flex justify-center gap-6 mt-6 text-xs text-slate-500 border-t border-b border-slate-200/60 py-3 max-w-lg mx-auto">
+      <span><strong class="text-base font-bold text-utrecht-navy" id="n-fotos">—</strong> Fotos</span>
+      <span><strong class="text-base font-bold text-utrecht-navy" id="n-puntos">—</strong> Puntos</span>
+      <span><strong class="text-base font-bold text-utrecht-navy" id="n-rutas">—</strong> Rutas GPX</span>
     </div>
   </header>
 
-  <!-- ══════════════ MAPA ══════════════ -->
-  <section id="mapa" class="max-w-5xl mx-auto px-4 mb-20">
-    <h2 class="hero-title text-3xl font-bold mb-2">Mapa Interactivo</h2>
-    <p class="text-utrecht-dark/60 mb-4 text-sm">Mis puntos favoritos, sitios a evitar y rutas en bici.</p>
+  <!-- ══════════════ CONTENIDO PRINCIPAL (SPA) ══════════════ -->
+  <main class="max-w-5xl mx-auto px-4 pb-20">
 
-    <!-- Filtros -->
-    <div class="flex flex-wrap gap-2 mb-4" id="filtros">
-      <button class="filtro-btn active" data-color="all">Todos</button>
-      <button class="filtro-btn" data-color="green">🟢 Recomendados</button>
-      <button class="filtro-btn" data-color="red">🔴 Evitar</button>
-      <button class="filtro-btn" data-color="blue">🔵 Parques</button>
-      <button class="filtro-btn" data-color="orange">🟠 Imprescindible</button>
-    </div>
+    <!-- ── PESTAÑA 1: GUÍA DE VIAJE ── -->
+    <section id="sec-guia" class="tab-section transition-opacity duration-300">
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Columna Izquierda: Info básica -->
+        <div class="md:col-span-2 space-y-6">
+          
+          <!-- Cómo llegar -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">✈️</span>
+              <h2 class="hero-title text-xl font-bold text-utrecht-navy">Cómo llegar desde Schiphol (Ámsterdam)</h2>
+            </div>
+            <p class="text-slate-600 text-sm leading-relaxed mb-4">
+              Utrecht está increíblemente bien conectada con el aeropuerto de Schiphol. Hay **trenes directos de la NS** que salen de la estación del propio aeropuerto cada 15 minutos. 
+            </p>
+            <div class="grid grid-cols-3 gap-3 bg-utrecht-cream/40 p-4 rounded-xl text-center text-xs">
+              <div>
+                <p class="text-slate-400 font-medium">Frecuencia</p>
+                <p class="font-bold text-utrecht-navy mt-0.5">Cada 15 min</p>
+              </div>
+              <div class="border-l border-slate-200">
+                <p class="text-slate-400 font-medium">Duración</p>
+                <p class="font-bold text-utrecht-navy mt-0.5">30 minutos</p>
+              </div>
+              <div class="border-l border-slate-200">
+                <p class="text-slate-400 font-medium">Precio aprox.</p>
+                <p class="font-bold text-utrecht-navy mt-0.5">~11,00 €</p>
+              </div>
+            </div>
+            <div class="mt-4 p-3.5 bg-blue-50/70 border border-blue-100 rounded-xl text-xs text-blue-800 flex gap-2">
+              <span class="text-sm">💡</span>
+              <p>
+                <strong>¡Olvídate de comprar billete en papel!</strong> En todos los transportes de Países Bajos puedes usar <strong>OVpay</strong>. Haz check-in al subir y check-out al bajar pasando tu tarjeta bancaria contactless (o tu móvil con Apple/Google Pay). Es automático y cobra la tarifa exacta.
+              </p>
+            </div>
+          </div>
 
-    <div id="map" class="shadow-lg"></div>
-  </section>
+          <!-- Moverse en Bici -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">🚴</span>
+              <h2 class="hero-title text-xl font-bold text-utrecht-navy">El Reino de la Bicicleta</h2>
+            </div>
+            <p class="text-slate-600 text-sm leading-relaxed mb-4">
+              Utrecht tiene una de las redes de carriles bici más integradas del mundo y alberga el **aparcamiento de bicicletas más grande del planeta** (bajo Utrecht Centraal, con espacio para 12.500 bicis, ¡gratis las primeras 24 horas!).
+            </p>
+            
+            <h3 class="font-bold text-slate-800 text-xs uppercase tracking-wider mb-2">Normas críticas para novatos:</h3>
+            <ul class="space-y-2 text-xs text-slate-600">
+              <li class="flex gap-2">
+                <span class="text-utrecht-red font-bold">1.</span>
+                <p><strong>Cero móviles en la mano:</strong> Está terminantemente prohibido usar el teléfono en marcha. La multa es de aprox. 160 € y la policía es muy estricta.</p>
+              </li>
+              <li class="flex gap-2">
+                <span class="text-utrecht-red font-bold">2.</span>
+                <p><strong>Señala los giros:</strong> Indica con el brazo extendido si vas a girar a izquierda o derecha antes de frenar o cruzar.</p>
+              </li>
+              <li class="flex gap-2">
+                <span class="text-utrecht-red font-bold">3.</span>
+                <p><strong>Prioridad a la derecha:</strong> Si llegas a un cruce sin marcas, la bici que viene por tu derecha siempre tiene prioridad. Si ves triángulos ("dientes de tiburón") pintados en el suelo, debes ceder el paso.</p>
+              </li>
+              <li class="flex gap-2">
+                <span class="text-utrecht-red font-bold">4.</span>
+                <p><strong>Aparcamiento controlado:</strong> No encadenes la bici en cualquier farola del centro. Si no está en un rack oficial, el ayuntamiento ("Fietsendepot") se la llevará y rescatarla cuesta 29 €.</p>
+              </li>
+            </ul>
+          </div>
 
-  <!-- ══════════════ GALERÍA ══════════════ -->
-  <section id="fotos" class="max-w-5xl mx-auto px-4 mb-20">
-    <div class="flex items-end justify-between mb-6">
-      <div>
-        <h2 class="hero-title text-3xl font-bold mb-1">Galería</h2>
-        <p class="text-utrecht-dark/60 text-sm">Una selección aleatoria. Diferente cada vez que visitas.</p>
-      </div>
-      <button id="btn-ver-todas"
-        style="display:none"
-        class="text-sm font-medium text-utrecht-canal hover:underline whitespace-nowrap ml-4">
-      </button>
-    </div>
-    <div id="galeria" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      <div class="foto-card col-span-2 md:col-span-3 lg:col-span-4">
-        <div class="foto-placeholder rounded-lg text-center flex flex-col gap-2" style="height:180px">
-          <span class="text-3xl">📷</span>
-          <span>Cargando fotos...</span>
+        </div>
+
+        <!-- Columna Derecha: Industria local y consejos rápidos -->
+        <div class="space-y-6">
+          <!-- Industria Local -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">💼</span>
+              <h2 class="hero-title text-lg font-bold text-utrecht-navy">Utrecht Productiva</h2>
+            </div>
+            <p class="text-slate-600 text-xs leading-relaxed mb-4">
+              Utrecht es el centro neurálgico de las comunicaciones de los Países Bajos y destaca en sectores clave:
+            </p>
+            <div class="space-y-3">
+              <div class="p-3 bg-slate-50 border rounded-xl">
+                <p class="font-bold text-xs text-utrecht-navy">🎮 Capital del Videojuego</p>
+                <p class="text-[11px] text-slate-500 mt-0.5">Sede del <em>Dutch Game Garden</em>. Utrecht acoge la mayor concentración de estudios de videojuegos y tecnología del país.</p>
+              </div>
+              <div class="p-3 bg-slate-50 border rounded-xl">
+                <p class="font-bold text-xs text-utrecht-navy">🚆 Corazón Ferroviario</p>
+                <p class="text-[11px] text-slate-500 mt-0.5">Las sedes principales de la NS (trenes nacionales) y ProRail (gestor de vías) se ubican aquí. Su estación es el nodo con más tráfico del país.</p>
+              </div>
+              <div class="p-3 bg-slate-50 border rounded-xl">
+                <p class="font-bold text-xs text-utrecht-navy">🏦 Finanzas Cooperativas</p>
+                <p class="text-[11px] text-slate-500 mt-0.5">El icónico edificio con forma de "dos torres inclinadas" que destaca en la ciudad es la central del Rabobank, nacido en Utrecht.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Alquiler de Bicis -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+            <h2 class="hero-title text-lg font-bold text-utrecht-navy mb-3">¿Dónde alquilo una bici?</h2>
+            <p class="text-slate-600 text-xs leading-relaxed mb-3">
+              Si vienes como turista, la mejor opción es alquilar en tiendas locales del centro:
+            </p>
+            <ul class="space-y-2 text-xs">
+              <li class="flex items-center gap-2 text-slate-700">
+                <span>🔧</span> <strong>Fietsverhuur Utrecht / Laag Catharijne:</strong> Cerca de la estación central. Precios desde ~10€ al día.
+              </li>
+              <li class="flex items-center gap-2 text-slate-700">
+                <span>⚡</span> <strong>Black Bikes:</strong> En el centro histórico, bicis holandesas negras clásicas muy fiables.
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ══════════════ RUTAS ══════════════ -->
-  <section id="rutas" class="max-w-5xl mx-auto px-4 mb-24">
-    <h2 class="hero-title text-3xl font-bold mb-2">Rutas en Bici</h2>
-    <p class="text-utrecht-dark/60 mb-6 text-sm">Cargadas desde Komoot. Se dibujan en el mapa al hacer click.</p>
-    <div id="rutas-list" class="grid md:grid-cols-2 gap-4">
-      <!-- Se rellena dinámicamente desde rutas/index.json -->
-    </div>
-  </section>
+    <!-- ── PESTAÑA 2: EL ALMA (HISTORIA Y COSTUMBRES) ── -->
+    <section id="sec-alma" class="tab-section hidden transition-opacity duration-300">
+      
+      <!-- Bloques editoriales -->
+      <div class="space-y-8">
+        
+        <!-- Orígenes y Dom Tower -->
+        <div class="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <span class="text-xs font-bold text-utrecht-red uppercase tracking-widest mb-1.5 block">Nuestros Cimientos</span>
+            <h2 class="hero-title text-3xl font-extrabold text-utrecht-navy mb-4">De Traiectum al Tornado de 1674</h2>
+            <div class="text-slate-600 text-sm space-y-3 leading-relaxed">
+              <p>
+                Utrecht nació en el **47 d.C.** como un fuerte romano de frontera llamado <em>Traiectum</em> ("vía de paso"), vigilando los límites del Imperio del Rin.
+              </p>
+              <p>
+                Siglos más tarde, se alzó la imponente **Dom Tower (Torre del Dom)**, que con sus **112,5 metros** sigue siendo la torre de iglesia más alta de Países Bajos. Originalmente, formaba un único bloque con la catedral. 
+              </p>
+              <p>
+                Sin embargo, el **1 de agosto de 1674**, un tornado de fuerza brutal cruzó Utrecht. La nave central de la catedral colapsó en segundos, dejando la torre completamente aislada del resto del edificio. Como la ciudad nunca tuvo fondos para restaurarla, la nave desapareció para siempre. La plaza actual (Domplein) ocupa el espacio vacío dejado por ese desastre medieval.
+              </p>
+            </div>
+          </div>
+          <div class="bg-slate-100 p-6 rounded-2xl border flex flex-col justify-center items-center text-center">
+            <span class="text-5xl mb-4">🌪️</span>
+            <h3 class="font-bold text-utrecht-navy mb-2">El Gran Tornado de Utrecht</h3>
+            <p class="text-xs text-slate-500 max-w-xs">
+              El 1 de agosto de 1674, una tormenta supercelular arrasó el centro de la ciudad. Destruyó decenas de tejados y dejó a la catedral sin su cuerpo central.
+            </p>
+            <div class="mt-4 border-t border-slate-200 pt-3 w-full text-[11px] text-slate-400">
+              Ubicación de la nave perdida: Plaza Domplein
+            </div>
+          </div>
+        </div>
 
-  <!-- ══════════════ AGENDA ══════════════ -->
-  <section id="agenda" class="max-w-5xl mx-auto px-4 mb-20">
-    <h2 class="hero-title text-3xl font-bold mb-2">Agenda</h2>
-    <p class="text-utrecht-dark/60 mb-5 text-sm">Mercados, fiestas y festivales que marcan el año en Utrecht.</p>
-    <div class="flex flex-wrap gap-2 mb-6" id="agenda-filtros">
-      <button class="filtro-btn active" data-tipo="todos">Todos</button>
-      <button class="filtro-btn" data-tipo="mercado">🛒 Mercados</button>
-      <button class="filtro-btn" data-tipo="festivo">🎉 Festivos</button>
-      <button class="filtro-btn" data-tipo="festival">🎬 Festivales</button>
-    </div>
-    <div id="agenda-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-      <div class="agenda-card col-span-3 text-center py-8 text-utrecht-dark/40 text-sm">Cargando agenda…</div>
-    </div>
-  </section>
+        <!-- Canales y Werven -->
+        <div class="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm grid md:grid-cols-2 gap-8 items-center">
+          <div class="order-2 md:order-1 bg-slate-100 p-6 rounded-2xl border flex flex-col justify-center items-center text-center">
+            <span class="text-5xl mb-4">🌊</span>
+            <h3 class="font-bold text-utrecht-navy mb-2">Los Werven de Utrecht</h3>
+            <p class="text-xs text-slate-500 max-w-xs">
+              Los únicos canales de dos niveles del mundo. Las bodegas bajo las calles (werfkelder) se comunican con los muelles a nivel del canal.
+            </p>
+            <div class="mt-4 border-t border-slate-200 pt-3 w-full text-[11px] text-slate-400">
+              Construidos en el siglo XII para carga de barcos.
+            </div>
+          </div>
+          <div class="order-1 md:order-2">
+            <span class="text-xs font-bold text-utrecht-red uppercase tracking-widest mb-1.5 block">Arquitectura Única</span>
+            <h2 class="hero-title text-3xl font-extrabold text-utrecht-navy mb-4">Los Canales de Dos Niveles</h2>
+            <div class="text-slate-600 text-sm space-y-3 leading-relaxed">
+              <p>
+                Los canales principales de Utrecht (el **Oudegracht** y el **Nieuwegracht**) son obras de ingeniería únicas en el mundo debido a sus muelles inferiores (*werven*) y sótanos a nivel del agua.
+              </p>
+              <p>
+                En el siglo XII, el nivel del agua se reguló, lo que permitió a los mercaderes cavar túneles desde la calle hasta los muelles inferiores para transportar mercancías directamente desde las barcazas a los sótanos de sus casas sin interrumpir el paso de carruajes arriba.
+              </p>
+              <p>
+                Hoy en día, estas bodegas históricas se han convertido en bares acogedores, estudios creativos, terrazas de restaurantes y viviendas llenas de encanto a ras de agua.
+              </p>
+            </div>
+          </div>
+        </div>
 
-  <!-- ══════════════ BARRIOS ══════════════ -->
-  <section id="barrios" class="max-w-5xl mx-auto px-4 mb-20">
-    <h2 class="hero-title text-3xl font-bold mb-2">Barrios</h2>
-    <p class="text-utrecht-dark/60 mb-6 text-sm">Seis rincones de Utrecht que merece la pena conocer.</p>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" id="barrios-grid">
+        <!-- Costumbres locales y bruine cafés -->
+        <div class="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm">
+          <span class="text-xs font-bold text-utrecht-red uppercase tracking-widest mb-1.5 block text-center">Tradición y Vida Social</span>
+          <h2 class="hero-title text-3xl font-extrabold text-utrecht-navy mb-6 text-center">Costumbres y el Alma Local</h2>
+          
+          <div class="grid md:grid-cols-3 gap-6">
+            <div class="bg-utrecht-cream/35 p-5 rounded-2xl border">
+              <span class="text-3xl mb-3 block">🕯️</span>
+              <h3 class="font-bold text-utrecht-navy mb-2">Sint Maarten (11 Nov)</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                San Martín de Tours es el patrón de Utrecht. La leyenda del santo partiendo su capa roja por la mitad para dársela a un mendigo define el propio escudo de la ciudad (dividido en rojo y blanco en diagonal). Cada noviembre, los niños desfilan cantando con farolillos de papel.
+              </p>
+            </div>
+            
+            <div class="bg-utrecht-cream/35 p-5 rounded-2xl border">
+              <span class="text-3xl mb-3 block">🍊</span>
+              <h3 class="font-bold text-utrecht-navy mb-2">Koningsdag en los Canales</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                A diferencia del bullicio de Ámsterdam, el Día del Rey en Utrecht se vive con un encanto especial en sus canales históricos. La fiesta empieza la noche anterior (Koningsnacht) con puestos callejeros libres organizados por los vecinos y barcas de música flotante.
+              </p>
+            </div>
 
-      <div class="barrio-card">
-        <div class="text-3xl mb-3">🏛️</div>
-        <h3 class="font-semibold text-lg mb-1">Binnenstad</h3>
-        <p class="text-xs text-utrecht-canal font-medium uppercase tracking-wide mb-2">Centro histórico</p>
-        <p class="text-sm text-utrecht-dark/70">El corazón medieval de Utrecht. El Oudegracht con sus terrazas sobre el agua, la Dom (112 m) y el Mariaplaats concentran la mayor parte de la vida social. Lleno de cafés, librerías independientes y tiendas pequeñas. Evita los fines de semana si quieres tranquilidad.</p>
+            <div class="bg-utrecht-cream/35 p-5 rounded-2xl border">
+              <span class="text-3xl mb-3 block">🍺</span>
+              <h3 class="font-bold text-utrecht-navy mb-2">Los "Bruine Cafés"</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Los tradicionales cafés marrones holandeses son pubs de madera oscura donde se reúne la comunidad a charlar. El más emblemático es el **Café Belgisch Biercafé Olivier**, instalado dentro de una enorme y hermosa iglesia clandestina decimonónica que aún conserva el órgano y los altares.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Barrios -->
+        <div>
+          <h2 class="hero-title text-2xl font-bold mb-1">Los Barrios de Utrecht</h2>
+          <p class="text-slate-500 text-xs mb-6">Seis áreas con personalidad propia que debes conocer.</p>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" id="barrios-grid">
+            <!-- Se rellenará o mantendrá el grid estático en HTML -->
+            <div class="barrio-card bg-white p-5 rounded-2xl border border-slate-200 shadow-sm premium-card">
+              <div class="text-2xl mb-2">🏛️</div>
+              <h3 class="font-bold text-utrecht-navy">Binnenstad</h3>
+              <p class="text-[10px] text-utrecht-red font-bold uppercase tracking-wider mb-2">Centro Histórico</p>
+              <p class="text-xs text-slate-600 leading-relaxed">El corazón medieval de Utrecht. Destacan el Oudegracht con sus terrazas bajas, la Dom (112 m) y calles pequeñas llenas de cafeterías de especialidad, librerías y canales.</p>
+            </div>
+
+            <div class="barrio-card bg-white p-5 rounded-2xl border border-slate-200 shadow-sm premium-card">
+              <div class="text-2xl mb-2">🌶️</div>
+              <h3 class="font-bold text-utrecht-navy">Lombok</h3>
+              <p class="text-[10px] text-utrecht-red font-bold uppercase tracking-wider mb-2">Oeste · Multicultural</p>
+              <p class="text-xs text-slate-600 leading-relaxed">Lleno de diversidad y gastronomía exótica. La calle Kanaalstraat ofrece puestos de comida de todas partes del mundo, restaurantes y un ambiente joven y desenfadado.</p>
+            </div>
+
+            <div class="barrio-card bg-white p-5 rounded-2xl border border-slate-200 shadow-sm premium-card">
+              <div class="text-2xl mb-2">🔧</div>
+              <h3 class="font-bold text-utrecht-navy">Rotsoord</h3>
+              <p class="text-[10px] text-utrecht-red font-bold uppercase tracking-wider mb-2">Sur · Distrito Creativo</p>
+              <p class="text-xs text-slate-600 leading-relaxed">Antigua zona industrial reconvertida hoy en un hub de diseño, galerías artísticas independientes, cervecerías artesanales de barrio y terrazas junto al canal.</p>
+            </div>
+
+            <div class="barrio-card bg-white p-5 rounded-2xl border border-slate-200 shadow-sm premium-card">
+              <div class="text-2xl mb-2">🌳</div>
+              <h3 class="font-bold text-utrecht-navy">Wittevrouwen</h3>
+              <p class="text-[10px] text-utrecht-red font-bold uppercase tracking-wider mb-2">Este · Residencial Premium</p>
+              <p class="text-xs text-slate-600 leading-relaxed">Conocido por sus casas de ladrillo rojo del siglo XIX, calles arboladas tranquilas y el parque Lepelenburg. Un barrio residencial elegante con encanto clásico.</p>
+            </div>
+
+            <div class="barrio-card bg-white p-5 rounded-2xl border border-slate-200 shadow-sm premium-card">
+              <div class="text-2xl mb-2">🏗️</div>
+              <h3 class="font-bold text-utrecht-navy">Leidsche Rijn</h3>
+              <p class="text-[10px] text-utrecht-red font-bold uppercase tracking-wider mb-2">Oeste · Expansión Moderna</p>
+              <p class="text-xs text-slate-600 leading-relaxed">El distrito de expansión moderna, con arquitectura vanguardista, el Máximapark (el parque más grande) y un aire muy familiar conectado por ciclovías rápidas.</p>
+            </div>
+
+            <div class="barrio-card bg-white p-5 rounded-2xl border border-slate-200 shadow-sm premium-card">
+              <div class="text-2xl mb-2">🧱</div>
+              <h3 class="font-bold text-utrecht-navy">Zuilen</h3>
+              <p class="text-[10px] text-utrecht-red font-bold uppercase tracking-wider mb-2">Norte · Auténtico y Obrero</p>
+              <p class="text-xs text-slate-600 leading-relaxed">Barrio obrero con identidad propia alejado del turismo. Cuenta con el parque de la ribera del Vecht y la calle comercial Amsterdamsestraatweg.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Agenda -->
+        <div class="border-t border-slate-200 pt-8">
+          <h2 class="hero-title text-2xl font-bold mb-1">Agenda de Eventos</h2>
+          <p class="text-slate-500 text-xs mb-4">Festivales, ferias y mercados tradicionales en Utrecht.</p>
+          <div class="flex flex-wrap gap-2 mb-4" id="agenda-filtros">
+            <button class="filtro-btn active" data-tipo="todos">Todos</button>
+            <button class="filtro-btn" data-tipo="mercado">🛒 Mercados</button>
+            <button class="filtro-btn" data-tipo="festivo">🎉 Festivos</button>
+            <button class="filtro-btn" data-tipo="festival">🎬 Festivales</button>
+          </div>
+          <div id="agenda-grid" class="grid md:grid-cols-3 gap-4">
+            <div class="agenda-card col-span-3 text-center py-6 text-slate-400 text-xs">Cargando agenda…</div>
+          </div>
+        </div>
+
+        <!-- Flora -->
+        <div class="border-t border-slate-200 pt-8">
+          <h2 class="hero-title text-2xl font-bold mb-1">Flora Local</h2>
+          <p class="text-slate-500 text-xs mb-4">Flores y plantas que decoran la ciudad según la estación del año.</p>
+          <div class="flex flex-wrap gap-2 mb-4" id="flora-filtros">
+            <button class="filtro-btn active" data-temporada="todas">Todas</button>
+            <button class="filtro-btn" data-temporada="invierno">❄️ Invierno</button>
+            <button class="filtro-btn" data-temporada="primavera">🌸 Primavera</button>
+            <button class="filtro-btn" data-temporada="verano">☀️ Verano</button>
+            <button class="filtro-btn" data-temporada="otoño">🍂 Otoño</button>
+          </div>
+          <div id="flora-grid" class="grid sm:grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="planta-card col-span-4 text-center py-6 text-slate-400 text-xs">Cargando flora…</div>
+          </div>
+        </div>
+
       </div>
+    </section>
 
-      <div class="barrio-card">
-        <div class="text-3xl mb-3">🌶️</div>
-        <h3 class="font-semibold text-lg mb-1">Lombok</h3>
-        <p class="text-xs text-utrecht-canal font-medium uppercase tracking-wide mb-2">Oeste · Multicultural</p>
-        <p class="text-sm text-utrecht-dark/70">El barrio más diverso de Utrecht, con raíces indonesias, marroquíes y turcas. La Kanaalstraat es la calle gastronómica más interesante de la ciudad: shawarma, ramen, dim sum y tostadas de aguacate en el mismo bloque. Ambiente relajado y precios honestos.</p>
+    <!-- ── PESTAÑA 3: AYER Y HOY (SLIDER COMPARADOR) ── -->
+    <section id="sec-slider" class="tab-section hidden transition-opacity duration-300">
+      <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm text-center max-w-3xl mx-auto space-y-6">
+        <div>
+          <span class="text-xs font-bold text-utrecht-red uppercase tracking-widest mb-1.5 block">Utrecht en el Tiempo</span>
+          <h2 class="hero-title text-3xl font-extrabold text-utrecht-navy">Ayer y Hoy en el Oudegracht</h2>
+          <p class="text-slate-500 text-xs mt-1">
+            Desliza el tirador central de izquierda a derecha para comparar la Oudegracht de Utrecht en 1900 frente a la actualidad.
+          </p>
+        </div>
+
+        <!-- Slider HTML -->
+        <div class="comparison-slider-container relative w-full aspect-[4/3] select-none rounded-2xl overflow-hidden bg-slate-200 border">
+          <!-- Imagen 1 (Fondo: Moderno) -->
+          <img src="https://upload.wikimedia.org/wikipedia/commons/d/de/Utrecht_-_Oudegracht.jpg" alt="Utrecht Moderno" class="absolute inset-0 w-full h-full object-cover pointer-events-none" />
+          
+          <!-- Imagen 2 (Capa superior: Antigua) -->
+          <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Oudegracht_Utrecht_1900.jpg" alt="Utrecht 1900" class="absolute inset-0 w-full h-full object-cover pointer-events-none z-10" id="before-img" style="clip-path: inset(0 50% 0 0);" />
+          
+          <!-- Slider Control (Invisible range input overlays the whole container) -->
+          <input type="range" min="0" max="100" value="50" class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30" id="comparison-slider" aria-label="Deslizar para comparar imágenes antiguas y modernas" />
+          
+          <!-- Línea y tirador -->
+          <div class="absolute inset-y-0 w-1 bg-white shadow-2xl pointer-events-none z-20" id="slider-handle" style="left: 50%;">
+            <!-- Botón del tirador -->
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 bg-white border-2 border-utrecht-red rounded-full flex items-center justify-center shadow-lg text-utrecht-red text-sm font-bold">
+              ⇄
+            </div>
+          </div>
+        </div>
+
+        <div class="text-xs text-slate-500 italic max-w-md mx-auto">
+          La foto antigua (izquierda) muestra el canal Oudegracht a la altura del puente central en 1900. A la derecha, la vista actual del mismo canal, mostrando la excelente preservación arquitectónica de la ciudad.
+        </div>
       </div>
+    </section>
 
-      <div class="barrio-card">
-        <div class="text-3xl mb-3">🔧</div>
-        <h3 class="font-semibold text-lg mb-1">Wijk C / Rotsoord</h3>
-        <p class="text-xs text-utrecht-canal font-medium uppercase tracking-wide mb-2">Sur del centro · Creativo</p>
-        <p class="text-sm text-utrecht-dark/70">Un barrio obrero reconvertido en zona creativa. El área de Rotsoord —antigua fábrica— alberga ahora estudios de diseño, cervecerías artesanales y espacios culturales. Es donde tiene sentido quedarse a tomar algo una noche de entre semana.</p>
+    <!-- ── PESTAÑA 4: GLOSARIO INTERACTIVO ── -->
+    <section id="sec-diccionario" class="tab-section hidden transition-opacity duration-300">
+      <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm max-w-4xl mx-auto space-y-6">
+        <div class="text-center">
+          <span class="text-xs font-bold text-utrecht-red uppercase tracking-widest mb-1.5 block">Idioma Local</span>
+          <h2 class="hero-title text-3xl font-extrabold text-utrecht-navy">Neerlandés de Supervivencia</h2>
+          <p class="text-slate-500 text-xs mt-1">
+            Palabras y expresiones de los Países Bajos con su significado, pronunciación y contexto cultural.
+          </p>
+        </div>
+
+        <!-- Buscador -->
+        <div class="max-w-md mx-auto relative">
+          <input type="text" id="glosario-search" placeholder="Buscar palabra en neerlandés o español..." class="w-full pl-10 pr-4 py-2 rounded-full border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-utrecht-red/30 focus:border-utrecht-red" />
+          <span class="absolute left-3.5 top-2.5 text-slate-400 text-xs">🔍</span>
+        </div>
+
+        <!-- Lista del Glosario -->
+        <div class="grid md:grid-cols-2 gap-4" id="glosario-grid">
+          <!-- Rellenado dinámicamente por JS -->
+        </div>
       </div>
+    </section>
 
-      <div class="barrio-card">
-        <div class="text-3xl mb-3">🌳</div>
-        <h3 class="font-semibold text-lg mb-1">Wittevrouwen</h3>
-        <p class="text-xs text-utrecht-canal font-medium uppercase tracking-wide mb-2">Este del centro · Residencial</p>
-        <p class="text-sm text-utrecht-dark/70">Calles anchas con árboles centenarios, casas de ladrillo rojo y jardines cuidados. Tranquilo, caro y muy buscado por familias. El parque Lepelenburg y el Maliebaan —el paseo más elegante de Utrecht— atraviesan el barrio. Ideal para pasear sin rumbo.</p>
+    <!-- ── PESTAÑA 5: EL MAPA Y RUTAS GPX ── -->
+    <section id="sec-mapa" class="tab-section hidden transition-opacity duration-300">
+      <div class="grid md:grid-cols-3 gap-6 items-start">
+        
+        <!-- Mapa y filtros (Columna Izquierda 2/3) -->
+        <div class="md:col-span-2 space-y-4">
+          <!-- Filtros de colores -->
+          <div class="flex flex-wrap gap-2" id="filtros">
+            <button class="filtro-btn active" data-color="all">Todos</button>
+            <button class="filtro-btn" data-color="green">🟢 Recomendados</button>
+            <button class="filtro-btn" data-color="red">🔴 Evitar</button>
+            <button class="filtro-btn" data-color="blue">🔵 Parques</button>
+            <button class="filtro-btn" data-color="orange">🟠 Imprescindible</button>
+          </div>
+          <!-- Mapa Leaflet -->
+          <div id="map" class="shadow-md"></div>
+        </div>
+
+        <!-- Rutas GPX (Columna Derecha 1/3) -->
+        <div class="space-y-4">
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <h2 class="hero-title text-xl font-bold text-utrecht-navy mb-1 flex items-center gap-2">
+              <span>🚴</span> Rutas en Bici
+            </h2>
+            <p class="text-xs text-slate-500 leading-relaxed mb-4">
+              Trayectos cíclicos semanales para conocer los alrededores de Utrecht. Actívalas para dibujarlas en el mapa.
+            </p>
+            <div id="rutas-list" class="space-y-3 overflow-y-auto max-h-[420px] pr-1">
+              <!-- Cargado dinámicamente -->
+            </div>
+          </div>
+        </div>
+
       </div>
+    </section>
 
-      <div class="barrio-card">
-        <div class="text-3xl mb-3">🏗️</div>
-        <h3 class="font-semibold text-lg mb-1">Leidsche Rijn</h3>
-        <p class="text-xs text-utrecht-canal font-medium uppercase tracking-wide mb-2">Oeste · Nueva urbanización</p>
-        <p class="text-sm text-utrecht-dark/70">La mayor expansión urbanística de Utrecht en las últimas décadas, con arquitectura moderna, amplias zonas verdes y el Máximapark —el mayor parque de la ciudad—. Joven, familiar y funcional. Conectado al centro en bici en 20 minutos por el Leidsche Rijn.</p>
+    <!-- ── PESTAÑA 6: GALERÍA DE FOTOS ── -->
+    <section id="sec-galeria" class="tab-section hidden transition-opacity duration-300">
+      <div class="flex items-end justify-between mb-6">
+        <div>
+          <h2 class="hero-title text-2xl font-bold text-utrecht-navy mb-1">Momentos y Rincones</h2>
+          <p class="text-slate-500 text-xs">Una selección de fotos aleatorias. Diferentes en cada recarga.</p>
+        </div>
+        <button id="btn-ver-todas" style="display:none" class="text-xs font-semibold text-utrecht-red hover:underline whitespace-nowrap ml-4"></button>
       </div>
-
-      <div class="barrio-card">
-        <div class="text-3xl mb-3">🧱</div>
-        <h3 class="font-semibold text-lg mb-1">Zuilen</h3>
-        <p class="text-xs text-utrecht-canal font-medium uppercase tracking-wide mb-2">Norte · Auténtico</p>
-        <p class="text-sm text-utrecht-dark/70">El barrio menos turistificado de Utrecht. Antiguo barrio obrero con identidad propia, precios bajos y una mezcla de inmigrantes de primera y segunda generación y holandeses de toda la vida. La Amsterdamsestraatweg es su eje: una calle larga, sin pretensiones y llena de vida real.</p>
+      <!-- Grid -->
+      <div id="galeria" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <!-- Rellenado por JS -->
       </div>
+    </section>
 
-    </div>
-  </section>
-
-  <!-- ══════════════ FLORA ══════════════ -->
-  <section id="flora" class="max-w-5xl mx-auto px-4 mb-24">
-    <h2 class="hero-title text-3xl font-bold mb-2">Flora</h2>
-    <p class="text-utrecht-dark/60 mb-5 text-sm">Plantas y flores que colorean Utrecht a lo largo del año.</p>
-    <div class="flex flex-wrap gap-2 mb-6" id="flora-filtros">
-      <button class="filtro-btn active" data-temporada="todas">Todas</button>
-      <button class="filtro-btn" data-temporada="invierno">❄️ Invierno</button>
-      <button class="filtro-btn" data-temporada="primavera">🌸 Primavera</button>
-      <button class="filtro-btn" data-temporada="verano">☀️ Verano</button>
-      <button class="filtro-btn" data-temporada="otoño">🍂 Otoño</button>
-    </div>
-    <div id="flora-grid" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-      <div class="planta-card col-span-4 text-center py-8 text-utrecht-dark/40 text-sm">Cargando flora…</div>
-    </div>
-  </section>
+  </main>
 
   <!-- ══════════════ FOOTER ══════════════ -->
-  <footer class="border-t border-utrecht-mist bg-utrecht-cream py-8 text-center text-sm text-utrecht-dark/40">
-    <p>Hecho con ☕ en Utrecht · <a href="https://github.com/zaswear/mijnutrecht" class="hover:text-utrecht-canal transition-colors">Código en GitHub</a></p>
+  <footer class="border-t border-slate-200/80 bg-white/60 py-8 text-center text-xs text-slate-400">
+    <p class="font-medium">
+      Hecho con ❤️ en Utrecht por Zaswear · 
+      <a href="https://github.com/zaswear/mijnutrecht" target="_blank" rel="noopener" class="text-utrecht-red font-semibold hover:underline">Código en GitHub</a>
+    </p>
+    <p class="mt-1.5 text-[10px]">Mijn Utrecht — Versión 2.0</p>
   </footer>
 
-  <!-- ══════════════ JS ══════════════ -->
+  <!-- ══════════════ LIGHTBOX GALERÍA ══════════════ -->
+  <div id="lightbox">
+    <button id="lightbox-close" onclick="closeLightbox()" aria-label="Cerrar">&#10005;</button>
+    <button id="lightbox-prev" onclick="moveLightbox(-1)" aria-label="Anterior">&#8249;</button>
+    <img id="lightbox-img" src="" alt="" />
+    <button id="lightbox-next" onclick="moveLightbox(1)" aria-label="Siguiente">&#8250;</button>
+    <div id="lightbox-caption"></div>
+  </div>
+
+  <!-- ══════════════ SCRIPTS JAVASCRIPT ══════════════ -->
   <script>
-    // ── MAPA ──────────────────────────────────────────────
+    // ── SPA NAVIGATION LÓGICA ──
+    let activeTab = 'guia';
+    
+    function switchTab(tabId) {
+      activeTab = tabId;
+      
+      // Ocultar todas las secciones
+      document.querySelectorAll('.tab-section').forEach(sec => {
+        sec.classList.add('hidden');
+      });
+      
+      // Mostrar sección activa
+      const activeSec = document.getElementById(`sec-${tabId}`);
+      if (activeSec) {
+        activeSec.classList.remove('hidden');
+      }
+      
+      // Sincronizar clases activas en los enlaces de navegación (Top y Bottom)
+      document.querySelectorAll('.nav-link').forEach(link => {
+        const isCurrent = link.dataset.tab === tabId;
+        
+        // Estilos enlaces top escritorio
+        if (link.classList.contains('px-2')) {
+          link.classList.toggle('text-utrecht-red', isCurrent);
+          link.classList.toggle('border-b-2', isCurrent);
+          link.classList.toggle('border-utrecht-red', isCurrent);
+          link.classList.toggle('text-slate-600', !isCurrent);
+        }
+        
+        // Estilos botones bottom móvil
+        if (link.classList.contains('flex-col')) {
+          link.classList.toggle('text-utrecht-red', isCurrent);
+          link.classList.toggle('bg-slate-100', isCurrent);
+          link.classList.toggle('text-slate-500', !isCurrent);
+        }
+      });
+      
+      // Ajustar dimensiones del mapa Leaflet cuando se activa su pestaña
+      if (tabId === 'mapa' && map) {
+        setTimeout(() => {
+          map.invalidateSize();
+        }, 120);
+      }
+      
+      // Scroll hacia arriba suave
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ── COMPARADOR AYER Y HOY LÓGICA ──
+    const slider = document.getElementById('comparison-slider');
+    const beforeImg = document.getElementById('before-img');
+    const handle = document.getElementById('slider-handle');
+    
+    if (slider && beforeImg && handle) {
+      slider.addEventListener('input', (e) => {
+        const val = e.target.value;
+        beforeImg.style.clipPath = `inset(0 ${100 - val}% 0 0)`;
+        handle.style.left = `${val}%`;
+      });
+    }
+
+    // ── DICCIONARIO DE NEERLANDÉS DATOS Y LÓGICA ──
+    const GLOSARIO = [
+      { palabra: "Gezellig", pron: "/je-sé-lej/", tipo: "Cultura", trad: "Acogedor, entrañable, agradable", desc: "Es la palabra holandesa más sagrada. Define un sentimiento de calidez y conexión social: cenar con amigos, una buena conversación en el canal o una tarde de café en Utrecht es 'gezellig'." },
+      { palabra: "Lekker", pron: "/lé-ker/", tipo: "Expresión", trad: "Delicioso, sabroso, agradable, bueno", desc: "Se usa para describir comida sabrosa, pero también un día soleado ('lekker weer'), dormir plácidamente o incluso sentirse bien. Es muy común en el día a día." },
+      { palabra: "Fiets", pron: "/fits/", tipo: "Vocabulario", trad: "Bicicleta", desc: "El vehículo indiscutible de Utrecht. La ciudad cuenta con más bicis que habitantes y toda la red de tráfico está diseñada en torno a ellas." },
+      { palabra: "Borrel", pron: "/bó-rel/", tipo: "Cultura", trad: "El aperitivo / Bebida de sobremesa", desc: "Reunirse a tomar una cerveza después de trabajar, típicamente acompañada de 'bitterballen' (croquetas redondas de carne especiada con mostaza)." },
+      { palabra: "Alstublieft", pron: "/als-tu-blift/", tipo: "Saludos", trad: "Por favor / Aquí tiene", desc: "Se utiliza de manera formal al pedir algo en una tienda o cafetería, o al entregar un objeto a otra persona al pagar." },
+      { palabra: "Dank je wel", pron: "/dank-ye-vel/", tipo: "Saludos", trad: "Muchas gracias", desc: "Expresión informal y habitual para dar las gracias. Si quieres hablarle formalmente a un desconocido puedes decir 'Dank u wel'." },
+      { palabra: "Borrelhapjes", pron: "/bó-rel-jap-yes/", tipo: "Vocabulario", trad: "Tapas / Snacks de aperitivo", desc: "Aperitivos salados calientes que acompañan al 'borrel'. Incluyen bitterballen, mini-rollitos de primavera y dados de queso joven holandés." },
+      { palabra: "Gezondheid", pron: "/je-zónt-jeit/", tipo: "Saludos", trad: "¡Salud! (al brindar o estornudar)", desc: "Literalmente significa 'salud'. Se usa de manera idéntica al español para desear salud tras un estornudo o al chocar las copas." },
+      { palabra: "Dag", pron: "/daj/", tipo: "Saludos", trad: "Hola / Adiós", desc: "Significa literalmente 'día', pero se usa constantemente como saludo rápido y simpático al entrar o salir de establecimientos." },
+      { palabra: "Broodje", pron: "/brót-ye/", tipo: "Vocabulario", trad: "Bocadillo / Panecillo", desc: "Un panecillo blando relleno. El 'Broodje Mario' es un bocadillo icónico italiano de Utrecht muy querido por los estudiantes locales." }
+    ];
+
+    function renderGlosario(filtro = '') {
+      const grid = document.getElementById('glosario-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
+      
+      const filtrado = GLOSARIO.filter(item => {
+        const query = filtro.toLowerCase();
+        return item.palabra.toLowerCase().includes(query) || 
+               item.trad.toLowerCase().includes(query) ||
+               item.desc.toLowerCase().includes(query);
+      });
+      
+      if (!filtrado.length) {
+        grid.innerHTML = `<div class="col-span-2 text-center py-8 text-slate-400 text-sm">No se encontraron resultados para "${filtro}"</div>`;
+        return;
+      }
+      
+      filtrado.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'bg-slate-50 p-5 rounded-2xl border border-slate-200/60 premium-card';
+        card.innerHTML = `
+          <div class="flex items-start justify-between gap-2 mb-1.5">
+            <div>
+              <h3 class="font-extrabold text-xl text-utrecht-red">${item.palabra}</h3>
+              <span class="text-xs font-mono text-slate-400 italic">${item.pron}</span>
+            </div>
+            <span class="text-[9px] font-bold px-2 py-0.5 rounded-full border border-slate-300 text-slate-500 bg-white">${item.tipo}</span>
+          </div>
+          <p class="font-bold text-xs text-utrecht-navy mb-2">➡️ ${item.trad}</p>
+          <p class="text-xs text-slate-600 leading-relaxed">${item.desc}</p>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    document.getElementById('glosario-search')?.addEventListener('input', (e) => {
+      renderGlosario(e.target.value);
+    });
+    
+    // Render glosario inicial
+    renderGlosario();
+
+    // ── MAPA INTERACTIVO LÓGICA ──
     const map = L.map('map').setView([52.0907, 5.1214], 14);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    // Usamos el set de mapas moderno de CartoDB Voyager en lugar del básico de OpenStreetMap
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
       maxZoom: 19,
     }).addTo(map);
 
@@ -556,13 +801,7 @@
     function makeIcon(color) {
       return L.divIcon({
         className: '',
-        html: `<div style="
-          width:14px; height:14px;
-          background:${colorMap[color] || '#666'};
-          border:2.5px solid white;
-          border-radius:50%;
-          box-shadow:0 1px 4px rgba(0,0,0,.4);
-        "></div>`,
+        html: `<div style="width:14px; height:14px; background:${colorMap[color] || '#666'}; border:2.5px solid white; border-radius:50%; box-shadow:0 1px 4px rgba(0,0,0,.4);"></div>`,
         iconSize: [14, 14],
         iconAnchor: [7, 7],
       });
@@ -576,8 +815,8 @@
         data.forEach(lugar => {
           const gmapsLink = lugar.google_maps_url
             ? `<a href="${lugar.google_maps_url}" target="_blank" rel="noopener"
-                style="display:inline-block;margin-top:.5rem;font-size:.75rem;color:#16a34a;font-weight:600;text-decoration:none">
-                🗺 Ver en Google Maps →</a>`
+                 style="display:inline-block;margin-top:.5rem;font-size:.75rem;color:#16a34a;font-weight:600;text-decoration:none">
+                 🗺 Ver en Google Maps →</a>`
             : '';
           const tipoStr = lugar.tipo
             ? (Array.isArray(lugar.tipo) ? lugar.tipo.join(' · ') : lugar.tipo).toUpperCase()
@@ -588,12 +827,12 @@
           const marker = L.marker(lugar.coordenadas, { icon: makeIcon(lugar.color) })
             .addTo(map)
             .bindPopup(`
-              <div style="font-family:'DM Sans',sans-serif; min-width:190px; max-width:240px">
-                <strong style="font-size:1rem">${lugar.nombre}</strong>
+              <div style="font-family:'Plus Jakarta Sans',sans-serif; min-width:190px; max-width:240px">
+                <strong style="font-size:0.95rem;color:#0F172A">${lugar.nombre}</strong>
                 ${descripcion}
-                <p style="margin:.3rem 0 .1rem;font-size:.83rem;color:#333">${lugar.nota}</p>
+                <p style="margin:.3rem 0 .1rem;font-size:.8rem;color:#475569">${lugar.nota}</p>
                 ${gmapsLink}
-                ${tipoStr ? `<div style="margin-top:.5rem;font-size:.65rem;color:#aaa;letter-spacing:.08em">${tipoStr}</div>` : ''}
+                ${tipoStr ? `<div style="margin-top:.5rem;font-size:.6rem;color:#94a3b8;letter-spacing:.08em;font-weight:700">${tipoStr}</div>` : ''}
               </div>
             `);
           marker._color = lugar.color;
@@ -602,11 +841,11 @@
       })
       .catch(() => console.warn('No se pudo cargar maps/puntos.json'));
 
-    // Filtros
-    document.querySelectorAll('.filtro-btn').forEach(btn => {
+    // Filtros del mapa
+    document.querySelectorAll('#filtros .filtro-btn').forEach(btn => {
       btn.addEventListener('click', () => {
-        document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+        document.querySelectorAll('#filtros .filtro-btn').forEach(b => b.classList.remove('active', 'ring-2', 'ring-utrecht-navy/40'));
+        btn.classList.add('active', 'ring-2', 'ring-utrecht-navy/40');
         const color = btn.dataset.color;
         allMarkers.forEach(m => {
           if (color === 'all' || m._color === color) {
@@ -618,11 +857,87 @@
       });
     });
 
-    // ── GALERÍA — carga automática desde Cloudinary (tag: gallery) ──
+    // ── RUTAS GPX LÓGICA ──
+    const rutaColors = ['#ea580c','#2563eb','#16a34a','#9333ea','#e11d48'];
+    let rutaLayers = {};
+
+    fetch('./rutas/index.json')
+      .then(r => r.json())
+      .then(rutas => {
+        const lista = document.getElementById('rutas-list');
+        lista.innerHTML = '';
+        document.getElementById('n-rutas').textContent = rutas.length;
+
+        rutas.forEach((ruta, i) => {
+          const color = rutaColors[i % rutaColors.length];
+          const card = document.createElement('div');
+          card.className = 'bg-slate-50 rounded-xl p-4 border border-slate-200 flex flex-col gap-1 cursor-pointer transition-shadow hover:shadow-sm';
+          card.innerHTML = `
+            <div class="flex items-center gap-2">
+              <span class="text-xl">${ruta.emoji || '🚴'}</span>
+              <p class="font-bold text-xs text-utrecht-navy">${ruta.nombre}</p>
+            </div>
+            <p class="text-[10px] text-slate-500 font-semibold mt-0.5">${ruta.distancia} · ${ruta.duracion} · ${ruta.dificultad}</p>
+            <p class="text-[11px] text-slate-600 mt-1 leading-normal mb-2">${ruta.descripcion}</p>
+            <div class="flex gap-2 items-center flex-wrap mt-auto">
+              <button onclick="event.stopPropagation(); toggleRuta('${ruta.archivo}', '${color}', this)"
+                class="text-[10px] font-bold px-3 py-1 rounded-full border-2 transition-all"
+                style="border-color:${color}; color:${color}">
+                Ver en mapa
+              </button>
+              ${ruta.archivo
+                ? `<a href="rutas/${ruta.archivo}" class="text-[10px] text-utrecht-brick font-bold hover:underline">Descargar GPX</a>`
+                : `<a href="${ruta.fuente}" target="_blank" rel="noopener" class="text-[10px] text-utrecht-brick font-bold hover:underline">Ver ruta →</a>`}
+            </div>`;
+          lista.appendChild(card);
+
+          // Cargar capa GPX oculta por defecto en el mapa
+          if (ruta.archivo) cargarGPX(ruta.archivo, color);
+        });
+      })
+      .catch(() => {
+        document.getElementById('rutas-list').innerHTML = `
+          <div class="text-center py-6 text-slate-400 text-xs">
+            Sin rutas en bici configuradas.
+          </div>`;
+      });
+
+    function cargarGPX(archivo, color) {
+      if (rutaLayers[archivo]) return;
+      new L.GPX(`rutas/${archivo}`, {
+        async: true,
+        polyline_options: { color, weight: 4, opacity: .85 },
+        marker_options: { startIconUrl: null, endIconUrl: null, shadowUrl: null }
+      }).on('loaded', function(e) {
+        rutaLayers[archivo] = e.target;
+        e.target.remove(); // oculto inicialmente
+      }).addTo(map);
+    }
+
+    function toggleRuta(archivo, color, btn) {
+      const layer = rutaLayers[archivo];
+      if (!layer) return;
+      if (map.hasLayer(layer)) {
+        map.removeLayer(layer);
+        btn.textContent = 'Ver en mapa';
+        btn.style.background = '';
+        btn.style.color = color;
+      } else {
+        layer.addTo(map);
+        map.fitBounds(layer.getBounds(), { padding: [40, 40] });
+        btn.textContent = 'Ocultar';
+        btn.style.background = color;
+        btn.style.color = '#fff';
+      }
+    }
+
+    // ── GALERÍA LÓGICA (Cloudinary) ──
     const CLOUD      = 'dkn49zkfr';
     const MESES      = ['','Enero','Febrero','Marzo','Abril','Mayo','Junio',
                         'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
     const PREVIEW_COUNT = 8;
+    let lbItems = [];
+    let lbIndex = 0;
 
     fetch(`https://res.cloudinary.com/${CLOUD}/image/list/gallery.json`)
       .then(r => {
@@ -637,7 +952,7 @@
         }))
       ))
       .catch(err => {
-        console.warn('Cloudinary list falló, usando gallery.json:', err);
+        console.warn('Cloudinary falló, usando gallery.json alternativo:', err);
         fetch('./fotos/gallery.json')
           .then(r => r.json())
           .then(fotos => mostrarFotos(
@@ -685,10 +1000,10 @@
         const dt    = r.created_at ? new Date(r.created_at) : new Date();
         const titulo = `Utrecht · ${MESES[dt.getMonth() + 1]} ${dt.getFullYear()}`;
         const div = document.createElement('div');
-        div.className = 'foto-card';
+        div.className = 'foto-card bg-white rounded-xl overflow-hidden shadow-sm border border-slate-200 premium-card cursor-zoom-in';
         div.innerHTML = `
-          <img src="${src}" alt="${titulo}" loading="lazy" />
-          <div class="p-2 text-xs text-utrecht-dark/60">${titulo}</div>
+          <img src="${src}" alt="${titulo}" class="w-full h-44 object-cover block" loading="lazy" />
+          <div class="p-2.5 text-[10px] text-slate-500 font-bold text-center tracking-tight bg-slate-50 border-t">${titulo}</div>
         `;
         const idx = lbItems.length;
         lbItems.push({ src, titulo });
@@ -696,7 +1011,39 @@
         grid.appendChild(div);
       });
     }
-    // ── AGENDA ────────────────────────────────────────────
+
+    // ── LIGHTBOX LÓGICA ──
+    function openLightbox(src, titulo, index) {
+      lbIndex = index;
+      document.getElementById('lightbox-img').src = src.replace('w_600', 'w_1800');
+      document.getElementById('lightbox-caption').textContent = titulo;
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.getElementById('lightbox-img').src = '';
+      document.body.style.overflow = '';
+    }
+    function moveLightbox(dir) {
+      lbIndex = (lbIndex + dir + lbItems.length) % lbItems.length;
+      const item = lbItems[lbIndex];
+      document.getElementById('lightbox-img').src = item.src.replace('w_600', 'w_1800');
+      document.getElementById('lightbox-caption').textContent = item.titulo;
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('lightbox').addEventListener('click', function(e) {
+        if (e.target === this) closeLightbox();
+      });
+    });
+    document.addEventListener('keydown', e => {
+      if (!document.getElementById('lightbox').classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft')  moveLightbox(-1);
+      if (e.key === 'ArrowRight') moveLightbox(1);
+    });
+
+    // ── AGENDA LÓGICA ──
     let agendaTodos = [];
     fetch('./agenda/eventos.json')
       .then(r => r.json())
@@ -705,8 +1052,8 @@
         renderAgenda(agendaTodos);
         document.querySelectorAll('#agenda-filtros .filtro-btn').forEach(btn => {
           btn.addEventListener('click', () => {
-            document.querySelectorAll('#agenda-filtros .filtro-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+            document.querySelectorAll('#agenda-filtros .filtro-btn').forEach(b => b.classList.remove('active', 'ring-2', 'ring-utrecht-navy/40'));
+            btn.classList.add('active', 'ring-2', 'ring-utrecht-navy/40');
             const tipo = btn.dataset.tipo;
             renderAgenda(tipo === 'todos' ? agendaTodos : agendaTodos.filter(e => e.tipo === tipo));
           });
@@ -714,18 +1061,20 @@
       })
       .catch(() => {
         document.getElementById('agenda-grid').innerHTML =
-          '<p class="text-sm text-utrecht-dark/40 col-span-3 text-center py-6">No se pudo cargar la agenda.</p>';
+          '<p class="text-xs text-slate-400 col-span-3 text-center py-6">No se pudo cargar la agenda.</p>';
       });
 
     function makeAgendaCard(ev) {
       const card = document.createElement('div');
-      card.className = 'agenda-card';
+      card.className = 'bg-white rounded-2xl p-5 border border-slate-200 shadow-sm premium-card flex flex-col justify-between';
       card.innerHTML = `
-        <div class="text-3xl mb-3">${ev.emoji}</div>
-        <h3 class="font-semibold mb-1">${ev.nombre}</h3>
-        <p class="text-xs text-utrecht-canal font-medium uppercase tracking-wide mb-2">${ev.cuando}</p>
-        <p class="text-sm text-utrecht-dark/70 mb-3">${ev.descripcion}</p>
-        <div class="flex flex-wrap gap-x-4 gap-y-1 text-xs text-utrecht-dark/50">
+        <div>
+          <div class="text-3xl mb-2">${ev.emoji}</div>
+          <h3 class="font-bold text-sm text-utrecht-navy mb-1">${ev.nombre}</h3>
+          <p class="text-[10px] text-utrecht-red font-bold uppercase tracking-wider mb-2">${ev.cuando}</p>
+          <p class="text-xs text-slate-600 leading-relaxed mb-4">${ev.descripcion}</p>
+        </div>
+        <div class="flex flex-col gap-1 text-[10px] text-slate-500 font-bold border-t border-slate-100 pt-3">
           <span>🕐 ${ev.horario}</span>
           <span>📍 ${ev.lugar}</span>
         </div>
@@ -739,7 +1088,7 @@
       document.getElementById('agenda-ver-mas')?.remove();
       grid.innerHTML = '';
       if (!eventos.length) {
-        grid.innerHTML = '<p class="text-sm text-utrecht-dark/40 col-span-3 text-center py-6">Sin eventos en esta categoría.</p>';
+        grid.innerHTML = '<p class="text-xs text-slate-400 col-span-3 text-center py-6">Sin eventos en esta categoría.</p>';
         return;
       }
       const cards = eventos.map(makeAgendaCard);
@@ -749,9 +1098,9 @@
         let expanded = false;
         const wrap = document.createElement('div');
         wrap.id = 'agenda-ver-mas';
-        wrap.className = 'mt-5 text-center';
+        wrap.className = 'mt-4 text-center col-span-3';
         const btn = document.createElement('button');
-        btn.className = 'ver-mas-btn';
+        btn.className = 'text-xs text-utrecht-red font-bold hover:underline px-4 py-1.5 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors shadow-sm';
         btn.textContent = `Ver ${extras.length} más →`;
         btn.addEventListener('click', () => {
           expanded = !expanded;
@@ -768,7 +1117,7 @@
       }
     }
 
-    // ── FLORA ─────────────────────────────────────────────
+    // ── FLORA LÓGICA ──
     let floraAll = [];
     fetch('./flora/plantas.json')
       .then(r => r.json())
@@ -777,8 +1126,8 @@
         renderFlora(floraAll);
         document.querySelectorAll('#flora-filtros .filtro-btn').forEach(btn => {
           btn.addEventListener('click', () => {
-            document.querySelectorAll('#flora-filtros .filtro-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
+            document.querySelectorAll('#flora-filtros .filtro-btn').forEach(b => b.classList.remove('active', 'ring-2', 'ring-utrecht-navy/40'));
+            btn.classList.add('active', 'ring-2', 'ring-utrecht-navy/40');
             const temporada = btn.dataset.temporada;
             renderFlora(temporada === 'todas' ? floraAll : floraAll.filter(p => p.temporada === temporada));
           });
@@ -786,45 +1135,22 @@
       })
       .catch(() => {});
 
-    // ── BARRIOS — mostrar 3 de 6, desplegable ──────────────
-    document.addEventListener('DOMContentLoaded', () => {
-      const LIMIT = 3;
-      const grid = document.getElementById('barrios-grid');
-      if (!grid) return;
-      const cards = Array.from(grid.querySelectorAll('.barrio-card'));
-      cards.slice(LIMIT).forEach(c => c.style.display = 'none');
-      if (cards.length > LIMIT) {
-        const extras = cards.slice(LIMIT);
-        let expanded = false;
-        const wrap = document.createElement('div');
-        wrap.className = 'mt-5 text-center';
-        const btn = document.createElement('button');
-        btn.className = 'ver-mas-btn';
-        btn.textContent = `Ver ${extras.length} más →`;
-        btn.addEventListener('click', () => {
-          expanded = !expanded;
-          extras.forEach(c => c.style.display = expanded ? '' : 'none');
-          btn.textContent = expanded ? 'Ver menos ↑' : `Ver ${extras.length} más →`;
-        });
-        wrap.appendChild(btn);
-        grid.after(wrap);
-      }
-    });
-
     function makePlanteCard(p) {
       const card = document.createElement('div');
-      card.className = 'planta-card';
+      card.className = 'bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm premium-card';
       card.innerHTML = `
-        <img src="${p.foto}" alt="${p.nombre}" loading="lazy" onerror="this.style.display='none'" />
-        <div class="p-4">
-          <div class="flex items-center gap-2 mb-1">
-            <span class="text-xl">${p.emoji}</span>
-            <h3 class="font-semibold">${p.nombre}</h3>
+        <img src="${p.foto}" alt="${p.nombre}" class="w-full h-36 object-cover block" loading="lazy" onerror="this.style.display='none'" />
+        <div class="p-4 flex flex-col justify-between h-auto">
+          <div>
+            <div class="flex items-center gap-2 mb-0.5">
+              <span class="text-xl">${p.emoji}</span>
+              <h3 class="font-bold text-sm text-utrecht-navy">${p.nombre}</h3>
+            </div>
+            <p class="text-[10px] text-slate-400 italic mb-2">${p.nombre_cientifico}</p>
+            <p class="text-[10px] font-bold text-utrecht-red uppercase tracking-wider mb-2">${p.meses}</p>
+            <p class="text-[11px] text-slate-600 leading-normal">${p.descripcion}</p>
           </div>
-          <p class="text-xs text-utrecht-dark/40 italic mb-2">${p.nombre_cientifico}</p>
-          <p class="text-xs font-medium text-utrecht-canal mb-2">${p.meses}</p>
-          <p class="text-sm text-utrecht-dark/70 leading-relaxed">${p.descripcion}</p>
-          <p class="text-xs text-utrecht-dark/40 mt-3">📍 ${p.donde_ver}</p>
+          <p class="text-[9px] text-slate-400 font-bold mt-4 pt-2 border-t border-slate-100">📍 ${p.donde_ver}</p>
         </div>
       `;
       return card;
@@ -836,7 +1162,7 @@
       document.getElementById('flora-ver-mas')?.remove();
       grid.innerHTML = '';
       if (!plantas.length) {
-        grid.innerHTML = '<p class="text-sm text-utrecht-dark/40 col-span-4 text-center py-6">Sin plantas en esta temporada.</p>';
+        grid.innerHTML = '<p class="text-xs text-slate-400 col-span-4 text-center py-6">Sin plantas en esta temporada.</p>';
         return;
       }
       const cards = plantas.map(makePlanteCard);
@@ -846,9 +1172,9 @@
         let expanded = false;
         const wrap = document.createElement('div');
         wrap.id = 'flora-ver-mas';
-        wrap.className = 'mt-5 text-center';
+        wrap.className = 'mt-4 text-center col-span-4';
         const btn = document.createElement('button');
-        btn.className = 'ver-mas-btn';
+        btn.className = 'text-xs text-utrecht-red font-bold hover:underline px-4 py-1.5 rounded-full border border-slate-200 bg-white hover:bg-slate-50 transition-colors shadow-sm';
         btn.textContent = `Ver ${extras.length} más →`;
         btn.addEventListener('click', () => {
           expanded = !expanded;
@@ -865,15 +1191,5 @@
       }
     }
   </script>
-
-
-  <!-- LIGHTBOX -->
-  <div id="lightbox">
-    <button id="lightbox-close" onclick="closeLightbox()">&#10005;</button>
-    <button id="lightbox-prev" onclick="moveLightbox(-1)">&#8249;</button>
-    <img id="lightbox-img" src="" alt="" />
-    <button id="lightbox-next" onclick="moveLightbox(1)">&#8250;</button>
-    <div id="lightbox-caption"></div>
-  </div>
 </body>
 </html>
