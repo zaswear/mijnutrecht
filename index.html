@@ -420,8 +420,10 @@
                 Cargando recomendaciones locales para el día de hoy...
               </p>
             </div>
+
+            <div id="weather-forecast" class="grid grid-cols-2 gap-2 mt-3"></div>
           </div>
-          
+
           <!-- Industria Local -->
           <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
             <div class="flex items-center gap-3 mb-4">
@@ -1711,10 +1713,24 @@
       const timeEl = document.getElementById('weather-time');
       const descEl = document.getElementById('weather-desc');
       const adviceEl = document.getElementById('weather-advice');
+      const forecastEl = document.getElementById('weather-forecast');
 
       if (!tempEl) return;
 
-      const url = 'https://api.open-meteo.com/v1/forecast?latitude=52.0907&longitude=5.1214&current=temperature_2m,weather_code&timezone=Europe/Amsterdam';
+      // Emoji según el weather_code (WMO) de Open-Meteo — reutilizado por los días siguientes.
+      function wIcon(code) {
+        if (code === 0) return '☀️';
+        if (code >= 1 && code <= 3) return '⛅';
+        if (code === 45 || code === 48) return '🌫️';
+        if (code >= 51 && code <= 57) return '🌧️';
+        if (code >= 61 && code <= 67) return '🌧️';
+        if (code >= 71 && code <= 77) return '🌨️';
+        if (code >= 80 && code <= 82) return '🌦️';
+        if (code >= 95) return '🌩️';
+        return '⛅';
+      }
+
+      const url = 'https://api.open-meteo.com/v1/forecast?latitude=52.0907&longitude=5.1214&current=temperature_2m,weather_code&daily=weather_code,temperature_2m_max,temperature_2m_min&forecast_days=3&timezone=Europe/Amsterdam';
 
       fetch(url)
         .then(res => res.json())
@@ -1762,6 +1778,25 @@
           iconEl.textContent = icon;
           descEl.textContent = desc;
           adviceEl.textContent = advice;
+
+          // Pronóstico de mañana y pasado mañana (índices 1 y 2 del bloque diario)
+          if (forecastEl && data.daily && data.daily.time) {
+            const dias = ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'];
+            let html = '';
+            for (let i = 1; i <= 2; i++) {
+              if (data.daily.time[i] == null) continue;
+              const d = new Date(data.daily.time[i] + 'T00:00:00');
+              const nombre = i === 1 ? 'Mañana' : dias[d.getDay()];
+              const max = Math.round(data.daily.temperature_2m_max[i]);
+              const min = Math.round(data.daily.temperature_2m_min[i]);
+              html += `<div class="bg-white/5 rounded-lg p-2 text-center border border-white/5">
+                <p class="text-[9px] uppercase tracking-wider text-slate-400">${nombre}</p>
+                <p class="text-lg leading-none my-1">${wIcon(data.daily.weather_code[i])}</p>
+                <p class="text-[10px] font-bold text-slate-100">${max}° <span class="text-slate-400 font-normal">${min}°</span></p>
+              </div>`;
+            }
+            forecastEl.innerHTML = html;
+          }
         })
         .catch(() => {
           // Fallback
