@@ -126,6 +126,29 @@
     ::-webkit-scrollbar-thumb:hover {
       background: #94a3b8;
     }
+    
+    /* Estilos interactivos de kaktus.dev */
+    .magnetic-wrap {
+      display: inline-block;
+      padding: 6px;
+      margin: -6px;
+    }
+    .magnetic-btn {
+      transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+      will-change: transform;
+    }
+    
+    .tilt-container {
+      perspective: 1000px;
+    }
+    .tilt-box {
+      transform-style: preserve-3d;
+      transition: transform 0.15s ease-out;
+      will-change: transform;
+    }
+    .tilt-box > * {
+      transform: translateZ(10px);
+    }
   </style>
 </head>
 <body class="text-utrecht-navy antialiased min-h-screen pb-20 md:pb-0">
@@ -218,16 +241,12 @@
     <style>@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }</style>
     
     <p class="text-xs font-bold text-utrecht-red uppercase tracking-widest mb-1">Guía Local e Histórica</p>
-    <h1 class="hero-title text-4xl md:text-5xl font-extrabold text-utrecht-navy tracking-tight mb-2">Mijn Utrecht</h1>
-    <p class="text-sm md:text-base text-slate-600 max-w-xl mx-auto">
+    <h1 class="hero-title text-4xl md:text-5xl font-extrabold text-utrecht-navy tracking-tight mb-2 select-none">
+      <span id="scramble-title" class="cursor-default">Mijn Utrecht</span>
+    </h1>
+    <p class="text-sm md:text-base text-slate-600 max-w-xl mx-auto mb-6">
       Una historia de amor a mi ciudad adoptiva neerlandesa, escrita en español para quienes vienen a visitarme.
     </p>
-
-    <div class="flex justify-center gap-6 mt-6 text-xs text-slate-500 border-t border-b border-slate-200/60 py-3 max-w-lg mx-auto">
-      <span><strong class="text-base font-bold text-utrecht-navy" id="n-fotos">—</strong> Fotos</span>
-      <span><strong class="text-base font-bold text-utrecht-navy" id="n-puntos">—</strong> Puntos</span>
-      <span><strong class="text-base font-bold text-utrecht-navy" id="n-rutas">—</strong> Rutas GPX</span>
-    </div>
   </header>
 
   <!-- ══════════════ CONTENIDO PRINCIPAL (SPA) ══════════════ -->
@@ -500,28 +519,32 @@
               </p>
             </div>
           </div>
-          <div class="relative rounded-2xl overflow-hidden shadow-md border border-slate-100 aspect-square group">
-            <img src="fotos/el_alma_dom.jpg" alt="Torre del Dom de Utrecht iluminada al atardecer" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/10 to-transparent flex flex-col justify-end p-6 text-white">
-              <span class="text-[10px] uppercase font-bold text-utrecht-red tracking-wider mb-1">Monumento Insignia</span>
-              <h3 class="font-bold text-lg leading-tight">La Torre del Dom</h3>
-              <p class="text-[11px] text-slate-300 mt-1 leading-relaxed">
-                Con sus 112,5 metros de altura, vigila la plaza Domplein desde 1382 como símbolo de resiliencia y el corazón latente de Utrecht.
-              </p>
+          <div class="tilt-container aspect-square">
+            <div class="tilt-box relative w-full h-full rounded-2xl overflow-hidden shadow-md border border-slate-100 group">
+              <img src="fotos/el_alma_dom.jpg" alt="Torre del Dom de Utrecht iluminada al atardecer" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/10 to-transparent flex flex-col justify-end p-6 text-white">
+                <span class="text-[10px] uppercase font-bold text-utrecht-red tracking-wider mb-1">Monumento Insignia</span>
+                <h3 class="font-bold text-lg leading-tight">La Torre del Dom</h3>
+                <p class="text-[11px] text-slate-300 mt-1 leading-relaxed">
+                  Con sus 112,5 metros de altura, vigila la plaza Domplein desde 1382 como símbolo de resiliencia y el corazón latente de Utrecht.
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
         <!-- Canales y Werven -->
         <div class="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm grid md:grid-cols-2 gap-8 items-center">
-          <div class="order-2 md:order-1 relative rounded-2xl overflow-hidden shadow-md border border-slate-100 aspect-square group">
-            <img src="fotos/el_alma_werven.jpg" alt="Canales de Utrecht de doble nivel" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/10 to-transparent flex flex-col justify-end p-6 text-white">
-              <span class="text-[10px] uppercase font-bold text-utrecht-red tracking-wider mb-1">Ingeniería Medieval</span>
-              <h3 class="font-bold text-lg leading-tight">Canales con Muelles (Werven)</h3>
-              <p class="text-[11px] text-slate-300 mt-1 leading-relaxed">
-                El único sistema de canales del mundo diseñado con bodegas a nivel del cauce y calles comerciales en un segundo nivel superior.
-              </p>
+          <div class="order-2 md:order-1 tilt-container aspect-square">
+            <div class="tilt-box relative w-full h-full rounded-2xl overflow-hidden shadow-md border border-slate-100 group">
+              <img src="fotos/el_alma_werven.jpg" alt="Canales de Utrecht de doble nivel" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/10 to-transparent flex flex-col justify-end p-6 text-white">
+                <span class="text-[10px] uppercase font-bold text-utrecht-red tracking-wider mb-1">Ingeniería Medieval</span>
+                <h3 class="font-bold text-lg leading-tight">Canales con Muelles (Werven)</h3>
+                <p class="text-[11px] text-slate-300 mt-1 leading-relaxed">
+                  El único sistema de canales del mundo diseñado con bodegas a nivel del cauce y calles comerciales en un segundo nivel superior.
+                </p>
+              </div>
             </div>
           </div>
           <div class="order-1 md:order-2">
@@ -596,14 +619,16 @@
           </div>
 
           <!-- Imagen destacada del Café Olivier -->
-          <div class="relative rounded-2xl overflow-hidden shadow-lg border border-slate-200/80 aspect-[16/9] group max-w-4xl mx-auto">
-            <img src="fotos/el_alma_olivier.jpg" alt="Interior de Belgisch Biercafé Olivier" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent flex flex-col justify-end p-8 text-white">
-              <span class="text-xs uppercase font-bold text-utrecht-red tracking-widest mb-1">Cultura del Borrel</span>
-              <h3 class="font-bold text-xl leading-tight">Belgisch Biercafé Olivier</h3>
-              <p class="text-xs text-slate-300 mt-2 leading-relaxed max-w-2xl">
-                Oculto tras la fachada exterior de una calle residencial se esconde este bar instalado dentro de una iglesia clandestina del siglo XIX. Conserva intactos el altar, el majestuoso órgano y las bóvedas de madera, ofreciendo un entorno mágico para degustar cervezas artesanas.
-              </p>
+          <div class="tilt-container aspect-[16/9] max-w-4xl mx-auto">
+            <div class="tilt-box relative w-full h-full rounded-2xl overflow-hidden shadow-lg border border-slate-200/80 group">
+              <img src="fotos/el_alma_olivier.jpg" alt="Interior de Belgisch Biercafé Olivier" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent flex flex-col justify-end p-8 text-white">
+                <span class="text-xs uppercase font-bold text-utrecht-red tracking-widest mb-1">Cultura del Borrel</span>
+                <h3 class="font-bold text-xl leading-tight">Belgisch Biercafé Olivier</h3>
+                <p class="text-xs text-slate-300 mt-2 leading-relaxed max-w-2xl">
+                  Oculto tras la fachada exterior de una calle residencial se esconde este bar instalado dentro de una iglesia clandestina del siglo XIX. Conserva intactos el altar, el majestuoso órgano y las bóvedas de madera, ofreciendo un entorno mágico para degustar cervezas artesanas.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -792,15 +817,21 @@
 
         <!-- Selector de Localización -->
         <div class="flex flex-wrap justify-center gap-2 mb-2">
-          <button onclick="changeComparison('oudegracht')" id="btn-comp-oudegracht" class="comp-btn active px-4 py-1.5 text-xs font-bold rounded-full border transition-all bg-utrecht-red text-white border-utrecht-red shadow-sm">
-            📍 Canal Oudegracht
-          </button>
-          <button onclick="changeComparison('domplein')" id="btn-comp-domplein" class="comp-btn px-4 py-1.5 text-xs font-bold rounded-full border transition-all bg-white text-slate-600 border-slate-200 hover:bg-slate-50">
-            📍 Catedral (Domplein)
-          </button>
-          <button onclick="changeComparison('vredenburg')" id="btn-comp-vredenburg" class="comp-btn px-4 py-1.5 text-xs font-bold rounded-full border transition-all bg-white text-slate-600 border-slate-200 hover:bg-slate-50">
-            📍 Plaza Vredenburg
-          </button>
+          <div class="magnetic-wrap">
+            <button onclick="changeComparison('oudegracht')" id="btn-comp-oudegracht" class="magnetic-btn comp-btn active px-4 py-1.5 text-xs font-bold rounded-full border transition-all bg-utrecht-red text-white border-utrecht-red shadow-sm">
+              📍 Canal Oudegracht
+            </button>
+          </div>
+          <div class="magnetic-wrap">
+            <button onclick="changeComparison('domplein')" id="btn-comp-domplein" class="magnetic-btn comp-btn px-4 py-1.5 text-xs font-bold rounded-full border transition-all bg-white text-slate-600 border-slate-200 hover:bg-slate-50">
+              📍 Catedral (Domplein)
+            </button>
+          </div>
+          <div class="magnetic-wrap">
+            <button onclick="changeComparison('vredenburg')" id="btn-comp-vredenburg" class="magnetic-btn comp-btn px-4 py-1.5 text-xs font-bold rounded-full border transition-all bg-white text-slate-600 border-slate-200 hover:bg-slate-50">
+              📍 Plaza Vredenburg
+            </button>
+          </div>
         </div>
 
         <!-- Slider HTML -->
@@ -1529,6 +1560,117 @@
         grid.after(wrap);
       }
     }
+
+    // ===== EFECTOS INTERACTIVOS (Kaktus.dev) =====
+
+    // 1. Text Scramble (ENCRYPT)
+    class TextScramble {
+      constructor(el) {
+        this.el = el;
+        this.chars = '!<>-_\\/[]{}—=+*^?#________';
+        this.update = this.update.bind(this);
+      }
+      setText(newText) {
+        const oldText = this.el.innerText || '';
+        const length = Math.max(oldText.length, newText.length);
+        const promise = new Promise((resolve) => this.resolve = resolve);
+        this.queue = [];
+        for (let i = 0; i < length; i++) {
+          const from = oldText[i] || '';
+          const to = newText[i] || '';
+          const start = Math.floor(Math.random() * 15);
+          const end = start + Math.floor(Math.random() * 15);
+          this.queue.push({ from, to, start, end, char: '' });
+        }
+        cancelAnimationFrame(this.frameRequest);
+        this.frame = 0;
+        this.update();
+        return promise;
+      }
+      update() {
+        let output = '';
+        let complete = 0;
+        for (let i = 0, n = this.queue.length; i < n; i++) {
+          let { from, to, start, end, char } = this.queue[i];
+          if (this.frame >= end) {
+            complete++;
+            output += to;
+          } else if (this.frame >= start) {
+            if (!char || Math.random() < 0.28) {
+              char = this.randomChar();
+              this.queue[i].char = char;
+            }
+            output += `<span style="color: #c81919; font-family: monospace; font-weight: bold;">${char}</span>`;
+          } else {
+            output += from;
+          }
+        }
+        this.el.innerHTML = output;
+        if (complete === this.queue.length) {
+          this.resolve();
+        } else {
+          this.frameRequest = requestAnimationFrame(this.update);
+          this.frame++;
+        }
+      }
+      randomChar() {
+        return this.chars[Math.floor(Math.random() * this.chars.length)];
+      }
+    }
+
+    const titleEl = document.getElementById('scramble-title');
+    if (titleEl) {
+      const scrambler = new TextScramble(titleEl);
+      const originalText = titleEl.textContent;
+      
+      // Al cargar
+      setTimeout(() => {
+        scrambler.setText(originalText);
+      }, 500);
+
+      // Al pasar el ratón (hover)
+      titleEl.addEventListener('mouseenter', () => {
+        scrambler.setText(originalText);
+      });
+    }
+
+    // 2. Atracción Magnética (MAGNET)
+    const magneticWraps = document.querySelectorAll('.magnetic-wrap');
+    magneticWraps.forEach(wrap => {
+      const btn = wrap.querySelector('.magnetic-btn');
+      if (btn) {
+        wrap.addEventListener('mousemove', (e) => {
+          const rect = wrap.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          btn.style.transform = `translate(${x * 0.35}px, ${y * 0.35}px)`;
+        });
+        wrap.addEventListener('mouseleave', () => {
+          btn.style.transform = 'translate(0px, 0px)';
+        });
+      }
+    });
+
+    // 3. Inclinación 3D (PERSPECTIVE)
+    const tiltContainers = document.querySelectorAll('.tilt-container');
+    tiltContainers.forEach(container => {
+      const box = container.querySelector('.tilt-box');
+      if (box) {
+        container.addEventListener('mousemove', (e) => {
+          const rect = container.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          
+          const calcX = -(y - rect.height / 2) / 10;
+          const calcY = (x - rect.width / 2) / 12;
+          
+          box.style.transform = `rotateX(${calcX}deg) rotateY(${calcY}deg)`;
+        });
+        container.addEventListener('mouseleave', () => {
+          box.style.transform = `rotateX(0deg) rotateY(0deg)`;
+        });
+      }
+    });
   </script>
 </body>
 </html>
