@@ -393,8 +393,34 @@
 
         </div>
 
-        <!-- Columna Derecha: Industria local, alquileres y pases -->
+        <!-- Columna Derecha: Clima, industria local, alquileres y pases -->
         <div class="space-y-6">
+          
+          <!-- Clima y Estado del Día (Widget Dinámico) -->
+          <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6 rounded-2xl border border-slate-700 shadow-md text-white">
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-2">
+                <span class="text-2xl" id="weather-icon">⛅</span>
+                <div>
+                  <h3 class="font-bold text-[10px] uppercase text-utrecht-red tracking-wider">Pronóstico Utrecht</h3>
+                  <p class="text-[9px] text-slate-400" id="weather-time">Cargando...</p>
+                </div>
+              </div>
+              <div class="text-right">
+                <span class="text-xl font-extrabold" id="weather-temp">--°C</span>
+              </div>
+            </div>
+            
+            <div class="p-3 bg-white/10 rounded-xl text-[10px] leading-relaxed border border-white/5 space-y-1.5">
+              <p>
+                <strong class="text-slate-200">Estado:</strong> <span id="weather-desc">Obteniendo clima actual...</span>
+              </p>
+              <div class="border-t border-white/10 my-1.5"></div>
+              <p id="weather-advice" class="text-slate-300">
+                Cargando recomendaciones locales para el día de hoy...
+              </p>
+            </div>
+          </div>
           
           <!-- Industria Local -->
           <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
@@ -1180,7 +1206,8 @@
     fetch('./maps/puntos.json')
       .then(r => r.json())
       .then(data => {
-        document.getElementById('n-puntos').textContent = data.length;
+        const nPuntosEl = document.getElementById('n-puntos');
+        if (nPuntosEl) nPuntosEl.textContent = data.length;
 
         data.forEach(lugar => {
           const gmapsLink = lugar.google_maps_url
@@ -1236,7 +1263,8 @@
       .then(rutas => {
         const lista = document.getElementById('rutas-list');
         lista.innerHTML = '';
-        document.getElementById('n-rutas').textContent = rutas.length;
+        const nRutasEl = document.getElementById('n-rutas');
+        if (nRutasEl) nRutasEl.textContent = rutas.length;
 
         rutas.forEach((ruta, i) => {
           const color = rutaColors[i % rutaColors.length];
@@ -1332,7 +1360,10 @@
               _url: f.url
             }))
           ))
-          .catch(() => { document.getElementById('n-fotos').textContent = '0'; });
+          .catch(() => { 
+            const nFotosEl = document.getElementById('n-fotos');
+            if (nFotosEl) nFotosEl.textContent = '0'; 
+          });
       });
 
     function mostrarFotos(fotos) {
@@ -1341,7 +1372,8 @@
         return !id.includes('avatar') && !id.startsWith('samples/');
       });
 
-      document.getElementById('n-fotos').textContent = all.length;
+      const nFotosEl = document.getElementById('n-fotos');
+      if (nFotosEl) nFotosEl.textContent = all.length;
 
       const shuffled = [...all].sort(() => Math.random() - 0.5);
       const preview  = shuffled.slice(0, PREVIEW_COUNT);
@@ -1671,6 +1703,77 @@
         });
       }
     });
+
+    // ── WEATHER AND ADVICE WIDGET LÓGICA (Open-Meteo API) ──
+    function initWeather() {
+      const iconEl = document.getElementById('weather-icon');
+      const tempEl = document.getElementById('weather-temp');
+      const timeEl = document.getElementById('weather-time');
+      const descEl = document.getElementById('weather-desc');
+      const adviceEl = document.getElementById('weather-advice');
+
+      if (!tempEl) return;
+
+      const url = 'https://api.open-meteo.com/v1/forecast?latitude=52.0907&longitude=5.1214&current=temperature_2m,weather_code&timezone=Europe/Amsterdam';
+
+      fetch(url)
+        .then(res => res.json())
+        .then(data => {
+          const temp = Math.round(data.current.temperature_2m);
+          const code = data.current.weather_code;
+          
+          tempEl.textContent = `${temp}°C`;
+          timeEl.textContent = 'En tiempo real';
+
+          let icon = '⛅';
+          let desc = 'Parcialmente nublado';
+          let advice = 'Cielo templado. Buen momento para caminar por el centro histórico y subir la Torre del Dom.';
+
+          if (code === 0) {
+            icon = '☀️';
+            desc = 'Cielos despejados';
+            advice = '¡Día espectacular! Ideal para alquilar una bicicleta, pasear por los canales y tomar algo en una terraza de los muelles (werven).';
+          } else if (code >= 1 && code <= 3) {
+            icon = '⛅';
+            desc = 'Parcialmente despejado';
+            advice = 'Cielo agradable. Buen momento para caminar por el centro histórico y explorar la plaza Domplein.';
+          } else if (code === 45 || code === 48) {
+            icon = '🌫️';
+            desc = 'Niebla típica';
+            advice = 'Utrecht misteriosa. La Torre del Dom lucirá espectacular entre la niebla. Perfecto para fotógrafos.';
+          } else if (code >= 51 && code <= 55) {
+            icon = '🌧️';
+            desc = 'Llovizna (Motregen)';
+            advice = 'Llovizna fina holandesa. Saca el chubasquero (evita paraguas en bici) y resguárdate en el Spoorwegmuseum o Speelklok.';
+          } else if (code >= 61 && code <= 65) {
+            icon = '🌧️';
+            desc = 'Lluvia intensa';
+            advice = 'Día lluvioso. Aprovecha para visitar el interior de la catedral o tomar una cerveza artesana en el Café Olivier.';
+          } else if (code >= 80 && code <= 82) {
+            icon = '🌦️';
+            desc = 'Chubascos pasajeros';
+            advice = 'Chubascos intermitentes. El cielo cambia rápido; combina paseos cortos al aire libre con paradas en cafés acogedores.';
+          } else if (code >= 95) {
+            icon = '🌩️';
+            desc = 'Tormenta';
+            advice = 'Clima adverso. Quédate a cubierto, explora los museos o relájate bajo las de madera del Café Olivier.';
+          }
+
+          iconEl.textContent = icon;
+          descEl.textContent = desc;
+          adviceEl.textContent = advice;
+        })
+        .catch(() => {
+          // Fallback
+          tempEl.textContent = '--°C';
+          timeEl.textContent = 'Modo consulta';
+          descEl.textContent = 'Templado típico';
+          adviceEl.textContent = 'Utrecht suele tener un clima cambiante. Ten a mano siempre un cortavientos y disfruta del paseo.';
+        });
+    }
+
+    // Inicializar clima
+    initWeather();
   </script>
 </body>
 </html>
