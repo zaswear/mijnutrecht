@@ -149,6 +149,53 @@
     .tilt-box > * {
       transform: translateZ(10px);
     }
+
+    /* ───── Bloque "Utrecht Viva" (Ayer y Hoy) ───── */
+
+    /* #1 Anatomía de la calle — hotspots */
+    .uv-hotspot { animation: uvPulse 2s infinite; }
+    .uv-hotspot.is-active { animation: none; }
+    /* Amplía el área táctil a ~46px sin agrandar el punto visible */
+    .uv-hotspot.is-anat::after { content: ''; position: absolute; inset: -11px; border-radius: 9999px; }
+    @keyframes uvPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(200,25,25,0.55); }
+      70%  { box-shadow: 0 0 0 12px rgba(200,25,25,0); }
+      100% { box-shadow: 0 0 0 0 rgba(200,25,25,0); }
+    }
+
+    /* #2 Comparador ilustrado */
+    .uv-illu-old { clip-path: inset(0 50% 0 0); }
+
+    /* #5 Baldosa → jardín */
+    .uv-tiles.is-green .uv-tile-pave { opacity: 0; }
+    .uv-tiles.is-green .uv-tile-plant { opacity: 1; transform: scale(1); }
+    .uv-tile-pave  { transition: opacity .6s ease; }
+    .uv-tile-plant { opacity: 0; transform: scale(.4); transition: opacity .6s ease, transform .6s cubic-bezier(.34,1.56,.64,1); }
+    .uv-tiles.is-green .uv-tile-plant:nth-child(2) { transition-delay: .05s; }
+    .uv-tiles.is-green .uv-tile-plant:nth-child(4) { transition-delay: .12s; }
+    .uv-tiles.is-green .uv-tile-plant:nth-child(6) { transition-delay: .18s; }
+
+    /* #6 Scrollytelling reveal */
+    .uv-reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .uv-reveal.is-in { opacity: 1; transform: none; }
+
+    /* #7 Tarjetas flip */
+    .uv-flip { perspective: 1000px; }
+    .uv-flip-inner { transition: transform .6s; transform-style: preserve-3d; }
+    .uv-flip.is-flipped .uv-flip-inner,
+    .uv-flip:hover .uv-flip-inner { transform: rotateY(180deg); }
+    .uv-flip-face { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+    .uv-flip-back { transform: rotateY(180deg); }
+
+    /* #8 Quiz */
+    .uv-quiz-opt.correct   { background:#dcfce7 !important; border-color:#4E6E58 !important; color:#14532d !important; }
+    .uv-quiz-opt.wrong     { background:#fee2e2 !important; border-color:#c81919 !important; color:#7f1d1d !important; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .uv-hotspot { animation: none; }
+      .uv-reveal { opacity: 1; transform: none; transition: none; }
+      .uv-flip-inner, .uv-tile-pave, .uv-tile-plant { transition: none; }
+    }
   </style>
 </head>
 <body class="text-utrecht-navy antialiased min-h-screen pb-20 md:pb-0">
@@ -885,6 +932,245 @@
         <div id="comparison-caption" class="text-xs text-slate-500 italic max-w-md mx-auto leading-relaxed">
           La foto histórica (izquierda) muestra el bullicio fluvial del canal Oudegracht en 1900, con barcazas de carga. A la derecha, la vista actual del mismo canal, convertido en un animado paseo lleno de terrazas y arbolado.
         </div>
+      </div>
+
+      <!-- ══════════ UTRECHT VIVA · bici · verde · seguridad ══════════ -->
+      <div class="max-w-4xl mx-auto mt-12 space-y-8">
+
+        <div class="text-center">
+          <span class="text-xs font-bold text-utrecht-sage uppercase tracking-widest mb-1.5 block">La ciudad que funciona</span>
+          <h2 class="hero-title text-3xl font-extrabold text-utrecht-navy">Cómo Utrecht integra bici, verde y seguridad</h2>
+          <p class="text-slate-500 text-sm mt-2 max-w-2xl mx-auto">Más allá del "antes y después": nueve formas de entender por qué Utrecht es una de las ciudades más habitables y ciclistas del mundo.</p>
+        </div>
+
+        <!-- #2 Comparador ilustrado: Catharijnesingel -->
+        <div class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200/80 shadow-sm">
+          <div class="text-center mb-4">
+            <span class="text-[11px] font-bold text-utrecht-red uppercase tracking-widest block">Comparador · Urbanismo</span>
+            <h3 class="hero-title text-2xl font-extrabold text-utrecht-navy mt-1">Del asfalto al agua: el Catharijnesingel</h3>
+            <p class="text-slate-500 text-xs mt-1 max-w-lg mx-auto">En los años 70, Utrecht rellenó este canal para una autopista urbana. En 2020, medio siglo después, volvió a excavarlo y devolvió el agua, los árboles y las bicis. Desliza para verlo.</p>
+          </div>
+          <div class="relative w-full aspect-[16/9] rounded-2xl overflow-hidden border select-none">
+            <!-- NUEVO (fondo): canal restaurado -->
+            <svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" class="absolute inset-0 w-full h-full">
+              <rect width="320" height="180" fill="#dbeafe"/>
+              <rect y="60" width="320" height="40" fill="#cbd5e1"/>
+              <rect x="0" y="62" width="60" height="38" fill="#94a3b8"/><rect x="70" y="58" width="55" height="42" fill="#a1a1aa"/><rect x="135" y="64" width="50" height="36" fill="#9ca3af"/>
+              <rect y="100" width="320" height="14" fill="#9E4F3F"/>
+              <rect y="114" width="320" height="66" fill="#3b82f6"/>
+              <path d="M0 124 q40 8 80 0 t80 0 t80 0 t80 0 V180 H0 Z" fill="#2563eb" opacity="0.5"/>
+              <g fill="#4E6E58"><circle cx="40" cy="96" r="16"/><circle cx="120" cy="98" r="14"/><circle cx="250" cy="96" r="16"/></g>
+              <g stroke="#6b3f33" stroke-width="3"><line x1="40" y1="100" x2="40" y2="112"/><line x1="120" y1="100" x2="120" y2="112"/><line x1="250" y1="100" x2="250" y2="112"/></g>
+              <!-- bici -->
+              <g stroke="#c81919" stroke-width="2.5" fill="none"><circle cx="180" cy="106" r="6"/><circle cx="200" cy="106" r="6"/><path d="M180 106 L190 96 L200 106 M190 96 L194 106"/></g>            </svg>
+            <!-- VIEJO (encima, recortado): autopista -->
+            <svg viewBox="0 0 320 180" preserveAspectRatio="xMidYMid slice" id="uv-illu-old" class="uv-illu-old absolute inset-0 w-full h-full z-10">
+              <rect width="320" height="180" fill="#94a3b8"/>
+              <rect y="60" width="320" height="40" fill="#64748b"/>
+              <rect y="100" width="320" height="80" fill="#475569"/>
+              <line x1="0" y1="140" x2="320" y2="140" stroke="#fbbf24" stroke-width="3" stroke-dasharray="18 14"/>
+              <g><rect x="30" y="118" width="40" height="16" rx="4" fill="#e11d48"/><rect x="150" y="150" width="44" height="17" rx="4" fill="#0ea5e9"/><rect x="240" y="120" width="42" height="16" rx="4" fill="#f59e0b"/></g>            </svg>
+            <input type="range" min="0" max="100" value="50" id="uv-illu-range" class="absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30" aria-label="Comparar el Catharijnesingel como autopista frente a canal restaurado"/>
+            <div class="absolute inset-y-0 w-1 bg-white shadow-2xl pointer-events-none z-20" id="uv-illu-handle" style="left:50%;">
+              <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-9 h-9 bg-white border-2 border-utrecht-red rounded-full flex items-center justify-center shadow-lg text-utrecht-red text-sm font-bold">⇄</div>
+            </div>
+          </div>
+          <div class="flex justify-between text-[11px] font-bold mt-3 px-1">
+            <span class="text-slate-500">◀ 1970 · autopista urbana</span>
+            <span class="text-utrecht-sage">2020 · canal restaurado ▶</span>
+          </div>
+        </div>
+
+        <!-- #1 Anatomía de una calle -->
+        <div class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200/80 shadow-sm">
+          <div class="text-center mb-4">
+            <span class="text-[11px] font-bold text-utrecht-sage uppercase tracking-widest block">Interactivo · Urbanismo</span>
+            <h3 class="hero-title text-2xl font-extrabold text-utrecht-navy mt-1">Anatomía de una calle de Utrecht</h3>
+            <p class="text-slate-500 text-xs mt-1">Toca cada punto para descubrir cómo conviven bici, agua, verde y seguridad en pocos metros.</p>
+          </div>
+          <div class="relative w-full max-w-xl mx-auto aspect-[16/10] rounded-2xl overflow-hidden border" id="uv-anat">
+            <svg viewBox="0 0 320 200" preserveAspectRatio="none" class="absolute inset-0 w-full h-full">
+              <rect width="320" height="200" fill="#FAF7F2"/>
+              <!-- fachadas + geveltuin -->
+              <rect width="320" height="46" fill="#cbb9a6"/>
+              <rect x="10" y="8" width="40" height="38" fill="#9E4F3F"/><rect x="60" y="8" width="40" height="38" fill="#b08968"/><rect x="110" y="8" width="40" height="38" fill="#8d6e5c"/><rect x="160" y="8" width="40" height="38" fill="#a8714f"/><rect x="210" y="8" width="40" height="38" fill="#9E4F3F"/><rect x="260" y="8" width="50" height="38" fill="#b08968"/>
+              <rect y="46" width="320" height="6" fill="#4E6E58"/>
+              <!-- acera -->
+              <rect y="52" width="320" height="26" fill="#e2e8f0"/>
+              <!-- carril bici -->
+              <rect y="78" width="320" height="30" fill="#c81919" opacity="0.85"/>
+              <g stroke="#fff" stroke-width="2.5" fill="none" transform="translate(150,84)"><circle cx="0" cy="14" r="7"/><circle cx="22" cy="14" r="7"/><path d="M0 14 L11 2 L22 14 M11 2 L15 14"/></g>
+              <!-- calzada 30 -->
+              <rect y="108" width="320" height="48" fill="#334155"/>
+              <line x1="0" y1="132" x2="320" y2="132" stroke="#fbbf24" stroke-width="2" stroke-dasharray="14 12"/>
+              <circle cx="40" cy="132" r="13" fill="#fff" stroke="#c81919" stroke-width="3"/><text x="40" y="137" text-anchor="middle" font-size="12" font-weight="bold" fill="#0F172A">30</text>
+              <!-- verge verde + árbol + wadi -->
+              <rect y="156" width="320" height="44" fill="#4E6E58"/>
+              <ellipse cx="240" cy="184" rx="46" ry="12" fill="#3b82f6" opacity="0.85"/>
+              <g><rect x="86" y="168" width="6" height="22" fill="#6b3f33"/><circle cx="89" cy="166" r="18" fill="#3f5d48"/></g>
+            </svg>
+            <button class="uv-hotspot is-anat absolute -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-white border-2 border-utrecht-red rounded-full text-utrecht-red text-xs font-bold flex items-center justify-center cursor-pointer" style="left:22%;top:24%" data-title="🌿 Geveltuin · Jardín de fachada" data-text="Los vecinos arrancan baldosas pegadas a su casa para plantar. Más verde, menos calor y una calle más bonita y biodiversa.">+</button>
+            <button class="uv-hotspot is-anat absolute -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-white border-2 border-utrecht-red rounded-full text-utrecht-red text-xs font-bold flex items-center justify-center cursor-pointer" style="left:47%;top:46%" data-title="🚲 Carril bici segregado" data-text="Pintado de rojo y separado físicamente del coche. Por eso aquí va en bici todo el mundo: de los 8 a los 80 años.">+</button>
+            <button class="uv-hotspot is-anat absolute -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-white border-2 border-utrecht-red rounded-full text-utrecht-red text-xs font-bold flex items-center justify-center cursor-pointer" style="left:13%;top:66%" data-title="🐢 Zona 30" data-text="La velocidad baja por defecto a 30 km/h en la mayoría de calles: menos atropellos graves y un ruido mucho menor.">+</button>
+            <button class="uv-hotspot is-anat absolute -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-white border-2 border-utrecht-red rounded-full text-utrecht-red text-xs font-bold flex items-center justify-center cursor-pointer" style="left:28%;top:84%" data-title="🌳 Arbolado urbano" data-text="Sombra que refresca el verano, raíces que filtran el agua y aire más limpio. Utrecht planta para tener una ciudad-bosque.">+</button>
+            <button class="uv-hotspot is-anat absolute -translate-x-1/2 -translate-y-1/2 w-6 h-6 bg-white border-2 border-utrecht-red rounded-full text-utrecht-red text-xs font-bold flex items-center justify-center cursor-pointer" style="left:75%;top:92%" data-title="💧 Wadi · Jardín de lluvia" data-text="Una zanja verde que absorbe la lluvia intensa en lugar de saturar las alcantarillas. Es la 'ciudad esponja' que evita inundaciones.">+</button>
+          </div>
+          <div id="uv-anat-info" class="mt-4 bg-utrecht-cream rounded-xl p-4 text-center transition-all">
+            <div class="font-bold text-utrecht-navy text-sm">👆 Toca un punto rojo de la calle</div>
+            <div class="text-slate-600 text-xs mt-1">Cada elemento cuenta cómo Utrecht mezcla movilidad, naturaleza y seguridad en el mismo espacio.</div>
+          </div>
+        </div>
+
+        <!-- #3 Contadores -->
+        <div class="bg-utrecht-navy text-white p-6 md:p-8 rounded-3xl shadow-sm">
+          <div class="text-center mb-5">
+            <span class="text-[11px] font-bold text-utrecht-red uppercase tracking-widest block" style="color:#fca5a5">En cifras</span>
+            <h3 class="hero-title text-2xl font-extrabold mt-1">Utrecht, en datos que sorprenden</h3>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-5" id="uv-stats">
+            <div class="text-center">
+              <div class="hero-title text-3xl md:text-4xl font-extrabold text-white uv-num" data-target="12500" data-suffix="">0</div>
+              <div class="text-[11px] text-slate-300 mt-1 leading-snug">plazas en el mayor aparcamiento de bicis del mundo (Utrecht Centraal)</div>
+            </div>
+            <div class="text-center">
+              <div class="hero-title text-3xl md:text-4xl font-extrabold text-white uv-num" data-target="51" data-suffix="%">0</div>
+              <div class="text-[11px] text-slate-300 mt-1 leading-snug">de los desplazamientos urbanos se hacen en bicicleta</div>
+            </div>
+            <div class="text-center">
+              <div class="hero-title text-3xl md:text-4xl font-extrabold text-white uv-num" data-target="50" data-suffix=" años">0</div>
+              <div class="text-[11px] text-slate-300 mt-1 leading-snug">de autopista revertidos al recuperar el canal Catharijnesingel</div>
+            </div>
+            <div class="text-center">
+              <div class="hero-title text-3xl md:text-4xl font-extrabold text-white uv-num" data-target="30" data-suffix=" km/h">0</div>
+              <div class="text-[11px] text-slate-300 mt-1 leading-snug">la nueva velocidad por defecto en la mayoría de calles</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- #5 Baldosa → jardín -->
+        <div class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200/80 shadow-sm text-center">
+          <span class="text-[11px] font-bold text-utrecht-sage uppercase tracking-widest block">Jardinería · Operación Steenbreek</span>
+          <h3 class="hero-title text-2xl font-extrabold text-utrecht-navy mt-1">Levanta una baldosa, planta un jardín</h3>
+          <p class="text-slate-500 text-xs mt-1 max-w-lg mx-auto">Utrecht anima a los vecinos a arrancar el adoquinado y plantar. Menos asfalto, más biodiversidad y una ciudad que absorbe la lluvia. Pulsa el botón.</p>
+          <div class="uv-tiles grid grid-cols-6 gap-1.5 max-w-md mx-auto my-5" id="uv-tiles">
+            <!-- 12 celdas -->
+            <div class="relative aspect-square"><div class="uv-tile-pave absolute inset-0 bg-slate-300 rounded"></div><div class="uv-tile-plant absolute inset-0 flex items-center justify-center text-lg">🌱</div></div>
+            <div class="relative aspect-square"><div class="uv-tile-pave absolute inset-0 bg-slate-400 rounded"></div><div class="uv-tile-plant absolute inset-0 flex items-center justify-center text-lg">🌼</div></div>
+            <div class="relative aspect-square"><div class="uv-tile-pave absolute inset-0 bg-slate-300 rounded"></div><div class="uv-tile-plant absolute inset-0 flex items-center justify-center text-lg">🌿</div></div>
+            <div class="relative aspect-square"><div class="uv-tile-pave absolute inset-0 bg-slate-400 rounded"></div><div class="uv-tile-plant absolute inset-0 flex items-center justify-center text-lg">🌷</div></div>
+            <div class="relative aspect-square"><div class="uv-tile-pave absolute inset-0 bg-slate-300 rounded"></div><div class="uv-tile-plant absolute inset-0 flex items-center justify-center text-lg">🌻</div></div>
+            <div class="relative aspect-square"><div class="uv-tile-pave absolute inset-0 bg-slate-400 rounded"></div><div class="uv-tile-plant absolute inset-0 flex items-center justify-center text-lg">🍀</div></div>
+            <div class="relative aspect-square"><div class="uv-tile-pave absolute inset-0 bg-slate-400 rounded"></div><div class="uv-tile-plant absolute inset-0 flex items-center justify-center text-lg">🌾</div></div>
+            <div class="relative aspect-square"><div class="uv-tile-pave absolute inset-0 bg-slate-300 rounded"></div><div class="uv-tile-plant absolute inset-0 flex items-center justify-center text-lg">🌱</div></div>
+            <div class="relative aspect-square"><div class="uv-tile-pave absolute inset-0 bg-slate-400 rounded"></div><div class="uv-tile-plant absolute inset-0 flex items-center justify-center text-lg">🌸</div></div>
+            <div class="relative aspect-square"><div class="uv-tile-pave absolute inset-0 bg-slate-300 rounded"></div><div class="uv-tile-plant absolute inset-0 flex items-center justify-center text-lg">🌿</div></div>
+            <div class="relative aspect-square"><div class="uv-tile-pave absolute inset-0 bg-slate-400 rounded"></div><div class="uv-tile-plant absolute inset-0 flex items-center justify-center text-lg">🌼</div></div>
+            <div class="relative aspect-square"><div class="uv-tile-pave absolute inset-0 bg-slate-300 rounded"></div><div class="uv-tile-plant absolute inset-0 flex items-center justify-center text-lg">🌱</div></div>
+          </div>
+          <button type="button" class="magnetic-btn bg-utrecht-sage text-white text-xs font-bold px-5 py-2 rounded-full shadow-sm hover:bg-utrecht-navy transition-colors"
+                  onclick="const t=document.getElementById('uv-tiles');t.classList.toggle('is-green');this.textContent=t.classList.contains('is-green')?'🧱 Volver a poner baldosas':'🌱 Levantar las baldosas';">
+            🌱 Levantar las baldosas
+          </button>
+        </div>
+
+        <!-- #6 Scrollytelling -->
+        <div class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200/80 shadow-sm">
+          <div class="text-center mb-5">
+            <span class="text-[11px] font-bold text-utrecht-red uppercase tracking-widest block">Historia viva</span>
+            <h3 class="hero-title text-2xl font-extrabold text-utrecht-navy mt-1">De autopista a paraíso ciclista</h3>
+          </div>
+          <div class="relative pl-6 space-y-5 before:content-[''] before:absolute before:left-1.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-utrecht-cream">
+            <div class="uv-reveal relative"><span class="absolute -left-[1.35rem] top-1 w-3 h-3 rounded-full bg-utrecht-red ring-4 ring-white"></span><div class="text-xs font-bold text-utrecht-red">Años 60–70</div><p class="text-sm text-slate-600 leading-relaxed">En plena fiebre del coche, Utrecht <strong>rellena canales históricos</strong> para construir carreteras y una autopista urbana sobre el Catharijnesingel.</p></div>
+            <div class="uv-reveal relative"><span class="absolute -left-[1.35rem] top-1 w-3 h-3 rounded-full bg-utrecht-brick ring-4 ring-white"></span><div class="text-xs font-bold text-utrecht-brick">Años 70–80</div><p class="text-sm text-slate-600 leading-relaxed">Los Países Bajos inventan el <strong>woonerf</strong>, la calle compartida donde manda el peatón, y empiezan a frenar la dictadura del automóvil.</p></div>
+            <div class="uv-reveal relative"><span class="absolute -left-[1.35rem] top-1 w-3 h-3 rounded-full bg-utrecht-sage ring-4 ring-white"></span><div class="text-xs font-bold text-utrecht-sage">Años 90–2010</div><p class="text-sm text-slate-600 leading-relaxed">Se teje una <strong>red ciclista continua y segura</strong>: carriles separados, rotondas con prioridad para la bici y puentes solo para peatones y ciclistas.</p></div>
+            <div class="uv-reveal relative"><span class="absolute -left-[1.35rem] top-1 w-3 h-3 rounded-full bg-utrecht-navy ring-4 ring-white"></span><div class="text-xs font-bold text-utrecht-navy">2019</div><p class="text-sm text-slate-600 leading-relaxed">Abre bajo la estación el <strong>mayor aparcamiento de bicicletas del mundo</strong>: 12.500 plazas.</p></div>
+            <div class="uv-reveal relative"><span class="absolute -left-[1.35rem] top-1 w-3 h-3 rounded-full bg-utrecht-red ring-4 ring-white"></span><div class="text-xs font-bold text-utrecht-red">2020 · hoy</div><p class="text-sm text-slate-600 leading-relaxed">Utrecht <strong>vuelve a excavar el Catharijnesingel</strong> y devuelve el agua. Hoy cerca de la mitad de los desplazamientos se hacen pedaleando.</p></div>
+          </div>
+        </div>
+
+        <!-- #7 Tarjetas flip -->
+        <div class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200/80 shadow-sm">
+          <div class="text-center mb-5">
+            <span class="text-[11px] font-bold text-utrecht-sage uppercase tracking-widest block">Datos fantásticos</span>
+            <h3 class="hero-title text-2xl font-extrabold text-utrecht-navy mt-1">Cinco claves, cinco sorpresas</h3>
+            <p class="text-slate-400 text-[11px] mt-1">Pasa el cursor o toca cada tarjeta.</p>
+          </div>
+          <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+            <div class="uv-flip aspect-[3/4] cursor-pointer" onclick="this.classList.toggle('is-flipped')"><div class="uv-flip-inner relative w-full h-full"><div class="uv-flip-face absolute inset-0 rounded-2xl bg-utrecht-cream border border-slate-200 flex flex-col items-center justify-center p-2 text-center"><span class="text-2xl">🏙️</span><span class="text-xs font-bold text-utrecht-navy mt-2">Urbanismo</span></div><div class="uv-flip-face uv-flip-back absolute inset-0 rounded-2xl bg-utrecht-navy text-white flex items-center justify-center p-3 text-center text-[11px] leading-snug">El <strong>woonerf</strong>, la calle donde manda el peatón, se inventó en los Países Bajos.</div></div></div>
+            <div class="uv-flip aspect-[3/4] cursor-pointer" onclick="this.classList.toggle('is-flipped')"><div class="uv-flip-inner relative w-full h-full"><div class="uv-flip-face absolute inset-0 rounded-2xl bg-utrecht-cream border border-slate-200 flex flex-col items-center justify-center p-2 text-center"><span class="text-2xl">🚲</span><span class="text-xs font-bold text-utrecht-navy mt-2">Bici</span></div><div class="uv-flip-face uv-flip-back absolute inset-0 rounded-2xl bg-utrecht-red text-white flex items-center justify-center p-3 text-center text-[11px] leading-snug">Más de <strong>12.500 bicis</strong> caben bajo la estación: el mayor aparcamiento ciclista del planeta.</div></div></div>
+            <div class="uv-flip aspect-[3/4] cursor-pointer" onclick="this.classList.toggle('is-flipped')"><div class="uv-flip-inner relative w-full h-full"><div class="uv-flip-face absolute inset-0 rounded-2xl bg-utrecht-cream border border-slate-200 flex flex-col items-center justify-center p-2 text-center"><span class="text-2xl">🌷</span><span class="text-xs font-bold text-utrecht-navy mt-2">Jardinería</span></div><div class="uv-flip-face uv-flip-back absolute inset-0 rounded-2xl bg-utrecht-sage text-white flex items-center justify-center p-3 text-center text-[11px] leading-snug">Hay un <strong>campeonato nacional</strong> (Tegelwippen) por arrancar baldosas y plantar más verde.</div></div></div>
+            <div class="uv-flip aspect-[3/4] cursor-pointer" onclick="this.classList.toggle('is-flipped')"><div class="uv-flip-inner relative w-full h-full"><div class="uv-flip-face absolute inset-0 rounded-2xl bg-utrecht-cream border border-slate-200 flex flex-col items-center justify-center p-2 text-center"><span class="text-2xl">🌳</span><span class="text-xs font-bold text-utrecht-navy mt-2">Naturaleza</span></div><div class="uv-flip-face uv-flip-back absolute inset-0 rounded-2xl bg-utrecht-brick text-white flex items-center justify-center p-3 text-center text-[11px] leading-snug">Junto a la ciudad sobrevive <strong>Amelisweerd</strong>, un bosque centenario defendido por sus vecinos.</div></div></div>
+            <div class="uv-flip aspect-[3/4] cursor-pointer" onclick="this.classList.toggle('is-flipped')"><div class="uv-flip-inner relative w-full h-full"><div class="uv-flip-face absolute inset-0 rounded-2xl bg-utrecht-cream border border-slate-200 flex flex-col items-center justify-center p-2 text-center"><span class="text-2xl">🛡️</span><span class="text-xs font-bold text-utrecht-navy mt-2">Seguridad</span></div><div class="uv-flip-face uv-flip-back absolute inset-0 rounded-2xl bg-utrecht-navy text-white flex items-center justify-center p-3 text-center text-[11px] leading-snug">Calles a 30, carriles separados y "ojos en la calle": aquí lo <strong>seguro</strong> es lo fácil.</div></div></div>
+          </div>
+        </div>
+
+        <!-- #8 Quiz -->
+        <div class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200/80 shadow-sm">
+          <div class="text-center mb-5">
+            <span class="text-[11px] font-bold text-utrecht-red uppercase tracking-widest block">¿Sabías que…?</span>
+            <h3 class="hero-title text-2xl font-extrabold text-utrecht-navy mt-1">Pon a prueba lo que sabes</h3>
+          </div>
+          <div id="uv-quiz" class="space-y-5 max-w-xl mx-auto">
+            <div class="uv-q">
+              <p class="font-bold text-sm text-utrecht-navy mb-2">1. ¿Cuántas bicis caben en el aparcamiento de Utrecht Centraal?</p>
+              <div class="grid gap-2">
+                <button class="uv-quiz-opt text-left text-xs font-semibold border border-slate-200 rounded-lg px-3 py-2 hover:bg-slate-50 transition-colors">Unas 2.500</button>
+                <button class="uv-quiz-opt text-left text-xs font-semibold border border-slate-200 rounded-lg px-3 py-2 hover:bg-slate-50 transition-colors" data-correct>Unas 12.500 — el mayor del mundo</button>
+                <button class="uv-quiz-opt text-left text-xs font-semibold border border-slate-200 rounded-lg px-3 py-2 hover:bg-slate-50 transition-colors">Unas 500</button>
+              </div>
+              <p class="uv-q-exp hidden text-[11px] text-slate-500 mt-2 italic">Abrió en 2019 y es, en efecto, el mayor aparcamiento de bicicletas del planeta.</p>
+            </div>
+            <div class="uv-q">
+              <p class="font-bold text-sm text-utrecht-navy mb-2">2. ¿Qué hizo Utrecht con el canal Catharijnesingel?</p>
+              <div class="grid gap-2">
+                <button class="uv-quiz-opt text-left text-xs font-semibold border border-slate-200 rounded-lg px-3 py-2 hover:bg-slate-50 transition-colors">Lo cubrió de hormigón para siempre</button>
+                <button class="uv-quiz-opt text-left text-xs font-semibold border border-slate-200 rounded-lg px-3 py-2 hover:bg-slate-50 transition-colors" data-correct>Lo rellenó para una autopista y 50 años después lo recuperó</button>
+                <button class="uv-quiz-opt text-left text-xs font-semibold border border-slate-200 rounded-lg px-3 py-2 hover:bg-slate-50 transition-colors">Nunca existió como canal</button>
+              </div>
+              <p class="uv-q-exp hidden text-[11px] text-slate-500 mt-2 italic">En 2020 reabrió el canal completo: uno de los grandes símbolos de "deshacer" la ciudad del coche.</p>
+            </div>
+            <div class="uv-q">
+              <p class="font-bold text-sm text-utrecht-navy mb-2">3. ¿Qué es un "geveltuin"?</p>
+              <div class="grid gap-2">
+                <button class="uv-quiz-opt text-left text-xs font-semibold border border-slate-200 rounded-lg px-3 py-2 hover:bg-slate-50 transition-colors">Un tipo de bicicleta de carga</button>
+                <button class="uv-quiz-opt text-left text-xs font-semibold border border-slate-200 rounded-lg px-3 py-2 hover:bg-slate-50 transition-colors" data-correct>Un jardín plantado junto a la fachada, arrancando baldosas</button>
+                <button class="uv-quiz-opt text-left text-xs font-semibold border border-slate-200 rounded-lg px-3 py-2 hover:bg-slate-50 transition-colors">Un parque nacional a las afueras</button>
+              </div>
+              <p class="uv-q-exp hidden text-[11px] text-slate-500 mt-2 italic">Es la jardinería de fachada que reverdece las calles del centro casa por casa.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- #9 Storyboard "Un día en Utrecht" -->
+        <div class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200/80 shadow-sm">
+          <div class="text-center mb-5">
+            <span class="text-[11px] font-bold text-utrecht-sage uppercase tracking-widest block">Recorrido</span>
+            <h3 class="hero-title text-2xl font-extrabold text-utrecht-navy mt-1">Un día en Utrecht, en bici</h3>
+            <p class="text-slate-400 text-[11px] mt-1">Desliza horizontalmente →</p>
+          </div>
+          <div class="flex gap-3 overflow-x-auto no-scrollbar pb-2 snap-x">
+            <div class="snap-start shrink-0 w-44 bg-utrecht-cream rounded-2xl p-4"><div class="text-2xl">🚲</div><div class="text-xs font-bold text-utrecht-red mt-2">08:00</div><p class="text-[11px] text-slate-600 mt-1 leading-snug">Sales por un <strong>carril separado</strong> del coche. Seguro hasta para los niños solos.</p></div>
+            <div class="snap-start shrink-0 w-44 bg-utrecht-cream rounded-2xl p-4"><div class="text-2xl">💧</div><div class="text-xs font-bold text-utrecht-sage mt-2">08:15</div><p class="text-[11px] text-slate-600 mt-1 leading-snug">Cruzas un <strong>wadi</strong> verde que se bebe la lluvia de la noche.</p></div>
+            <div class="snap-start shrink-0 w-44 bg-utrecht-cream rounded-2xl p-4"><div class="text-2xl">🧒</div><div class="text-xs font-bold text-utrecht-navy mt-2">08:30</div><p class="text-[11px] text-slate-600 mt-1 leading-snug">Atraviesas un <strong>woonerf</strong>: los niños juegan en la calle y el coche va al paso.</p></div>
+            <div class="snap-start shrink-0 w-44 bg-utrecht-cream rounded-2xl p-4"><div class="text-2xl">🛶</div><div class="text-xs font-bold text-utrecht-brick mt-2">13:00</div><p class="text-[11px] text-slate-600 mt-1 leading-snug">Comes en una terraza junto al <strong>canal recuperado</strong>, donde antes había asfalto.</p></div>
+            <div class="snap-start shrink-0 w-44 bg-utrecht-cream rounded-2xl p-4"><div class="text-2xl">🌷</div><div class="text-xs font-bold text-utrecht-sage mt-2">18:00</div><p class="text-[11px] text-slate-600 mt-1 leading-snug">Riegas tu <strong>geveltuin</strong>: tu trocito de jardín pegado a la fachada.</p></div>
+            <div class="snap-start shrink-0 w-44 bg-utrecht-cream rounded-2xl p-4"><div class="text-2xl">🌙</div><div class="text-xs font-bold text-utrecht-navy mt-2">22:00</div><p class="text-[11px] text-slate-600 mt-1 leading-snug">Vuelves por calles iluminadas y con vida: "<strong>ojos en la calle</strong>" que dan seguridad.</p></div>
+          </div>
+        </div>
+
+        <!-- #10 Utrecht vs ciudad del coche -->
+        <div class="bg-white p-6 md:p-8 rounded-3xl border border-slate-200/80 shadow-sm">
+          <div class="text-center mb-4">
+            <span class="text-[11px] font-bold text-utrecht-red uppercase tracking-widest block">Comparativa</span>
+            <h3 class="hero-title text-2xl font-extrabold text-utrecht-navy mt-1">Dos modelos de ciudad</h3>
+          </div>
+          <div class="flex justify-center gap-2 mb-5">
+            <button type="button" id="uv-vs-car" class="magnetic-btn comp-btn px-4 py-1.5 text-xs font-bold rounded-full border transition-all bg-white text-slate-600 border-slate-200 hover:bg-slate-50" onclick="uvSetVs('car')">🚗 Ciudad del coche</button>
+            <button type="button" id="uv-vs-utr" class="magnetic-btn comp-btn px-4 py-1.5 text-xs font-bold rounded-full border transition-all bg-utrecht-sage text-white border-utrecht-sage shadow-sm" onclick="uvSetVs('utr')">🚲 Modelo Utrecht</button>
+          </div>
+          <div id="uv-vs" class="space-y-4 max-w-lg mx-auto" data-state="utr"></div>
+        </div>
+
       </div>
     </section>
 
@@ -1809,6 +2095,124 @@
 
     // Inicializar clima
     initWeather();
+  </script>
+
+  <!-- ══════════ Lógica módulos "Utrecht Viva" (Ayer y Hoy) ══════════ -->
+  <script>
+  (function () {
+    // #2 Comparador ilustrado (Catharijnesingel)
+    const illuRange = document.getElementById('uv-illu-range');
+    const illuOld = document.getElementById('uv-illu-old');
+    const illuHandle = document.getElementById('uv-illu-handle');
+    if (illuRange && illuOld && illuHandle) {
+      illuRange.addEventListener('input', (e) => {
+        const v = e.target.value;
+        illuOld.style.clipPath = `inset(0 ${100 - v}% 0 0)`;
+        illuHandle.style.left = `${v}%`;
+      });
+    }
+
+    // #1 Anatomía de la calle — hotspots
+    const anatInfo = document.getElementById('uv-anat-info');
+    const hotspots = document.querySelectorAll('.uv-hotspot.is-anat');
+    hotspots.forEach((h) => {
+      h.addEventListener('click', () => {
+        hotspots.forEach((x) => x.classList.remove('is-active', 'ring-2', 'ring-utrecht-red', 'ring-offset-1', 'scale-110', 'z-10'));
+        h.classList.add('is-active', 'ring-2', 'ring-utrecht-red', 'ring-offset-1', 'scale-110', 'z-10');
+        if (anatInfo) {
+          anatInfo.innerHTML =
+            `<div class="font-bold text-utrecht-navy text-sm">${h.dataset.title}</div>` +
+            `<div class="text-slate-600 text-xs mt-1">${h.dataset.text}</div>`;
+        }
+      });
+    });
+
+    // #3 Contadores animados (al entrar en viewport)
+    function animateCount(el) {
+      const target = parseFloat(el.dataset.target) || 0;
+      const suffix = el.dataset.suffix || '';
+      const dur = 1400, start = performance.now();
+      function tick(now) {
+        const p = Math.min(1, (now - start) / dur);
+        const val = Math.round(target * (1 - Math.pow(1 - p, 3)));
+        el.textContent = val.toLocaleString('es-ES') + suffix;
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+    if ('IntersectionObserver' in window) {
+      const numObs = new IntersectionObserver((entries, obs) => {
+        entries.forEach((e) => { if (e.isIntersecting) { animateCount(e.target); obs.unobserve(e.target); } });
+      }, { threshold: 0.4 });
+      document.querySelectorAll('.uv-num').forEach((n) => numObs.observe(n));
+
+      // #6 Reveal on scroll
+      const revObs = new IntersectionObserver((entries, obs) => {
+        entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('is-in'); obs.unobserve(e.target); } });
+      }, { threshold: 0.15 });
+      document.querySelectorAll('.uv-reveal').forEach((r) => revObs.observe(r));
+    } else {
+      document.querySelectorAll('.uv-num').forEach((n) => { n.textContent = (parseFloat(n.dataset.target) || 0).toLocaleString('es-ES') + (n.dataset.suffix || ''); });
+      document.querySelectorAll('.uv-reveal').forEach((r) => r.classList.add('is-in'));
+    }
+
+    // #8 Quiz
+    document.querySelectorAll('#uv-quiz .uv-q').forEach((q) => {
+      const opts = q.querySelectorAll('.uv-quiz-opt');
+      const exp = q.querySelector('.uv-q-exp');
+      opts.forEach((opt) => {
+        opt.addEventListener('click', () => {
+          if (q.dataset.done) return;
+          q.dataset.done = '1';
+          const correct = q.querySelector('.uv-quiz-opt[data-correct]');
+          if (opt.hasAttribute('data-correct')) opt.classList.add('correct');
+          else { opt.classList.add('wrong'); if (correct) correct.classList.add('correct'); }
+          if (exp) exp.classList.remove('hidden');
+          opts.forEach((o) => { o.disabled = true; });
+        });
+      });
+    });
+
+    // #10 Utrecht vs ciudad del coche
+    const UV_VS = {
+      car: { rows: [
+        { k: 'Espacio para personas', v: '30%', w: 30, c: '#c81919' },
+        { k: 'Zonas verdes y árboles', v: 'Escasas', w: 25, c: '#c81919' },
+        { k: 'Seguridad vial', v: 'Siniestralidad alta', w: 35, c: '#c81919' },
+        { k: 'Aire y silencio', v: 'Ruido y humos', w: 30, c: '#c81919' },
+      ]},
+      utr: { rows: [
+        { k: 'Espacio para personas', v: '70%', w: 70, c: '#4E6E58' },
+        { k: 'Zonas verdes y árboles', v: 'Abundantes', w: 85, c: '#4E6E58' },
+        { k: 'Seguridad vial', v: 'De las más bajas del mundo', w: 95, c: '#4E6E58' },
+        { k: 'Aire y silencio', v: 'Limpio y tranquilo', w: 90, c: '#4E6E58' },
+      ]},
+    };
+    function uvSetBtn(btn, active) {
+      if (!btn) return;
+      btn.classList.toggle('bg-utrecht-sage', active);
+      btn.classList.toggle('text-white', active);
+      btn.classList.toggle('border-utrecht-sage', active);
+      btn.classList.toggle('shadow-sm', active);
+      btn.classList.toggle('bg-white', !active);
+      btn.classList.toggle('text-slate-600', !active);
+      btn.classList.toggle('border-slate-200', !active);
+    }
+    window.uvSetVs = function (state) {
+      const wrap = document.getElementById('uv-vs');
+      if (!wrap) return;
+      const data = UV_VS[state] || UV_VS.utr;
+      wrap.dataset.state = state;
+      wrap.innerHTML = data.rows.map((r) =>
+        `<div>` +
+          `<div class="flex justify-between items-baseline mb-1"><span class="text-xs font-bold text-utrecht-navy">${r.k}</span><span class="text-[11px] text-slate-500">${r.v}</span></div>` +
+          `<div class="h-2.5 rounded-full bg-slate-100 overflow-hidden"><div class="h-full rounded-full transition-all duration-500" style="width:${r.w}%;background:${r.c}"></div></div>` +
+        `</div>`).join('');
+      uvSetBtn(document.getElementById('uv-vs-car'), state === 'car');
+      uvSetBtn(document.getElementById('uv-vs-utr'), state === 'utr');
+    };
+    if (document.getElementById('uv-vs')) window.uvSetVs('utr');
+  })();
   </script>
 </body>
 </html>
