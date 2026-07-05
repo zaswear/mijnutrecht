@@ -1483,10 +1483,38 @@
     const map = L.map('map').setView([52.0907, 5.1214], 14);
 
     // Usamos el set de mapas moderno de CartoDB Voyager en lugar del básico de OpenStreetMap
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>',
-      maxZoom: 19,
-    }).addTo(map);
+    const cartoAttr = '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors © <a href="https://carto.com/attributions">CARTO</a>';
+    const dayTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+      attribution: cartoAttr, maxZoom: 19,
+    });
+    const nightTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+      attribution: cartoAttr, maxZoom: 19,
+    });
+    dayTiles.addTo(map);
+
+    // Modo noche del mapa: alterna tiles claros/oscuros con un control propio.
+    let isNight = false;
+    const NightControl = L.Control.extend({
+      options: { position: 'topright' },
+      onAdd() {
+        const btn = L.DomUtil.create('button', 'leaflet-bar');
+        btn.type = 'button';
+        btn.title = 'Modo noche del mapa';
+        btn.setAttribute('aria-label', 'Modo noche del mapa');
+        btn.style.cssText = 'width:34px;height:34px;background:#fff;border:none;cursor:pointer;font-size:16px;line-height:34px;padding:0;';
+        btn.textContent = '🌙';
+        L.DomEvent.on(btn, 'click', (e) => {
+          L.DomEvent.stop(e);
+          isNight = !isNight;
+          if (isNight) { map.removeLayer(dayTiles); nightTiles.addTo(map); }
+          else { map.removeLayer(nightTiles); dayTiles.addTo(map); }
+          btn.textContent = isNight ? '☀️' : '🌙';
+          btn.title = isNight ? 'Modo día del mapa' : 'Modo noche del mapa';
+        });
+        return btn;
+      },
+    });
+    map.addControl(new NightControl());
 
     const colorMap = {
       green:  '#16a34a',
