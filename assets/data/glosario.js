@@ -1,0 +1,12 @@
+const GLOSARIO = [
+      { palabra: "Gezellig", pron: "/je-sé-lej/", tipo: "Cultura", trad: "Acogedor, entrañable, agradable", desc: "Es la palabra holandesa más sagrada. Define un sentimiento de calidez y conexión social: cenar con amigos, una buena conversación en el canal o una tarde de café en Utrecht es 'gezellig'." },
+      { palabra: "Lekker", pron: "/lé-ker/", tipo: "Expresión", trad: "Delicioso, sabroso, agradable, bueno", desc: "Se usa para describir comida sabrosa, pero también un día soleado ('lekker weer'), dormir plácidamente o incluso sentirse bien. Es muy común en el día a día." },
+      { palabra: "Fiets", pron: "/fits/", tipo: "Vocabulario", trad: "Bicicleta", desc: "El vehículo indiscutible de Utrecht. La ciudad cuenta con más bicis que habitantes y toda la red de tráfico está diseñada en torno a ellas." },
+      { palabra: "Borrel", pron: "/bó-rel/", tipo: "Cultura", trad: "El aperitivo / Bebida de sobremesa", desc: "Reunirse a tomar una cerveza después de trabajar, típicamente acompañada de 'bitterballen' (croquetas redondas de carne especiada con mostaza)." },
+      { palabra: "Alstublieft", pron: "/als-tu-blift/", tipo: "Saludos", trad: "Por favor / Aquí tiene", desc: "Se utiliza de manera formal al pedir algo en una tienda o cafetería, o al entregar un objeto a otra persona al pagar." },
+      { palabra: "Dank je wel", pron: "/dank-ye-vel/", tipo: "Saludos", trad: "Muchas gracias", desc: "Expresión informal y habitual para dar las gracias. Si quieres hablarle formalmente a un desconocido puedes decir 'Dank u wel'." },
+      { palabra: "Borrelhapjes", pron: "/bó-rel-jap-yes/", tipo: "Vocabulario", trad: "Tapas / Snacks de aperitivo", desc: "Aperitivos salados calientes que acompañan al 'borrel'. Incluyen bitterballen, mini-rollitos de primavera y dados de queso joven holandés." },
+      { palabra: "Gezondheid", pron: "/je-zónt-jeit/", tipo: "Saludos", trad: "¡Salud! (al brindar o estornudar)", desc: "Literalmente significa 'salud'. Se usa de manera idéntica al español para desear salud tras un estornudo o al chocar las copas." },
+      { palabra: "Dag", pron: "/daj/", tipo: "Saludos", trad: "Hola / Adiós", desc: "Significa literalmente 'día', pero se usa constantemente como saludo rápido y simpático al entrar o salir de establecimientos." },
+      { palabra: "Broodje", pron: "/brót-ye/", tipo: "Vocabulario", trad: "Bocadillo / Panecillo", desc: "Un panecillo blando relleno. El 'Broodje Mario' es un bocadillo icónico italiano de Utrecht muy querido por los estudiantes locales." }
+    ];

@@ -1,0 +1,169 @@
+body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--utrecht-cream, #FAF7F2);
+    }
+    .hero-title { font-family: 'Playfair Display', serif; }
+    
+    /* Custom tab navigation styles */
+    .nav-link {
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    /* Scroll container tweaks */
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    
+    /* Map element styling */
+    #map {
+      height: 520px;
+      border-radius: 1rem;
+      z-index: 10;
+      border: 1px solid #e2e8f0;
+    }
+    
+    /* Image slider comparison styling */
+    .comparison-slider-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1rem;
+      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.15), 0 8px 10px -6px rgb(0 0 0 / 0.15);
+    }
+    
+    /* Leaflet popup styling override */
+    .leaflet-popup-content-wrapper {
+      border-radius: 0.75rem !important;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1) !important;
+      border: 1px solid #f1f5f9;
+    }
+    .leaflet-popup-tip {
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1) !important;
+    }
+
+    /* Card hover premium effects */
+    .premium-card {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    }
+    .premium-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px -10px rgba(15, 23, 42, 0.15);
+    }
+
+    /* Lightbox styling */
+    #lightbox {
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      background: rgba(15, 23, 42, 0.95); backdrop-filter: blur(8px);
+      align-items: center; justify-content: center; cursor: zoom-out;
+    }
+    #lightbox.open { display: flex; }
+    #lightbox img {
+      max-width: min(92vw, 1200px); max-height: 85vh;
+      object-fit: contain; border-radius: 0.75rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      animation: zoomIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes zoomIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+    
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FAF7F2;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    
+    /* Estilos interactivos de kaktus.dev */
+    .magnetic-wrap {
+      display: inline-block;
+      padding: 6px;
+      margin: -6px;
+    }
+    .magnetic-btn {
+      transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1);
+      will-change: transform;
+    }
+    
+    .tilt-container {
+      perspective: 1000px;
+    }
+    .tilt-box {
+      transform-style: preserve-3d;
+      transition: transform 0.15s ease-out;
+      will-change: transform;
+    }
+    .tilt-box > * {
+      transform: translateZ(10px);
+    }
+
+    /* ───── Bloque "Utrecht Viva" (Ayer y Hoy) ───── */
+
+    /* #1 Anatomía de la calle — hotspots */
+    .uv-hotspot { animation: uvPulse 2s infinite; }
+    .uv-hotspot.is-active { animation: none; }
+    /* Amplía el área táctil a ~46px sin agrandar el punto visible */
+    .uv-hotspot.is-anat::after { content: ''; position: absolute; inset: -11px; border-radius: 9999px; }
+    @keyframes uvPulse {
+      0%   { box-shadow: 0 0 0 0 rgba(200,25,25,0.55); }
+      70%  { box-shadow: 0 0 0 12px rgba(200,25,25,0); }
+      100% { box-shadow: 0 0 0 0 rgba(200,25,25,0); }
+    }
+
+    /* #2 Comparador ilustrado */
+    .uv-illu-old { clip-path: inset(0 50% 0 0); }
+
+    /* #5 Baldosa → jardín */
+    .uv-tiles.is-green .uv-tile-pave { opacity: 0; }
+    .uv-tiles.is-green .uv-tile-plant { opacity: 1; transform: scale(1); }
+    .uv-tile-pave  { transition: opacity .6s ease; }
+    .uv-tile-plant { opacity: 0; transform: scale(.4); transition: opacity .6s ease, transform .6s cubic-bezier(.34,1.56,.64,1); }
+    .uv-tiles.is-green .uv-tile-plant:nth-child(2) { transition-delay: .05s; }
+    .uv-tiles.is-green .uv-tile-plant:nth-child(4) { transition-delay: .12s; }
+    .uv-tiles.is-green .uv-tile-plant:nth-child(6) { transition-delay: .18s; }
+
+    /* #6 Scrollytelling reveal */
+    .uv-reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s var(--ease-out), transform .6s var(--ease-out); }
+    .uv-reveal.is-in { opacity: 1; transform: none; }
+
+    /* #7 Tarjetas flip */
+    .uv-flip { perspective: 1000px; }
+    .uv-flip-inner { transition: transform .6s var(--ease-out); transform-style: preserve-3d; }
+    .uv-flip.is-flipped .uv-flip-inner,
+    .uv-flip:hover .uv-flip-inner { transform: rotateY(180deg); }
+    .uv-flip-face { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+    .uv-flip-back { transform: rotateY(180deg); }
+
+    /* #8 Quiz */
+    .uv-quiz-opt.correct   { background:#dcfce7 !important; border-color:#4E6E58 !important; color:#14532d !important; }
+    .uv-quiz-opt.wrong     { background:#fee2e2 !important; border-color:#c81919 !important; color:#7f1d1d !important; }
+
+    /* ── interface-kit: a11y + motion foundations ── */
+    :root { --ease-out: cubic-bezier(0.23,1,0.32,1); --ease-spring: cubic-bezier(0.34,1.56,0.64,1); }
+    html { text-rendering: optimizeLegibility; }
+    h1,h2,h3,h4 { text-wrap: balance; }
+    p, li { text-wrap: pretty; }
+    :focus-visible { outline: 2px solid #c81919; outline-offset: 2px; border-radius: 4px; }
+    :focus:not(:focus-visible) { outline: none; }
+    /* Reveal animation */
+    .scroll-reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.23,1,0.32,1), transform 0.7s cubic-bezier(0.23,1,0.32,1); }
+    .scroll-reveal.is-visible { opacity: 1; transform: translateY(0); }
+    /* 44px hit areas (touch targets) */
+    .nav-link { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
+    #lightbox button { min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center; }
+    .uv-flip, .uv-tile, .uv-quiz-opt, [role="button"] { min-height: 44px; }
+    button:active { transform: scale(0.97); }
+    @media (hover: hover) and (pointer: fine) { .nav-link:hover { color: #c81919; } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .uv-hotspot { animation: none; }
+      .uv-reveal { opacity: 1; transform: none; transition: none; }
+      .uv-flip-inner, .uv-tile-pave, .uv-tile-plant { transition: none; }
+      button:active { transform: none; }
+    }
