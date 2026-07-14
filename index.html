@@ -198,6 +198,9 @@
     p, li { text-wrap: pretty; }
     :focus-visible { outline: 2px solid #c81919; outline-offset: 2px; border-radius: 4px; }
     :focus:not(:focus-visible) { outline: none; }
+    /* Reveal animation */
+    .scroll-reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s cubic-bezier(0.23,1,0.32,1), transform 0.7s cubic-bezier(0.23,1,0.32,1); }
+    .scroll-reveal.is-visible { opacity: 1; transform: translateY(0); }
     /* 44px hit areas (touch targets) */
     .nav-link { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
     #lightbox button { min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center; }
@@ -253,6 +256,7 @@
         <button onclick="switchTab('slider')" class="nav-link px-2 py-1" data-tab="slider">Ayer y Hoy</button>
         <button onclick="switchTab('diccionario')" class="nav-link px-2 py-1" data-tab="diccionario">Glosario</button>
         <button onclick="switchTab('mapa')" class="nav-link px-2 py-1" data-tab="mapa">Mapa y Rutas</button>
+        <button onclick="switchTab('descubrir')" class="nav-link px-2 py-1" data-tab="descubrir">Descubrir a pie</button>
         <button onclick="switchTab('galeria')" class="nav-link px-2 py-1" data-tab="galeria">Galería</button>
       </div>
       <div class="flex items-center gap-3">
@@ -283,6 +287,10 @@
       <button onclick="switchTab('mapa')" class="nav-link flex flex-col items-center gap-1 text-slate-500 py-1 px-3 rounded-xl transition-all" data-tab="mapa">
         <span class="text-xl">🗺️</span>
         <span class="text-[9px] font-bold tracking-tight">Mapa</span>
+      </button>
+      <button onclick="switchTab('descubrir')" class="nav-link flex flex-col items-center gap-1 text-slate-500 py-1 px-3 rounded-xl transition-all" data-tab="descubrir">
+        <span class="text-xl">🚶</span>
+        <span class="text-[9px] font-bold tracking-tight">Descubrir</span>
       </button>
       <button onclick="switchTab('galeria')" class="nav-link flex flex-col items-center gap-1 text-slate-500 py-1 px-3 rounded-xl transition-all" data-tab="galeria">
         <span class="text-xl">📷</span>
@@ -1249,7 +1257,224 @@
       </div>
     </section>
 
-    <!-- ── PESTAÑA 6: GALERÍA DE FOTOS ── -->
+    <!-- ── PESTAÑA NUEVA: DESCUBRIR A PIE ── -->
+    <section id="sec-descubrir" class="tab-section hidden transition-opacity duration-300">
+      <div class="max-w-5xl mx-auto space-y-12 pb-16 pt-8 px-4">
+        
+        <!-- Bloque Bicis -->
+        <div class="scroll-reveal opacity-0 translate-y-8 transition-all duration-700 ease-out">
+          <h2 class="hero-title text-3xl md:text-4xl font-bold text-utrecht-navy mb-4 flex items-center gap-3">
+            <span>🚲</span> Alquiler de Bicicletas
+          </h2>
+          <p class="text-slate-600 mb-8 max-w-2xl text-lg">Moverse en bici por Utrecht no es una opción, es un estilo de vida. Conoce las principales alternativas para hacerte con una montura.</p>
+          
+          <div class="grid md:grid-cols-3 gap-6">
+            <!-- OV-fiets -->
+            <div class="premium-card bg-white p-6 rounded-2xl border border-slate-200 relative overflow-hidden group">
+              <div class="absolute -right-6 -top-6 w-24 h-24 bg-yellow-50 rounded-full transition-transform duration-500 group-hover:scale-150"></div>
+              <div class="relative z-10">
+                <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center text-2xl mb-4 shadow-sm">🚄</div>
+                <h3 class="text-xl font-bold text-utrecht-navy mb-2">OV-fiets</h3>
+                <p class="text-sm text-slate-500 mb-4">La mítica bici pública amarilla y azul. Se alquilan masivamente en la Estación Central.</p>
+                <ul class="text-sm text-slate-600 space-y-2 mb-4">
+                  <li class="flex gap-2"><span>✓</span> Requiere OV-chipkaart personal</li>
+                  <li class="flex gap-2"><span>✓</span> Hasta 2 bicis por tarjeta</li>
+                </ul>
+                <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+                  <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Precio aprox.</span>
+                  <span class="font-bold text-utrecht-red">4,55 € / 24h</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Swapfiets -->
+            <div class="premium-card bg-white p-6 rounded-2xl border border-slate-200 relative overflow-hidden group">
+              <div class="absolute -right-6 -top-6 w-24 h-24 bg-blue-50 rounded-full transition-transform duration-500 group-hover:scale-150"></div>
+              <div class="relative z-10">
+                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-2xl mb-4 shadow-sm">🔵</div>
+                <h3 class="text-xl font-bold text-utrecht-navy mb-2">Swapfiets</h3>
+                <p class="text-sm text-slate-500 mb-4">Renting mensual con la icónica rueda azul delantera. Ideal para estancias medias o largas.</p>
+                <ul class="text-sm text-slate-600 space-y-2 mb-4">
+                  <li class="flex gap-2"><span>✓</span> Reparaciones incluidas</li>
+                  <li class="flex gap-2"><span>✓</span> Cancelación mensual</li>
+                </ul>
+                <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+                  <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Precio aprox.</span>
+                  <span class="font-bold text-utrecht-red">22 € / mes</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tiendas Locales -->
+            <div class="premium-card bg-white p-6 rounded-2xl border border-slate-200 relative overflow-hidden group">
+              <div class="absolute -right-6 -top-6 w-24 h-24 bg-green-50 rounded-full transition-transform duration-500 group-hover:scale-150"></div>
+              <div class="relative z-10">
+                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-2xl mb-4 shadow-sm">🏪</div>
+                <h3 class="text-xl font-bold text-utrecht-navy mb-2">Tiendas de Alquiler</h3>
+                <p class="text-sm text-slate-500 mb-4">Opciones como Willemstraatbike o Black Bikes para turismo de un par de días.</p>
+                <ul class="text-sm text-slate-600 space-y-2 mb-4">
+                  <li class="flex gap-2"><span>✓</span> No requiere tarjeta especial</li>
+                  <li class="flex gap-2"><span>✓</span> Opciones con marchas y eléctricas</li>
+                </ul>
+                <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+                  <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Precio aprox.</span>
+                  <span class="font-bold text-utrecht-red">12 - 15 € / día</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Consejos -->
+          <div class="mt-8 bg-slate-50 rounded-2xl p-6 border border-slate-200 shadow-sm relative overflow-hidden">
+            <div class="absolute right-0 top-0 w-32 h-32 bg-slate-200 rounded-bl-full opacity-50"></div>
+            <h4 class="font-bold text-utrecht-navy mb-3 flex items-center gap-2 relative z-10"><span>💡</span> Consejos de Oro</h4>
+            <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-600 relative z-10">
+              <p><strong>El Doble Candado:</strong> Pasa siempre el candado de cadena por el cuadro y la rueda delantera, y asegúrala a un elemento fijo. Además, nunca olvides cerrar el candado de anilla de la rueda trasera.</p>
+              <p><strong>Las Normas No Escritas:</strong> Señaliza con el brazo antes de girar, no circules por el carril bus y, como peatón, vigila siempre el carril bici antes de cruzar (¡los ciclistas tienen prioridad y van rápido!).</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="h-px bg-slate-200 w-full my-8"></div>
+
+        <!-- Bloque Rutas a pie -->
+        <div>
+          <div class="scroll-reveal opacity-0 translate-y-8 transition-all duration-700 ease-out mb-10">
+            <h2 class="hero-title text-3xl md:text-4xl font-bold text-utrecht-navy mb-4 flex items-center gap-3">
+              <span>🚶</span> 10 Rutas a Pie para Descubrir Utrecht
+            </h2>
+            <p class="text-slate-600 max-w-2xl text-lg">Ya sea adentrándote en el corazón histórico, escapando hacia los bosques circundantes o descubriendo la arquitectura moderna, estas rutas te mostrarán las mil caras de la ciudad.</p>
+          </div>
+          
+          <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6" id="rutas-pie-grid">
+            <!-- Las 10 Rutas -->
+            <div class="tilt-container break-inside-avoid scroll-reveal opacity-0 translate-y-8 transition-all duration-700 ease-out" style="transition-delay: 100ms;">
+              <div class="tilt-box bg-white p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
+                <div class="w-10 h-10 bg-red-50 text-utrecht-red rounded-xl flex items-center justify-center font-bold font-mono mb-4">01</div>
+                <h3 class="text-lg font-bold text-utrecht-navy mb-2 leading-tight">El Corazón Clásico</h3>
+                <p class="text-sm text-slate-600 mb-3 leading-relaxed">Ruta por excelencia: desde la majestuosa Domtoren hasta los muelles a nivel del agua del Oudegracht, descubriendo las bodegas históricas.</p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">URBANA</span>
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">2.5 KM</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tilt-container break-inside-avoid scroll-reveal opacity-0 translate-y-8 transition-all duration-700 ease-out" style="transition-delay: 200ms;">
+              <div class="tilt-box bg-white p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
+                <div class="w-10 h-10 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center font-bold font-mono mb-4">02</div>
+                <h3 class="text-lg font-bold text-utrecht-navy mb-2 leading-tight">Ruta de los Museos</h3>
+                <p class="text-sm text-slate-600 mb-3 leading-relaxed">Un paseo por el Museumkwartier, comenzando en el Museum Speelklok y finalizando en el jardín del Centraal Museum, una zona tranquila y llena de encanto.</p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">CULTURAL</span>
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">3 KM</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tilt-container break-inside-avoid scroll-reveal opacity-0 translate-y-8 transition-all duration-700 ease-out" style="transition-delay: 300ms;">
+              <div class="tilt-box bg-white p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
+                <div class="w-10 h-10 bg-green-50 text-green-600 rounded-xl flex items-center justify-center font-bold font-mono mb-4">03</div>
+                <h3 class="text-lg font-bold text-utrecht-navy mb-2 leading-tight">Paseo Verde: Wilhelminapark</h3>
+                <p class="text-sm text-slate-600 mb-3 leading-relaxed">Hacia el este de la ciudad (Oudwijk), maravíllate con las imponentes mansiones del siglo XIX que bordean el camino hasta llegar al icónico parque.</p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">PARQUES</span>
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">4 KM</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tilt-container break-inside-avoid scroll-reveal opacity-0 translate-y-8 transition-all duration-700 ease-out" style="transition-delay: 100ms;">
+              <div class="tilt-box bg-white p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
+                <div class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center font-bold font-mono mb-4">04</div>
+                <h3 class="text-lg font-bold text-utrecht-navy mb-2 leading-tight">Naturaleza en Amelisweerd</h3>
+                <p class="text-sm text-slate-600 mb-3 leading-relaxed">Saliendo de la ciudad, camina por la ribera del sinuoso río Kromme Rijn hasta adentrarte en los bosques de Amelisweerd y su famosa casa de té.</p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">EXTRARRADIO</span>
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">7 KM</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tilt-container break-inside-avoid scroll-reveal opacity-0 translate-y-8 transition-all duration-700 ease-out" style="transition-delay: 200ms;">
+              <div class="tilt-box bg-gradient-to-br from-white to-slate-50 p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
+                <div class="w-10 h-10 bg-slate-100 text-slate-700 rounded-xl flex items-center justify-center font-bold font-mono mb-4">05</div>
+                <h3 class="text-lg font-bold text-utrecht-navy mb-2 leading-tight">Ruta De Stijl</h3>
+                <p class="text-sm text-slate-600 mb-3 leading-relaxed">Un tributo a la arquitectura moderna y al movimiento De Stijl, coronando el paseo en la vanguardista Rietveld Schröderhuis.</p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">ARQUITECTURA</span>
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">3.5 KM</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tilt-container break-inside-avoid scroll-reveal opacity-0 translate-y-8 transition-all duration-700 ease-out" style="transition-delay: 300ms;">
+              <div class="tilt-box bg-white p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
+                <div class="w-10 h-10 bg-cyan-50 text-cyan-600 rounded-xl flex items-center justify-center font-bold font-mono mb-4">06</div>
+                <h3 class="text-lg font-bold text-utrecht-navy mb-2 leading-tight">Los Canales Exteriores</h3>
+                <p class="text-sm text-slate-600 mb-3 leading-relaxed">Una ruta circular perfecta que bordea el casco antiguo por el antiguo foso defensivo (Zocherpark). Ideal para corredores matutinos.</p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">CIRCULAR</span>
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">6 KM</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tilt-container break-inside-avoid scroll-reveal opacity-0 translate-y-8 transition-all duration-700 ease-out" style="transition-delay: 100ms;">
+              <div class="tilt-box bg-white p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
+                <div class="w-10 h-10 bg-pink-50 text-pink-600 rounded-xl flex items-center justify-center font-bold font-mono mb-4">07</div>
+                <h3 class="text-lg font-bold text-utrecht-navy mb-2 leading-tight">Sabores del Mundo</h3>
+                <p class="text-sm text-slate-600 mb-3 leading-relaxed">El oeste de la estación central. Explora la multicultural Kanaalstraat y acércate al espectacular molino de madera, el Houtzaagmolen De Ster.</p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">DIVERSIDAD</span>
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">2 KM</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tilt-container break-inside-avoid scroll-reveal opacity-0 translate-y-8 transition-all duration-700 ease-out" style="transition-delay: 200ms;">
+              <div class="tilt-box bg-white p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
+                <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center font-bold font-mono mb-4">08</div>
+                <h3 class="text-lg font-bold text-utrecht-navy mb-2 leading-tight">Science Park & Botánico</h3>
+                <p class="text-sm text-slate-600 mb-3 leading-relaxed">Pasea entre arquitectura brutalista contemporánea y termina en el precioso y extenso Jardín Botánico de la Universidad de Utrecht.</p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">ESTUDIANTIL</span>
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">5 KM</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tilt-container break-inside-avoid scroll-reveal opacity-0 translate-y-8 transition-all duration-700 ease-out" style="transition-delay: 300ms;">
+              <div class="tilt-box bg-white p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
+                <div class="w-10 h-10 bg-amber-50 text-amber-700 rounded-xl flex items-center justify-center font-bold font-mono mb-4">09</div>
+                <h3 class="text-lg font-bold text-utrecht-navy mb-2 leading-tight">Historia Romana</h3>
+                <p class="text-sm text-slate-600 mb-3 leading-relaxed">Más lejos, en Leidsche Rijn. Una caminata moderna que te lleva hasta el Castellum Hoge Woerd, una espectacular reconstrucción de un fuerte romano.</p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">HISTÓRICA</span>
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">8 KM</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tilt-container break-inside-avoid scroll-reveal opacity-0 translate-y-8 transition-all duration-700 ease-out" style="transition-delay: 100ms;">
+              <div class="tilt-box bg-slate-900 p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.15)] border border-slate-800">
+                <div class="w-10 h-10 bg-yellow-400 text-slate-900 rounded-xl flex items-center justify-center font-bold font-mono mb-4">10</div>
+                <h3 class="text-lg font-bold text-white mb-2 leading-tight">Trajectum Lumen</h3>
+                <p class="text-sm text-slate-300 mb-3 leading-relaxed">Una ruta especialmente diseñada para hacer tras la puesta de sol. Sigue las instalaciones de arte lumínico que resaltan puentes y edificios históricos.</p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="px-2 py-1 bg-slate-800 text-slate-300 rounded-md text-[10px] font-semibold">NOCTURNA</span>
+                  <span class="px-2 py-1 bg-slate-800 text-slate-300 rounded-md text-[10px] font-semibold">4.5 KM</span>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── PESTAÑA 7: GALERÍA DE FOTOS ── -->
     <section id="sec-galeria" class="tab-section hidden transition-opacity duration-300">
       <div class="flex items-end justify-between mb-6">
         <div>
@@ -1768,6 +1993,19 @@
       document.getElementById('lightbox').addEventListener('click', function(e) {
         if (e.target === this) closeLightbox();
       });
+
+      // Animación de revelado al hacer scroll (Rutas y Bicis)
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            entry.target.classList.remove('opacity-0', 'translate-y-8');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { rootMargin: '0px 0px -50px 0px' });
+      
+      document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
     });
     document.addEventListener('keydown', e => {
       if (!document.getElementById('lightbox').classList.contains('open')) return;
