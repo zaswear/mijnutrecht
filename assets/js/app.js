@@ -1,5 +1,5 @@
 // ── SPA NAVIGATION LÓGICA ──
-    let activeTab = 'guia';
+    let activeTab = 'vidalocal';
     
     function switchTab(tabId) {
       activeTab = tabId;
@@ -36,7 +36,7 @@
       });
       
       // Ajustar dimensiones del mapa Leaflet cuando se activa su pestaña
-      if (tabId === 'mapa' && map) {
+      if (tabId === 'descubrir' && map) {
         setTimeout(() => {
           map.invalidateSize();
         }, 120);

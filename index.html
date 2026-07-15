@@ -76,7 +76,7 @@
     </svg>
   </div>
 
-  <!-- ══════════════ NAV ESCRITORIO (TOP) ══════════════ -->
+  <!-- ══════════════ NAV ESCRITORIO (TOP) ══════════════ -->  <!-- ══════════════ NAV ESCRITORIO (TOP) ══════════════ -->
   <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
     <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -85,55 +85,43 @@
       </div>
       <!-- Enlaces escritorio -->
       <div class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-600">
-        <button onclick="switchTab('guia')" class="nav-link px-2 py-1 text-utrecht-red border-b-2 border-utrecht-red" data-tab="guia">Guía de Viaje</button>
+        <button onclick="switchTab('vidalocal')" class="nav-link px-2 py-1 text-utrecht-red border-b-2 border-utrecht-red" data-tab="vidalocal">Vida Local</button>
+        <button onclick="switchTab('descubrir')" class="nav-link px-2 py-1" data-tab="descubrir">Descubrir</button>
+        <button onclick="switchTab('gastronomia')" class="nav-link px-2 py-1" data-tab="gastronomia">Gastronomía</button>
+        <button onclick="switchTab('naturaleza')" class="nav-link px-2 py-1" data-tab="naturaleza">Naturaleza</button>
         <button onclick="switchTab('alma')" class="nav-link px-2 py-1" data-tab="alma">El Alma</button>
-        <button onclick="switchTab('slider')" class="nav-link px-2 py-1" data-tab="slider">Ayer y Hoy</button>
-        <button onclick="switchTab('diccionario')" class="nav-link px-2 py-1" data-tab="diccionario">Glosario</button>
-        <button onclick="switchTab('mapa')" class="nav-link px-2 py-1" data-tab="mapa">Transporte</button>
-        <button onclick="switchTab('rutas')" class="nav-link px-2 py-1" data-tab="rutas">Rutas a Pie</button>
-        <button onclick="switchTab('galeria')" class="nav-link px-2 py-1" data-tab="galeria">Galería</button>
       </div>
       <div class="flex items-center gap-3">
         <span class="text-xs font-semibold px-2.5 py-1 bg-slate-100 rounded-full border text-slate-600">ESPAÑOL</span>
       </div>
     </div>
   </nav>
-
   <!-- ══════════════ NAV MÓVIL (BOTTOM) ══════════════ -->
   <nav class="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-slate-200 shadow-2xl safe-bottom">
     <div class="flex justify-around items-center py-2 px-1">
-      <button onclick="switchTab('guia')" class="nav-link flex flex-col items-center gap-1 text-slate-500 py-1 px-3 rounded-xl transition-all" data-tab="guia">
+      <button onclick="switchTab('vidalocal')" class="nav-link flex flex-col items-center gap-1 text-slate-500 py-1 px-3 rounded-xl transition-all text-utrecht-red bg-slate-100" data-tab="vidalocal">
         <span class="text-xl">🚲</span>
-        <span class="text-[9px] font-bold tracking-tight">Guía</span>
+        <span class="text-[9px] font-bold tracking-tight">Vida Local</span>
+      </button>
+      <button onclick="switchTab('descubrir')" class="nav-link flex flex-col items-center gap-1 text-slate-500 py-1 px-3 rounded-xl transition-all" data-tab="descubrir">
+        <span class="text-xl">🏰</span>
+        <span class="text-[9px] font-bold tracking-tight">Descubrir</span>
+      </button>
+      <button onclick="switchTab('gastronomia')" class="nav-link flex flex-col items-center gap-1 text-slate-500 py-1 px-3 rounded-xl transition-all" data-tab="gastronomia">
+        <span class="text-xl">🍻</span>
+        <span class="text-[9px] font-bold tracking-tight">Comida</span>
+      </button>
+      <button onclick="switchTab('naturaleza')" class="nav-link flex flex-col items-center gap-1 text-slate-500 py-1 px-3 rounded-xl transition-all" data-tab="naturaleza">
+        <span class="text-xl">🌳</span>
+        <span class="text-[9px] font-bold tracking-tight">Naturaleza</span>
       </button>
       <button onclick="switchTab('alma')" class="nav-link flex flex-col items-center gap-1 text-slate-500 py-1 px-3 rounded-xl transition-all" data-tab="alma">
-        <span class="text-xl">🏰</span>
+        <span class="text-xl">📚</span>
         <span class="text-[9px] font-bold tracking-tight">El Alma</span>
-      </button>
-      <button onclick="switchTab('slider')" class="nav-link flex flex-col items-center gap-1 text-slate-500 py-1 px-3 rounded-xl transition-all" data-tab="slider">
-        <span class="text-xl">⏳</span>
-        <span class="text-[9px] font-bold tracking-tight">Ayer/Hoy</span>
-      </button>
-      <button onclick="switchTab('diccionario')" class="nav-link flex flex-col items-center gap-1 text-slate-500 py-1 px-3 rounded-xl transition-all" data-tab="diccionario">
-        <span class="text-xl">📖</span>
-        <span class="text-[9px] font-bold tracking-tight">Glosario</span>
-      </button>
-      <button onclick="switchTab('mapa')" class="nav-link flex flex-col items-center gap-1 text-slate-500 py-1 px-3 rounded-xl transition-all" data-tab="mapa">
-        <span class="text-xl">🚲</span>
-        <span class="text-[9px] font-bold tracking-tight">Moverse</span>
-      </button>
-      <button onclick="switchTab('rutas')" class="nav-link flex flex-col items-center gap-1 text-slate-500 py-1 px-3 rounded-xl transition-all" data-tab="rutas">
-        <span class="text-xl">🚶</span>
-        <span class="text-[9px] font-bold tracking-tight">Rutas</span>
-      </button>
-      <button onclick="switchTab('galeria')" class="nav-link flex flex-col items-center gap-1 text-slate-500 py-1 px-3 rounded-xl transition-all" data-tab="galeria">
-        <span class="text-xl">📷</span>
-        <span class="text-[9px] font-bold tracking-tight">Fotos</span>
       </button>
     </div>
   </nav>
-
-  <!-- ══════════════ CABECERA (HERO) ══════════════ -->
+<!-- ══════════════ CABECERA (HERO) ══════════════ -->
   <header class="max-w-4xl mx-auto px-4 pt-10 pb-6 text-center">
     <div class="flex justify-center mb-4">
       <div class="relative">
@@ -153,15 +141,13 @@
     </p>
   </header>
 
-  <!-- ══════════════ CONTENIDO PRINCIPAL (SPA) ══════════════ -->
+  <!-- ══════════════ CONTENIDO PRINCIPAL (SPA) ══════════════ -->  <!-- ══════════════ CONTENIDO PRINCIPAL (SPA) ══════════════ -->
   <main class="max-w-5xl mx-auto px-4 pb-20">
 
-    <!-- ── PESTAÑA 1: GUÍA DE VIAJE ── -->
-    <section id="sec-guia" class="tab-section transition-opacity duration-300">
+    <!-- ── VIDA LOCAL ── -->
+    <section id="sec-vidalocal" class="tab-section transition-opacity duration-300">
       <div class="grid md:grid-cols-3 gap-6">
-        <!-- Columna Izquierda: Info básica y consejos locales -->
         <div class="md:col-span-2 space-y-6">
-          
           <!-- Cómo llegar -->
           <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
             <div class="flex items-center gap-3 mb-4">
@@ -194,6 +180,23 @@
           </div>
 
           <!-- Moverse en Bici -->
+          
+          <!-- Guía de Burocracia -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">📝</span>
+              <h2 class="hero-title text-xl font-bold text-utrecht-navy">Burocracia y BSN</h2>
+            </div>
+            <p class="text-slate-600 text-sm leading-relaxed mb-4">
+              Si vienes a vivir, lo primero que necesitas es tu <strong>BSN (Burgerservicenummer)</strong>. Es el número de seguridad social esencial para abrir cuenta bancaria o trabajar.
+            </p>
+            <ul class="space-y-2 text-xs text-slate-600 mb-3">
+              <li class="flex gap-2"><span>1.</span> Pide cita en el Gemeente (Ayuntamiento) tan pronto tengas contrato de alquiler.</li>
+              <li class="flex gap-2"><span>2.</span> Si vas a estar menos de 4 meses, pide el alta como No Residente (RNI).</li>
+            </ul>
+          </div>
+    
+          <!-- Moverse en Bici -->
           <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
             <div class="flex items-center gap-3 mb-4">
               <span class="text-2xl">🚴</span>
@@ -224,6 +227,360 @@
             </ul>
           </div>
 
+          <!-- Bocados de Utrecht -->
+          <!-- Choque Cultural -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">🇳🇱</span>
+              <h2 class="hero-title text-xl font-bold text-utrecht-navy">Choque Cultural: Guía Práctica</h2>
+            </div>
+            <p class="text-slate-600 text-sm leading-relaxed mb-4">
+              Para integrarte como un local y evitar malentendidos cotidianos, ten en cuenta estas tres costumbres de Utrecht:
+            </p>
+            <div class="space-y-3.5 text-xs text-slate-600">
+              <div class="flex gap-3">
+                <span class="text-utrecht-red font-extrabold">⏰</span>
+                <p>
+                  <strong>Cenar muy temprano:</strong> Los holandeses suelen cenar entre las 17:30 y las 19:30. Muchos restaurantes del centro cierran sus cocinas a las 21:00 o 21:30. Si buscas cenar a partir de las 22:00, tus opciones se reducirán drásticamente a puestos de comida rápida.
+                </p>
+              </div>
+              <div class="flex gap-3">
+                <span class="text-utrecht-red font-extrabold">💳</span>
+                <p>
+                  <strong>Pinnen (Cero efectivo):</strong> Utrecht es casi 100% libre de efectivo. Bares, cafeterías, transportes y gran parte de las tiendas solo aceptan tarjetas de débito o crédito (indicado como <em>Pin Only</em> o <em>Pinnen Ja</em>). Lleva siempre tu tarjeta o móvil preparado para pagar.
+                </p>
+              </div>
+              <div class="flex gap-3">
+                <span class="text-utrecht-red font-extrabold">🛒</span>
+                <p>
+                  <strong>Supermercados Albert Heijn:</strong> Son el supermercado principal. Las ofertas marcadas en azul (descuentos *Bonus*) solo se aplican si pasas la tarjeta de cliente *Bonuskaart* en caja (puedes pedir una física gratis o escanear una digital). Además, recuerda traer tus propias bolsas o tendrás que pagarlas.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Columna Derecha
+        </div>
+        <div class="space-y-6">
+          <!-- Clima y Estado del Día (Widget Dinámico) -->
+          <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6 rounded-2xl border border-slate-700 shadow-md text-white">
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center gap-2">
+                <span class="text-2xl" id="weather-icon">⛅</span>
+                <div>
+                  <h3 class="font-bold text-[10px] uppercase text-utrecht-red tracking-wider">Pronóstico Utrecht</h3>
+                  <p class="text-[9px] text-slate-400" id="weather-time">Cargando...</p>
+                </div>
+              </div>
+              <div class="text-right">
+                <span class="text-xl font-extrabold" id="weather-temp">--°C</span>
+              </div>
+            </div>
+            
+            <div class="p-3 bg-white/10 rounded-xl text-[10px] leading-relaxed border border-white/5 space-y-1.5">
+              <p>
+                <strong class="text-slate-200">Estado:</strong> <span id="weather-desc">Obteniendo clima actual...</span>
+              </p>
+              <div class="border-t border-white/10 my-1.5"></div>
+              <p id="weather-advice" class="text-slate-300">
+                Cargando recomendaciones locales para el día de hoy...
+              </p>
+            </div>
+
+            <div id="weather-forecast" class="grid grid-cols-2 gap-2 mt-3"></div>
+          </div>
+
+          <!-- Industria Local -->
+          
+          <!-- Mercados Locales -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">🛍️</span>
+              <h2 class="hero-title text-xl font-bold text-utrecht-navy">Mercados Locales</h2>
+            </div>
+            <p class="text-slate-600 text-sm leading-relaxed mb-3">No hay nada más local que comprar en el mercado:</p>
+            <ul class="space-y-2 text-xs text-slate-700">
+              <li><strong>Vredenburg Markt:</strong> Miércoles, viernes y sábado. Fruta, queso y <em>stroopwafels</em> calientes.</li>
+              <li><strong>Lapjesmarkt:</strong> Sábados por la mañana en Breedstraat. El mercado de telas más antiguo de Holanda (desde 1597).</li>
+              <li><strong>Bloemenmarkt:</strong> Sábados en Janskerkhof. Mercado de flores espectacular.</li>
+            </ul>
+          </div>
+    
+          
+          <!-- Trabajo Remoto -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">💻</span>
+              <h2 class="hero-title text-xl font-bold text-utrecht-navy">Cafés para Teletrabajar</h2>
+            </div>
+            <p class="text-slate-600 text-sm leading-relaxed mb-4">Los mejores lugares con Wi-Fi, buen café y enchufes para sacar tu portátil:</p>
+            <div class="space-y-3">
+              <div class="p-3 bg-slate-50 border rounded-xl">
+                <p class="font-bold text-xs text-utrecht-navy">☕ The Village Coffee & Music</p>
+                <p class="text-[11px] text-slate-500 mt-0.5">Ambiente roquero, gran café en Voorstraat o Science Park.</p>
+              </div>
+              <div class="p-3 bg-slate-50 border rounded-xl">
+                <p class="font-bold text-xs text-utrecht-navy">🥐 Koffie & Ik</p>
+                <p class="text-[11px] text-slate-500 mt-0.5">En Lombok. Luminoso y tranquilo para trabajar por la mañana.</p>
+              </div>
+            </div>
+          </div>
+    
+          <!-- Emergencias y Salud -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">🚑</span>
+              <h2 class="hero-title text-lg font-bold text-utrecht-navy">Emergencias y Salud</h2>
+            </div>
+            <p class="text-slate-600 text-xs leading-relaxed mb-3">
+              Guía rápida de números de soporte médico y de seguridad durante tu estancia en la ciudad:
+            </p>
+            <div class="space-y-2 text-xs">
+              <div class="flex justify-between items-center p-2.5 bg-red-50 border border-red-100 rounded-xl">
+                <span class="font-bold text-red-700">🚨 Emergencias (Vital)</span>
+                <span class="font-mono font-extrabold text-red-700 px-2 py-0.5 bg-white border border-red-200 rounded">112</span>
+              </div>
+              <div class="flex justify-between items-center p-2.5 bg-slate-50 border rounded-xl">
+                <span class="text-slate-600">📞 Policía (No emergencias)</span>
+                <span class="font-mono font-bold text-slate-700">0900-8844</span>
+              </div>
+              <div class="p-2.5 bg-slate-50 border rounded-xl space-y-1">
+                <div class="flex justify-between items-center">
+                  <span class="font-bold text-utrecht-navy">🏥 Huisartsenpost (Urgencias)</span>
+                  <span class="font-mono font-bold text-slate-700 text-[10px]">088-130-9600</span>
+                </div>
+                <p class="text-[10px] text-slate-500 leading-relaxed mt-1">
+                  Atención médica fuera de horario comercial (noches y fines de semana). **Debes llamar siempre por teléfono antes de acudir** para que te asignen una cita en el hospital de urgencias.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+        </div>
+      </div>
+    </section>
+    
+    <!-- ── DESCUBRIR ── -->
+    <section id="sec-descubrir" class="tab-section hidden transition-opacity duration-300">
+      <div class="space-y-12">
+        <!-- Mapa Principal Integrado -->
+        <div>
+          <h2 class="hero-title text-2xl font-bold text-utrecht-navy mb-4 mt-2">El Mapa (Puntos de Interés)</h2>
+          <!-- ── PESTAÑA 5: EL MAPA Y RUTAS GPX ── -->
+    <div id="sec-mapa-inner" class="">
+      <div class="space-y-12">
+        <div class="grid md:grid-cols-3 gap-6 items-start">
+        
+        <!-- Mapa y filtros (Columna Izquierda 2/3) -->
+        <div class="md:col-span-2 space-y-4">
+          <!-- Filtros de colores -->
+          <div class="flex flex-wrap gap-2" id="filtros">
+            <button class="filtro-btn active" data-color="all"><i class="ph-fill ph-map-pin" style="color:#64748b"></i> Todos</button>
+            <button class="filtro-btn" data-color="green"><i class="ph-fill ph-fork-knife" style="color:#16a34a"></i> Recomendados</button>
+            <button class="filtro-btn" data-color="red"><i class="ph-fill ph-thumbs-down" style="color:#dc2626"></i> Evitar</button>
+            <button class="filtro-btn" data-color="blue"><i class="ph-fill ph-tree" style="color:#2563eb"></i> Parques</button>
+            <button class="filtro-btn" data-color="orange"><i class="ph-fill ph-star" style="color:#ea580c"></i> Imprescindible</button>
+          </div>
+          <!-- Mapa Leaflet -->
+          <div id="map" class="shadow-md"></div>
+        </div>
+
+        <!-- Rutas GPX (Columna Derecha 1/3) -->
+        <div class="space-y-4">
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <h2 class="hero-title text-xl font-bold text-utrecht-navy mb-1 flex items-center gap-2">
+              <span>🚴</span> Rutas en Bici
+            </h2>
+            <p class="text-xs text-slate-500 leading-relaxed mb-4">
+              Trayectos cíclicos semanales para conocer los alrededores de Utrecht. Actívalas para dibujarlas en el mapa.
+            </p>
+            <div id="rutas-list" class="space-y-3 overflow-y-auto max-h-[420px] pr-1">
+              <!-- Cargado dinámicamente -->
+            </div>
+          </div>
+        </div>
+
+      </div>
+        
+        </div>
+        
+        <!-- Secretos -->
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="space-y-6">
+            <!-- Canales y Werven -->
+        <div class="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm grid md:grid-cols-2 gap-8 items-center">
+          <div class="order-2 md:order-1 tilt-container aspect-square">
+            <div class="tilt-box relative w-full h-full rounded-2xl overflow-hidden shadow-md border border-slate-100 group">
+              <img src="fotos/el_alma_werven.jpg" alt="Canales de Utrecht de doble nivel" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/10 to-transparent flex flex-col justify-end p-6 text-white">
+                <span class="text-[10px] uppercase font-bold text-utrecht-red tracking-wider mb-1">Ingeniería Medieval</span>
+                <h3 class="font-bold text-lg leading-tight">Canales con Muelles (Werven)</h3>
+                <p class="text-[11px] text-slate-300 mt-1 leading-relaxed">
+                  El único sistema de canales del mundo diseñado con bodegas a nivel del cauce y calles comerciales en un segundo nivel superior.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="order-1 md:order-2">
+            <span class="text-xs font-bold text-utrecht-red uppercase tracking-widest mb-1.5 block">Arquitectura Única</span>
+            <h2 class="hero-title text-3xl font-extrabold text-utrecht-navy mb-4">Los Canales de Dos Niveles</h2>
+            <div class="text-slate-600 text-sm space-y-3 leading-relaxed">
+              <p>
+                Los canales históricos que serpentean por la ciudad, como el **Oudegracht** y el **Nieuwegracht**, son una obra maestra de ingeniería civil medieval única en el planeta, caracterizados por poseer **werven** (muelles inferiores) y sótanos habitables por debajo del nivel de las calles principales.
+              </p>
+              <p>
+                En el **siglo XII**, los ciudadanos de Utrecht consiguieron represar y regular el cauce del río Rin mediante la instalación de exclusas aguas arriba. Esto provocó una notable y permanente bajada del nivel de agua en los canales de la urbe. Los astutos mercaderes medievales no tardaron en aprovechar la oportunidad para excavar sótanos profundos (*werfkelders*) bajo el pavimento de la calle.
+              </p>
+              <p>
+                Estos sótanos se extendían en túneles directos desde los muelles de carga a ras del canal hasta el interior de sus casas situadas en el plano superior. De este modo, las barcazas mercantes descargaban mercancías pesadas directamente en las bodegas de almacenamiento sin obstaculizar el denso tráfico de carruajes y peatones en el nivel superior.
+              </p>
+              <p>
+                En la actualidad, este laberinto histórico de ladrillo y arcos es el epicentro social de Utrecht. Los antiguos almacenes y muelles acogen terrazas, cafeterías de especialidad, galerías de arte independiente y restaurantes a pie de agua por donde ver pasar canoas y patos.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Costumbres locales y bruine cafés -->
+          </div>
+          <div class="space-y-6">
+            
+          <!-- Miffy -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">🐰</span>
+              <h2 class="hero-title text-xl font-bold text-utrecht-navy">El Legado de Nijntje (Miffy)</h2>
+            </div>
+            <p class="text-slate-600 text-sm leading-relaxed mb-3">
+              Dick Bruna, el creador de la famosa conejita Miffy, nació en Utrecht. Puedes encontrarla por toda la ciudad:
+            </p>
+            <ul class="space-y-2 text-xs text-slate-700">
+              <li><strong>Nijntje Museum:</strong> Un museo interactivo espectacular para niños pequeños.</li>
+              <li><strong>Semáforos de Miffy:</strong> En el cruce peatonal de Lange Viestraat.</li>
+              <li><strong>Estatua de Miffy:</strong> En la plaza Nijntjepleintje.</li>
+            </ul>
+          </div>
+    
+            <!-- Pases de Museos -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">🎟️</span>
+              <h2 class="hero-title text-lg font-bold text-utrecht-navy">Pases y Museos</h2>
+            </div>
+            <p class="text-slate-600 text-xs leading-relaxed mb-3">
+              Utrecht cuenta con algunos de los museos más divertidos del país. Si planeas ver varios, te interesa conocer las opciones de pases:
+            </p>
+            <div class="space-y-3 text-xs">
+              <div class="p-3 bg-slate-50 border rounded-xl">
+                <p class="font-bold text-[11px] text-utrecht-navy">💳 Museumkaart (Paso Nacional)</p>
+                <p class="text-[10px] text-slate-500 mt-1 leading-relaxed">
+                  Cuesta ~75 € (válida por 1 año). Da acceso gratuito a más de 450 museos de Países Bajos. En Utrecht cubre el Spoorwegmuseum (Trenes), el Speelklok (Cajas de música) y el Centraal Museum. Si vas a visitar más de 4 museos en el país, ya la habrás amortizado.
+                </p>
+              </div>
+              <div class="p-3 bg-slate-50 border rounded-xl">
+                <p class="font-bold text-[11px] text-utrecht-navy">🎫 Utrecht Region Pass</p>
+                <p class="text-[10px] text-slate-500 mt-1 leading-relaxed">
+                  Una tarjeta inteligente recargable diseñada especialmente para turistas, que integra billetes de transporte público ilimitado y entradas con descuento a las atracciones clave de Utrecht y alrededores.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Emergencias y Salud -->
+          </div>
+        </div>
+        
+        <!-- Bloque Bicis -->
+        <div class="scroll-reveal opacity-0 translate-y-8 transition-all duration-700 ease-out">
+          <h2 class="hero-title text-3xl md:text-4xl font-bold text-utrecht-navy mb-4 flex items-center gap-3">
+            <span>🚲</span> Alquiler de Bicicletas
+          </h2>
+          <p class="text-slate-600 mb-8 max-w-2xl text-lg">Moverse en bici por Utrecht no es una opción, es un estilo de vida. Conoce las principales alternativas para hacerte con una montura.</p>
+          
+          <div class="grid md:grid-cols-3 gap-6">
+            <!-- OV-fiets -->
+            <div class="premium-card bg-white p-6 rounded-2xl border border-slate-200 relative overflow-hidden group">
+              <div class="absolute -right-6 -top-6 w-24 h-24 bg-yellow-50 rounded-full transition-transform duration-500 group-hover:scale-150"></div>
+              <div class="relative z-10">
+                <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center text-2xl mb-4 shadow-sm">🚄</div>
+                <h3 class="text-xl font-bold text-utrecht-navy mb-2">OV-fiets</h3>
+                <p class="text-sm text-slate-500 mb-4">La mítica bici pública amarilla y azul. Se alquilan masivamente en la Estación Central.</p>
+                <ul class="text-sm text-slate-600 space-y-2 mb-4">
+                  <li class="flex gap-2"><span>✓</span> Requiere OV-chipkaart personal</li>
+                  <li class="flex gap-2"><span>✓</span> Hasta 2 bicis por tarjeta</li>
+                </ul>
+                <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+                  <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Precio aprox.</span>
+                  <span class="font-bold text-utrecht-red">4,55 € / 24h</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Swapfiets -->
+            <div class="premium-card bg-white p-6 rounded-2xl border border-slate-200 relative overflow-hidden group">
+              <div class="absolute -right-6 -top-6 w-24 h-24 bg-blue-50 rounded-full transition-transform duration-500 group-hover:scale-150"></div>
+              <div class="relative z-10">
+                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-2xl mb-4 shadow-sm">🔵</div>
+                <h3 class="text-xl font-bold text-utrecht-navy mb-2">Swapfiets</h3>
+                <p class="text-sm text-slate-500 mb-4">Renting mensual con la icónica rueda azul delantera. Ideal para estancias medias o largas.</p>
+                <ul class="text-sm text-slate-600 space-y-2 mb-4">
+                  <li class="flex gap-2"><span>✓</span> Reparaciones incluidas</li>
+                  <li class="flex gap-2"><span>✓</span> Cancelación mensual</li>
+                </ul>
+                <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+                  <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Precio aprox.</span>
+                  <span class="font-bold text-utrecht-red">22 € / mes</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tiendas Locales -->
+            <div class="premium-card bg-white p-6 rounded-2xl border border-slate-200 relative overflow-hidden group">
+              <div class="absolute -right-6 -top-6 w-24 h-24 bg-green-50 rounded-full transition-transform duration-500 group-hover:scale-150"></div>
+              <div class="relative z-10">
+                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-2xl mb-4 shadow-sm">🏪</div>
+                <h3 class="text-xl font-bold text-utrecht-navy mb-2">Tiendas de Alquiler</h3>
+                <p class="text-sm text-slate-500 mb-4">Opciones como Willemstraatbike o Black Bikes para turismo de un par de días.</p>
+                <ul class="text-sm text-slate-600 space-y-2 mb-4">
+                  <li class="flex gap-2"><span>✓</span> No requiere tarjeta especial</li>
+                  <li class="flex gap-2"><span>✓</span> Opciones con marchas y eléctricas</li>
+                </ul>
+                <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
+                  <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Precio aprox.</span>
+                  <span class="font-bold text-utrecht-red">12 - 15 € / día</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Consejos -->
+          <div class="mt-8 bg-slate-50 rounded-2xl p-6 border border-slate-200 shadow-sm relative overflow-hidden">
+            <div class="absolute right-0 top-0 w-32 h-32 bg-slate-200 rounded-bl-full opacity-50"></div>
+            <h4 class="font-bold text-utrecht-navy mb-3 flex items-center gap-2 relative z-10"><span>💡</span> Consejos de Oro</h4>
+            <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-600 relative z-10">
+              <p><strong>El Doble Candado:</strong> Pasa siempre el candado de cadena por el cuadro y la rueda delantera, y asegúrala a un elemento fijo. Además, nunca olvides cerrar el candado de anilla de la rueda trasera.</p>
+              <p><strong>Las Normas No Escritas:</strong> Señaliza con el brazo antes de girar, no circules por el carril bus y, como peatón, vigila siempre el carril bici antes de cruzar (¡los ciclistas tienen prioridad y van rápido!).</p>
+            </div>
+          </div>
+        </div>
+
+        
+      </div>
+    
+
+    <!-- ── PESTAÑA NUEVA: RUTAS A PIE ── -->
+      </div>
+    </section>
+    
+    <!-- ── GASTRONOMIA ── -->
+    <section id="sec-gastronomia" class="tab-section hidden transition-opacity duration-300">
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="space-y-6">
           <!-- Bocados de Utrecht -->
           <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
             <div class="flex items-center gap-3 mb-4">
@@ -265,241 +622,51 @@
           </div>
 
           <!-- Choque Cultural -->
-          <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
-            <div class="flex items-center gap-3 mb-4">
-              <span class="text-2xl">🇳🇱</span>
-              <h2 class="hero-title text-xl font-bold text-utrecht-navy">Choque Cultural: Guía Práctica</h2>
-            </div>
-            <p class="text-slate-600 text-sm leading-relaxed mb-4">
-              Para integrarte como un local y evitar malentendidos cotidianos, ten en cuenta estas tres costumbres de Utrecht:
-            </p>
-            <div class="space-y-3.5 text-xs text-slate-600">
-              <div class="flex gap-3">
-                <span class="text-utrecht-red font-extrabold">⏰</span>
-                <p>
-                  <strong>Cenar muy temprano:</strong> Los holandeses suelen cenar entre las 17:30 y las 19:30. Muchos restaurantes del centro cierran sus cocinas a las 21:00 o 21:30. Si buscas cenar a partir de las 22:00, tus opciones se reducirán drásticamente a puestos de comida rápida.
-                </p>
-              </div>
-              <div class="flex gap-3">
-                <span class="text-utrecht-red font-extrabold">💳</span>
-                <p>
-                  <strong>Pinnen (Cero efectivo):</strong> Utrecht es casi 100% libre de efectivo. Bares, cafeterías, transportes y gran parte de las tiendas solo aceptan tarjetas de débito o crédito (indicado como <em>Pin Only</em> o <em>Pinnen Ja</em>). Lleva siempre tu tarjeta o móvil preparado para pagar.
-                </p>
-              </div>
-              <div class="flex gap-3">
-                <span class="text-utrecht-red font-extrabold">🛒</span>
-                <p>
-                  <strong>Supermercados Albert Heijn:</strong> Son el supermercado principal. Las ofertas marcadas en azul (descuentos *Bonus*) solo se aplican si pasas la tarjeta de cliente *Bonuskaart* en caja (puedes pedir una física gratis o escanear una digital). Además, recuerda traer tus propias bolsas o tendrás que pagarlas.
-                </p>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <!-- Columna Derecha: Clima, industria local, alquileres y pases -->
-        <div class="space-y-6">
           
-          <!-- Clima y Estado del Día (Widget Dinámico) -->
-          <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 p-6 rounded-2xl border border-slate-700 shadow-md text-white">
-            <div class="flex items-center justify-between mb-4">
-              <div class="flex items-center gap-2">
-                <span class="text-2xl" id="weather-icon">⛅</span>
-                <div>
-                  <h3 class="font-bold text-[10px] uppercase text-utrecht-red tracking-wider">Pronóstico Utrecht</h3>
-                  <p class="text-[9px] text-slate-400" id="weather-time">Cargando...</p>
-                </div>
-              </div>
-              <div class="text-right">
-                <span class="text-xl font-extrabold" id="weather-temp">--°C</span>
-              </div>
-            </div>
-            
-            <div class="p-3 bg-white/10 rounded-xl text-[10px] leading-relaxed border border-white/5 space-y-1.5">
-              <p>
-                <strong class="text-slate-200">Estado:</strong> <span id="weather-desc">Obteniendo clima actual...</span>
-              </p>
-              <div class="border-t border-white/10 my-1.5"></div>
-              <p id="weather-advice" class="text-slate-300">
-                Cargando recomendaciones locales para el día de hoy...
-              </p>
-            </div>
-
-            <div id="weather-forecast" class="grid grid-cols-2 gap-2 mt-3"></div>
-          </div>
-
-          <!-- Industria Local -->
+          <!-- Vegano -->
           <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
             <div class="flex items-center gap-3 mb-4">
-              <span class="text-2xl">💼</span>
-              <h2 class="hero-title text-lg font-bold text-utrecht-navy">Utrecht Productiva</h2>
+              <span class="text-2xl">🌱</span>
+              <h2 class="hero-title text-xl font-bold text-utrecht-navy">Utrecht Verde (Vegano/Vegetariano)</h2>
             </div>
-            <p class="text-slate-600 text-xs leading-relaxed mb-4">
-              Utrecht es el centro neurálgico de las comunicaciones de los Países Bajos y destaca en sectores clave:
-            </p>
-            <div class="space-y-3">
-              <div class="p-3 bg-slate-50 border rounded-xl">
-                <p class="font-bold text-xs text-utrecht-navy">🎮 Capital del Videojuego</p>
-                <p class="text-[11px] text-slate-500 mt-0.5">Sede del <em>Dutch Game Garden</em>. Utrecht acoge la mayor concentración de estudios de videojuegos y tecnología del país.</p>
-              </div>
-              <div class="p-3 bg-slate-50 border rounded-xl">
-                <p class="font-bold text-xs text-utrecht-navy">🚆 Corazón Ferroviario</p>
-                <p class="text-[11px] text-slate-500 mt-0.5">Las sedes principales de la NS (trenes nacionales) y ProRail (gestor de vías) se ubican aquí. Su estación es el nodo con más tráfico del país.</p>
-              </div>
-              <div class="p-3 bg-slate-50 border rounded-xl">
-                <p class="font-bold text-xs text-utrecht-navy">🏦 Finanzas Cooperativas</p>
-                <p class="text-[11px] text-slate-500 mt-0.5">El icónico edificio con forma de "dos torres inclinadas" que destaca en la ciudad es la central del Rabobank, nacido en Utrecht.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Alquiler de Bicis -->
-          <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
-            <h2 class="hero-title text-lg font-bold text-utrecht-navy mb-3">¿Dónde alquilo una bici?</h2>
-            <p class="text-slate-600 text-xs leading-relaxed mb-3">
-              Si vienes como turista, la mejor opción es alquilar en tiendas locales del centro:
-            </p>
-            <ul class="space-y-2 text-xs">
-              <li class="flex items-center gap-2 text-slate-700">
-                <span>🔧</span> <strong>Fietsverhuur Utrecht / Laag Catharijne:</strong> Cerca de la estación central. Precios desde ~10€ al día.
-              </li>
-              <li class="flex items-center gap-2 text-slate-700">
-                <span>⚡</span> <strong>Black Bikes:</strong> En el centro histórico, bicis holandesas negras clásicas muy fiables.
-              </li>
+            <p class="text-slate-600 text-sm leading-relaxed mb-3">La ciudad es un paraíso <em>plant-based</em>:</p>
+            <ul class="space-y-2 text-xs text-slate-700">
+              <li><strong>Broei:</strong> 100% vegetal, ambiente acogedor junto al canal.</li>
+              <li><strong>Gys:</strong> Comida orgánica, sin gluten y vegana con varias sedes.</li>
+              <li><strong>KasKantine:</strong> Agricultura urbana y comida rescatada.</li>
             </ul>
           </div>
-
-          <!-- Pases de Museos -->
+    
+        </div>
+        <div class="space-y-6">
+          
+          <!-- Ruta Cerveza -->
           <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
             <div class="flex items-center gap-3 mb-4">
-              <span class="text-2xl">🎟️</span>
-              <h2 class="hero-title text-lg font-bold text-utrecht-navy">Pases y Museos</h2>
+              <span class="text-2xl">🍺</span>
+              <h2 class="hero-title text-xl font-bold text-utrecht-navy">Ruta de la Cerveza Artesanal</h2>
             </div>
-            <p class="text-slate-600 text-xs leading-relaxed mb-3">
-              Utrecht cuenta con algunos de los museos más divertidos del país. Si planeas ver varios, te interesa conocer las opciones de pases:
-            </p>
-            <div class="space-y-3 text-xs">
-              <div class="p-3 bg-slate-50 border rounded-xl">
-                <p class="font-bold text-[11px] text-utrecht-navy">💳 Museumkaart (Paso Nacional)</p>
-                <p class="text-[10px] text-slate-500 mt-1 leading-relaxed">
-                  Cuesta ~75 € (válida por 1 año). Da acceso gratuito a más de 450 museos de Países Bajos. En Utrecht cubre el Spoorwegmuseum (Trenes), el Speelklok (Cajas de música) y el Centraal Museum. Si vas a visitar más de 4 museos en el país, ya la habrás amortizado.
-                </p>
-              </div>
-              <div class="p-3 bg-slate-50 border rounded-xl">
-                <p class="font-bold text-[11px] text-utrecht-navy">🎫 Utrecht Region Pass</p>
-                <p class="text-[10px] text-slate-500 mt-1 leading-relaxed">
-                  Una tarjeta inteligente recargable diseñada especialmente para turistas, que integra billetes de transporte público ilimitado y entradas con descuento a las atracciones clave de Utrecht y alrededores.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Emergencias y Salud -->
-          <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
-            <div class="flex items-center gap-3 mb-4">
-              <span class="text-2xl">🚑</span>
-              <h2 class="hero-title text-lg font-bold text-utrecht-navy">Emergencias y Salud</h2>
-            </div>
-            <p class="text-slate-600 text-xs leading-relaxed mb-3">
-              Guía rápida de números de soporte médico y de seguridad durante tu estancia en la ciudad:
-            </p>
-            <div class="space-y-2 text-xs">
-              <div class="flex justify-between items-center p-2.5 bg-red-50 border border-red-100 rounded-xl">
-                <span class="font-bold text-red-700">🚨 Emergencias (Vital)</span>
-                <span class="font-mono font-extrabold text-red-700 px-2 py-0.5 bg-white border border-red-200 rounded">112</span>
-              </div>
-              <div class="flex justify-between items-center p-2.5 bg-slate-50 border rounded-xl">
-                <span class="text-slate-600">📞 Policía (No emergencias)</span>
-                <span class="font-mono font-bold text-slate-700">0900-8844</span>
-              </div>
-              <div class="p-2.5 bg-slate-50 border rounded-xl space-y-1">
-                <div class="flex justify-between items-center">
-                  <span class="font-bold text-utrecht-navy">🏥 Huisartsenpost (Urgencias)</span>
-                  <span class="font-mono font-bold text-slate-700 text-[10px]">088-130-9600</span>
+            <p class="text-slate-600 text-sm leading-relaxed mb-4">Utrecht tiene una floreciente escena cervecera local:</p>
+            <div class="space-y-3">
+              <div class="flex gap-4 p-3 bg-slate-50 border rounded-xl items-start">
+                <span class="text-xl mt-0.5">🏭</span>
+                <div>
+                  <h4 class="font-bold text-xs text-utrecht-navy">Stadskasteel Oudaen</h4>
+                  <p class="text-[11px] text-slate-600 leading-relaxed mt-0.5">Cervecería ubicada dentro de un castillo urbano del siglo XIII en pleno Oudegracht.</p>
                 </div>
-                <p class="text-[10px] text-slate-500 leading-relaxed mt-1">
-                  Atención médica fuera de horario comercial (noches y fines de semana). **Debes llamar siempre por teléfono antes de acudir** para que te asignen una cita en el hospital de urgencias.
-                </p>
+              </div>
+              <div class="flex gap-4 p-3 bg-slate-50 border rounded-xl items-start">
+                <span class="text-xl mt-0.5">🎨</span>
+                <div>
+                  <h4 class="font-bold text-xs text-utrecht-navy">vandeStreek</h4>
+                  <p class="text-[11px] text-slate-600 leading-relaxed mt-0.5">Famosos por sus IPAs y cervezas sin alcohol. Su taproom está cerca de la estación Zuilen.</p>
+                </div>
               </div>
             </div>
           </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- ── PESTAÑA 2: EL ALMA (HISTORIA Y COSTUMBRES) ── -->
-    <section id="sec-alma" class="tab-section hidden transition-opacity duration-300">
-      
-      <!-- Bloques editoriales -->
-      <div class="space-y-12">
-        
-        <!-- Orígenes y Dom Tower -->
-        <div class="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm grid md:grid-cols-2 gap-8 items-center">
-          <div>
-            <span class="text-xs font-bold text-utrecht-red uppercase tracking-widest mb-1.5 block">Nuestros Cimientos</span>
-            <h2 class="hero-title text-3xl font-extrabold text-utrecht-navy mb-4">De Traiectum al Tornado de 1674</h2>
-            <div class="text-slate-600 text-sm space-y-3 leading-relaxed">
-              <p>
-                La historia de Utrecht se remonta al año **47 d.C.**, cuando los soldados romanos levantaron un fuerte militar de frontera a orillas del río Rin. Bautizado como <em>Traiectum</em> ("vía de paso"), este emplazamiento formaba parte del *Limes Germanicus*, la frontera fortificada septentrional del Imperio romano. Con el correr de los siglos, este puesto estratégico creció hasta transformarse en el centro religioso, intelectual y comercial de los Países Bajos del Norte.
-              </p>
-              <p>
-                A inicios del siglo XIV, la ciudad comenzó a erigir el monumento que definiría para siempre su silueta urbana: la **Dom Tower (Torre del Dom)**. Diseñada como parte integral de la imponente Catedral gótica de San Martín, se completó en **1382** con una altura de **112,5 metros**, convirtiéndose en la torre de iglesia más alta del país.
-              </p>
-              <p>
-                No obstante, la noche del **1 de agosto de 1674**, un desastre natural cambió el mapa de la ciudad para siempre. Una violenta tormenta supercelular cruzó Utrecht desatando un tornado destructivo de fuerza inaudita. En pocos minutos, la nave central que unía el coro con la torre de la catedral se derrumbó por completo. La torre permaneció en pie de milagro, quedando aislada del resto del templo. La plaza que vemos hoy en día (**Domplein**) ocupa exactamente el espacio vacío dejado por aquel tornado del siglo XVII que la ciudad nunca tuvo fondos para reconstruir.
-              </p>
-            </div>
-          </div>
-          <div class="tilt-container aspect-square">
-            <div class="tilt-box relative w-full h-full rounded-2xl overflow-hidden shadow-md border border-slate-100 group">
-              <img src="fotos/el_alma_dom.jpg" alt="Torre del Dom de Utrecht iluminada al atardecer" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/10 to-transparent flex flex-col justify-end p-6 text-white">
-                <span class="text-[10px] uppercase font-bold text-utrecht-red tracking-wider mb-1">Monumento Insignia</span>
-                <h3 class="font-bold text-lg leading-tight">La Torre del Dom</h3>
-                <p class="text-[11px] text-slate-300 mt-1 leading-relaxed">
-                  Con sus 112,5 metros de altura, vigila la plaza Domplein desde 1382 como símbolo de resiliencia y el corazón latente de Utrecht.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Canales y Werven -->
-        <div class="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm grid md:grid-cols-2 gap-8 items-center">
-          <div class="order-2 md:order-1 tilt-container aspect-square">
-            <div class="tilt-box relative w-full h-full rounded-2xl overflow-hidden shadow-md border border-slate-100 group">
-              <img src="fotos/el_alma_werven.jpg" alt="Canales de Utrecht de doble nivel" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/10 to-transparent flex flex-col justify-end p-6 text-white">
-                <span class="text-[10px] uppercase font-bold text-utrecht-red tracking-wider mb-1">Ingeniería Medieval</span>
-                <h3 class="font-bold text-lg leading-tight">Canales con Muelles (Werven)</h3>
-                <p class="text-[11px] text-slate-300 mt-1 leading-relaxed">
-                  El único sistema de canales del mundo diseñado con bodegas a nivel del cauce y calles comerciales en un segundo nivel superior.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div class="order-1 md:order-2">
-            <span class="text-xs font-bold text-utrecht-red uppercase tracking-widest mb-1.5 block">Arquitectura Única</span>
-            <h2 class="hero-title text-3xl font-extrabold text-utrecht-navy mb-4">Los Canales de Dos Niveles</h2>
-            <div class="text-slate-600 text-sm space-y-3 leading-relaxed">
-              <p>
-                Los canales históricos que serpentean por la ciudad, como el **Oudegracht** y el **Nieuwegracht**, son una obra maestra de ingeniería civil medieval única en el planeta, caracterizados por poseer **werven** (muelles inferiores) y sótanos habitables por debajo del nivel de las calles principales.
-              </p>
-              <p>
-                En el **siglo XII**, los ciudadanos de Utrecht consiguieron represar y regular el cauce del río Rin mediante la instalación de exclusas aguas arriba. Esto provocó una notable y permanente bajada del nivel de agua en los canales de la urbe. Los astutos mercaderes medievales no tardaron en aprovechar la oportunidad para excavar sótanos profundos (*werfkelders*) bajo el pavimento de la calle.
-              </p>
-              <p>
-                Estos sótanos se extendían en túneles directos desde los muelles de carga a ras del canal hasta el interior de sus casas situadas en el plano superior. De este modo, las barcazas mercantes descargaban mercancías pesadas directamente en las bodegas de almacenamiento sin obstaculizar el denso tráfico de carruajes y peatones en el nivel superior.
-              </p>
-              <p>
-                En la actualidad, este laberinto histórico de ladrillo y arcos es el epicentro social de Utrecht. Los antiguos almacenes y muelles acogen terrazas, cafeterías de especialidad, galerías de arte independiente y restaurantes a pie de agua por donde ver pasar canoas y patos.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Costumbres locales y bruine cafés -->
+    
+          <!-- Bruine Cafes (Costumbres) -->
+          
         <div class="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm space-y-8">
           <div>
             <span class="text-xs font-bold text-utrecht-red uppercase tracking-widest mb-1.5 block text-center">Tradición y Vida Social</span>
@@ -565,6 +732,212 @@
           </div>
         </div>
 
+        <!-- Línea del Tiempo de Utrecht -->
+        </div>
+      </div>
+    </section>
+    
+    <!-- ── NATURALEZA Y ACTIVIDAD ── -->
+    <section id="sec-naturaleza" class="tab-section hidden transition-opacity duration-300">
+      <div class="space-y-12">
+        <div class="grid md:grid-cols-2 gap-6">
+          
+          <!-- SUP -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">🏄</span>
+              <h2 class="hero-title text-xl font-bold text-utrecht-navy">SUP y Canoas en los Canales</h2>
+            </div>
+            <p class="text-slate-600 text-sm leading-relaxed mb-4">
+              Una de las mejores formas de ver la ciudad es desde el agua. Puedes alquilar una canoa o tabla de Stand Up Paddle (SUP) y recorrer el Oudegracht y el canal circular Singel.
+            </p>
+            <div class="p-3 bg-blue-50/70 border border-blue-100 rounded-xl text-xs text-blue-800 flex gap-2">
+              <span class="text-sm">⚠️</span>
+              <p><strong>Cuidado con los barcos:</strong> Mantente siempre a la derecha en los túneles y cede el paso a los barcos turísticos motorizados, no pueden frenar rápido.</p>
+            </div>
+          </div>
+    
+        </div>
+        <!-- ── PESTAÑA NUEVA: RUTAS A PIE ── -->
+    <div class="">
+      <div class="max-w-5xl mx-auto space-y-12 pb-16 pt-8 px-4">
+        
+        <!-- Bloque Rutas a pie -->
+        <div>
+          <div class="scroll-reveal opacity-0 translate-y-8 transition-all duration-700 ease-out mb-10">
+            <h2 class="hero-title text-3xl md:text-4xl font-bold text-utrecht-navy mb-4 flex items-center gap-3">
+              <span>🚶</span> 10 Rutas a Pie para Descubrir Utrecht
+            </h2>
+            <p class="text-slate-600 max-w-2xl text-lg">Ya sea adentrándote en el corazón histórico, escapando hacia los bosques circundantes o descubriendo la arquitectura moderna, estas rutas te mostrarán las mil caras de la ciudad.</p>
+          </div>
+          
+          <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6" id="rutas-pie-grid">
+            <!-- Las 10 Rutas -->
+            <div class="tilt-container break-inside-avoid cursor-pointer hover:ring-4 ring-utrecht-red/20 rounded-3xl transition-all scroll-reveal opacity-0 translate-y-8 duration-700 ease-out" onclick="openRouteModal(this)" data-route-id="1" style="transition-delay: 100ms;">
+              <div class="tilt-box bg-white p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
+                <div class="w-10 h-10 bg-red-50 text-utrecht-red rounded-xl flex items-center justify-center font-bold font-mono mb-4">01</div>
+                <h3 class="text-lg font-bold text-utrecht-navy mb-2 leading-tight">El Corazón Clásico</h3>
+                <p class="text-sm text-slate-600 mb-3 leading-relaxed">Ruta por excelencia: desde la majestuosa Domtoren hasta los muelles a nivel del agua del Oudegracht, descubriendo las bodegas históricas.</p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">URBANA</span>
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">2.5 KM</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tilt-container break-inside-avoid cursor-pointer hover:ring-4 ring-utrecht-red/20 rounded-3xl transition-all scroll-reveal opacity-0 translate-y-8 duration-700 ease-out" onclick="openRouteModal(this)" data-route-id="2" style="transition-delay: 200ms;">
+              <div class="tilt-box bg-white p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
+                <div class="w-10 h-10 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center font-bold font-mono mb-4">02</div>
+                <h3 class="text-lg font-bold text-utrecht-navy mb-2 leading-tight">Ruta de los Museos</h3>
+                <p class="text-sm text-slate-600 mb-3 leading-relaxed">Un paseo por el Museumkwartier, comenzando en el Museum Speelklok y finalizando en el jardín del Centraal Museum, una zona tranquila y llena de encanto.</p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">CULTURAL</span>
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">3 KM</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tilt-container break-inside-avoid cursor-pointer hover:ring-4 ring-utrecht-red/20 rounded-3xl transition-all scroll-reveal opacity-0 translate-y-8 duration-700 ease-out" onclick="openRouteModal(this)" data-route-id="3" style="transition-delay: 300ms;">
+              <div class="tilt-box bg-white p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
+                <div class="w-10 h-10 bg-green-50 text-green-600 rounded-xl flex items-center justify-center font-bold font-mono mb-4">03</div>
+                <h3 class="text-lg font-bold text-utrecht-navy mb-2 leading-tight">Paseo Verde: Wilhelminapark</h3>
+                <p class="text-sm text-slate-600 mb-3 leading-relaxed">Hacia el este de la ciudad (Oudwijk), maravíllate con las imponentes mansiones del siglo XIX que bordean el camino hasta llegar al icónico parque.</p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">PARQUES</span>
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">4 KM</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tilt-container break-inside-avoid cursor-pointer hover:ring-4 ring-utrecht-red/20 rounded-3xl transition-all scroll-reveal opacity-0 translate-y-8 duration-700 ease-out" onclick="openRouteModal(this)" data-route-id="4" style="transition-delay: 100ms;">
+              <div class="tilt-box bg-white p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
+                <div class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center font-bold font-mono mb-4">04</div>
+                <h3 class="text-lg font-bold text-utrecht-navy mb-2 leading-tight">Naturaleza en Amelisweerd</h3>
+                <p class="text-sm text-slate-600 mb-3 leading-relaxed">Saliendo de la ciudad, camina por la ribera del sinuoso río Kromme Rijn hasta adentrarte en los bosques de Amelisweerd y su famosa casa de té.</p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">EXTRARRADIO</span>
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">7 KM</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tilt-container break-inside-avoid cursor-pointer hover:ring-4 ring-utrecht-red/20 rounded-3xl transition-all scroll-reveal opacity-0 translate-y-8 duration-700 ease-out" onclick="openRouteModal(this)" data-route-id="5" style="transition-delay: 200ms;">
+              <div class="tilt-box bg-gradient-to-br from-white to-slate-50 p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
+                <div class="w-10 h-10 bg-slate-100 text-slate-700 rounded-xl flex items-center justify-center font-bold font-mono mb-4">05</div>
+                <h3 class="text-lg font-bold text-utrecht-navy mb-2 leading-tight">Ruta De Stijl</h3>
+                <p class="text-sm text-slate-600 mb-3 leading-relaxed">Un tributo a la arquitectura moderna y al movimiento De Stijl, coronando el paseo en la vanguardista Rietveld Schröderhuis.</p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">ARQUITECTURA</span>
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">3.5 KM</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tilt-container break-inside-avoid cursor-pointer hover:ring-4 ring-utrecht-red/20 rounded-3xl transition-all scroll-reveal opacity-0 translate-y-8 duration-700 ease-out" onclick="openRouteModal(this)" data-route-id="6" style="transition-delay: 300ms;">
+              <div class="tilt-box bg-white p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
+                <div class="w-10 h-10 bg-cyan-50 text-cyan-600 rounded-xl flex items-center justify-center font-bold font-mono mb-4">06</div>
+                <h3 class="text-lg font-bold text-utrecht-navy mb-2 leading-tight">Los Canales Exteriores</h3>
+                <p class="text-sm text-slate-600 mb-3 leading-relaxed">Una ruta circular perfecta que bordea el casco antiguo por el antiguo foso defensivo (Zocherpark). Ideal para corredores matutinos.</p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">CIRCULAR</span>
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">6 KM</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tilt-container break-inside-avoid cursor-pointer hover:ring-4 ring-utrecht-red/20 rounded-3xl transition-all scroll-reveal opacity-0 translate-y-8 duration-700 ease-out" onclick="openRouteModal(this)" data-route-id="7" style="transition-delay: 100ms;">
+              <div class="tilt-box bg-white p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
+                <div class="w-10 h-10 bg-pink-50 text-pink-600 rounded-xl flex items-center justify-center font-bold font-mono mb-4">07</div>
+                <h3 class="text-lg font-bold text-utrecht-navy mb-2 leading-tight">Sabores del Mundo</h3>
+                <p class="text-sm text-slate-600 mb-3 leading-relaxed">El oeste de la estación central. Explora la multicultural Kanaalstraat y acércate al espectacular molino de madera, el Houtzaagmolen De Ster.</p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">DIVERSIDAD</span>
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">2 KM</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tilt-container break-inside-avoid cursor-pointer hover:ring-4 ring-utrecht-red/20 rounded-3xl transition-all scroll-reveal opacity-0 translate-y-8 duration-700 ease-out" onclick="openRouteModal(this)" data-route-id="8" style="transition-delay: 200ms;">
+              <div class="tilt-box bg-white p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
+                <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center font-bold font-mono mb-4">08</div>
+                <h3 class="text-lg font-bold text-utrecht-navy mb-2 leading-tight">Science Park & Botánico</h3>
+                <p class="text-sm text-slate-600 mb-3 leading-relaxed">Pasea entre arquitectura brutalista contemporánea y termina en el precioso y extenso Jardín Botánico de la Universidad de Utrecht.</p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">ESTUDIANTIL</span>
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">5 KM</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tilt-container break-inside-avoid cursor-pointer hover:ring-4 ring-utrecht-red/20 rounded-3xl transition-all scroll-reveal opacity-0 translate-y-8 duration-700 ease-out" onclick="openRouteModal(this)" data-route-id="9" style="transition-delay: 300ms;">
+              <div class="tilt-box bg-white p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
+                <div class="w-10 h-10 bg-amber-50 text-amber-700 rounded-xl flex items-center justify-center font-bold font-mono mb-4">09</div>
+                <h3 class="text-lg font-bold text-utrecht-navy mb-2 leading-tight">Historia Romana</h3>
+                <p class="text-sm text-slate-600 mb-3 leading-relaxed">Más lejos, en Leidsche Rijn. Una caminata moderna que te lleva hasta el Castellum Hoge Woerd, una espectacular reconstrucción de un fuerte romano.</p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">HISTÓRICA</span>
+                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">8 KM</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="tilt-container break-inside-avoid cursor-pointer hover:ring-4 ring-utrecht-red/20 rounded-3xl transition-all scroll-reveal opacity-0 translate-y-8 duration-700 ease-out" onclick="openRouteModal(this)" data-route-id="10" style="transition-delay: 100ms;">
+              <div class="tilt-box bg-slate-900 p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.15)] border border-slate-800">
+                <div class="w-10 h-10 bg-yellow-400 text-slate-900 rounded-xl flex items-center justify-center font-bold font-mono mb-4">10</div>
+                <h3 class="text-lg font-bold text-white mb-2 leading-tight">Trajectum Lumen</h3>
+                <p class="text-sm text-slate-300 mb-3 leading-relaxed">Una ruta especialmente diseñada para hacer tras la puesta de sol. Sigue las instalaciones de arte lumínico que resaltan puentes y edificios históricos.</p>
+                <div class="flex gap-2 flex-wrap">
+                  <span class="px-2 py-1 bg-slate-800 text-slate-300 rounded-md text-[10px] font-semibold">NOCTURNA</span>
+                  <span class="px-2 py-1 bg-slate-800 text-slate-300 rounded-md text-[10px] font-semibold">4.5 KM</span>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── PESTAÑA 7: GALERÍA DE FOTOS ── -->
+      </div>
+    </section>
+    
+    <!-- ── EL ALMA ── -->
+    <section id="sec-alma" class="tab-section hidden transition-opacity duration-300">
+      <div class="space-y-12">
+        <!-- Orígenes y Dom Tower -->
+        <div class="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <span class="text-xs font-bold text-utrecht-red uppercase tracking-widest mb-1.5 block">Nuestros Cimientos</span>
+            <h2 class="hero-title text-3xl font-extrabold text-utrecht-navy mb-4">De Traiectum al Tornado de 1674</h2>
+            <div class="text-slate-600 text-sm space-y-3 leading-relaxed">
+              <p>
+                La historia de Utrecht se remonta al año **47 d.C.**, cuando los soldados romanos levantaron un fuerte militar de frontera a orillas del río Rin. Bautizado como <em>Traiectum</em> ("vía de paso"), este emplazamiento formaba parte del *Limes Germanicus*, la frontera fortificada septentrional del Imperio romano. Con el correr de los siglos, este puesto estratégico creció hasta transformarse en el centro religioso, intelectual y comercial de los Países Bajos del Norte.
+              </p>
+              <p>
+                A inicios del siglo XIV, la ciudad comenzó a erigir el monumento que definiría para siempre su silueta urbana: la **Dom Tower (Torre del Dom)**. Diseñada como parte integral de la imponente Catedral gótica de San Martín, se completó en **1382** con una altura de **112,5 metros**, convirtiéndose en la torre de iglesia más alta del país.
+              </p>
+              <p>
+                No obstante, la noche del **1 de agosto de 1674**, un desastre natural cambió el mapa de la ciudad para siempre. Una violenta tormenta supercelular cruzó Utrecht desatando un tornado destructivo de fuerza inaudita. En pocos minutos, la nave central que unía el coro con la torre de la catedral se derrumbó por completo. La torre permaneció en pie de milagro, quedando aislada del resto del templo. La plaza que vemos hoy en día (**Domplein**) ocupa exactamente el espacio vacío dejado por aquel tornado del siglo XVII que la ciudad nunca tuvo fondos para reconstruir.
+              </p>
+            </div>
+          </div>
+          <div class="tilt-container aspect-square">
+            <div class="tilt-box relative w-full h-full rounded-2xl overflow-hidden shadow-md border border-slate-100 group">
+              <img src="fotos/el_alma_dom.jpg" alt="Torre del Dom de Utrecht iluminada al atardecer" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/10 to-transparent flex flex-col justify-end p-6 text-white">
+                <span class="text-[10px] uppercase font-bold text-utrecht-red tracking-wider mb-1">Monumento Insignia</span>
+                <h3 class="font-bold text-lg leading-tight">La Torre del Dom</h3>
+                <p class="text-[11px] text-slate-300 mt-1 leading-relaxed">
+                  Con sus 112,5 metros de altura, vigila la plaza Domplein desde 1382 como símbolo de resiliencia y el corazón latente de Utrecht.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Canales y Werven -->
         <!-- Línea del Tiempo de Utrecht -->
         <div class="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm space-y-8">
           <div>
@@ -652,6 +1025,7 @@
           </div>
         </div>
 
+        <!-- Barrios -->
         <!-- Barrios -->
         <div>
           <h2 class="hero-title text-2xl font-bold mb-1">Los Barrios de Utrecht</h2>
@@ -791,8 +1165,10 @@
         </div>
       </div>
 
-      <!-- ══════════ UTRECHT VIVA · bici · verde · seguridad ══════════ -->
-      <div class="max-w-4xl mx-auto mt-12 space-y-8">
+      <!-- ══════════ UTRECHT VIVA
+        <div class="mt-12">
+          <!-- ══════════ UTRECHT VIVA · bici · verde · seguridad ══════════ -->
+      <div class="w-full mx-auto mt-12 space-y-8">
 
         <div class="text-center">
           <span class="text-xs font-bold text-utrecht-sage uppercase tracking-widest mb-1.5 block">La ciudad que funciona</span>
@@ -1031,8 +1407,36 @@
       </div>
     </section>
 
-    <!-- ── PESTAÑA 4: GLOSARIO INTERACTIVO ── -->
-    <section id="sec-diccionario" class="tab-section hidden transition-opacity duration-300">
+    <!-- ── PESTAÑA 4:
+        </div>
+        <!-- Industria Local -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm">
+            <div class="flex items-center gap-3 mb-4">
+              <span class="text-2xl">💼</span>
+              <h2 class="hero-title text-lg font-bold text-utrecht-navy">Utrecht Productiva</h2>
+            </div>
+            <p class="text-slate-600 text-xs leading-relaxed mb-4">
+              Utrecht es el centro neurálgico de las comunicaciones de los Países Bajos y destaca en sectores clave:
+            </p>
+            <div class="space-y-3">
+              <div class="p-3 bg-slate-50 border rounded-xl">
+                <p class="font-bold text-xs text-utrecht-navy">🎮 Capital del Videojuego</p>
+                <p class="text-[11px] text-slate-500 mt-0.5">Sede del <em>Dutch Game Garden</em>. Utrecht acoge la mayor concentración de estudios de videojuegos y tecnología del país.</p>
+              </div>
+              <div class="p-3 bg-slate-50 border rounded-xl">
+                <p class="font-bold text-xs text-utrecht-navy">🚆 Corazón Ferroviario</p>
+                <p class="text-[11px] text-slate-500 mt-0.5">Las sedes principales de la NS (trenes nacionales) y ProRail (gestor de vías) se ubican aquí. Su estación es el nodo con más tráfico del país.</p>
+              </div>
+              <div class="p-3 bg-slate-50 border rounded-xl">
+                <p class="font-bold text-xs text-utrecht-navy">🏦 Finanzas Cooperativas</p>
+                <p class="text-[11px] text-slate-500 mt-0.5">El icónico edificio con forma de "dos torres inclinadas" que destaca en la ciudad es la central del Rabobank, nacido en Utrecht.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Alquiler de Bicis -->
+        <!-- ── PESTAÑA 4: GLOSARIO INTERACTIVO ── -->
+    <div id="sec-diccionario-inner" class="">
       <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm max-w-4xl mx-auto space-y-6">
         <div class="text-center">
           <span class="text-xs font-bold text-utrecht-red uppercase tracking-widest mb-1.5 block">Idioma Local</span>
@@ -1053,264 +1457,11 @@
           <!-- Rellenado dinámicamente por JS -->
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- ── PESTAÑA 5: EL MAPA Y RUTAS GPX ── -->
-    <section id="sec-mapa" class="tab-section hidden transition-opacity duration-300">
-      <div class="space-y-12">
-        <div class="grid md:grid-cols-3 gap-6 items-start">
-        
-        <!-- Mapa y filtros (Columna Izquierda 2/3) -->
-        <div class="md:col-span-2 space-y-4">
-          <!-- Filtros de colores -->
-          <div class="flex flex-wrap gap-2" id="filtros">
-            <button class="filtro-btn active" data-color="all"><i class="ph-fill ph-map-pin" style="color:#64748b"></i> Todos</button>
-            <button class="filtro-btn" data-color="green"><i class="ph-fill ph-fork-knife" style="color:#16a34a"></i> Recomendados</button>
-            <button class="filtro-btn" data-color="red"><i class="ph-fill ph-thumbs-down" style="color:#dc2626"></i> Evitar</button>
-            <button class="filtro-btn" data-color="blue"><i class="ph-fill ph-tree" style="color:#2563eb"></i> Parques</button>
-            <button class="filtro-btn" data-color="orange"><i class="ph-fill ph-star" style="color:#ea580c"></i> Imprescindible</button>
-          </div>
-          <!-- Mapa Leaflet -->
-          <div id="map" class="shadow-md"></div>
-        </div>
-
-        <!-- Rutas GPX (Columna Derecha 1/3) -->
-        <div class="space-y-4">
-          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-            <h2 class="hero-title text-xl font-bold text-utrecht-navy mb-1 flex items-center gap-2">
-              <span>🚴</span> Rutas en Bici
-            </h2>
-            <p class="text-xs text-slate-500 leading-relaxed mb-4">
-              Trayectos cíclicos semanales para conocer los alrededores de Utrecht. Actívalas para dibujarlas en el mapa.
-            </p>
-            <div id="rutas-list" class="space-y-3 overflow-y-auto max-h-[420px] pr-1">
-              <!-- Cargado dinámicamente -->
-            </div>
-          </div>
-        </div>
-
-      </div>
-        <!-- Bloque Bicis -->
-        <div class="scroll-reveal opacity-0 translate-y-8 transition-all duration-700 ease-out">
-          <h2 class="hero-title text-3xl md:text-4xl font-bold text-utrecht-navy mb-4 flex items-center gap-3">
-            <span>🚲</span> Alquiler de Bicicletas
-          </h2>
-          <p class="text-slate-600 mb-8 max-w-2xl text-lg">Moverse en bici por Utrecht no es una opción, es un estilo de vida. Conoce las principales alternativas para hacerte con una montura.</p>
-          
-          <div class="grid md:grid-cols-3 gap-6">
-            <!-- OV-fiets -->
-            <div class="premium-card bg-white p-6 rounded-2xl border border-slate-200 relative overflow-hidden group">
-              <div class="absolute -right-6 -top-6 w-24 h-24 bg-yellow-50 rounded-full transition-transform duration-500 group-hover:scale-150"></div>
-              <div class="relative z-10">
-                <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center text-2xl mb-4 shadow-sm">🚄</div>
-                <h3 class="text-xl font-bold text-utrecht-navy mb-2">OV-fiets</h3>
-                <p class="text-sm text-slate-500 mb-4">La mítica bici pública amarilla y azul. Se alquilan masivamente en la Estación Central.</p>
-                <ul class="text-sm text-slate-600 space-y-2 mb-4">
-                  <li class="flex gap-2"><span>✓</span> Requiere OV-chipkaart personal</li>
-                  <li class="flex gap-2"><span>✓</span> Hasta 2 bicis por tarjeta</li>
-                </ul>
-                <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
-                  <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Precio aprox.</span>
-                  <span class="font-bold text-utrecht-red">4,55 € / 24h</span>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Swapfiets -->
-            <div class="premium-card bg-white p-6 rounded-2xl border border-slate-200 relative overflow-hidden group">
-              <div class="absolute -right-6 -top-6 w-24 h-24 bg-blue-50 rounded-full transition-transform duration-500 group-hover:scale-150"></div>
-              <div class="relative z-10">
-                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-2xl mb-4 shadow-sm">🔵</div>
-                <h3 class="text-xl font-bold text-utrecht-navy mb-2">Swapfiets</h3>
-                <p class="text-sm text-slate-500 mb-4">Renting mensual con la icónica rueda azul delantera. Ideal para estancias medias o largas.</p>
-                <ul class="text-sm text-slate-600 space-y-2 mb-4">
-                  <li class="flex gap-2"><span>✓</span> Reparaciones incluidas</li>
-                  <li class="flex gap-2"><span>✓</span> Cancelación mensual</li>
-                </ul>
-                <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
-                  <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Precio aprox.</span>
-                  <span class="font-bold text-utrecht-red">22 € / mes</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Tiendas Locales -->
-            <div class="premium-card bg-white p-6 rounded-2xl border border-slate-200 relative overflow-hidden group">
-              <div class="absolute -right-6 -top-6 w-24 h-24 bg-green-50 rounded-full transition-transform duration-500 group-hover:scale-150"></div>
-              <div class="relative z-10">
-                <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center text-2xl mb-4 shadow-sm">🏪</div>
-                <h3 class="text-xl font-bold text-utrecht-navy mb-2">Tiendas de Alquiler</h3>
-                <p class="text-sm text-slate-500 mb-4">Opciones como Willemstraatbike o Black Bikes para turismo de un par de días.</p>
-                <ul class="text-sm text-slate-600 space-y-2 mb-4">
-                  <li class="flex gap-2"><span>✓</span> No requiere tarjeta especial</li>
-                  <li class="flex gap-2"><span>✓</span> Opciones con marchas y eléctricas</li>
-                </ul>
-                <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between">
-                  <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Precio aprox.</span>
-                  <span class="font-bold text-utrecht-red">12 - 15 € / día</span>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-          <!-- Consejos -->
-          <div class="mt-8 bg-slate-50 rounded-2xl p-6 border border-slate-200 shadow-sm relative overflow-hidden">
-            <div class="absolute right-0 top-0 w-32 h-32 bg-slate-200 rounded-bl-full opacity-50"></div>
-            <h4 class="font-bold text-utrecht-navy mb-3 flex items-center gap-2 relative z-10"><span>💡</span> Consejos de Oro</h4>
-            <div class="grid md:grid-cols-2 gap-4 text-sm text-slate-600 relative z-10">
-              <p><strong>El Doble Candado:</strong> Pasa siempre el candado de cadena por el cuadro y la rueda delantera, y asegúrala a un elemento fijo. Además, nunca olvides cerrar el candado de anilla de la rueda trasera.</p>
-              <p><strong>Las Normas No Escritas:</strong> Señaliza con el brazo antes de girar, no circules por el carril bus y, como peatón, vigila siempre el carril bici antes de cruzar (¡los ciclistas tienen prioridad y van rápido!).</p>
-            </div>
-          </div>
-        </div>
-
-        
-      </div>
-    </section>
-
-    <!-- ── PESTAÑA NUEVA: RUTAS A PIE ── -->
-    <section id="sec-rutas" class="tab-section hidden transition-opacity duration-300">
-      <div class="max-w-5xl mx-auto space-y-12 pb-16 pt-8 px-4">
-        
-        <!-- Bloque Rutas a pie -->
-        <div>
-          <div class="scroll-reveal opacity-0 translate-y-8 transition-all duration-700 ease-out mb-10">
-            <h2 class="hero-title text-3xl md:text-4xl font-bold text-utrecht-navy mb-4 flex items-center gap-3">
-              <span>🚶</span> 10 Rutas a Pie para Descubrir Utrecht
-            </h2>
-            <p class="text-slate-600 max-w-2xl text-lg">Ya sea adentrándote en el corazón histórico, escapando hacia los bosques circundantes o descubriendo la arquitectura moderna, estas rutas te mostrarán las mil caras de la ciudad.</p>
-          </div>
-          
-          <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6" id="rutas-pie-grid">
-            <!-- Las 10 Rutas -->
-            <div class="tilt-container break-inside-avoid cursor-pointer hover:ring-4 ring-utrecht-red/20 rounded-3xl transition-all scroll-reveal opacity-0 translate-y-8 duration-700 ease-out" onclick="openRouteModal(this)" data-route-id="1" style="transition-delay: 100ms;">
-              <div class="tilt-box bg-white p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
-                <div class="w-10 h-10 bg-red-50 text-utrecht-red rounded-xl flex items-center justify-center font-bold font-mono mb-4">01</div>
-                <h3 class="text-lg font-bold text-utrecht-navy mb-2 leading-tight">El Corazón Clásico</h3>
-                <p class="text-sm text-slate-600 mb-3 leading-relaxed">Ruta por excelencia: desde la majestuosa Domtoren hasta los muelles a nivel del agua del Oudegracht, descubriendo las bodegas históricas.</p>
-                <div class="flex gap-2 flex-wrap">
-                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">URBANA</span>
-                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">2.5 KM</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="tilt-container break-inside-avoid cursor-pointer hover:ring-4 ring-utrecht-red/20 rounded-3xl transition-all scroll-reveal opacity-0 translate-y-8 duration-700 ease-out" onclick="openRouteModal(this)" data-route-id="2" style="transition-delay: 200ms;">
-              <div class="tilt-box bg-white p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
-                <div class="w-10 h-10 bg-orange-50 text-orange-600 rounded-xl flex items-center justify-center font-bold font-mono mb-4">02</div>
-                <h3 class="text-lg font-bold text-utrecht-navy mb-2 leading-tight">Ruta de los Museos</h3>
-                <p class="text-sm text-slate-600 mb-3 leading-relaxed">Un paseo por el Museumkwartier, comenzando en el Museum Speelklok y finalizando en el jardín del Centraal Museum, una zona tranquila y llena de encanto.</p>
-                <div class="flex gap-2 flex-wrap">
-                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">CULTURAL</span>
-                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">3 KM</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="tilt-container break-inside-avoid cursor-pointer hover:ring-4 ring-utrecht-red/20 rounded-3xl transition-all scroll-reveal opacity-0 translate-y-8 duration-700 ease-out" onclick="openRouteModal(this)" data-route-id="3" style="transition-delay: 300ms;">
-              <div class="tilt-box bg-white p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
-                <div class="w-10 h-10 bg-green-50 text-green-600 rounded-xl flex items-center justify-center font-bold font-mono mb-4">03</div>
-                <h3 class="text-lg font-bold text-utrecht-navy mb-2 leading-tight">Paseo Verde: Wilhelminapark</h3>
-                <p class="text-sm text-slate-600 mb-3 leading-relaxed">Hacia el este de la ciudad (Oudwijk), maravíllate con las imponentes mansiones del siglo XIX que bordean el camino hasta llegar al icónico parque.</p>
-                <div class="flex gap-2 flex-wrap">
-                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">PARQUES</span>
-                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">4 KM</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="tilt-container break-inside-avoid cursor-pointer hover:ring-4 ring-utrecht-red/20 rounded-3xl transition-all scroll-reveal opacity-0 translate-y-8 duration-700 ease-out" onclick="openRouteModal(this)" data-route-id="4" style="transition-delay: 100ms;">
-              <div class="tilt-box bg-white p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
-                <div class="w-10 h-10 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center font-bold font-mono mb-4">04</div>
-                <h3 class="text-lg font-bold text-utrecht-navy mb-2 leading-tight">Naturaleza en Amelisweerd</h3>
-                <p class="text-sm text-slate-600 mb-3 leading-relaxed">Saliendo de la ciudad, camina por la ribera del sinuoso río Kromme Rijn hasta adentrarte en los bosques de Amelisweerd y su famosa casa de té.</p>
-                <div class="flex gap-2 flex-wrap">
-                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">EXTRARRADIO</span>
-                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">7 KM</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="tilt-container break-inside-avoid cursor-pointer hover:ring-4 ring-utrecht-red/20 rounded-3xl transition-all scroll-reveal opacity-0 translate-y-8 duration-700 ease-out" onclick="openRouteModal(this)" data-route-id="5" style="transition-delay: 200ms;">
-              <div class="tilt-box bg-gradient-to-br from-white to-slate-50 p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
-                <div class="w-10 h-10 bg-slate-100 text-slate-700 rounded-xl flex items-center justify-center font-bold font-mono mb-4">05</div>
-                <h3 class="text-lg font-bold text-utrecht-navy mb-2 leading-tight">Ruta De Stijl</h3>
-                <p class="text-sm text-slate-600 mb-3 leading-relaxed">Un tributo a la arquitectura moderna y al movimiento De Stijl, coronando el paseo en la vanguardista Rietveld Schröderhuis.</p>
-                <div class="flex gap-2 flex-wrap">
-                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">ARQUITECTURA</span>
-                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">3.5 KM</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="tilt-container break-inside-avoid cursor-pointer hover:ring-4 ring-utrecht-red/20 rounded-3xl transition-all scroll-reveal opacity-0 translate-y-8 duration-700 ease-out" onclick="openRouteModal(this)" data-route-id="6" style="transition-delay: 300ms;">
-              <div class="tilt-box bg-white p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
-                <div class="w-10 h-10 bg-cyan-50 text-cyan-600 rounded-xl flex items-center justify-center font-bold font-mono mb-4">06</div>
-                <h3 class="text-lg font-bold text-utrecht-navy mb-2 leading-tight">Los Canales Exteriores</h3>
-                <p class="text-sm text-slate-600 mb-3 leading-relaxed">Una ruta circular perfecta que bordea el casco antiguo por el antiguo foso defensivo (Zocherpark). Ideal para corredores matutinos.</p>
-                <div class="flex gap-2 flex-wrap">
-                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">CIRCULAR</span>
-                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">6 KM</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="tilt-container break-inside-avoid cursor-pointer hover:ring-4 ring-utrecht-red/20 rounded-3xl transition-all scroll-reveal opacity-0 translate-y-8 duration-700 ease-out" onclick="openRouteModal(this)" data-route-id="7" style="transition-delay: 100ms;">
-              <div class="tilt-box bg-white p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
-                <div class="w-10 h-10 bg-pink-50 text-pink-600 rounded-xl flex items-center justify-center font-bold font-mono mb-4">07</div>
-                <h3 class="text-lg font-bold text-utrecht-navy mb-2 leading-tight">Sabores del Mundo</h3>
-                <p class="text-sm text-slate-600 mb-3 leading-relaxed">El oeste de la estación central. Explora la multicultural Kanaalstraat y acércate al espectacular molino de madera, el Houtzaagmolen De Ster.</p>
-                <div class="flex gap-2 flex-wrap">
-                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">DIVERSIDAD</span>
-                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">2 KM</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="tilt-container break-inside-avoid cursor-pointer hover:ring-4 ring-utrecht-red/20 rounded-3xl transition-all scroll-reveal opacity-0 translate-y-8 duration-700 ease-out" onclick="openRouteModal(this)" data-route-id="8" style="transition-delay: 200ms;">
-              <div class="tilt-box bg-white p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
-                <div class="w-10 h-10 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center font-bold font-mono mb-4">08</div>
-                <h3 class="text-lg font-bold text-utrecht-navy mb-2 leading-tight">Science Park & Botánico</h3>
-                <p class="text-sm text-slate-600 mb-3 leading-relaxed">Pasea entre arquitectura brutalista contemporánea y termina en el precioso y extenso Jardín Botánico de la Universidad de Utrecht.</p>
-                <div class="flex gap-2 flex-wrap">
-                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">ESTUDIANTIL</span>
-                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">5 KM</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="tilt-container break-inside-avoid cursor-pointer hover:ring-4 ring-utrecht-red/20 rounded-3xl transition-all scroll-reveal opacity-0 translate-y-8 duration-700 ease-out" onclick="openRouteModal(this)" data-route-id="9" style="transition-delay: 300ms;">
-              <div class="tilt-box bg-white p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100">
-                <div class="w-10 h-10 bg-amber-50 text-amber-700 rounded-xl flex items-center justify-center font-bold font-mono mb-4">09</div>
-                <h3 class="text-lg font-bold text-utrecht-navy mb-2 leading-tight">Historia Romana</h3>
-                <p class="text-sm text-slate-600 mb-3 leading-relaxed">Más lejos, en Leidsche Rijn. Una caminata moderna que te lleva hasta el Castellum Hoge Woerd, una espectacular reconstrucción de un fuerte romano.</p>
-                <div class="flex gap-2 flex-wrap">
-                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">HISTÓRICA</span>
-                  <span class="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-[10px] font-semibold">8 KM</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="tilt-container break-inside-avoid cursor-pointer hover:ring-4 ring-utrecht-red/20 rounded-3xl transition-all scroll-reveal opacity-0 translate-y-8 duration-700 ease-out" onclick="openRouteModal(this)" data-route-id="10" style="transition-delay: 100ms;">
-              <div class="tilt-box bg-slate-900 p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.15)] border border-slate-800">
-                <div class="w-10 h-10 bg-yellow-400 text-slate-900 rounded-xl flex items-center justify-center font-bold font-mono mb-4">10</div>
-                <h3 class="text-lg font-bold text-white mb-2 leading-tight">Trajectum Lumen</h3>
-                <p class="text-sm text-slate-300 mb-3 leading-relaxed">Una ruta especialmente diseñada para hacer tras la puesta de sol. Sigue las instalaciones de arte lumínico que resaltan puentes y edificios históricos.</p>
-                <div class="flex gap-2 flex-wrap">
-                  <span class="px-2 py-1 bg-slate-800 text-slate-300 rounded-md text-[10px] font-semibold">NOCTURNA</span>
-                  <span class="px-2 py-1 bg-slate-800 text-slate-300 rounded-md text-[10px] font-semibold">4.5 KM</span>
-                </div>
-              </div>
-            </div>
-            
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ── PESTAÑA 7: GALERÍA DE FOTOS ── -->
-    <section id="sec-galeria" class="tab-section hidden transition-opacity duration-300">
+    <!-- ── PESTAÑA 5:
+        <!-- ── PESTAÑA 7: GALERÍA DE FOTOS ── -->
+    <div class="">
       <div class="flex items-end justify-between mb-6">
         <div>
           <h2 class="hero-title text-2xl font-bold text-utrecht-navy mb-1">Momentos y Rincones</h2>
@@ -1322,11 +1473,13 @@
       <div id="galeria" class="grid grid-cols-2 md:grid-cols-4 gap-4">
         <!-- Rellenado por JS -->
       </div>
-    </section>
+    </div>
 
   </main>
-
-  <!-- ══════════════ FOOTER ══════════════ -->
+      </div>
+    </section>
+      </main>
+<!-- ══════════════ FOOTER ══════════════ -->
   <footer class="border-t border-slate-200/80 bg-white/60 py-8 text-center text-xs text-slate-400">
     <p class="font-medium">
       Hecho con ❤️ en Utrecht por Zaswear · 
@@ -1379,4 +1532,4 @@
     </div>
   </div>
 </body>
-</html>
+</html></html>
