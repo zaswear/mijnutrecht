@@ -14,6 +14,10 @@
   <!-- Leaflet GPX plugin -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js"></script>
 
+  <!-- Phosphor Icons — fill (marcadores/filtros del mapa) + regular (controles UI) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
@@ -1041,7 +1045,7 @@
         <!-- Buscador -->
         <div class="max-w-md mx-auto relative">
           <input type="text" id="glosario-search" placeholder="Buscar palabra en neerlandés o español..." class="w-full pl-10 pr-4 py-2 rounded-full border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-utrecht-red/30 focus:border-utrecht-red" />
-          <span class="absolute left-3.5 top-2.5 text-slate-400 text-xs">🔍</span>
+          <span class="absolute left-3.5 top-2.5 text-slate-400"><i class="ph ph-magnifying-glass"></i></span>
         </div>
 
         <!-- Lista del Glosario -->
@@ -1060,11 +1064,11 @@
         <div class="md:col-span-2 space-y-4">
           <!-- Filtros de colores -->
           <div class="flex flex-wrap gap-2" id="filtros">
-            <button class="filtro-btn active" data-color="all">Todos</button>
-            <button class="filtro-btn" data-color="green">🟢 Recomendados</button>
-            <button class="filtro-btn" data-color="red">🔴 Evitar</button>
-            <button class="filtro-btn" data-color="blue">🔵 Parques</button>
-            <button class="filtro-btn" data-color="orange">🟠 Imprescindible</button>
+            <button class="filtro-btn active" data-color="all"><i class="ph-fill ph-map-pin" style="color:#64748b"></i> Todos</button>
+            <button class="filtro-btn" data-color="green"><i class="ph-fill ph-fork-knife" style="color:#16a34a"></i> Recomendados</button>
+            <button class="filtro-btn" data-color="red"><i class="ph-fill ph-thumbs-down" style="color:#dc2626"></i> Evitar</button>
+            <button class="filtro-btn" data-color="blue"><i class="ph-fill ph-tree" style="color:#2563eb"></i> Parques</button>
+            <button class="filtro-btn" data-color="orange"><i class="ph-fill ph-star" style="color:#ea580c"></i> Imprescindible</button>
           </div>
           <!-- Mapa Leaflet -->
           <div id="map" class="shadow-md"></div>
@@ -1333,10 +1337,10 @@
 
   <!-- ══════════════ LIGHTBOX GALERÍA ══════════════ -->
   <div id="lightbox">
-    <button id="lightbox-close" onclick="closeLightbox()" aria-label="Cerrar">&#10005;</button>
-    <button id="lightbox-prev" onclick="moveLightbox(-1)" aria-label="Anterior">&#8249;</button>
+    <button id="lightbox-close" onclick="closeLightbox()" aria-label="Cerrar"><i class="ph ph-x"></i></button>
+    <button id="lightbox-prev" onclick="moveLightbox(-1)" aria-label="Anterior"><i class="ph ph-caret-left"></i></button>
     <img id="lightbox-img" src="" alt="" />
-    <button id="lightbox-next" onclick="moveLightbox(1)" aria-label="Siguiente">&#8250;</button>
+    <button id="lightbox-next" onclick="moveLightbox(1)" aria-label="Siguiente"><i class="ph ph-caret-right"></i></button>
     <div id="lightbox-caption"></div>
   </div>
 

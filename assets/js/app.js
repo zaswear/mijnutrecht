@@ -196,14 +196,27 @@
       orange: '#ea580c',
     };
 
+    // Glifo Phosphor por color/categoría del punto
+    const glyphMap = {
+      green:  'ph-fork-knife',   // Recomendado (gastronomía)
+      orange: 'ph-star',         // Imprescindible (monumentos)
+      blue:   'ph-tree',         // Parques y canales
+      red:    'ph-thumbs-down',  // Evitar
+    };
+
     let allMarkers = [];
 
     function makeIcon(color) {
+      const bg = colorMap[color] || '#666';
+      const glyph = glyphMap[color] || 'ph-map-pin';
       return L.divIcon({
         className: '',
-        html: `<div style="width:14px; height:14px; background:${colorMap[color] || '#666'}; border:2.5px solid white; border-radius:50%; box-shadow:0 1px 4px rgba(0,0,0,.4);"></div>`,
-        iconSize: [14, 14],
-        iconAnchor: [7, 7],
+        html: `<div style="width:26px; height:26px; background:${bg}; border:2.5px solid white; border-radius:50%; box-shadow:0 1px 4px rgba(0,0,0,.4); display:flex; align-items:center; justify-content:center;">
+                 <i class="ph-fill ${glyph}" style="color:#fff; font-size:15px; line-height:1;"></i>
+               </div>`,
+        iconSize: [26, 26],
+        iconAnchor: [13, 13],
+        popupAnchor: [0, -13],
       });
     }
 
@@ -279,17 +292,21 @@
               <span class="text-xl">${ruta.emoji || '🚴'}</span>
               <p class="font-bold text-xs text-utrecht-navy">${ruta.nombre}</p>
             </div>
-            <p class="text-[10px] text-slate-500 font-semibold mt-0.5">${ruta.distancia} · ${ruta.duracion} · ${ruta.dificultad}</p>
+            <p class="text-[10px] text-slate-500 font-semibold mt-0.5 flex items-center gap-2 flex-wrap">
+              <span class="inline-flex items-center gap-0.5"><i class="ph ph-ruler"></i>${ruta.distancia}</span>
+              <span class="inline-flex items-center gap-0.5"><i class="ph ph-clock"></i>${ruta.duracion}</span>
+              <span class="inline-flex items-center gap-0.5"><i class="ph ph-mountains"></i>${ruta.dificultad}</span>
+            </p>
             <p class="text-[11px] text-slate-600 mt-1 leading-normal mb-2">${ruta.descripcion}</p>
             <div class="flex gap-2 items-center flex-wrap mt-auto">
               <button onclick="event.stopPropagation(); toggleRuta('${ruta.archivo}', '${color}', this)"
-                class="text-[10px] font-bold px-3 py-1 rounded-full border-2 transition-all"
+                class="text-[10px] font-bold px-3 py-1 rounded-full border-2 transition-all inline-flex items-center gap-1"
                 style="border-color:${color}; color:${color}">
-                Ver en mapa
+                <i class="ph ph-map-trifold"></i> Ver en mapa
               </button>
               ${ruta.archivo
-                ? `<a href="rutas/${ruta.archivo}" class="text-[10px] text-utrecht-brick font-bold hover:underline">Descargar GPX</a>`
-                : `<a href="${ruta.fuente}" target="_blank" rel="noopener" class="text-[10px] text-utrecht-brick font-bold hover:underline">Ver ruta →</a>`}
+                ? `<a href="rutas/${ruta.archivo}" class="text-[10px] text-utrecht-brick font-bold hover:underline inline-flex items-center gap-0.5"><i class="ph ph-download-simple"></i> GPX</a>`
+                : `<a href="${ruta.fuente}" target="_blank" rel="noopener" class="text-[10px] text-utrecht-brick font-bold hover:underline inline-flex items-center gap-0.5">Ver ruta <i class="ph ph-arrow-up-right"></i></a>`}
             </div>`;
           lista.appendChild(card);
 
@@ -321,13 +338,13 @@
       if (!layer) return;
       if (map.hasLayer(layer)) {
         map.removeLayer(layer);
-        btn.textContent = 'Ver en mapa';
+        btn.innerHTML = '<i class="ph ph-map-trifold"></i> Ver en mapa';
         btn.style.background = '';
         btn.style.color = color;
       } else {
         layer.addTo(map);
         map.fitBounds(layer.getBounds(), { padding: [40, 40] });
-        btn.textContent = 'Ocultar';
+        btn.innerHTML = '<i class="ph ph-eye-slash"></i> Ocultar';
         btn.style.background = color;
         btn.style.color = '#fff';
       }
