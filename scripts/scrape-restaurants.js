@@ -93,6 +93,31 @@ async function geocode(address) {
       console.warn("  No se pudo parsear la respuesta:", stdout.slice(0, 200));
     }
 
+    if (venues.length === 0) {
+      console.log("  ⚠️ No se encontraron restaurantes (¿cambió el HTML?). Activando fallback visual con Gemini...");
+      try {
+        const pageUrl = page === 1 ? BASE : `${BASE}?page=${page}`;
+        const fallbackRes = await fetch("http://localhost:5000/api/extract", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ 
+            url: pageUrl, 
+            prompt: "Devuelve un array JSON estricto extrayendo los restaurantes listados en la imagen. Cada objeto debe tener: 'name' (nombre), 'address' (dirección si la hay, o null), 'rating' (nota numérica ej. 8.5, o null), 'cuisine' (tipo de comida o null), 'href' (la ruta url relativa si la deduces, o null). Responde SOLO con el JSON."
+          }),
+        });
+        if (fallbackRes.ok) {
+          const fallbackData = await fallbackRes.json();
+          let cleanJson = fallbackData.result.replace(/```json/g, "").replace(/```/g, "").trim();
+          venues = JSON.parse(cleanJson);
+          console.log(`  🤖 Fallback exitoso: Gemini extrajo ${venues.length} restaurantes mirando la web.`);
+        } else {
+          console.error(`  ❌ Error HTTP del fallback: ${fallbackRes.status}`);
+        }
+      } catch (e) {
+        console.error("  ❌ Falló el fallback visual:", e.message);
+      }
+    }
+
     console.log(`  → ${venues.length} lugares encontrados`);
 
     for (const v of venues) {
