@@ -1,0 +1,65 @@
+[
+  {
+    "num": "01",
+    "titulo": "Comer en un almacén medieval a nivel del agua",
+    "texto": "Bajas unas escaleras de piedra en el Oudegracht y de pronto estás bajo la calle, en un werfkeller del siglo XII. Antes descargaban barcazas de cerveza y turba; hoy sirven vino y el agua te pasa a un metro de los pies.",
+    "donde": "Werfkelders del Oudegracht",
+    "img": "fotos/optim/werven-800.webp",
+    "alt": "Muelles y bodegas a nivel del agua del canal Oudegracht",
+    "tono": "tinta"
+  },
+  {
+    "num": "02",
+    "titulo": "Tocar un piano de iglesia mientras bebes una IPA",
+    "texto": "Detrás de una fachada anodina se esconde una iglesia clandestina del siglo XIX convertida en bar de cervezas belgas. El altar sigue ahí. El órgano también. Y nadie te mira raro si te sientas al piano.",
+    "donde": "Belgisch Biercafé Olivier",
+    "img": "fotos/optim/olivier-800.webp",
+    "alt": "Interior del Biercafé Olivier, una iglesia del siglo XIX convertida en bar",
+    "tono": "ladrillo"
+  },
+  {
+    "num": "03",
+    "titulo": "Ver la ciudad desde 112 metros subiendo 465 escalones",
+    "texto": "La Domtoren es la torre de iglesia más alta de los Países Bajos y solo se sube con guía. Desde arriba, en un día claro, se ve Ámsterdam. Las piernas te lo recordarán al día siguiente.",
+    "donde": "Domtoren · Domplein",
+    "img": "fotos/optim/dom-800.webp",
+    "alt": "La Torre del Dom de Utrecht vista desde la plaza Domplein",
+    "tono": "tinta"
+  },
+  {
+    "num": "04",
+    "titulo": "Oír una caja de música del siglo XVII sonar de verdad",
+    "texto": "El Museum Speelklok no expone instrumentos mecánicos: los hace sonar. Órganos de feria de cinco metros, relojes que cantan y pianolas que tocan solas, todo en marcha, con guía que los enciende delante de ti.",
+    "donde": "Museum Speelklok",
+    "img": "",
+    "alt": "",
+    "tono": "naranja"
+  },
+  {
+    "num": "05",
+    "titulo": "Navegar un canal donde antes había una autopista",
+    "texto": "En los años 70 Utrecht rellenó el Catharijnesingel para meter coches. En 2020 lo volvió a excavar y devolvió el agua. Puedes remar en canoa justo por encima de donde estaba el asfalto.",
+    "donde": "Catharijnesingel",
+    "img": "",
+    "alt": "",
+    "tono": "verde"
+  },
+  {
+    "num": "06",
+    "titulo": "Cruzar la calle en un semáforo de Miffy",
+    "texto": "Dick Bruna, el creador de Nijntje (Miffy), era de aquí. La ciudad lo celebra con semáforos donde el muñeco que cruza es una coneja, una plaza con su estatua y un museo pensado para menores de seis años.",
+    "donde": "Lange Viestraat · Nijntjepleintje",
+    "img": "",
+    "alt": "",
+    "tono": "ladrillo"
+  },
+  {
+    "num": "07",
+    "titulo": "Desayunar stroopwafel caliente en el mercado de telas más antiguo de Holanda",
+    "texto": "El Lapjesmarkt de Breedstraat lleva funcionando los sábados desde 1597. Se va a por retales, pero se sale con un stroopwafel recién prensado del que gotea el sirope.",
+    "donde": "Lapjesmarkt · Breedstraat, sábados",
+    "img": "",
+    "alt": "",
+    "tono": "tinta"
+  }
+]

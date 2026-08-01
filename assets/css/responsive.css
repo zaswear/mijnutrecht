@@ -1,0 +1,115 @@
+/* ═══════════════════════════════════════════════════════════
+   Mijn Utrecht · responsive.css
+   Media queries. Mobile-first: el resto del CSS asume desktop
+   en las rejillas, así que aquí colapsamos hacia abajo.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ───────── Escritorio estrecho: el nav no cabe entero ───────── */
+@media (max-width: 1400px) {
+  .nav__cta { display: none; }
+  .nav__link { font-size: 0.83rem; padding-inline: 0.6rem; }
+  .nav__link--highlight { padding-inline: 0.9rem; }
+  .nav__links { gap: 0.15rem; }
+}
+
+/* ───────── Tablet (≤ 1024px) ───────── */
+@media (max-width: 1024px) {
+  :root { --pad-x: 2rem; --gap-section: 5rem; }
+
+  .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .layout-aside, .layout-aside--wide { grid-template-columns: minmax(0, 1fr); }
+  .walk-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .gallery-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .flip-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .split { gap: 2rem; }
+}
+
+/* ───────── Móvil (≤ 760px) ───────── */
+@media (max-width: 760px) {
+  :root { --pad-x: 1.5rem; --gap-section: 4rem; --nav-h: 62px; }
+
+  /* Nav: los enlaces pasan a un panel desplegable */
+  .nav__toggle { display: flex; }
+  .nav__links {
+    position: absolute;
+    top: var(--nav-h); left: 0; right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.15rem;
+    padding: 0.75rem var(--pad-x) 1.25rem;
+    background: rgba(245, 240, 232, 0.98);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-borde);
+    box-shadow: var(--shadow-nav);
+    display: none;
+  }
+  .nav__links.is-open { display: flex; }
+  .nav__link, .nav.is-scrolled .nav__link { color: var(--color-texto); justify-content: flex-start; }
+  .nav__cta { display: none; }
+
+  /* Layout general */
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: minmax(0, 1fr); }
+  .split, .split--reverse { grid-template-columns: minmax(0, 1fr); }
+  .split--reverse .split__media { order: 0; }
+  .section-head { margin-bottom: 2rem; }
+
+  /* Hero */
+  .hero { min-height: 92svh; padding-bottom: 2rem; }
+  .hero__title { font-size: clamp(3rem, 16vw, 4.5rem); }
+  .hero__ctas { flex-direction: column; align-items: stretch; }
+  .hero__ctas .btn { width: 100%; }
+  .trust-bar { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem; margin-top: 2rem; }
+  .trust-bar__item { font-size: 0.78rem; }
+  .hero__scroll { display: none; }
+
+  /* Secciones */
+  .mode-switch { grid-template-columns: minmax(0, 1fr); }
+  .free-tour-cards { grid-template-columns: minmax(0, 1fr); }
+  .versus { grid-template-columns: minmax(0, 1fr); }
+  .exp-grid { grid-template-columns: minmax(0, 1fr); }
+  .exp-card { aspect-ratio: 3 / 4; min-height: 300px; }
+  .walk-grid { grid-template-columns: minmax(0, 1fr); }
+  .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.75rem; }
+  .glosario-grid { grid-template-columns: minmax(0, 1fr); }
+  .flip-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .footer__grid { grid-template-columns: minmax(0, 1fr); }
+
+  .timeline__item { grid-template-columns: 52px 1fr; gap: 0.9rem; }
+  .timeline__item::before { left: 15px; }
+  .timeline__marker { width: 32px; height: 32px; font-size: 0.9rem; }
+  .timeline__hora { width: 32px; font-size: 0.62rem; }
+
+  .tabs { width: 100%; justify-content: flex-start; }
+  #map { height: 420px; }
+
+  /* Modal como hoja inferior en móvil */
+  .modal { align-items: flex-end; padding: 0; }
+  .modal__panel {
+    max-height: 90vh;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    padding: 2rem 1.5rem 2.5rem;
+  }
+  #lightbox-prev, #lightbox-next { top: auto; bottom: 4.5rem; transform: none; }
+  #lightbox-prev:hover, #lightbox-next:hover { transform: scale(1.06); }
+}
+
+/* ───────── Móvil pequeño (≤ 420px) ───────── */
+@media (max-width: 420px) {
+  .tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .versus__col, .card { padding: 1.35rem; }
+  .modal__panel { padding: 1.75rem 1.15rem 2rem; }
+}
+
+/* ───────── Desktop ancho (≥ 1280px) ───────── */
+@media (min-width: 1280px) {
+  :root { --pad-x: 4rem; --gap-section: 8rem; }
+}
+
+/* ───────── Impresión ───────── */
+@media print {
+  .nav, .hero__scroll, .footer__actions, #lightbox, .modal { display: none !important; }
+  body { background: #fff; }
+  .section { padding-block: 1.5rem; }
+  .reveal { opacity: 1; transform: none; }
+}

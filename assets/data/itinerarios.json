@@ -1,0 +1,171 @@
+{
+  "1": {
+    "label": "1 día",
+    "titulo": "Utrecht en un día: el centro medieval sin prisa",
+    "resumen": ["≈ 4 km a pie", "Todo en el casco antiguo", "Sin necesidad de transporte"],
+    "dias": [
+      {
+        "nombre": "Día único",
+        "paradas": [
+          {
+            "hora": "09:30",
+            "emoji": "🗼",
+            "titulo": "Domtoren y Domplein",
+            "texto": "Empieza por lo alto. La subida a la torre (465 escalones, solo con guía) se agota pronto: reserva la noche anterior. Abajo, la plaza vacía marca donde estaba la nave que tumbó el tornado de 1674.",
+            "hop": "5 min andando hasta el canal",
+            "img": "fotos/optim/dom-800.webp",
+            "alt": "Torre del Dom vista desde Domplein"
+          },
+          {
+            "hora": "11:00",
+            "emoji": "🚤",
+            "titulo": "Oudegracht y los werven",
+            "texto": "Baja a los muelles inferiores y camina a ras de agua entre bodegas del siglo XII. Es el único sistema de canales del mundo a dos niveles: calle arriba, almacenes abajo.",
+            "hop": "En la propia ruta del canal",
+            "img": "fotos/optim/werven-800.webp",
+            "alt": "Muelles inferiores del Oudegracht"
+          },
+          {
+            "hora": "13:30",
+            "emoji": "🥖",
+            "titulo": "Comida: Broodje Mario",
+            "texto": "El bocadillo estudiantil de Utrecht desde 1977, bajo los arcos del Oudegracht. Pan italiano recién horneado, salami, queso, pimiento verde y salsa secreta. Barato y enorme.",
+            "hop": "10 min hasta Reguliersteeg"
+          },
+          {
+            "hora": "16:00",
+            "emoji": "🍺",
+            "titulo": "Biercafé Olivier",
+            "texto": "Una iglesia clandestina del XIX convertida en bar de cerveza belga. Pide una trapense y siéntate bajo las bóvedas: el altar y el órgano siguen intactos.",
+            "hop": "12 min hasta Catharijnesingel"
+          },
+          {
+            "hora": "18:00",
+            "emoji": "🌿",
+            "titulo": "Paseo por el Catharijnesingel",
+            "texto": "El canal que fue autopista urbana y volvió a ser agua en 2020. Cierra el día bordeando el foso medieval por el parque de Zocher, con la torre al fondo.",
+            "hop": "Fin de ruta · 10 min a la estación"
+          }
+        ]
+      }
+    ]
+  },
+  "2": {
+    "label": "2 días",
+    "titulo": "Dos días: el centro más museos y el Utrecht que vive de noche",
+    "resumen": ["≈ 9 km a pie en total", "2 museos", "Ruta nocturna Trajectum Lumen"],
+    "dias": [
+      {
+        "nombre": "Día 1 · El corazón clásico",
+        "paradas": [
+          {
+            "hora": "09:30",
+            "emoji": "🗼",
+            "titulo": "Domtoren y Domplein",
+            "texto": "La torre más alta de los Países Bajos (112,5 m) y la plaza que dejó el tornado de 1674.",
+            "hop": "5 min hasta el canal",
+            "img": "fotos/optim/dom-800.webp",
+            "alt": "Torre del Dom vista desde Domplein"
+          },
+          {
+            "hora": "11:00",
+            "emoji": "🚤",
+            "titulo": "Oudegracht a nivel del agua",
+            "texto": "Los werven y sus bodegas medievales, hoy terrazas y talleres.",
+            "hop": "Sobre la marcha",
+            "img": "fotos/optim/werven-800.webp",
+            "alt": "Muelles inferiores del Oudegracht"
+          },
+          { "hora": "13:30", "emoji": "🥖", "titulo": "Broodje Mario", "texto": "El bocadillo institucional de la ciudad.", "hop": "10 min" },
+          { "hora": "16:00", "emoji": "🍺", "titulo": "Biercafé Olivier", "texto": "Cerveza belga bajo las bóvedas de una iglesia clandestina.", "hop": "12 min" },
+          { "hora": "18:00", "emoji": "🌿", "titulo": "Catharijnesingel", "texto": "El canal recuperado y el parque de Zocher al atardecer.", "hop": "Fin del día" }
+        ]
+      },
+      {
+        "nombre": "Día 2 · Museos, parque y noche",
+        "paradas": [
+          {
+            "hora": "10:00",
+            "emoji": "🎼",
+            "titulo": "Museum Speelklok",
+            "texto": "Instrumentos musicales mecánicos que suenan de verdad: órganos de feria, relojes cantores y pianolas. La visita guiada los enciende uno a uno.",
+            "hop": "20 min andando hacia el este"
+          },
+          {
+            "hora": "12:30",
+            "emoji": "🌳",
+            "titulo": "Wilhelminapark",
+            "texto": "El parque burgués del XIX en Oudwijk, rodeado de mansiones. Sitio perfecto para un picnic o una terraza tranquila lejos del centro.",
+            "hop": "25 min en bici hasta Lombok"
+          },
+          {
+            "hora": "19:00",
+            "emoji": "🌶️",
+            "titulo": "Cena en Lombok",
+            "texto": "El barrio multicultural al oeste de la estación. Kanaalstraat concentra comida turca, marroquí, surinamesa e indonesia a precio real de barrio.",
+            "hop": "20 min de vuelta al centro"
+          },
+          {
+            "hora": "21:30",
+            "emoji": "💡",
+            "titulo": "Trajectum Lumen",
+            "texto": "Ruta nocturna de instalaciones de luz que iluminan puentes, patios y fachadas históricas. Se hace sola, siguiendo las marcas por el casco antiguo.",
+            "hop": "Fin de ruta"
+          }
+        ]
+      }
+    ]
+  },
+  "3": {
+    "label": "3 días",
+    "titulo": "Tres días: la ciudad, su arquitectura y el bosque de al lado",
+    "resumen": ["≈ 12 km a pie + 14 km en bici", "3 museos", "Una salida fuera de la ciudad"],
+    "dias": [
+      {
+        "nombre": "Día 1 · El corazón clásico",
+        "paradas": [
+          { "hora": "09:30", "emoji": "🗼", "titulo": "Domtoren y Domplein", "texto": "La subida a la torre y la plaza del tornado.", "hop": "5 min", "img": "fotos/optim/dom-800.webp", "alt": "Torre del Dom vista desde Domplein" },
+          { "hora": "11:00", "emoji": "🚤", "titulo": "Oudegracht y los werven", "texto": "Canales a dos niveles y bodegas del siglo XII.", "hop": "Sobre la marcha", "img": "fotos/optim/werven-800.webp", "alt": "Muelles inferiores del Oudegracht" },
+          { "hora": "13:30", "emoji": "🥖", "titulo": "Broodje Mario", "texto": "Comida rápida con solera desde 1977.", "hop": "10 min" },
+          { "hora": "16:00", "emoji": "🍺", "titulo": "Biercafé Olivier", "texto": "Iglesia por fuera, cervecería por dentro.", "hop": "12 min" },
+          { "hora": "18:00", "emoji": "🌿", "titulo": "Catharijnesingel", "texto": "Paseo por el canal que devolvió el agua a la ciudad.", "hop": "Fin del día" }
+        ]
+      },
+      {
+        "nombre": "Día 2 · Museos, parque y noche",
+        "paradas": [
+          { "hora": "10:00", "emoji": "🎼", "titulo": "Museum Speelklok", "texto": "Música mecánica del XVII en funcionamiento.", "hop": "20 min" },
+          { "hora": "12:30", "emoji": "🌳", "titulo": "Wilhelminapark", "texto": "Mansiones del XIX y césped para tumbarse.", "hop": "25 min en bici" },
+          { "hora": "19:00", "emoji": "🌶️", "titulo": "Cena en Lombok", "texto": "Kanaalstraat: el mundo entero en dos manzanas.", "hop": "20 min" },
+          { "hora": "21:30", "emoji": "💡", "titulo": "Trajectum Lumen", "texto": "La ruta de arte lumínico por el casco antiguo.", "hop": "Fin del día" }
+        ]
+      },
+      {
+        "nombre": "Día 3 · Bosque, De Stijl y mercado",
+        "paradas": [
+          {
+            "hora": "09:00",
+            "emoji": "🌲",
+            "titulo": "Amelisweerd en bici",
+            "texto": "Siete kilómetros siguiendo el río Kromme Rijn hasta un bosque centenario que los vecinos salvaron de la autopista. Hay casa de té al final del camino.",
+            "hop": "30 min en bici de vuelta"
+          },
+          {
+            "hora": "13:00",
+            "emoji": "🟥",
+            "titulo": "Rietveld Schröderhuis",
+            "texto": "Patrimonio de la Humanidad y manifiesto construido del movimiento De Stijl (1924). Solo se entra con visita guiada reservada con antelación.",
+            "hop": "20 min hasta el centro"
+          },
+          {
+            "hora": "16:00",
+            "emoji": "🛒",
+            "titulo": "Mercado local",
+            "texto": "Según el día: Vredenburg (mié, vie y sáb) para queso y stroopwafels calientes; Lapjesmarkt (sáb) para telas desde 1597; Bloemenmarkt (sáb) en Janskerkhof para flores.",
+            "hop": "Fin de ruta"
+          }
+        ]
+      }
+    ]
+  }
+}

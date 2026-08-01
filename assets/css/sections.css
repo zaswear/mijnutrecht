@@ -1,0 +1,712 @@
+/* ═══════════════════════════════════════════════════════════
+   Mijn Utrecht · sections.css
+   Estilos propios de cada sección de la web.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ───────── HERO ───────── */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-top: calc(var(--nav-h) + 2rem);
+  padding-bottom: 2.5rem;
+  color: #fff;
+  background: #23343B;
+  overflow: hidden;
+}
+.hero__media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero__media img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 55%;
+}
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(to top, rgba(26, 22, 20, 0.92) 0%, rgba(26, 22, 20, 0.55) 38%, rgba(26, 22, 20, 0.15) 68%, rgba(26, 22, 20, 0.45) 100%);
+}
+.hero__inner { position: relative; z-index: 2; }
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  backdrop-filter: blur(6px);
+}
+.hero__title {
+  margin-top: 1.25rem;
+  font-size: clamp(3.2rem, 12vw, 7.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.35);
+}
+.hero__claim {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.35rem, 4vw, 2.4rem);
+  line-height: 1.2;
+  margin-top: 0.6rem;
+  color: #F6D9C9;
+  max-width: 20ch;
+}
+.hero__sub {
+  margin-top: 1.5rem;
+  max-width: 46ch;
+  font-size: clamp(0.98rem, 1.8vw, 1.12rem);
+  color: rgba(255, 255, 255, 0.82);
+}
+.hero__ctas { display: flex; flex-wrap: wrap; gap: 0.85rem; margin-top: 2rem; }
+
+.trust-bar {
+  position: relative;
+  z-index: 2;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.18);
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+.trust-bar__item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+.trust-bar__icon { font-size: 1.2rem; flex: none; }
+
+.hero__scroll {
+  position: absolute;
+  bottom: 0.6rem; left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 1.4rem;
+  animation: bob 2.4s ease-in-out infinite;
+}
+@keyframes bob { 0%, 100% { transform: translate(-50%, 0); } 50% { transform: translate(-50%, 7px); } }
+
+/* ───────── Selector de modo ───────── */
+.mode-switch {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+.mode-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1.75rem;
+  border-radius: var(--radius-lg);
+  border: 2px solid var(--color-borde);
+  background: var(--color-blanco);
+  text-align: left;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.25s var(--ease-spring), border-color 0.25s, box-shadow 0.25s;
+}
+.mode-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-ladrillo);
+  box-shadow: var(--shadow-lift);
+  color: inherit;
+}
+.mode-card__icon { font-size: 2rem; line-height: 1; }
+.mode-card__title { font-family: var(--font-display); font-size: 1.35rem; font-weight: 700; }
+.mode-card__text { font-size: 0.88rem; color: var(--color-texto-suave); }
+.mode-card__cta { margin-top: 0.75rem; font-size: 0.83rem; font-weight: 700; color: var(--color-ladrillo); }
+.mode-card.is-current { border-color: var(--color-ladrillo); background: rgba(184, 92, 63, 0.05); }
+.mode-card.is-current .mode-card__cta::after { content: ' · estás aquí'; font-weight: 500; color: var(--color-texto-suave); }
+
+/* ───────── Utrecht vs Ámsterdam ───────── */
+.versus {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  align-items: start;
+}
+.versus__col {
+  border-radius: var(--radius-lg);
+  padding: 1.75rem;
+  border: 1px solid var(--color-borde);
+  background: var(--color-blanco);
+  box-shadow: var(--shadow-card);
+}
+.versus__col--win { border-color: rgba(90, 143, 110, 0.45); background: linear-gradient(180deg, rgba(90, 143, 110, 0.07), var(--color-blanco) 45%); }
+.versus__col--other { background: var(--color-piedra); box-shadow: none; }
+.versus__head { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.25rem; }
+.versus__head h3 { font-size: 1.4rem; }
+.versus__list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.9rem; }
+.versus__list li {
+  display: flex;
+  gap: 0.65rem;
+  font-size: 0.92rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px dashed var(--color-borde);
+}
+.versus__list li:last-child { border-bottom: none; padding-bottom: 0; }
+.versus__col--win .versus__list li::before { content: '✓'; color: var(--color-verde); font-weight: 700; flex: none; }
+.versus__col--other .versus__list li::before { content: '·'; color: var(--color-texto-suave); font-weight: 700; flex: none; }
+.versus__col--other .versus__list li { color: var(--color-texto-suave); }
+
+.versus__note {
+  margin-top: 2.5rem;
+  padding: 1.5rem 1.75rem;
+  border-left: 3px solid var(--color-ladrillo);
+  background: rgba(184, 92, 63, 0.06);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+/* ───────── Itinerarios por días ───────── */
+.itinerario__resumen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 1.1rem 1.4rem;
+  border-radius: var(--radius);
+  background: var(--color-piedra-dark);
+  border: 1px solid var(--color-borde);
+  margin-bottom: 2.25rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-texto-suave);
+}
+.itinerario__titulo { font-size: clamp(1.4rem, 3vw, 1.9rem); margin-bottom: 1.25rem; }
+.itinerario__dia-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  margin: 2.5rem 0 1.5rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 2px solid var(--color-borde);
+}
+.itinerario__dia-title:first-child { margin-top: 0; }
+
+/* ───────── 7 experiencias ───────── */
+.exp-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+.exp-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 340px;
+  aspect-ratio: 4 / 3;
+  padding: 1.75rem;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  color: #fff;
+  isolation: isolate;
+  background: var(--color-canal);
+}
+.exp-card__bg {
+  position: absolute; inset: 0; z-index: -2;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-out);
+}
+.exp-card:hover .exp-card__bg { transform: scale(1.05); }
+.exp-card::after {
+  content: '';
+  position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(to top, rgba(26, 22, 20, 0.9) 8%, rgba(26, 22, 20, 0.35) 55%, rgba(26, 22, 20, 0.12) 100%);
+}
+.exp-card--tinta { background: linear-gradient(150deg, var(--color-canal) 0%, #22414C 100%); }
+.exp-card--ladrillo { background: linear-gradient(150deg, var(--color-ladrillo) 0%, #7E3626 100%); }
+.exp-card--verde { background: linear-gradient(150deg, var(--color-verde) 0%, #34573F 100%); }
+.exp-card--naranja { background: linear-gradient(150deg, var(--color-naranja) 0%, #A8410F 100%); }
+.exp-card__num {
+  font-family: var(--font-display);
+  font-size: 3.2rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 0.5rem;
+}
+.exp-card__title { font-size: 1.4rem; color: #fff; margin-bottom: 0.55rem; }
+.exp-card__text { font-size: 0.9rem; color: rgba(255, 255, 255, 0.85); max-width: 42ch; }
+.exp-card__where {
+  margin-top: 0.9rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #F3C4AC;
+}
+
+/* ───────── Gastronomía ───────── */
+.food-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1.1rem;
+  border-radius: var(--radius);
+  background: var(--color-piedra);
+  border: 1px solid var(--color-borde);
+}
+.food-item__emoji { flex: none; font-size: 1.5rem; line-height: 1.2; }
+.food-item__name { font-weight: 700; font-size: 0.98rem; margin-bottom: 0.25rem; }
+.food-item__text { font-size: 0.87rem; color: var(--color-texto-suave); }
+
+/* ───────── Rutas a pie ───────── */
+.walk-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+.walk-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-borde);
+  background: var(--color-blanco);
+  box-shadow: var(--shadow-card);
+  text-align: left;
+  height: 100%;
+  transition: transform 0.25s var(--ease-spring), box-shadow 0.25s, border-color 0.25s;
+}
+.walk-card:hover { transform: translateY(-4px); border-color: var(--color-ladrillo); box-shadow: var(--shadow-lift); }
+.walk-card__num {
+  width: 42px; height: 42px;
+  display: grid; place-items: center;
+  border-radius: 10px;
+  background: rgba(184, 92, 63, 0.12);
+  color: var(--color-ladrillo);
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+.walk-card--noche { background: var(--color-texto); border-color: var(--color-texto); color: #EDE6DC; }
+.walk-card--noche .walk-card__title { color: #fff; }
+.walk-card--noche .walk-card__num { background: rgba(255, 255, 255, 0.14); color: #F6D9C9; }
+.walk-card--noche .walk-card__text { color: rgba(255, 255, 255, 0.7); }
+.walk-card--noche .badge--neutro { background: rgba(255, 255, 255, 0.12); color: rgba(255, 255, 255, 0.8); }
+.walk-card__title { font-family: var(--font-display); font-size: 1.12rem; }
+.walk-card__text { font-size: 0.87rem; color: var(--color-texto-suave); }
+.walk-card__tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; padding-top: 0.6rem; }
+
+/* ───────── Galería ───────── */
+.gallery-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+.gallery-item {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--color-borde);
+  background: var(--color-piedra-dark);
+  cursor: zoom-in;
+  aspect-ratio: 4 / 3;
+}
+.gallery-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s var(--ease-out);
+}
+.gallery-item:hover img { transform: scale(1.06); }
+.gallery-item figcaption {
+  position: absolute; inset: auto 0 0 0;
+  padding: 1.5rem 0.75rem 0.6rem;
+  background: linear-gradient(transparent, rgba(26, 22, 20, 0.8));
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.gallery-item:hover figcaption, .gallery-item:focus-within figcaption { opacity: 1; }
+
+/* ───────── Bloques largos con imagen ───────── */
+.split {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 3rem;
+  align-items: center;
+}
+.split__media {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--color-borde);
+  box-shadow: var(--shadow-card);
+  aspect-ratio: 4 / 3;
+}
+.split__media img { width: 100%; height: 100%; object-fit: cover; }
+.split__body > p + p { margin-top: 1rem; }
+.split--reverse .split__media { order: 2; }
+
+/* ───────── Historia: línea del tiempo ───────── */
+.hist-timeline {
+  position: relative;
+  border-left: 2px solid var(--color-borde);
+  margin-left: 1rem;
+  display: grid;
+  gap: 2.25rem;
+  padding: 0.5rem 0;
+  list-style: none;
+}
+.hist-timeline li { position: relative; padding-left: 1.75rem; }
+.hist-timeline li::before {
+  content: '';
+  position: absolute;
+  left: -9px; top: 8px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--color-borde);
+  border: 4px solid var(--color-piedra);
+}
+.hist-timeline li.is-key::before { background: var(--color-ladrillo); }
+.section--paper .hist-timeline li::before { border-color: var(--color-blanco); }
+.hist-timeline__year {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-ladrillo);
+}
+.hist-timeline li:not(.is-key) .hist-timeline__year { color: var(--color-texto-suave); }
+.hist-timeline__title { font-family: var(--font-body); font-weight: 700; font-size: 1rem; margin: 0.15rem 0 0.35rem; }
+.hist-timeline__text { font-size: 0.9rem; color: var(--color-texto-suave); max-width: 62ch; }
+
+/* ───────── Barrios ───────── */
+.barrio-card__zona {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-ladrillo);
+  margin-bottom: 0.6rem;
+  display: block;
+}
+
+/* ───────── Comparador antes/después ───────── */
+.compare {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--color-borde);
+  user-select: none;
+  background: var(--color-piedra-dark);
+}
+.compare--wide { aspect-ratio: 16 / 9; }
+.compare img, .compare svg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.compare__old { z-index: 2; clip-path: inset(0 50% 0 0); }
+.compare__range {
+  position: absolute; inset: 0; z-index: 4;
+  width: 100%; height: 100%;
+  opacity: 0;
+  cursor: ew-resize;
+  margin: 0;
+}
+.compare__handle {
+  position: absolute; top: 0; bottom: 0; z-index: 3;
+  width: 3px;
+  background: #fff;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+  left: 50%;
+}
+.compare__handle::after {
+  content: '⇄';
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px; height: 40px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--color-ladrillo);
+  color: var(--color-ladrillo);
+  font-weight: 700;
+}
+.compare-legend {
+  display: flex; justify-content: space-between; gap: 1rem;
+  margin-top: 0.8rem;
+  font-size: 0.75rem; font-weight: 700;
+  color: var(--color-texto-suave);
+}
+
+/* ───────── Anatomía de una calle ───────── */
+.anat { position: relative; width: 100%; aspect-ratio: 16 / 10; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--color-borde); }
+.anat svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hotspot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 30px; height: 30px;
+  display: grid; place-items: center;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid var(--color-ladrillo);
+  color: var(--color-ladrillo);
+  font-weight: 700;
+  font-size: 0.85rem;
+  animation: pulse 2.2s infinite;
+}
+.hotspot::after { content: ''; position: absolute; inset: -9px; border-radius: 50%; }
+.hotspot.is-active { animation: none; background: var(--color-ladrillo); color: #fff; }
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(184, 92, 63, 0.5); }
+  70% { box-shadow: 0 0 0 13px rgba(184, 92, 63, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(184, 92, 63, 0); }
+}
+.anat-info {
+  margin-top: 1rem;
+  padding: 1.1rem 1.25rem;
+  border-radius: var(--radius);
+  background: var(--color-piedra-dark);
+  text-align: center;
+}
+.anat-info__title { font-weight: 700; font-size: 0.98rem; }
+.anat-info__text { font-size: 0.86rem; color: var(--color-texto-suave); margin-top: 0.25rem; }
+
+/* ───────── Contadores ───────── */
+.stat { text-align: center; }
+.stat__num {
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 5vw, 3rem);
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+}
+.stat__label { font-size: 0.8rem; color: rgba(255, 255, 255, 0.72); margin-top: 0.6rem; line-height: 1.4; }
+
+/* ───────── Baldosa → jardín ───────── */
+.tiles { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0.4rem; max-width: 420px; margin: 1.75rem auto; }
+.tile { position: relative; aspect-ratio: 1; }
+.tile__pave { position: absolute; inset: 0; border-radius: 5px; background: #C9C0B4; transition: opacity 0.6s ease; }
+.tile:nth-child(even) .tile__pave { background: #B3A899; }
+.tile__plant {
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+  font-size: 1.2rem;
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity 0.6s ease, transform 0.6s var(--ease-spring);
+}
+.tiles.is-green .tile__pave { opacity: 0; }
+.tiles.is-green .tile__plant { opacity: 1; transform: scale(1); }
+.tiles.is-green .tile:nth-child(3n) .tile__plant { transition-delay: 0.08s; }
+.tiles.is-green .tile:nth-child(4n) .tile__plant { transition-delay: 0.15s; }
+
+/* ───────── Tarjetas flip ───────── */
+.flip-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0.85rem; }
+.flip { perspective: 1000px; aspect-ratio: 3 / 4; cursor: pointer; border-radius: var(--radius); }
+.flip__inner {
+  position: relative;
+  width: 100%; height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.6s var(--ease-out);
+}
+.flip.is-flipped .flip__inner, .flip:hover .flip__inner { transform: rotateY(180deg); }
+.flip__face {
+  position: absolute; inset: 0;
+  display: grid; place-items: center; align-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  text-align: center;
+  border-radius: var(--radius);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.flip__front { background: var(--color-piedra); border: 1px solid var(--color-borde); }
+.flip__front span:first-child { font-size: 1.6rem; }
+.flip__front span:last-child { font-size: 0.78rem; font-weight: 700; }
+.flip__back {
+  transform: rotateY(180deg);
+  background: var(--color-canal);
+  color: #fff;
+  font-size: 0.76rem;
+  line-height: 1.4;
+}
+.flip:nth-child(2) .flip__back { background: var(--color-ladrillo); }
+.flip:nth-child(3) .flip__back { background: var(--color-verde); }
+.flip:nth-child(4) .flip__back { background: var(--color-naranja); }
+.flip:nth-child(5) .flip__back { background: var(--color-texto); }
+
+/* ───────── Quiz ───────── */
+.quiz { display: grid; gap: 2rem; max-width: 640px; }
+.quiz__q { font-weight: 700; font-size: 0.98rem; margin-bottom: 0.75rem; }
+.quiz__opts { display: grid; gap: 0.5rem; }
+.quiz__opt {
+  min-height: 48px;
+  padding: 0.7rem 1rem;
+  text-align: left;
+  border-radius: 10px;
+  border: 1px solid var(--color-borde);
+  background: var(--color-blanco);
+  font-size: 0.88rem;
+  font-weight: 500;
+  transition: background 0.2s, border-color 0.2s;
+}
+.quiz__opt:hover:not(:disabled) { border-color: var(--color-ladrillo); background: rgba(184, 92, 63, 0.05); }
+.quiz__opt.is-correct { background: rgba(90, 143, 110, 0.18); border-color: var(--color-verde); color: #33573E; }
+.quiz__opt.is-wrong { background: rgba(184, 92, 63, 0.15); border-color: var(--color-ladrillo); color: #7E3626; }
+.quiz__exp { font-size: 0.82rem; font-style: italic; color: var(--color-texto-suave); margin-top: 0.65rem; }
+
+/* ───────── Storyboard horizontal ───────── */
+.story-card {
+  width: 190px;
+  padding: 1.1rem;
+  border-radius: var(--radius);
+  background: var(--color-piedra);
+  border: 1px solid var(--color-borde);
+}
+.story-card__emoji { font-size: 1.5rem; }
+.story-card__hora { font-size: 0.75rem; font-weight: 700; color: var(--color-ladrillo); margin-top: 0.5rem; }
+.story-card__text { font-size: 0.8rem; color: var(--color-texto-suave); margin-top: 0.3rem; }
+
+/* ───────── Barras comparativas (modelo de ciudad) ───────── */
+.bars { display: grid; gap: 1.1rem; max-width: 560px; }
+.bar__head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.35rem; }
+.bar__key { font-size: 0.85rem; font-weight: 700; }
+.bar__val { font-size: 0.78rem; color: var(--color-texto-suave); }
+.bar__track { height: 10px; border-radius: var(--radius-pill); background: var(--color-piedra-dark); overflow: hidden; }
+.bar__fill { height: 100%; border-radius: var(--radius-pill); transition: width 0.5s var(--ease-out); }
+
+/* ───────── Glosario ───────── */
+.glosario-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+.glosario-card {
+  padding: 1.25rem;
+  border-radius: var(--radius);
+  background: var(--color-piedra);
+  border: 1px solid var(--color-borde);
+}
+.glosario-card__head { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem; }
+.glosario-card__word { font-family: var(--font-display); font-size: 1.3rem; color: var(--color-ladrillo); }
+.glosario-card__pron { font-size: 0.75rem; font-style: italic; color: var(--color-texto-suave); }
+.glosario-card__trad { font-size: 0.85rem; font-weight: 700; margin: 0.5rem 0 0.35rem; }
+.glosario-card__desc { font-size: 0.84rem; color: var(--color-texto-suave); }
+
+.search-field { position: relative; max-width: 420px; }
+.search-field input {
+  width: 100%;
+  min-height: 48px;
+  padding: 0 1rem 0 2.6rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--color-borde);
+  background: var(--color-blanco);
+}
+.search-field__icon { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--color-texto-suave); }
+
+/* ───────── Flora y agenda ───────── */
+.flora-card { border-radius: var(--radius); overflow: hidden; border: 1px solid var(--color-borde); background: var(--color-blanco); }
+.flora-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.flora-card__body { padding: 1rem; }
+.flora-card__sci { font-size: 0.72rem; font-style: italic; color: var(--color-texto-suave); }
+.flora-card__meses { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-ladrillo); margin: 0.5rem 0; }
+.flora-card__text { font-size: 0.82rem; color: var(--color-texto-suave); }
+.flora-card__donde { font-size: 0.72rem; color: var(--color-texto-suave); margin-top: 0.8rem; padding-top: 0.6rem; border-top: 1px solid var(--color-borde); }
+
+.evento-card { display: flex; flex-direction: column; height: 100%; }
+.evento-card__cuando { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-ladrillo); margin-bottom: 0.6rem; }
+.evento-card__foot { margin-top: auto; padding-top: 0.9rem; border-top: 1px solid var(--color-borde); font-size: 0.75rem; color: var(--color-texto-suave); display: grid; gap: 0.2rem; }
+
+/* ───────── CTA de Free Tour (landing principal) ───────── */
+.free-tour-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+.free-tour-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1.75rem;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: #fff;
+  text-decoration: none;
+  transition: transform 0.25s var(--ease-spring), background 0.25s, border-color 0.25s;
+}
+.free-tour-card:hover {
+  transform: translateY(-4px);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #fff;
+}
+.free-tour-card__icon { font-size: 2rem; line-height: 1; }
+.free-tour-card h3 { font-size: 1.35rem; color: #fff; }
+.free-tour-card p { font-size: 0.92rem; color: rgba(255, 255, 255, 0.78); }
+.free-tour-card__meta {
+  margin-top: auto;
+  padding-top: 1rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #F3C4AC;
+}
+
+/* ───────── Layout con columna lateral (mapa, guía práctica) ───────── */
+.layout-aside {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 1.75rem;
+  align-items: start;
+}
+.layout-aside--wide { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); }
+
+/* Cabecera de sección con acción a la derecha */
+.section-head--row {
+  max-width: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+/* ───────── Widget de clima ───────── */
+.weather {
+  background: linear-gradient(160deg, var(--color-canal) 0%, #24404A 100%);
+  color: #fff;
+  border-radius: var(--radius-lg);
+  padding: 1.6rem;
+  border: none;
+}
+.weather__head { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.weather__now { display: flex; align-items: center; gap: 0.75rem; }
+.weather__icon { font-size: 2rem; line-height: 1; }
+.weather__label { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #F3C4AC; }
+.weather__time { font-size: 0.74rem; color: rgba(255, 255, 255, 0.65); }
+.weather__temp { font-family: var(--font-display); font-size: 1.9rem; font-weight: 700; }
+.weather__box {
+  margin-top: 1.1rem;
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 0.84rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+.weather__box strong { color: #fff; }
+.weather__advice { margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid rgba(255, 255, 255, 0.15); }
+.weather__forecast { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.6rem; margin-top: 0.9rem; }
+.weather__day {
+  display: grid; gap: 0.15rem; justify-items: center;
+  padding: 0.6rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 0.72rem;
+}
+.weather__day-name { color: rgba(255, 255, 255, 0.65); text-transform: uppercase; letter-spacing: 0.06em; }
+.weather__day-icon { font-size: 1.15rem; }
+.weather__day-temp { font-weight: 700; }
+
+/* ───────── Coste de vida (expat) ───────── */
+.tabla-costes { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+.tabla-costes caption { text-align: left; font-size: 0.82rem; color: var(--color-texto-suave); margin-bottom: 0.75rem; }
+.tabla-costes th, .tabla-costes td { padding: 0.75rem 0.9rem; text-align: left; border-bottom: 1px solid var(--color-borde); }
+.tabla-costes thead th { font-size: 0.72rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--color-texto-suave); }
+.tabla-costes td:last-child, .tabla-costes th:last-child { text-align: right; font-variant-numeric: tabular-nums; }
+.tabla-costes tfoot td { font-weight: 700; border-bottom: none; }
+.tabla-wrap { overflow-x: auto; }

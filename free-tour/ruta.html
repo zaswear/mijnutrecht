@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Free Tour · Mijn Utrecht</title>
+  <meta name="description" content="Free tour digital de Utrecht: sigue la ruta parada a parada con narración, datos históricos, retos de foto y acertijos." />
+  <meta name="theme-color" content="#F5F0E8" />
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚶</text></svg>" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{--color-piedra:#F5F0E8;--color-texto:#2C2420}
+    body{margin:0;background:var(--color-piedra);color:var(--color-texto);font-family:'Inter',system-ui,sans-serif}
+  </style>
+
+  <link rel="stylesheet" href="../assets/css/main.css" />
+  <link rel="stylesheet" href="css/free-tour.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+
+<body class="tour-container">
+  <a class="skip-link" href="#stop-root">Saltar al contenido de la parada</a>
+
+  <!-- ══════════ Cabecera fija: progreso + título ══════════ -->
+  <header class="tour-top">
+    <div class="progress-bar" role="progressbar" aria-label="Progreso del tour"
+         aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <div class="progress-bar__fill" id="progress-fill"></div>
+    </div>
+    <div class="tour-top__row">
+      <a class="tour-top__back" href="index.html" aria-label="Volver al listado de free tours">←</a>
+      <span class="tour-top__title" id="tour-title">Cargando ruta…</span>
+      <span class="tour-top__count" id="tour-count" aria-live="polite">—</span>
+    </div>
+  </header>
+
+  <!-- ══════════ Mapa plegable ══════════ -->
+  <section class="map-collapsible" aria-label="Mapa de la ruta">
+    <button class="map-collapsible__header" type="button" id="map-toggle"
+            aria-expanded="false" aria-controls="map-panel">
+      <span>🗺️ Ver el mapa de la ruta</span>
+      <span class="map-collapsible__chevron" aria-hidden="true">⌄</span>
+    </button>
+    <div class="map-collapsible__content" id="map-panel">
+      <div id="tour-map"></div>
+    </div>
+    <div class="map-actions">
+      <button class="btn-soft" type="button" id="btn-directions"
+              aria-label="Abrir indicaciones a pie hasta esta parada en Google Maps">
+        🧭 Cómo llegar
+      </button>
+    </div>
+  </section>
+
+  <p class="ft-offline-note" id="offline-note" role="status">
+    📴 Sin conexión. Sigues viendo la ruta guardada en el móvil.
+  </p>
+
+  <!-- ══════════ Parada actual (render por JS) ══════════ -->
+  <main id="stop-root">
+    <div class="ft-status">Cargando la ruta…</div>
+  </main>
+
+  <!-- ══════════ Navegación inferior ══════════ -->
+  <nav class="tour-nav" aria-label="Navegación entre paradas">
+    <button class="tour-nav__btn" type="button" id="nav-prev" aria-label="Parada anterior">◀ Anterior</button>
+    <span class="tour-nav__dots" id="nav-dots" aria-hidden="true"></span>
+    <button class="tour-nav__btn" type="button" id="nav-next" aria-label="Parada siguiente">Siguiente ▶</button>
+  </nav>
+
+  <!-- ══════════ Diálogo: continuar donde lo dejaste ══════════ -->
+  <div class="ft-dialog" id="resume-dialog" role="dialog" aria-modal="true" aria-labelledby="resume-title">
+    <div class="ft-dialog__panel" tabindex="-1">
+      <h2 id="resume-title">¿Seguimos donde lo dejaste?</h2>
+      <p id="resume-text"></p>
+      <button class="btn-cta" type="button" id="resume-yes">Sí, continuar</button>
+      <div class="btn-row" style="justify-content:center;margin-top:0.75rem">
+        <button class="btn-soft" type="button" id="resume-no">Empezar de cero</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+  <script src="js/geolocation.js" defer></script>
+  <script src="js/map.js" defer></script>
+  <script src="js/speech.js" defer></script>
+  <script src="js/free-tour.js" defer></script>
+</body>
+</html>
