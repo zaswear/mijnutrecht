@@ -34,7 +34,6 @@
   <a class="skip-link" href="#rutas">Saltar al listado de rutas</a>
 
   <header class="tour-top">
-    <div class="progress-bar" aria-hidden="true"><div class="progress-bar__fill" style="width:100%"></div></div>
     <div class="tour-top__row">
       <a class="tour-top__back" href="../index.html" aria-label="Volver a Mijn Utrecht">←</a>
       <span class="tour-top__title">🚶 Free Tours de Utrecht</span>
@@ -47,6 +46,9 @@
         <h1>Free Tours de Utrecht</h1>
         <p>Dos rutas gratuitas para hacer caminando, con el móvil en la mano y sin guía que espere a nadie.</p>
       </section>
+
+      <!-- Se rellena por JS si hay una ruta a medias guardada -->
+      <div id="ft-reanudar"></div>
 
       <div class="ft-cards" id="rutas">
 
@@ -122,6 +124,33 @@
     if ('serviceWorker' in navigator && location.protocol !== 'file:') {
       navigator.serviceWorker.register('sw.js').catch(function () { /* sin offline */ });
     }
+
+    // Si hay una ruta a medias, ofrecerla antes que nada
+    (function () {
+      var RUTAS = {
+        oculto: { titulo: 'Utrecht Oculto', paradas: 7, icono: '🏛️' },
+        locura: { titulo: 'Canal, Cerveza y Locura', paradas: 6, icono: '🍺' }
+      };
+      var guardado;
+      try { guardado = JSON.parse(localStorage.getItem('mijnutrecht-tour-progress')) || {}; }
+      catch (e) { return; }
+
+      var pendiente = Object.keys(guardado)
+        .map(function (id) { return guardado[id]; })
+        .filter(function (p) { return p && !p.completedAt && p.currentStop > 0 && RUTAS[p.routeId]; })[0];
+      if (!pendiente) return;
+
+      var meta = RUTAS[pendiente.routeId];
+      document.getElementById('ft-reanudar').innerHTML =
+        '<div class="ft-reanudar">' +
+          '<span aria-hidden="true" style="font-size:1.6rem">' + meta.icono + '</span>' +
+          '<span class="ft-reanudar__texto">' +
+            '<strong>Tienes una ruta a medias</strong>' +
+            '<span>' + meta.titulo + ' · parada ' + (pendiente.currentStop + 1) + ' de ' + meta.paradas + '</span>' +
+          '</span>' +
+          '<a class="btn-soft" href="ruta.html?ruta=' + pendiente.routeId + '">Continuar →</a>' +
+        '</div>';
+    })();
   </script>
 </body>
 </html>

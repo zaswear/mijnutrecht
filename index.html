@@ -94,7 +94,7 @@
   <!-- ══════════════ NAV ══════════════ -->
   <header class="nav">
     <nav class="nav__inner" aria-label="Navegación principal">
-      <a class="nav__brand" href="index.html">
+      <a class="nav__brand" href="index.html" aria-current="page">
         <span class="brand-mark" aria-hidden="true">🚲</span> Mijn Utrecht
       </a>
 
@@ -257,10 +257,10 @@
         </div>
 
         <div id="itinerarios">
-          <div class="tabs" role="tablist" data-tabs aria-label="Días de estancia">
-            <button class="tab" role="tab" id="tab-1" aria-controls="itinerario-1" aria-selected="true">1 día</button>
-            <button class="tab" role="tab" id="tab-2" aria-controls="itinerario-2" aria-selected="false">2 días</button>
-            <button class="tab" role="tab" id="tab-3" aria-controls="itinerario-3" aria-selected="false">3 días</button>
+          <div class="tabs" role="tablist" data-tabs data-tabs-param="dia" aria-label="Días de estancia">
+            <button class="tab" role="tab" id="tab-1" data-tab-slug="1" aria-controls="itinerario-1" aria-selected="true">1 día</button>
+            <button class="tab" role="tab" id="tab-2" data-tab-slug="2" aria-controls="itinerario-2" aria-selected="false">2 días</button>
+            <button class="tab" role="tab" id="tab-3" data-tab-slug="3" aria-controls="itinerario-3" aria-selected="false">3 días</button>
           </div>
 
           <div class="tab-panel" role="tabpanel" id="itinerario-1" aria-labelledby="tab-1" style="margin-top:2.5rem">
@@ -302,7 +302,7 @@
           </p>
         </div>
 
-        <div class="tabs tabs--block" role="tablist" data-tabs aria-label="Categorías de gastronomía">
+        <div class="tabs tabs--block" role="tablist" data-tabs data-tabs-param="comer" aria-label="Categorías de gastronomía">
           <button class="tab" role="tab" id="tab-probar" aria-controls="p-probar" aria-selected="true">Probar sí o sí</button>
           <button class="tab" role="tab" id="tab-cena" aria-controls="p-cena" aria-selected="false">Cena romántica</button>
           <button class="tab" role="tab" id="tab-cerveza" aria-controls="p-cerveza" aria-selected="false">Ruta de cerveza</button>
@@ -569,29 +569,42 @@
           </p>
         </div>
 
+        <div class="chip-row" data-map-filter style="margin-bottom:1.25rem">
+          <button class="chip" type="button" data-color="all" aria-pressed="true">Todos</button>
+          <button class="chip" type="button" data-color="orange" aria-pressed="false">⭐ Imprescindibles</button>
+          <button class="chip" type="button" data-color="green" aria-pressed="false">🍴 Gastronomía</button>
+          <button class="chip" type="button" data-color="blue" aria-pressed="false">🌳 Parques y canales</button>
+          <button class="chip" type="button" data-color="red" aria-pressed="false">✕ Evitar</button>
+        </div>
+
         <div class="layout-aside">
           <div>
-            <div class="chip-row" data-map-filter style="margin-bottom:1rem">
-              <button class="chip" type="button" data-color="all" aria-pressed="true">Todos</button>
-              <button class="chip" type="button" data-color="orange" aria-pressed="false">⭐ Imprescindibles</button>
-              <button class="chip" type="button" data-color="green" aria-pressed="false">🍴 Gastronomía</button>
-              <button class="chip" type="button" data-color="blue" aria-pressed="false">🌳 Parques y canales</button>
-              <button class="chip" type="button" data-color="red" aria-pressed="false">✕ Evitar</button>
-            </div>
             <div id="map" role="application" aria-label="Mapa de puntos de interés de Utrecht"></div>
-            <p class="small muted" style="margin-top:0.75rem">Haz clic sobre el mapa para activar el zoom con la rueda.</p>
+            <p class="small muted map-hint-raton" style="margin-top:0.75rem">
+              Haz clic sobre el mapa para activar el zoom con la rueda.
+            </p>
           </div>
 
-          <aside class="card">
-            <h3 class="card__title">🚴 <span id="n-rutas">5</span> rutas en bici</h3>
-            <p class="card__text" style="margin-bottom:1.25rem">
-              Salidas de fin de semana por los alrededores. Actívalas para dibujarlas sobre el mapa
-              o descarga el GPX.
-            </p>
-            <div id="rutas-list" class="stack">
-              <p class="muted small">Cargando rutas…</p>
+          <aside class="puntos-panel">
+            <div class="search-field">
+              <span class="search-field__icon" aria-hidden="true">🔎</span>
+              <label class="visually-hidden" for="puntos-search">Buscar un sitio por nombre</label>
+              <input type="search" id="puntos-search" placeholder="Buscar: pizza, parque, Dom…"
+                     autocomplete="off" />
             </div>
+            <p class="puntos-panel__count small muted" id="puntos-count" role="status">Cargando sitios…</p>
+            <ul class="puntos-list" id="puntos-list"></ul>
           </aside>
+        </div>
+      </div>
+
+      <div class="wrap" style="margin-top:3.5rem">
+        <h3 style="margin-bottom:0.5rem">🚴 <span id="n-rutas">5</span> rutas en bici por los alrededores</h3>
+        <p class="lead" style="margin-bottom:1.75rem">
+          Salidas de fin de semana. Actívalas para dibujarlas sobre el mapa o descarga el GPX.
+        </p>
+        <div id="rutas-list" class="grid grid-3">
+          <p class="muted small">Cargando rutas…</p>
         </div>
       </div>
     </section>
@@ -932,24 +945,28 @@
                     data-share-text="Guía de Utrecht en español, escrita por alguien que vive allí">
               Comparte con tu compi de viaje
             </button>
-            <a class="btn btn-secondary" href="#que-ver">Descarga la guía PDF completa</a>
+            <button class="btn btn-secondary" type="button" data-print>
+              Guardar la guía en PDF
+            </button>
           </div>
           <p class="footer__note" style="margin-top:0.6rem">
-            La versión en PDF todavía no existe: de momento el botón te lleva a los itinerarios.
+            Abre el diálogo de impresión del navegador con la guía maquetada para papel:
+            elige «Guardar como PDF» y te la llevas al viaje sin conexión.
           </p>
         </div>
 
         <div>
-          <h3 style="font-size:1.15rem">Un consejo mensual de Utrecht que no encontrarás en las guías</h3>
-          <p class="footer__note" style="margin-top:0.5rem">
-            Un correo al mes. Nada más.
+          <h3 style="font-size:1.15rem">Llévate Utrecht en el bolsillo</h3>
+          <p class="footer__note" style="margin-top:0.5rem;max-width:38ch">
+            No hay newsletter ni formularios: la guía se actualiza aquí y ya está.
+            Si vas a venir, lo práctico es esto.
           </p>
-          <form class="form-inline" id="newsletter-form" novalidate>
-            <label class="visually-hidden" for="newsletter-email">Tu correo electrónico</label>
-            <input type="email" id="newsletter-email" name="email" placeholder="tu@correo.com" required />
-            <button class="btn btn-primary" type="submit">Apuntarme</button>
-          </form>
-          <p class="form-status" id="newsletter-status" role="status"></p>
+          <ul style="list-style:none;padding:0;display:grid;gap:0.6rem;margin-top:1.25rem">
+            <li><a href="free-tour/">🚶 Hacer un free tour con el móvil</a></li>
+            <li><a href="#mapa">🗺️ Buscar un sitio concreto en el mapa</a></li>
+            <li><a href="historia.html">📚 Leer de dónde sale todo esto</a></li>
+            <li><a href="https://github.com/zaswear/mijnutrecht" target="_blank" rel="noopener">⭐ Seguir los cambios en GitHub</a></li>
+          </ul>
         </div>
       </div>
 

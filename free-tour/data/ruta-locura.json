@@ -10,9 +10,10 @@
   "portada": "../fotos/optim/olivier-800.webp",
   "portada_alt": "Interior de un bruine café de Utrecht con bóvedas de madera",
   "punto_encuentro": {
-    "nombre": "Fuente de Neude",
-    "lat": 52.0930,
-    "lng": 5.1185
+    "nombre": "Al pie de la Domtoren, Domplein",
+    "detalle": "Bajo la torre, junto a la entrada de las visitas guiadas.",
+    "lat": 52.0908,
+    "lng": 5.1213
   },
   "paradas_lista": [
     {
@@ -31,7 +32,11 @@
       "reto_foto": "Haz una foto desde arriba capturando el mar de bicis. Sin coches.",
       "acertijo": {
         "pregunta": "¿Cuántos kilos pesa la campana más grande?",
-        "opciones": ["3.200 kg", "8.200 kg", "12.000 kg"],
+        "opciones": [
+          "3.200 kg",
+          "8.200 kg",
+          "12.000 kg"
+        ],
         "correcta": 1,
         "explicacion": "La campana «Salvator» pesa 8.200 kilos, el equivalente a 8 coches compactos."
       }
@@ -56,7 +61,7 @@
       "numero": 3,
       "titulo": "El Mercado donde el Tiempo no Existe",
       "subtitulo": "Desde 1597, el mismo sitio",
-      "lat": 52.0920,
+      "lat": 52.092,
       "lng": 5.1225,
       "tiempo_estimado": "10 minutos",
       "distancia_siguiente": "5 min caminando",
@@ -73,7 +78,7 @@
       "titulo": "El Barrio que la Gente Cruza pero No Explora",
       "subtitulo": "Twijnstraat: donde compran los locales",
       "lat": 52.0895,
-      "lng": 5.1170,
+      "lng": 5.117,
       "tiempo_estimado": "10 minutos",
       "distancia_siguiente": "6 min caminando",
       "foto": "../fotos/optim/oudegracht-modern-1200.webp",

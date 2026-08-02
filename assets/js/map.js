@@ -1,7 +1,7 @@
 /* ═══════════════════════════════════════════════════════════
    Mijn Utrecht · map.js
-   Mapa Leaflet: puntos de interés, filtros por categoría,
-   modo noche y rutas ciclistas en GPX.
+   Mapa Leaflet: puntos de interés, buscador + lista, filtros
+   por categoría, modo noche y rutas ciclistas en GPX.
    ═══════════════════════════════════════════════════════════ */
 (function () {
   'use strict';
@@ -15,9 +15,37 @@
     });
   };
 
-  var map = L.map('map', { scrollWheelZoom: false }).setView([52.0907, 5.1214], 14);
+  // Normaliza para buscar sin tildes ni mayúsculas
+  var norm = function (s) {
+    return String(s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  };
+
+  var esTactil = window.matchMedia('(hover: none)').matches;
+
+  var map = L.map('map', {
+    scrollWheelZoom: false,
+    // En táctil el arrastre empieza desactivado: si no, un swipe vertical
+    // que empiece sobre el mapa mueve el mapa en vez de bajar la página.
+    dragging: !esTactil,
+    tap: false
+  }).setView([52.0907, 5.1214], 14);
+
   map.on('click', function () { map.scrollWheelZoom.enable(); });
   map.on('mouseout', function () { map.scrollWheelZoom.disable(); });
+
+  /* Capa de activación en móvil: hasta que no se toca, la página manda */
+  if (esTactil) {
+    var velo = document.createElement('button');
+    velo.type = 'button';
+    velo.className = 'map-activar';
+    velo.innerHTML = '<span>👆 Toca para mover el mapa</span>';
+    velo.setAttribute('aria-label', 'Activar el mapa para poder moverlo con el dedo');
+    mapEl.appendChild(velo);
+    velo.addEventListener('click', function () {
+      map.dragging.enable();
+      velo.remove();
+    });
+  }
 
   var attr = '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · © <a href="https://carto.com/attributions">CARTO</a>';
   var dayTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', { attribution: attr, maxZoom: 19 });
@@ -49,10 +77,10 @@
 
   /* Marcadores */
   var COLORES = {
-    orange: { bg: '#E86A33', glyph: '★' },
-    green: { bg: '#5A8F6E', glyph: '🍴' },
-    blue: { bg: '#3A6B7C', glyph: '🌳' },
-    red: { bg: '#B3382C', glyph: '✕' }
+    orange: { bg: '#E86A33', glyph: '★', etiqueta: 'Imprescindible' },
+    green: { bg: '#5A8F6E', glyph: '🍴', etiqueta: 'Gastronomía' },
+    blue: { bg: '#3A6B7C', glyph: '🌳', etiqueta: 'Parque o canal' },
+    red: { bg: '#B3382C', glyph: '✕', etiqueta: 'Mejor evitarlo' }
   };
 
   function makeIcon(color) {
@@ -68,7 +96,77 @@
     });
   }
 
-  var markers = [];
+  var sitios = [];          // { lugar, marker, texto }
+  var filtroColor = 'all';
+  var filtroTexto = '';
+
+  var listaEl = document.getElementById('puntos-list');
+  var countEl = document.getElementById('puntos-count');
+  var searchEl = document.getElementById('puntos-search');
+
+  function visibles() {
+    return sitios.filter(function (s) {
+      if (filtroColor !== 'all' && s.lugar.color !== filtroColor) return false;
+      if (filtroTexto && s.texto.indexOf(filtroTexto) === -1) return false;
+      return true;
+    });
+  }
+
+  function pintarLista() {
+    if (!listaEl) return;
+    var lista = visibles();
+
+    if (countEl) {
+      countEl.textContent = lista.length === sitios.length
+        ? sitios.length + ' sitios · todos los que recomiendo o evito'
+        : lista.length + ' de ' + sitios.length + ' sitios';
+    }
+
+    if (!lista.length) {
+      listaEl.innerHTML = '<li class="punto-item punto-item--vacio">Ningún sitio coincide. Prueba con otra palabra o quita el filtro.</li>';
+      return;
+    }
+
+    listaEl.innerHTML = lista.map(function (s) {
+      var l = s.lugar;
+      var cat = COLORES[l.color] || {};
+      return '<li class="punto-item">' +
+        '<button type="button" class="punto-item__btn" data-punto="' + s.id + '">' +
+          '<span class="punto-item__punto" style="background:' + (cat.bg || '#6B5E55') + '" aria-hidden="true"></span>' +
+          '<span class="punto-item__texto">' +
+            '<span class="punto-item__nombre">' + esc(l.nombre) + '</span>' +
+            (l.nota ? '<span class="punto-item__nota">' + esc(l.nota) + '</span>' : '') +
+          '</span>' +
+        '</button>' +
+        (l.google_maps_url
+          ? '<a class="punto-item__gmaps" href="' + esc(l.google_maps_url) + '" target="_blank" rel="noopener"' +
+            ' aria-label="Abrir ' + esc(l.nombre) + ' en Google Maps">↗</a>'
+          : '') +
+      '</li>';
+    }).join('');
+  }
+
+  function pintarMarcadores() {
+    var lista = visibles();
+    var ids = lista.map(function (s) { return s.id; });
+    sitios.forEach(function (s) {
+      if (ids.indexOf(s.id) > -1) s.marker.addTo(map);
+      else s.marker.remove();
+    });
+  }
+
+  function refrescar() {
+    pintarMarcadores();
+    pintarLista();
+  }
+
+  function irAlPunto(id) {
+    var s = sitios[id];
+    if (!s) return;
+    map.setView([s.lugar.coordenadas[0], s.lugar.coordenadas[1]], 17, { animate: true });
+    s.marker.openPopup();
+    if (esTactil) mapEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 
   fetch('./maps/puntos.json')
     .then(function (r) { return r.json(); })
@@ -76,8 +174,9 @@
       var n = document.getElementById('n-puntos');
       if (n) n.textContent = String(data.length);
 
-      data.forEach(function (lugar) {
+      data.forEach(function (lugar, i) {
         var tipo = lugar.tipo ? (Array.isArray(lugar.tipo) ? lugar.tipo.join(' · ') : lugar.tipo) : '';
+        var cat = COLORES[lugar.color] || {};
         var html =
           '<div class="popup">' +
             '<p class="popup__title">' + esc(lugar.nombre) + '</p>' +
@@ -92,23 +191,51 @@
         var m = L.marker(lugar.coordenadas, { icon: makeIcon(lugar.color), title: lugar.nombre })
           .addTo(map)
           .bindPopup(html);
-        m._color = lugar.color;
-        markers.push(m);
-      });
-    })
-    .catch(function () { console.warn('No se pudo cargar maps/puntos.json'); });
 
-  /* Filtros */
+        sitios.push({
+          id: i,
+          lugar: lugar,
+          marker: m,
+          texto: norm([lugar.nombre, lugar.descripcion, lugar.nota, tipo, cat.etiqueta].join(' '))
+        });
+      });
+
+      refrescar();
+    })
+    .catch(function () {
+      console.warn('No se pudo cargar maps/puntos.json');
+      if (countEl) countEl.textContent = 'No se han podido cargar los sitios.';
+    });
+
+  /* Buscador */
+  if (searchEl) {
+    var t;
+    searchEl.addEventListener('input', function (e) {
+      clearTimeout(t);
+      var v = e.target.value;
+      t = setTimeout(function () {
+        filtroTexto = norm(v.trim());
+        refrescar();
+      }, 140);
+    });
+  }
+
+  /* Clic en un resultado de la lista */
+  if (listaEl) {
+    listaEl.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-punto]');
+      if (btn) irAlPunto(parseInt(btn.dataset.punto, 10));
+    });
+  }
+
+  /* Filtros por categoría */
   document.querySelectorAll('[data-map-filter] .chip').forEach(function (btn) {
     btn.addEventListener('click', function () {
       btn.closest('[data-map-filter]').querySelectorAll('.chip').forEach(function (b) {
         b.setAttribute('aria-pressed', String(b === btn));
       });
-      var color = btn.dataset.color;
-      markers.forEach(function (m) {
-        if (color === 'all' || m._color === color) m.addTo(map);
-        else m.remove();
-      });
+      filtroColor = btn.dataset.color;
+      refrescar();
     });
   });
 
@@ -145,7 +272,7 @@
       btn.style.background = color;
       btn.style.color = '#fff';
       btn.setAttribute('aria-pressed', 'true');
-      document.getElementById('mapa').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      mapEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   };
 

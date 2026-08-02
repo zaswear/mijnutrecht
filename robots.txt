@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://zaswear.github.io/mijnutrecht/sitemap.xml

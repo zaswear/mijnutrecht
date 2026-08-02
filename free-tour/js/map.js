@@ -20,12 +20,30 @@
     var el = document.getElementById(containerId);
     if (!el) return null;
 
+    // En táctil el arrastre arranca desactivado para no secuestrar el scroll
+    // de la página; se activa al tocar el mapa (ver activarArrastre).
+    var esTactil = window.matchMedia('(hover: none)').matches;
     map = L.map(containerId, {
       center: center || [52.0907, 5.1214],
       zoom: zoom || 15,
       scrollWheelZoom: false,
+      dragging: !esTactil,
+      tap: false,
       zoomControl: true
     });
+
+    if (esTactil) {
+      var velo = document.createElement('button');
+      velo.type = 'button';
+      velo.className = 'map-activar';
+      velo.innerHTML = '<span>👆 Toca para mover el mapa</span>';
+      velo.setAttribute('aria-label', 'Activar el mapa para poder moverlo con el dedo');
+      el.appendChild(velo);
+      velo.addEventListener('click', function () {
+        map.dragging.enable();
+        velo.remove();
+      });
+    }
 
     L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
       attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · © <a href="https://carto.com/attributions">CARTO</a>',

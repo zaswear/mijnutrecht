@@ -98,6 +98,65 @@
     });
   }
 
+  /* ── Imprimir / guardar como PDF ── */
+  document.querySelectorAll('[data-print]').forEach(function (btn) {
+    btn.addEventListener('click', function () { window.print(); });
+  });
+
+  /* ── Volver arriba: estas páginas miden 15.000-21.000 px ── */
+  if (document.body.scrollHeight > 4000) {
+    var top = document.createElement('button');
+    top.type = 'button';
+    top.className = 'back-to-top';
+    top.setAttribute('aria-label', 'Volver arriba');
+    top.innerHTML = '↑';
+    document.body.appendChild(top);
+
+    top.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      var first = document.querySelector('.nav__brand');
+      if (first) first.focus();
+    });
+
+    var toggleTop = function () {
+      top.classList.toggle('is-visible', window.scrollY > 900);
+    };
+    toggleTop();
+    window.addEventListener('scroll', toggleTop, { passive: true });
+  }
+
+  /* ── Scrollspy: marca en el nav la sección que se está leyendo ── */
+  var spyLinks = Array.prototype.slice
+    .call(document.querySelectorAll('.nav__link[href^="#"]'))
+    .map(function (a) {
+      return { link: a, section: document.getElementById(a.getAttribute('href').slice(1)) };
+    })
+    .filter(function (x) { return x.section; });
+
+  if (spyLinks.length && 'IntersectionObserver' in window) {
+    var marcar = function (activa) {
+      spyLinks.forEach(function (x) {
+        if (x.section === activa) x.link.setAttribute('aria-current', 'true');
+        else x.link.removeAttribute('aria-current');
+      });
+    };
+
+    var visiblesSpy = new Set();
+    var spyObs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) visiblesSpy.add(e.target);
+        else visiblesSpy.delete(e.target);
+      });
+      // La primera del documento que esté en pantalla
+      var actual = spyLinks
+        .map(function (x) { return x.section; })
+        .filter(function (s) { return visiblesSpy.has(s); })[0];
+      marcar(actual);
+    }, { rootMargin: '-30% 0px -55% 0px' });
+
+    spyLinks.forEach(function (x) { spyObs.observe(x.section); });
+  }
+
   /* ── Año en el footer ── */
   var year = document.getElementById('year');
   if (year) year.textContent = String(new Date().getFullYear());

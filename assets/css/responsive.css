@@ -81,7 +81,8 @@
   .timeline__hora { width: 32px; font-size: 0.62rem; }
 
   .tabs { width: 100%; justify-content: flex-start; }
-  #map { height: 420px; }
+  #map { height: 380px; }
+  .puntos-panel { max-height: 460px; }
 
   /* Modal como hoja inferior en móvil */
   .modal { align-items: flex-end; padding: 0; }
@@ -92,6 +93,12 @@
   }
   #lightbox-prev, #lightbox-next { top: auto; bottom: 4.5rem; transform: none; }
   #lightbox-prev:hover, #lightbox-next:hover { transform: scale(1.06); }
+}
+
+/* ───────── Dispositivos táctiles ───────── */
+@media (hover: none) {
+  /* No hay rueda del ratón que activar */
+  .map-hint-raton { display: none; }
 }
 
 /* ───────── Móvil pequeño (≤ 420px) ───────── */
@@ -106,10 +113,44 @@
   :root { --pad-x: 4rem; --gap-section: 8rem; }
 }
 
-/* ───────── Impresión ───────── */
+/* ───────── Impresión ─────────
+   El botón «Guardar la guía en PDF» abre este layout: hay que desplegar
+   todo lo que en pantalla está colapsado (pestañas y acordeones), o el
+   PDF saldría con la mitad del contenido. */
 @media print {
-  .nav, .hero__scroll, .footer__actions, #lightbox, .modal { display: none !important; }
-  body { background: #fff; }
-  .section { padding-block: 1.5rem; }
-  .reveal { opacity: 1; transform: none; }
+  .nav, .hero__scroll, .footer__actions, #lightbox, .modal,
+  .back-to-top, .map-activar, .tabs, .chip-row, #map,
+  .puntos-panel, .gallery-grid, .weather, .free-tour-cards { display: none !important; }
+
+  body { background: #fff; color: #000; }
+  .section { padding-block: 1.25rem; break-inside: avoid; }
+  .section--paper, .section--canal, .section--dark, .footer {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  .section--canal h2, .section--canal h3, .section--dark h2, .section--dark h3,
+  .footer h2, .footer h3 { color: #000 !important; }
+  .section--canal .lead, .section--dark .lead, .footer__note { color: #333 !important; }
+
+  .reveal { opacity: 1 !important; transform: none !important; }
+  .card, .versus__col, .walk-card { box-shadow: none; break-inside: avoid; }
+
+  /* Todo el contenido colapsado, desplegado.
+     hidden="until-found" oculta con content-visibility, no con display:
+     hay que revertir las dos cosas o el PDF sale sin las pestañas. */
+  .tab-panel[hidden], .tab-panel {
+    display: block !important;
+    content-visibility: visible !important;
+  }
+  .accordion__panel { max-height: none !important; overflow: visible !important; }
+  .accordion__chevron { display: none; }
+
+  .hero { min-height: 0; padding: 2rem 0; color: #000; }
+  .hero__media, .hero__overlay { display: none; }
+  .hero__title { color: #000; text-shadow: none; }
+  .hero__claim, .hero__sub, .hero__eyebrow, .trust-bar__item { color: #000 !important; }
+  .trust-bar { border-top-color: #ccc; }
+
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.75em; color: #555; }
+  a[href^="#"]::after, a[href$=".html"]::after { content: ""; }
 }

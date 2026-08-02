@@ -598,3 +598,65 @@
   .tour-wrap, .stop-card, .tour-top__row { max-width: 720px; }
   .tour-nav { justify-content: center; gap: 2rem; }
 }
+
+/* Velo de activación del mapa en táctil (mismo patrón que el mapa principal) */
+#tour-map { position: relative; }
+.map-activar {
+  position: absolute;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+  padding-bottom: 1.5rem;
+  border-radius: 0;
+  background: transparent;   /* el mapa se ve entero: solo se bloquea el arrastre */
+}
+.map-activar span {
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: var(--shadow-lift);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-texto);
+}
+
+/* ───────── Punto de encuentro (solo parada 1) ───────── */
+.encuentro {
+  margin-bottom: 1.5rem;
+  padding: 1.1rem 1.25rem;
+  border-radius: 12px;
+  background: var(--color-blanco);
+  border: 2px solid var(--color-accent);
+}
+.encuentro__label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8A6E15;
+  margin-bottom: 0.4rem;
+}
+.encuentro__nombre { font-weight: 700; font-size: 1rem; }
+.encuentro__detalle { font-size: 0.85rem; color: var(--color-texto-suave); margin-top: 0.2rem; }
+.encuentro .btn-soft { margin-top: 0.9rem; }
+
+/* ───────── Ruta a medias en el listado ───────── */
+.ft-reanudar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.15rem;
+  border-radius: 12px;
+  background: var(--color-blanco);
+  border: 2px solid var(--color-ladrillo);
+}
+.ft-reanudar__texto { flex: 1; min-width: 12rem; font-size: 0.9rem; }
+.ft-reanudar__texto strong { display: block; }
+.ft-reanudar__texto span { color: var(--color-texto-suave); font-size: 0.82rem; }
+.ft-reanudar .btn-soft { background: var(--color-ladrillo); border-color: var(--color-ladrillo); color: #fff; }
+.ft-reanudar .btn-soft:hover { background: var(--color-ladrillo-dark); border-color: var(--color-ladrillo-dark); color: #fff; }

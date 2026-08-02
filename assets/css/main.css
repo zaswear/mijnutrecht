@@ -5,8 +5,10 @@
 
 :root {
   /* Paleta */
-  --color-ladrillo: #B85C3F;
+  --color-ladrillo: #B85C3F;        /* rellenos: blanco encima cumple AA (4.53) */
   --color-ladrillo-dark: #9C4831;
+  --color-ladrillo-texto: #9C4831;  /* texto sobre fondo claro: 5.47 sobre piedra */
+  --color-ladrillo-claro: #FBE7DC;  /* texto sobre fondo canal: 4.91 */
   --color-canal: #3A6B7C;
   --color-canal-dark: #2C5361;
   --color-piedra: #F5F0E8;
@@ -69,14 +71,16 @@ img, picture, svg, video { display: block; max-width: 100%; }
 img { height: auto; }
 
 /* El atributo hidden debe ganar a cualquier display de componente
-   (.btn, .callout…), o elementos ocultos siguen viéndose. */
-[hidden] { display: none !important; }
+   (.btn, .callout…), o elementos ocultos siguen viéndose.
+   Se excluye hidden="until-found": ese modo necesita seguir participando
+   del layout para que la búsqueda del navegador (Ctrl+F) lo encuentre. */
+[hidden]:not([hidden='until-found']) { display: none !important; }
 
 button, input, textarea, select { font: inherit; color: inherit; }
 button { cursor: pointer; background: none; border: none; padding: 0; }
 
-a { color: var(--color-ladrillo); text-decoration-thickness: 1px; text-underline-offset: 3px; }
-a:hover { color: var(--color-ladrillo-dark); }
+a { color: var(--color-ladrillo-texto); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+a:hover { color: #7E3626; }
 
 ul, ol { padding-left: 1.15rem; }
 
@@ -101,12 +105,16 @@ p, li { text-wrap: pretty; }
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--color-ladrillo);
+  color: var(--color-ladrillo-texto);
   display: block;
   margin-bottom: 0.75rem;
 }
-.eyebrow--canal { color: var(--color-canal); }
-.eyebrow--verde { color: var(--color-verde); }
+.eyebrow--canal { color: var(--color-canal-dark); }
+.eyebrow--verde { color: #3F6B50; }
+/* Sobre fondos oscuros (section--canal / section--dark / footer) */
+.section--canal .eyebrow,
+.section--dark .eyebrow,
+.footer .eyebrow { color: var(--color-ladrillo-claro); }
 
 .lead {
   font-size: clamp(1.02rem, 1.7vw, 1.2rem);
@@ -138,10 +146,10 @@ p, li { text-wrap: pretty; }
 .section--paper { background: var(--color-blanco); }
 .section--canal { background: var(--color-canal); color: #F2EFE9; }
 .section--canal h2, .section--canal h3 { color: #fff; }
-.section--canal .lead { color: rgba(255, 255, 255, 0.78); }
+.section--canal .lead { color: rgba(255, 255, 255, 0.92); }
 .section--dark { background: var(--color-texto); color: #EDE6DC; }
 .section--dark h2, .section--dark h3 { color: #fff; }
-.section--dark .lead { color: rgba(255, 255, 255, 0.72); }
+.section--dark .lead { color: rgba(255, 255, 255, 0.86); }
 
 .section-head { margin-bottom: 3rem; max-width: 66ch; }
 .section-head .lead { margin-top: 1rem; }

@@ -135,6 +135,19 @@
     '</section>';
   }
 
+  /* Punto de encuentro: solo en la primera parada, que es donde importa */
+  function encuentroBlock() {
+    var pe = route && route.punto_encuentro;
+    if (!pe || index !== 0) return '';
+    return '<aside class="encuentro">' +
+      '<p class="encuentro__label">📍 Empieza aquí</p>' +
+      '<p class="encuentro__nombre">' + esc(pe.nombre) + '</p>' +
+      (pe.detalle ? '<p class="encuentro__detalle">' + esc(pe.detalle) + '</p>' : '') +
+      '<button type="button" class="btn-soft" id="btn-encuentro" ' +
+      'aria-label="Abrir el punto de encuentro en Google Maps">🧭 Cómo llegar al punto de encuentro</button>' +
+    '</aside>';
+  }
+
   function renderStop(i) {
     finished = false;
     index = Math.max(0, Math.min(i, stops.length - 1));
@@ -147,6 +160,7 @@
     root.innerHTML =
       '<article class="stop-card">' +
         '<span class="stop-card__eyebrow">Parada ' + (index + 1) + ' de ' + stops.length + '</span>' +
+        encuentroBlock() +
         mediaBlock(stop) +
         '<h1 class="stop-card__title">' + esc(stop.titulo) + '</h1>' +
         '<p class="stop-card__subtitle">' + esc(stop.subtitulo) + '</p>' +
@@ -236,6 +250,13 @@
           speak.textContent = '🔊 Escuchar';
           speak.setAttribute('aria-pressed', 'false');
         });
+      });
+    }
+
+    var enc = $('btn-encuentro');
+    if (enc && route.punto_encuentro) {
+      enc.addEventListener('click', function () {
+        FTGeo.openDirections(route.punto_encuentro.lat, route.punto_encuentro.lng, route.punto_encuentro.nombre);
       });
     }
 
@@ -530,6 +551,44 @@
     $('resume-no').onclick = function () { close(); onNo(); };
   }
 
+  /* ───────── metadatos por ruta ─────────
+     Las dos rutas viven en la misma URL con distinto ?ruta=, así que
+     canonical y Open Graph se ajustan al abrir la ruta: si no, compartir
+     cualquiera de las dos enseña la misma tarjeta. */
+  function actualizarMetadatos(data) {
+    var base = location.origin + location.pathname.replace(/[^/]*$/, '');
+    var url = base + 'ruta.html?ruta=' + data.id;
+    var desc = data.subtitulo + ' · ' + data.paradas + ' paradas, ' + data.distancia +
+               ' y ' + data.duracion + ' caminando por Utrecht, en español.';
+
+    function meta(sel, attr, valor) {
+      var el = document.head.querySelector(sel);
+      if (!el) {
+        el = document.createElement('meta');
+        var partes = sel.match(/\[(.+?)=["'](.+?)["']\]/);
+        if (partes) el.setAttribute(partes[1], partes[2]);
+        document.head.appendChild(el);
+      }
+      el.setAttribute(attr, valor);
+    }
+
+    var canon = document.head.querySelector('link[rel="canonical"]');
+    if (!canon) {
+      canon = document.createElement('link');
+      canon.rel = 'canonical';
+      document.head.appendChild(canon);
+    }
+    canon.href = url;
+
+    meta('meta[name="description"]', 'content', desc);
+    meta('meta[property="og:title"]', 'content', data.titulo + ' · Free Tour de Utrecht');
+    meta('meta[property="og:description"]', 'content', desc);
+    meta('meta[property="og:url"]', 'content', url);
+    if (data.portada) {
+      meta('meta[property="og:image"]', 'content', new URL(data.portada, location.href).href);
+    }
+  }
+
   /* ───────── arranque ───────── */
   function loadRoute(routeId) {
     return fetch('data/ruta-' + routeId + '.json')
@@ -545,6 +604,7 @@
         document.title = data.titulo + ' · Free Tour · Mijn Utrecht';
         var t = $('tour-title');
         if (t) t.textContent = data.icono + ' ' + data.titulo;
+        actualizarMetadatos(data);
 
         setupMap();
         setupGestures();

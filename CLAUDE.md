@@ -49,12 +49,12 @@ mijnutrecht/
 │   │   ├── sections.css    ← Estilos propios de cada sección
 │   │   └── responsive.css  ← Media queries (colapsos ≤1024px y ≤760px)
 │   ├── js/
-│   │   ├── main.js         ← Navbar, menú móvil, selector de modo, share, newsletter
+│   │   ├── main.js         ← Navbar, menú móvil, modo, share, imprimir, volver arriba, scrollspy
 │   │   ├── tabs.js         ← Tabs accesibles genéricas ([data-tabs])
 │   │   ├── accordion.js    ← Acordeones FAQ ([data-accordion])
 │   │   ├── animations.js   ← IntersectionObserver: .reveal y contadores .js-count
 │   │   ├── landing.js      ← Itinerarios, 7 experiencias y modal de rutas a pie
-│   │   ├── map.js          ← Leaflet: puntos, filtros, modo noche, rutas GPX
+│   │   ├── map.js          ← Leaflet: puntos, buscador + lista, filtros, modo noche, GPX
 │   │   ├── gallery.js      ← Galería Cloudinary + lightbox
 │   │   ├── weather.js      ← Widget de clima Open-Meteo
 │   │   └── alma.js         ← Módulos de historia.html (comparadores, quiz, glosario,
@@ -79,6 +79,8 @@ mijnutrecht/
 │   ├── plantas.json        ← Flora local por temporada
 │   └── fotos/
 ├── scripts/                ← Scripts de automatización (no se publican)
+├── 404.html                ← Página de error de GitHub Pages (rutas absolutas /mijnutrecht/…)
+├── robots.txt · sitemap.xml
 └── CLAUDE.md               ← Este archivo
 ```
 
@@ -93,7 +95,9 @@ pueden borrar cuando el rediseño esté asentado: `index.html.bak`, `assets/js/a
 Variables en `assets/css/main.css` (`:root`). **No hardcodear colores nuevos**, usar estos:
 
 ```css
---color-ladrillo: #B85C3F;   /* acentos, CTA, links */
+--color-ladrillo: #B85C3F;        /* rellenos: botones, bordes (blanco encima cumple AA) */
+--color-ladrillo-texto: #9C4831;  /* TEXTO sobre fondo claro (eyebrow, enlaces) */
+--color-ladrillo-claro: #FBE7DC;  /* texto sobre fondo canal / oscuro */
 --color-canal:    #3A6B7C;   /* fondos de sección, headers */
 --color-piedra:   #F5F0E8;   /* fondo principal */
 --color-naranja:  #E86A33;   /* badges, destacados */
@@ -122,11 +126,23 @@ Ritmo: `--gap-section` 6rem (8rem en ≥1280px), radios 12px (`--radius`) y 20px
   inyecta por JS, disparar `document.dispatchEvent(new CustomEvent('mu:content-loaded'))`
   para que `animations.js` vuelva a observar.
 - **Tabs**: contenedor `[data-tabs]` con `role="tablist"`, botones `role="tab"` +
-  `aria-controls`, paneles `.tab-panel` con `hidden`.
+  `aria-controls`, paneles `.tab-panel` con `hidden`. `tabs.js` los convierte a
+  `hidden="until-found"` para que **Ctrl+F encuentre el contenido de las pestañas
+  cerradas** y las abra (evento `beforematch`). Por eso la regla global es
+  `[hidden]:not([hidden='until-found'])` y la hoja de impresión revierte además
+  `content-visibility`. Con `data-tabs-param="dia"` la pestaña activa se refleja en
+  la URL (`?dia=3`), así se pueden compartir enlaces directos.
 - **Acordeones**: contenedor `[data-accordion]` (`data-accordion="single"` para que solo
   quede uno abierto), trigger `.accordion__trigger` con `aria-expanded` + `aria-controls`.
 - **Filtros**: `.chip` con `aria-pressed`; los contenedores llevan `data-map-filter`,
   `data-agenda-filter` o `data-flora-filter`.
+- **Mapa**: además de los pines hay buscador + lista (`#puntos-search`, `#puntos-list`),
+  porque pinchando pines no se encuentra un sitio concreto. La búsqueda ignora tildes.
+- **Contraste**: para texto sobre fondo claro usar `--color-ladrillo-texto` (#9C4831),
+  no `--color-ladrillo` (#B85C3F, se queda en 3.99 sobre piedra). Sobre fondos canal u
+  oscuros, `--color-ladrillo-claro`.
+- **Mapas en táctil**: arrancan con `dragging` desactivado y un botón `.map-activar`
+  encima. Si no, un swipe vertical que empiece sobre el mapa secuestra el scroll.
 - **Modo turista/expat**: `<body data-modo="turista|expat">` y enlaces con `data-modo`;
   `main.js` guarda la preferencia en `localStorage` (`mijnutrecht:modo`).
 
@@ -149,7 +165,13 @@ reset y tipografía) y las fotos de `../fotos/optim/`.
 - **Service Worker en `free-tour/sw.js`, no en `js/`**: un SW solo controla su propio
   directorio hacia abajo y GitHub Pages no deja mandar `Service-Worker-Allowed`. Si se
   moviera a `js/` dejaría de cachear `ruta.html`. Al añadir archivos nuevos a la sección,
-  añádelos a la lista `CORE` y **sube la versión de `CACHE_NAME`** para invalidar el caché.
+  añádelos a la lista `CORE` y **sube la versión de `CACHE_NAME`**.
+  Estrategia: **red primero para HTML y JSON** (un deploy se ve en el acto) y **caché
+  primero para CSS, JS e imágenes** (la ruta abre al instante en mitad de la calle).
+- **Metadatos por ruta**: las dos rutas comparten `ruta.html`, así que `free-tour.js`
+  reescribe `canonical` y las etiquetas Open Graph según `?ruta=`.
+- **Punto de encuentro**: `punto_encuentro` se pinta solo en la parada 1 y debe coincidir
+  con sus coordenadas; si no, el usuario queda en un sitio y la ruta empieza en otro.
 - **Fotos**: cada parada usa `foto` (ruta relativa desde `/free-tour/`). Si está vacío se
   pinta un bloque de color con el número de parada. Instrucciones para añadir fotos
   propias en `img/ruta-*/README.md`.
@@ -286,4 +308,6 @@ Test visual de regresión con `agent-browser diff screenshot`
 - Nunca subir API keys al repo.
 - Los archivos en `scripts/` son herramientas locales, no se despliegan.
 - Accesibilidad: botones reales (`<button>`), `alt` en imágenes, foco visible,
-  objetivos táctiles de 44px y respeto a `prefers-reduced-motion`.
+  objetivos táctiles de 44px, contraste AA y respeto a `prefers-reduced-motion`.
+- Nada de promesas falsas en la UI: el botón de PDF abre `window.print()` con la hoja
+  de impresión (que despliega pestañas y acordeones), no un PDF inexistente.

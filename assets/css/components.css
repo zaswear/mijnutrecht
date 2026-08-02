@@ -49,7 +49,7 @@
 }
 .btn-ghost:hover {
   border-color: var(--color-ladrillo);
-  color: var(--color-ladrillo);
+  color: var(--color-ladrillo-texto);
   transform: translateY(-2px);
   box-shadow: var(--shadow-card);
 }
@@ -81,7 +81,7 @@
   font-size: 0.78rem;
   color: var(--color-texto-suave);
 }
-.card__meta strong { color: var(--color-ladrillo); font-size: 0.88rem; }
+.card__meta strong { color: var(--color-ladrillo-texto); font-size: 0.88rem; }
 
 /* Lista de datos dentro de tarjetas */
 .tick-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.55rem; }
@@ -156,13 +156,15 @@
   white-space: nowrap;
   transition: background 0.25s var(--ease-out), color 0.25s, box-shadow 0.25s;
 }
-.tab:hover { color: var(--color-ladrillo); }
+.tab:hover { color: var(--color-ladrillo-texto); }
 .tab[aria-selected="true"] {
   background: var(--color-blanco);
-  color: var(--color-ladrillo);
+  color: var(--color-ladrillo-texto);
   box-shadow: var(--shadow-card);
 }
-.tab-panel[hidden] { display: none; }
+/* Los paneles inactivos usan hidden="until-found": siguen ocultos pero
+   Ctrl+F los encuentra y los abre (ver tabs.js). */
+.tab-panel[hidden]:not([hidden='until-found']) { display: none; }
 .tab-panel { animation: fadeUp 0.45s var(--ease-out); }
 
 @keyframes fadeUp {
@@ -185,7 +187,7 @@
   color: var(--color-texto-suave);
   transition: all 0.2s;
 }
-.chip:hover { border-color: var(--color-ladrillo); color: var(--color-ladrillo); }
+.chip:hover { border-color: var(--color-ladrillo); color: var(--color-ladrillo-texto); }
 .chip[aria-pressed="true"], .chip.is-active {
   background: var(--color-texto);
   border-color: var(--color-texto);
@@ -210,14 +212,14 @@
   color: var(--color-texto);
   transition: color 0.2s;
 }
-.accordion__trigger:hover { color: var(--color-ladrillo); }
+.accordion__trigger:hover { color: var(--color-ladrillo-texto); }
 .accordion__emoji { flex: none; font-size: 1.2rem; }
 .accordion__label { flex: 1; }
 .accordion__chevron {
   flex: none;
   width: 1.5rem; height: 1.5rem;
   display: grid; place-items: center;
-  color: var(--color-ladrillo);
+  color: var(--color-ladrillo-texto);
   transition: transform 0.3s var(--ease-out);
 }
 .accordion__trigger[aria-expanded="true"] .accordion__chevron { transform: rotate(180deg); }
@@ -270,7 +272,7 @@
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.06em;
-  color: var(--color-ladrillo);
+  color: var(--color-ladrillo-texto);
   text-align: center;
   width: 42px;
 }
@@ -284,7 +286,7 @@
   margin-top: 0.7rem;
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--color-canal);
+  color: var(--color-canal-dark);
 }
 .timeline__thumb {
   margin-top: 0.85rem;
@@ -476,4 +478,34 @@
 .reveal.is-visible { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; }
+}
+
+/* ───────── Volver arriba ───────── */
+.back-to-top {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 90;
+  width: 48px; height: 48px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--color-texto);
+  color: #fff;
+  font-size: 1.15rem;
+  box-shadow: var(--shadow-lift);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity 0.25s var(--ease-out), transform 0.25s var(--ease-out), visibility 0.25s, background 0.2s;
+}
+.back-to-top.is-visible { opacity: 1; visibility: visible; transform: none; }
+.back-to-top:hover { background: var(--color-ladrillo); }
+
+/* Enlace de nav de la sección que se está leyendo */
+.nav__link[aria-current="true"] { color: #fff; background: rgba(255, 255, 255, 0.18); }
+.nav.is-scrolled .nav__link[aria-current="true"],
+.nav--solid .nav__link[aria-current="true"] {
+  background: rgba(184, 92, 63, 0.12);
+  color: var(--color-ladrillo-texto);
 }

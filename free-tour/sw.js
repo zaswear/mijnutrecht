@@ -8,7 +8,7 @@
    la cabecera Service-Worker-Allowed para ampliarlo.
    ═══════════════════════════════════════════════════════════ */
 
-const CACHE_NAME = 'mijnutrecht-tour-v1';
+const CACHE_NAME = 'mijnutrecht-tour-v2';
 
 /* Rutas relativas al scope (/free-tour/) */
 const CORE = [
@@ -51,6 +51,26 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+/* Dos estrategias:
+   · HTML y JSON → red primero. Así un deploy se ve en el acto en vez de
+     servir la versión vieja hasta la siguiente visita. Si no hay cobertura,
+     cae al caché y el tour sigue funcionando.
+   · CSS, JS e imágenes → caché primero, revalidando por detrás. Son los
+     que hacen que la ruta abra al instante en mitad de la calle. */
+function esDocumentoODatos(req, url) {
+  return req.mode === 'navigate' ||
+         req.destination === 'document' ||
+         url.pathname.endsWith('.json');
+}
+
+function guardar(req, res) {
+  if (res && res.status === 200 && res.type === 'basic') {
+    const copy = res.clone();
+    caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
+  }
+  return res;
+}
+
 self.addEventListener('fetch', (event) => {
   const req = event.request;
   if (req.method !== 'GET') return;
@@ -59,19 +79,18 @@ self.addEventListener('fetch', (event) => {
   // Los tiles del mapa y las APIs externas van siempre a la red
   if (url.origin !== self.location.origin) return;
 
+  if (esDocumentoODatos(req, url)) {
+    event.respondWith(
+      fetch(req)
+        .then((res) => guardar(req, res))
+        .catch(() => caches.match(req).then((cached) => cached || caches.match('ruta.html')))
+    );
+    return;
+  }
+
   event.respondWith(
     caches.match(req).then((cached) => {
-      const network = fetch(req)
-        .then((res) => {
-          if (res && res.status === 200 && res.type === 'basic') {
-            const copy = res.clone();
-            caches.open(CACHE_NAME).then((cache) => cache.put(req, copy));
-          }
-          return res;
-        })
-        .catch(() => cached);
-
-      // Cache-first para que el tour responda al instante sin cobertura
+      const network = fetch(req).then((res) => guardar(req, res)).catch(() => cached);
       return cached || network;
     })
   );

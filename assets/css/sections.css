@@ -283,7 +283,7 @@
   display: grid; place-items: center;
   border-radius: 10px;
   background: rgba(184, 92, 63, 0.12);
-  color: var(--color-ladrillo);
+  color: var(--color-ladrillo-texto);
   font-family: var(--font-display);
   font-weight: 700;
 }
@@ -369,7 +369,7 @@
   font-family: var(--font-display);
   font-size: 1.15rem;
   font-weight: 700;
-  color: var(--color-ladrillo);
+  color: var(--color-ladrillo-texto);
 }
 .hist-timeline li:not(.is-key) .hist-timeline__year { color: var(--color-texto-suave); }
 .hist-timeline__title { font-family: var(--font-body); font-weight: 700; font-size: 1rem; margin: 0.15rem 0 0.35rem; }
@@ -381,7 +381,7 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--color-ladrillo);
+  color: var(--color-ladrillo-texto);
   margin-bottom: 0.6rem;
   display: block;
 }
@@ -560,7 +560,7 @@
   border: 1px solid var(--color-borde);
 }
 .story-card__emoji { font-size: 1.5rem; }
-.story-card__hora { font-size: 0.75rem; font-weight: 700; color: var(--color-ladrillo); margin-top: 0.5rem; }
+.story-card__hora { font-size: 0.75rem; font-weight: 700; color: var(--color-ladrillo-texto); margin-top: 0.5rem; }
 .story-card__text { font-size: 0.8rem; color: var(--color-texto-suave); margin-top: 0.3rem; }
 
 /* ───────── Barras comparativas (modelo de ciudad) ───────── */
@@ -580,7 +580,7 @@
   border: 1px solid var(--color-borde);
 }
 .glosario-card__head { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem; }
-.glosario-card__word { font-family: var(--font-display); font-size: 1.3rem; color: var(--color-ladrillo); }
+.glosario-card__word { font-family: var(--font-display); font-size: 1.3rem; color: var(--color-ladrillo-texto); }
 .glosario-card__pron { font-size: 0.75rem; font-style: italic; color: var(--color-texto-suave); }
 .glosario-card__trad { font-size: 0.85rem; font-weight: 700; margin: 0.5rem 0 0.35rem; }
 .glosario-card__desc { font-size: 0.84rem; color: var(--color-texto-suave); }
@@ -601,12 +601,12 @@
 .flora-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
 .flora-card__body { padding: 1rem; }
 .flora-card__sci { font-size: 0.72rem; font-style: italic; color: var(--color-texto-suave); }
-.flora-card__meses { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-ladrillo); margin: 0.5rem 0; }
+.flora-card__meses { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-ladrillo-texto); margin: 0.5rem 0; }
 .flora-card__text { font-size: 0.82rem; color: var(--color-texto-suave); }
 .flora-card__donde { font-size: 0.72rem; color: var(--color-texto-suave); margin-top: 0.8rem; padding-top: 0.6rem; border-top: 1px solid var(--color-borde); }
 
 .evento-card { display: flex; flex-direction: column; height: 100%; }
-.evento-card__cuando { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-ladrillo); margin-bottom: 0.6rem; }
+.evento-card__cuando { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-ladrillo-texto); margin-bottom: 0.6rem; }
 .evento-card__foot { margin-top: auto; padding-top: 0.9rem; border-top: 1px solid var(--color-borde); font-size: 0.75rem; color: var(--color-texto-suave); display: grid; gap: 0.2rem; }
 
 /* ───────── CTA de Free Tour (landing principal) ───────── */
@@ -645,6 +645,107 @@
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #F3C4AC;
+}
+
+/* ───────── Buscador y lista de sitios del mapa ───────── */
+.puntos-panel {
+  background: var(--color-blanco);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radius);
+  padding: 1.1rem;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  max-height: 592px;
+}
+.puntos-panel .search-field { max-width: none; }
+.puntos-panel__count {
+  margin: 0.8rem 0.2rem 0.6rem;
+  font-weight: 600;
+}
+.puntos-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  flex: 1;
+  border-top: 1px solid var(--color-borde);
+}
+.punto-item {
+  display: flex;
+  align-items: stretch;
+  gap: 0.25rem;
+  border-bottom: 1px solid var(--color-borde);
+}
+.punto-item--vacio {
+  display: block;
+  padding: 1.5rem 0.5rem;
+  font-size: 0.86rem;
+  color: var(--color-texto-suave);
+  text-align: center;
+  border-bottom: none;
+}
+.punto-item__btn {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  min-height: 48px;
+  padding: 0.7rem 0.4rem;
+  text-align: left;
+  border-radius: 8px;
+  transition: background 0.15s;
+}
+.punto-item__btn:hover { background: var(--color-piedra); }
+.punto-item__punto {
+  flex: none;
+  width: 10px; height: 10px;
+  margin-top: 0.42rem;
+  border-radius: 50%;
+}
+.punto-item__texto { display: grid; gap: 0.1rem; min-width: 0; }
+.punto-item__nombre { font-size: 0.9rem; font-weight: 600; }
+.punto-item__nota {
+  font-size: 0.76rem;
+  color: var(--color-texto-suave);
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.punto-item__gmaps {
+  flex: none;
+  width: 44px;
+  display: grid;
+  place-items: center;
+  color: var(--color-texto-suave);
+  text-decoration: none;
+  border-radius: 8px;
+}
+.punto-item__gmaps:hover { background: var(--color-piedra); color: var(--color-ladrillo-texto); }
+
+/* Velo de activación del mapa en táctil */
+#map { position: relative; }
+.map-activar {
+  position: absolute;
+  inset: 0;
+  z-index: 500;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  width: 100%;
+  padding-bottom: 1.5rem;
+  border-radius: var(--radius-lg);
+  background: transparent;   /* el mapa se ve entero: solo se bloquea el arrastre */
+}
+.map-activar span {
+  padding: 0.55rem 1.1rem;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: var(--shadow-lift);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--color-texto);
 }
 
 /* ───────── Layout con columna lateral (mapa, guía práctica) ───────── */
