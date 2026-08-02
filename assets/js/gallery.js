@@ -78,7 +78,8 @@
     if (btn && rest.length) {
       btn.hidden = false;
       btn.textContent = 'Ver las ' + all.length + ' fotos →';
-      btn.addEventListener('click', function () {
+      btn.addEventListener('click', function onExpand() {
+        btn.removeEventListener('click', onExpand);   // una sola vez: si no, duplicaría la galería
         render(rest, true);
         btn.hidden = true;
       });
