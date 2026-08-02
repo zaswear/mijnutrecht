@@ -100,6 +100,28 @@
   var filtroColor = 'all';
   var filtroTexto = '';
 
+  /* A zoom 14 se solapan 27 de los 65 pines: van agrupados y se separan
+     solos al acercar. Si el plugin no carga, se cae a marcadores sueltos. */
+  var agrupa = typeof L.markerClusterGroup === 'function';
+  var capa = agrupa
+    ? L.markerClusterGroup({
+        maxClusterRadius: 46,
+        disableClusteringAtZoom: 17,
+        spiderfyOnMaxZoom: true,
+        showCoverageOnHover: false,
+        iconCreateFunction: function (cluster) {
+          var n = cluster.getChildCount();
+          var tam = n < 10 ? 34 : n < 25 ? 40 : 46;
+          return L.divIcon({
+            className: '',
+            html: '<div class="mapa-cluster" style="width:' + tam + 'px;height:' + tam + 'px">' + n + '</div>',
+            iconSize: [tam, tam]
+          });
+        }
+      })
+    : L.layerGroup();
+  capa.addTo(map);
+
   var listaEl = document.getElementById('puntos-list');
   var countEl = document.getElementById('puntos-count');
   var searchEl = document.getElementById('puntos-search');
@@ -149,10 +171,11 @@
   function pintarMarcadores() {
     var lista = visibles();
     var ids = lista.map(function (s) { return s.id; });
-    sitios.forEach(function (s) {
-      if (ids.indexOf(s.id) > -1) s.marker.addTo(map);
-      else s.marker.remove();
-    });
+    var dentro = sitios.filter(function (s) { return ids.indexOf(s.id) > -1; })
+                       .map(function (s) { return s.marker; });
+    capa.clearLayers();
+    if (agrupa) capa.addLayers(dentro);
+    else dentro.forEach(function (m) { capa.addLayer(m); });
   }
 
   function refrescar() {
@@ -163,9 +186,14 @@
   function irAlPunto(id) {
     var s = sitios[id];
     if (!s) return;
-    map.setView([s.lugar.coordenadas[0], s.lugar.coordenadas[1]], 17, { animate: true });
-    s.marker.openPopup();
     if (esTactil) mapEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (agrupa && capa.hasLayer(s.marker)) {
+      // Despliega el clúster que lo contiene antes de abrir su ficha
+      capa.zoomToShowLayer(s.marker, function () { s.marker.openPopup(); });
+      return;
+    }
+    map.setView(s.lugar.coordenadas, 17, { animate: true });
+    s.marker.openPopup();
   }
 
   fetch('./maps/puntos.json')
@@ -189,7 +217,6 @@
           '</div>';
 
         var m = L.marker(lugar.coordenadas, { icon: makeIcon(lugar.color), title: lugar.nombre })
-          .addTo(map)
           .bindPopup(html);
 
         sitios.push({

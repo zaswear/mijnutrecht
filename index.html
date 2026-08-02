@@ -46,8 +46,9 @@
   <link rel="stylesheet" href="assets/css/sections.css" />
   <link rel="stylesheet" href="assets/css/responsive.css" />
 
-  <!-- Leaflet (mapa) -->
+  <!-- Leaflet (mapa) + agrupador de marcadores -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
 
   <script type="application/ld+json">
   {
@@ -888,13 +889,13 @@
             <span class="free-tour-card__icon" aria-hidden="true">🏛️</span>
             <h3>Utrecht Oculto</h3>
             <p>Secretos, leyendas y el tornado que se llevó media catedral.</p>
-            <span class="free-tour-card__meta">7 paradas · 2 horas · 3,5 km</span>
+            <span class="free-tour-card__meta">7 paradas · 1 h 30 min · 1,4 km</span>
           </a>
           <a class="free-tour-card reveal" href="free-tour/ruta.html?ruta=locura">
             <span class="free-tour-card__icon" aria-hidden="true">🍺</span>
             <h3>Canal y Locura</h3>
             <p>Cerveza, castillos y el otro Utrecht, el que no sale en las guías.</p>
-            <span class="free-tour-card__meta">6 paradas · 2,5 horas · 4 km</span>
+            <span class="free-tour-card__meta">6 paradas · 2 h 30 min · 5,4 km</span>
           </a>
         </div>
 
@@ -1007,6 +1008,7 @@
   <!-- ══════════════ SCRIPTS ══════════════ -->
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-gpx/1.7.0/gpx.min.js" defer></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js" defer></script>
   <script src="assets/data/walking-routes.js" defer></script>
   <script src="assets/js/main.js" defer></script>
   <script src="assets/js/tabs.js" defer></script>

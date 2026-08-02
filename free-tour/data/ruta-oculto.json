@@ -3,16 +3,16 @@
   "titulo": "Utrecht Oculto",
   "subtitulo": "Secretos, leyendas y el tornado",
   "icono": "🏛️",
-  "duracion": "2 horas",
-  "distancia": "3,5 km",
+  "duracion": "1 h 30 min",
+  "distancia": "1,4 km",
   "dificultad": "Baja",
   "paradas": 7,
   "portada": "../fotos/optim/dom-800.webp",
   "portada_alt": "La Torre del Dom de Utrecht sobre la plaza Domplein",
   "punto_encuentro": {
     "nombre": "Escaleras de la Domtoren, Domplein",
-    "lat": 52.0908,
-    "lng": 5.1213,
+    "lat": 52.090653,
+    "lng": 5.121309,
     "detalle": "En las escaleras de la torre, mirando a la plaza vacía."
   },
   "paradas_lista": [
@@ -20,10 +20,10 @@
       "numero": 1,
       "titulo": "La Plaza del Tornado",
       "subtitulo": "Donde una tormenta cambió la ciudad para siempre",
-      "lat": 52.0908,
-      "lng": 5.1213,
+      "lat": 52.090653,
+      "lng": 5.121309,
       "tiempo_estimado": "8 minutos",
-      "distancia_siguiente": "3 min caminando",
+      "distancia_siguiente": "2 min caminando",
       "foto": "../fotos/optim/dom-800.webp",
       "foto_alt": "Plaza Domplein con la Torre del Dom aislada",
       "guia": "Bienvenidos a Utrecht. Mirad a vuestro alrededor. Esta plaza parece tranquila, ¿verdad? Pues en 1674, exactamente en este lugar, un tornado destrozó una de las catedrales más grandes de Europa del Norte. No en Ámsterdam, no en Róterdam. Aquí. En Utrecht. Los holandeses, pragmáticos como son, miraron los escombros, hicieron cuentas y dijeron: «Bah, no la reconstruyamos, que queda más espacio para bicis». Bueno, no dijeron exactamente eso, pero la plaza que pisáis es literalmente el agujero que dejó el tornado. Seguimos.",
@@ -39,32 +39,34 @@
         ],
         "correcta": 1,
         "explicacion": "En 1674, durante el siglo XVII. La torre quedó aislada y nunca se reconstruyó la nave central."
-      }
+      },
+      "coord_fuente": "Domtoren / Domplein (Nominatim)"
     },
     {
       "numero": 2,
       "titulo": "El Último Baño Medieval",
       "subtitulo": "Un WC del siglo XV que sigue en pie",
-      "lat": 52.0905,
-      "lng": 5.1218,
+      "lat": 52.09159,
+      "lng": 5.122344,
       "tiempo_estimado": "5 minutos",
-      "distancia_siguiente": "5 min caminando",
+      "distancia_siguiente": "3 min caminando",
       "foto": "",
       "foto_alt": "",
       "guia": "Mirad esta pequeña puerta de piedra a la izquierda. Parece la entrada a un trastero, ¿no? Pues es una de las pocas puertas de baño público medieval que quedan en Europa. Sí, aquí los ciudadanos del siglo XV hacían sus necesidades. Y no, no había papel. Usaban musgo. Sí, musgo. «Países Bajos, país pionero en sostenibilidad», diría el ayuntamiento. El caso es que esto sigue siendo propiedad del municipio. Así que, si alguna vez necesitáis un baño de emergencia en Utrecht... bueno, técnicamente esto es opción histórica.",
       "dato_historico": "Los baños públicos medievales en ciudades holandesas eran comunes. Esta estructura en Domstraat es uno de los pocos vestigios conservados en el centro de Utrecht, datado aproximadamente del siglo XV.",
       "misterio": "En la Edad Media, los baños públicos eran también lugares de reunión social. La gente comía, bebía y discutía de política... mientras hacía sus cosas. El equivalente del siglo XV a un Starbucks con wifi.",
       "reto_foto": "Haz una foto dramática a la puertecita de piedra con cara de descubridor de tesoros.",
-      "acertijo": null
+      "acertijo": null,
+      "coord_fuente": "Domstraat (Nominatim)"
     },
     {
       "numero": 3,
       "titulo": "El Canal de los Asesinatos Imposibles",
       "subtitulo": "Muelles medievales y misterios nocturnos",
-      "lat": 52.091,
-      "lng": 5.1225,
+      "lat": 52.091573,
+      "lng": 5.119544,
       "tiempo_estimado": "10 minutos",
-      "distancia_siguiente": "6 min caminando",
+      "distancia_siguiente": "5 min caminando",
       "foto": "../fotos/optim/werven-800.webp",
       "foto_alt": "Muelles inferiores (werven) del canal Oudegracht",
       "guia": "Ahora bajad conmigo estos escalones. Cuidado, que resbalan cuando llueve. Bienvenidos al nivel secreto de Utrecht. Estáis ahora mismo debajo de la calle, en los muelles del siglo XII. Aquí los barcos descargaban mercancía directamente en sótanos. Pero aquí viene lo gordo: durante siglos, esta zona era territorio de gremios. Y los gremios medievales eran como la mafia, pero con delantales. Se sabe de al menos tres «accidentes» de comerciantes rivales que terminaron en el canal... en plena noche... cuando no había testigos. Los registros del siglo XVII hablan de cuerpos encontrados flotando con piedras en los bolsillos. ¿Accidentes? El ayuntamiento lo llamaba «caídas desafortunadas». Yo lo llamo «competencia desleal medieval».",
@@ -80,32 +82,34 @@
         ],
         "correcta": 1,
         "explicacion": "Los barcos descargaban directamente en las bodegas, mientras los carruajes y peatones circulaban sin interrupción en la calle superior."
-      }
+      },
+      "coord_fuente": "Stadhuisbrug, muelles del Oudegracht (Nominatim)"
     },
     {
       "numero": 4,
       "titulo": "La Casa donde el Tiempo Se Detuvo",
       "subtitulo": "Una cocina del siglo XVII intacta",
-      "lat": 52.0915,
-      "lng": 5.1238,
+      "lat": 52.093412,
+      "lng": 5.116789,
       "tiempo_estimado": "6 minutos",
-      "distancia_siguiente": "4 min caminando",
+      "distancia_siguiente": "1 min caminando",
       "foto": "../fotos/optim/hero-800.webp",
       "foto_alt": "Fachadas de ladrillo a lo largo del canal Oudegracht",
       "guia": "Fijaos en esta fachada de ladrillo. Parece normal, ¿no? Pues dentro de esta casa hay una cocina del siglo XVII prácticamente intacta. No es un museo. Es una casa privada. Los dueños, una familia que lleva viviendo aquí desde 1780, decidieron en los años 70 no reformar la cocina «porque funciona». Así que aún cocinan en una chimenea abierta con un horno de leña empotrado en la pared. He entrado una vez, a invitación de un amigo de un amigo. Huele a humo de haya y a especias. Es como viajar en el tiempo, pero con WiFi en la habitación de arriba. Lo más surrealista es que la nevera... es una nevera actual de Bosch. El contraste es psicodélico.",
       "dato_historico": "Muchas casas del centro de Utrecht conservan interiores originales de los siglos XVII-XVIII. La legislación de monumentos protege la fachada y ciertos elementos interiores, pero permite adaptaciones modernas.",
       "misterio": "La familia dueña de esta cocina histórica es famosa en el barrio por hacer las mejores pannenkoeken (crepes holandesas) de Utrecht... en un horno de 300 años. Ironía: sus hijos, de 25 y 28 años, son programadores en una startup de inteligencia artificial.",
       "reto_foto": "Haz una foto artística de la fachada con el reflejo del canal en un charco.",
-      "acertijo": null
+      "acertijo": null,
+      "coord_fuente": "Viebrug, Oudegracht (Nominatim)"
     },
     {
       "numero": 5,
       "titulo": "El Semáforo que Vigila",
       "subtitulo": "Miffy, la conejita multimillonaria",
-      "lat": 52.0913,
-      "lng": 5.1205,
+      "lat": 52.093221,
+      "lng": 5.11579,
       "tiempo_estimado": "5 minutos",
-      "distancia_siguiente": "7 min caminando",
+      "distancia_siguiente": "4 min caminando",
       "foto": "",
       "foto_alt": "",
       "guia": "Mirad arriba. Ese semáforo peatonal. ¿Veis la conejita? Eso es Miffy, o Nijntje en neerlandés. Nació aquí, en Utrecht. Pero ojo, no os fiéis de su cara dulce. Esta conejita es un fenómeno global que ha generado más de mil millones de euros. Sí, con B. Y todo empezó en esta ciudad, en un pequeño estudio de un tal Dick Bruna. El tipo dibujaba con trazos mínimos, usando solo colores primarios, y creó una iconografía que a día de hoy identifica a Utrecht en Japón mejor que en España. En Tokio hay una cola para hacerse foto con este semáforo. Aquí, los holandeses lo cruzan sin mirar, como si nada. Pero nosotros sabemos la verdad: esta conejita nos vigila. Y cobra royalties.",
@@ -121,30 +125,32 @@
         ],
         "correcta": 1,
         "explicacion": "Dick Bruna creó a Miffy en 1955. En 2016, Utrecht le dedicó estos semáforos."
-      }
+      },
+      "coord_fuente": "Lange Viestraat, semáforos de Miffy (Nominatim)"
     },
     {
       "numero": 6,
       "titulo": "La Iglesia Clandestina",
       "subtitulo": "De capilla escondida a cervecería",
-      "lat": 52.091,
-      "lng": 5.1188,
+      "lat": 52.091023,
+      "lng": 5.115411,
       "tiempo_estimado": "12 minutos",
-      "distancia_siguiente": "5 min caminando",
+      "distancia_siguiente": "3 min caminando",
       "foto": "../fotos/optim/olivier-800.webp",
       "foto_alt": "Interior del Biercafé Olivier, antigua iglesia clandestina",
       "guia": "Empujad esta puerta. No tiene pinta de iglesia, ¿verdad? Pues dentro hay... un altar. Y un órgano. Y bóvedas de madera. Esto fue una iglesia clandestina católica en el siglo XIX, cuando los protestantes controlaban todo. Los católicos no podían tener iglesias visibles, así que escondían capillas detrás de fachadas de casas normales. Hoy es un bar de cerveza belga. Sí, has oído bien: una iglesia clandestina convertida en cervecería artesanal. Solo en Utrecht. Pedid una cerveza sentados en lo que antes era el coro. Y mirad arriba: ese órgano sigue funcionando. A veces, borrachos a las 2 de la mañana, algún estudiante sube y toca una nota. Es la misa más surrealista del mundo.",
       "dato_historico": "Durante la República Neerlandesa, los católicos tenían prohibido ejercer su culto públicamente. Las schuilkerken (iglesias ocultas) proliferaron en casas particulares. Esta de Achter Clarenburg data de 1715 y funcionó como capilla hasta 1850.",
       "misterio": "El bar tiene más de 300 cervezas belgas. El récord del local es de un grupo de estudiantes que probó 47 variedades diferentes en una noche. No recuerdan quién ganó.",
       "reto_foto": "Haz una foto del altar con una cerveza en primer plano. Instagram va a explotar.",
-      "acertijo": null
+      "acertijo": null,
+      "coord_fuente": "Achter Clarenburg, Biercafé Olivier (Nominatim)"
     },
     {
       "numero": 7,
       "titulo": "El Final en el Agua",
       "subtitulo": "Donde una autopista se convirtió en canal",
-      "lat": 52.0922,
-      "lng": 5.121,
+      "lat": 52.089958,
+      "lng": 5.113995,
       "tiempo_estimado": "10 minutos",
       "distancia_siguiente": null,
       "foto": "../fotos/optim/vredenburg-modern-1200.webp",
@@ -162,7 +168,8 @@
         ],
         "correcta": 1,
         "explicacion": "En los años 1960. Medio siglo después, en 2020, Utrecht recuperó el canal."
-      }
+      },
+      "coord_fuente": "Catharijnesingel (Nominatim)"
     }
   ]
 }

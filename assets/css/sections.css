@@ -811,3 +811,19 @@
 .tabla-costes td:last-child, .tabla-costes th:last-child { text-align: right; font-variant-numeric: tabular-nums; }
 .tabla-costes tfoot td { font-weight: 700; border-bottom: none; }
 .tabla-wrap { overflow-x: auto; }
+
+/* Burbujas del agrupador de marcadores */
+.mapa-cluster {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--color-canal);
+  border: 3px solid #fff;
+  box-shadow: 0 2px 8px rgba(26, 22, 20, 0.35);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+.marker-cluster { background: transparent; }
+.leaflet-cluster-anim .leaflet-marker-icon { transition: transform 0.3s var(--ease-out), opacity 0.3s; }

@@ -3,8 +3,8 @@
   "titulo": "Canal, Cerveza y Locura",
   "subtitulo": "El otro Utrecht",
   "icono": "🍺",
-  "duracion": "2,5 horas",
-  "distancia": "4 km",
+  "duracion": "2 h 30 min",
+  "distancia": "5,4 km",
   "dificultad": "Media",
   "paradas": 6,
   "portada": "../fotos/optim/olivier-800.webp",
@@ -12,18 +12,18 @@
   "punto_encuentro": {
     "nombre": "Al pie de la Domtoren, Domplein",
     "detalle": "Bajo la torre, junto a la entrada de las visitas guiadas.",
-    "lat": 52.0908,
-    "lng": 5.1213
+    "lat": 52.090653,
+    "lng": 5.121309
   },
   "paradas_lista": [
     {
       "numero": 1,
       "titulo": "La Torre que Sobrevivió a Todo",
       "subtitulo": "465 escalones de historia",
-      "lat": 52.0908,
-      "lng": 5.1213,
+      "lat": 52.090653,
+      "lng": 5.121309,
       "tiempo_estimado": "15 minutos",
-      "distancia_siguiente": "4 min caminando",
+      "distancia_siguiente": "7 min caminando",
       "foto": "../fotos/optim/dom-800.webp",
       "foto_alt": "La Domtoren de Utrecht vista desde abajo",
       "guia": "Subir 465 escalones no es para cualquiera. Pero arriba, veréis algo que poca gente sabe: Utrecht es la única ciudad de Europa donde puedes ver el horizonte completo de una región desde una torre de iglesia... sin ver apenas coches. Bicis. Bicis por todas partes. Miles. Es hipnótico. Ah, y si contáis las campanas, son catorce. La más grande pesa 8.200 kilos. Eso son 8 coches compactos. Y todavía suena cada domingo. Los vecinos se quejan del ruido. Los turistas lloran de la emoción. Los holandeses miran el reloj y dicen: «ya es mediodía, hora de la segunda taza de café».",
@@ -39,78 +39,83 @@
         ],
         "correcta": 1,
         "explicacion": "La campana «Salvator» pesa 8.200 kilos, el equivalente a 8 coches compactos."
-      }
+      },
+      "coord_fuente": "Domtoren (Nominatim)"
     },
     {
       "numero": 2,
       "titulo": "La Cervecería en el Castillo",
       "subtitulo": "IPA desde una torre de defensa del siglo XIII",
-      "lat": 52.0915,
-      "lng": 5.1195,
+      "lat": 52.092749,
+      "lng": 5.116644,
       "tiempo_estimado": "15 minutos",
-      "distancia_siguiente": "8 min caminando",
+      "distancia_siguiente": "7 min caminando",
       "foto": "",
       "foto_alt": "",
       "guia": "Esto parece un castillo porque LO ES. Un castillo urbano del siglo XIII. Hoy es una cervecería. Sí, podéis beber cerveza artesanal dentro de una torre de defensa medieval. Los arqueros del siglo XIII disparaban flechas desde estas ventanas. Tú vas a disparar cerveza artesanal IPA desde un vaso. Evolución humana. Recomiendo la «Oudaen Tripel». Ojo: tiene 8,5 grados. Y las escaleras de piedra no perdonan si vas tambaleante.",
       "dato_historico": "El Stadskasteel Oudaen es una casa-torre fortificada del siglo XIII. Fue residencia noble, hospital, asilo y, desde los años 80, cervecería y restaurante.",
       "misterio": "El castillo tiene un pozo de 28 metros de profundidad que data del siglo XIII. Aún tiene agua. Los cerveceros la han probado. Es potable. Hacen bromas sobre hacer una edición limitada «Pozo Medieval», pero el ayuntamiento les ha dicho que no.",
       "reto_foto": "Selfie con una cerveza Oudaen y la torre del castillo de fondo.",
-      "acertijo": null
+      "acertijo": null,
+      "coord_fuente": "Kasteel Oudaen, Oudegracht 99 (Nominatim)"
     },
     {
       "numero": 3,
       "titulo": "El Mercado donde el Tiempo no Existe",
       "subtitulo": "Desde 1597, el mismo sitio",
-      "lat": 52.092,
-      "lng": 5.1225,
+      "lat": 52.095277,
+      "lng": 5.119986,
       "tiempo_estimado": "10 minutos",
-      "distancia_siguiente": "5 min caminando",
+      "distancia_siguiente": "26 min caminando",
       "foto": "",
       "foto_alt": "",
       "guia": "Si es sábado por la mañana, estáis de suerte. Este es el Lapjesmarkt, el mercado de telas más antiguo de Holanda. Desde 1597. Eso es antes de que España perdiera Flandes. Aquí venden telas, lanas, botones, cremalleras... y una cosa muy holandesa llamada «stof» que significa «tela» pero también se usa como insulto suave. La gente viene con carritos de la compra de los años 70, habla en dialecto utrechtés que ni los holandeses de Ámsterdam entienden, y regatea por media yarda de tela floral como si fuera oro. Si no es sábado, sentíos libres de mirar con tristeza la calle vacía. Volved otro día.",
       "dato_historico": "El Lapjesmarkt (mercado de telas) se celebra desde 1597 en Breedstraat. Es el mercado de telas al aire libre más antiguo de los Países Bajos.",
       "misterio": "Hay una vendedora de 84 años, llamada Joke, que lleva 60 años en el mismo puesto. Conoce a tres generaciones de clientes por nombre. Si le dices que eres español, te dará un caramelo y te preguntará por el tiempo en Mallorca.",
       "reto_foto": "Haz una foto colorida de los puestos de tela con los pies en primer plano.",
-      "acertijo": null
+      "acertijo": null,
+      "coord_fuente": "Breedstraat, Lapjesmarkt (Nominatim)"
     },
     {
       "numero": 4,
       "titulo": "El Barrio que la Gente Cruza pero No Explora",
       "subtitulo": "Twijnstraat: donde compran los locales",
-      "lat": 52.0895,
-      "lng": 5.117,
+      "lat": 52.082417,
+      "lng": 5.123525,
       "tiempo_estimado": "10 minutos",
-      "distancia_siguiente": "6 min caminando",
+      "distancia_siguiente": "5 min caminando",
       "foto": "../fotos/optim/oudegracht-modern-1200.webp",
       "foto_alt": "Calle comercial del centro histórico de Utrecht",
       "guia": "La mayoría de los turistas nunca pisa esta calle. Se quedan en el Oudegracht y dan la vuelta. Error. Twijnstraat es donde compran los holandeses: panaderías artesanales, queserías familiares, una tienda de quesos donde el dueño te deja probar 15 variedades sin comprar nada, y una chocolatería que hace Domtorentjes a mano. Ojo con una cosa: cuando entres a la tienda de quesos, no digas «queso holandés». Hay 100 tipos de queso holandés. El dueño, un tipo llamado Henk con bigote impecable, te mirará como si le hubieras insultado a la madre. Pide «probar algo local». Te dará un Gouda viejo de 3 años. Es picante, cristalino, y sabe a gloria.",
       "dato_historico": "Twijnstraat es una de las calles comerciales históricas de Utrecht, con tiendas familiares que datan de varias generaciones. Ha resistido la llegada de cadenas comerciales gracias a la fidelidad de los vecinos.",
       "misterio": "La panadería «Het Brood» en esta calle abre a las 7:00 y cierra cuando se acaba el pan. A veces a las 10:00. A veces a las 14:00. No hay horario fijo. Los holandeses lo respetan. Los turistas se vuelven locos. «Eficiencia holandesa extrema», dice el dueño.",
       "reto_foto": "Foto de la fachada de la panadería o la tienda de quesos con un primer plano del producto.",
-      "acertijo": null
+      "acertijo": null,
+      "coord_fuente": "Twijnstraat (Nominatim)"
     },
     {
       "numero": 5,
       "titulo": "El Callejón de los Grafitis que el Ayuntamiento Protege",
       "subtitulo": "Arte ilegal convertido en patrimonio",
-      "lat": 52.0888,
-      "lng": 5.1165,
+      "lat": 52.0801,
+      "lng": 5.1239,
       "tiempo_estimado": "8 minutos",
-      "distancia_siguiente": "7 min caminando",
+      "distancia_siguiente": "27 min caminando",
       "foto": "",
       "foto_alt": "",
       "guia": "Este callejón es ilegal. Bueno, era ilegal. Estaba lleno de grafitis, y el ayuntamiento lo limpiaba cada dos meses. Pero un día, un artista local pintó un mural de Miffy gigante con una bomba de pintura. Se hizo viral. El ayuntamiento, en un raro ataque de sentido del humor, declaró este callejón «zona de expresión artística temporal». Ahora los artistas tienen permiso para pintar aquí durante un mes, y luego se borra y empieza de nuevo. Es un museo vivo. Y lo mejor: al final del callejón hay una puertecita que da a... un jardín secreto comunitario. Sí, un jardín urbano donde los vecinos cultivan tomates y hierbas entre bloques de oficinas. Solo en Utrecht.",
       "dato_historico": "Utrecht tiene una política de «tolerancia creativa» en ciertos espacios urbanos. El proyecto «Mural Utrecht» permite arte callejero rotativo en zonas designadas.",
       "misterio": "El mural de Miffy con spray fue pintado a las 3 de la mañana. El artista se entregó voluntariamente a la policía al día siguiente... llevando una tarta de manzana como ofrenda de paz. La policía le dio una advertencia verbal, se comieron la tarta, y el ayuntamiento le ofreció un encargo oficial una semana después.",
       "reto_foto": "Selfie con el mural de Miffy de fondo. Pose artística.",
-      "acertijo": null
+      "acertijo": null,
+      "coord_fuente": "Sur de Twijnstraat, hacia Rotsoord (aprox.)"
     },
     {
       "numero": 6,
       "titulo": "Última Parada — El Borrel",
       "subtitulo": "El ritual holandés sagrado",
-      "lat": 52.0918,
-      "lng": 5.1185,
+      "lat": 52.093173,
+      "lng": 5.118646,
       "tiempo_estimado": "20 minutos",
       "distancia_siguiente": null,
       "foto": "../fotos/optim/olivier-800.webp",
@@ -128,7 +133,8 @@
         ],
         "correcta": 1,
         "explicacion": "El borrel es sagrado: cerveza pequeña, bitterballen, y conversación sobre cualquier cosa menos el trabajo."
-      }
+      },
+      "coord_fuente": "Neude, bruine cafés (Nominatim)"
     }
   ]
 }

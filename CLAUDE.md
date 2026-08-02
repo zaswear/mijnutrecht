@@ -12,6 +12,8 @@ Web personal estática publicada en GitHub Pages que documenta mi vida en Utrech
 - **HTML5 + CSS + JS vanilla** — sin frameworks, sin build step, sin Tailwind
 - **Leaflet.js** — mapa interactivo con OpenStreetMap (tiles CartoDB Voyager / Dark)
 - **Leaflet-GPX plugin** — para dibujar rutas ciclistas desde archivos .gpx
+- **Leaflet.markercluster** — agrupa los pines del mapa principal: a zoom 14 se
+  solapaban 27 de los 65
 - **Open-Meteo** — clima en tiempo real, sin API key
 - **Cloudinary** — almacenamiento y optimización de fotos de galería (cloud: `dkn49zkfr`)
 - **Google Fonts** — Playfair Display (display) + Inter (cuerpo) + Caveat (notas)
@@ -138,6 +140,10 @@ Ritmo: `--gap-section` 6rem (8rem en ≥1280px), radios 12px (`--radius`) y 20px
   `data-agenda-filter` o `data-flora-filter`.
 - **Mapa**: además de los pines hay buscador + lista (`#puntos-search`, `#puntos-list`),
   porque pinchando pines no se encuentra un sitio concreto. La búsqueda ignora tildes.
+  Los marcadores viven en la capa `markerClusterGroup`, **no en el mapa**: al filtrar hay
+  que usar `capa.clearLayers()` + `addLayers()`, y para centrar un punto concreto
+  `capa.zoomToShowLayer()`, que despliega antes el clúster que lo contiene. Si el plugin
+  no cargara, la capa cae a un `L.layerGroup` y todo sigue funcionando sin agrupar.
 - **Contraste**: para texto sobre fondo claro usar `--color-ladrillo-texto` (#9C4831),
   no `--color-ladrillo` (#B85C3F, se queda en 3.99 sobre piedra). Sobre fondos canal u
   oscuros, `--color-ladrillo-claro`.
@@ -175,9 +181,15 @@ reset y tipografía) y las fotos de `../fotos/optim/`.
 - **Fotos**: cada parada usa `foto` (ruta relativa desde `/free-tour/`). Si está vacío se
   pinta un bloque de color con el número de parada. Instrucciones para añadir fotos
   propias en `img/ruta-*/README.md`.
-- **Coordenadas**: varias paradas llevan coordenadas aproximadas heredadas del guion
-  original (la polilínea zigzaguea un poco). Si se afinan, hay que tocar `lat`/`lng` en el
-  JSON de la ruta; no hay nada más que actualizar.
+- **Coordenadas**: geocodificadas con Nominatim (sin API key). Cada parada guarda su
+  procedencia en `coord_fuente`. Las paradas de lugares inventados por el guion (el baño
+  medieval, la casa del siglo XVII, el callejón de los grafitis) van sobre la calle que
+  nombra el texto y su `coord_fuente` lo dice.
+- **Distancia y duración son datos derivados**: salen de sumar los saltos entre paradas
+  (haversine × 1,35 de rodeo, a 4,5 km/h) más el `tiempo_estimado` de cada una. Si mueves
+  una parada, recalcula `distancia_siguiente`, `distancia` y `duracion` — y acuérdate de
+  que esas cifras también están escritas a mano en las tarjetas de `free-tour/index.html`
+  y en la sección Free Tour de `index.html`.
 - Añadir una ruta nueva = crear `data/ruta-<id>.json` con el mismo esquema, una card en
   `index.html`, el id en la validación de `free-tour.js` y el JSON en `CORE` de `sw.js`.
 
@@ -192,6 +204,7 @@ reset y tipografía) y las fotos de `../fotos/optim/`.
     "lat": 52.0908, "lng": 5.1213,
     "tiempo_estimado": "8 minutos", "distancia_siguiente": "3 min caminando",
     "foto": "../fotos/optim/dom-800.webp", "foto_alt": "…",
+    "coord_fuente": "Domtoren / Domplein (Nominatim)",
     "guia": "…", "dato_historico": "…", "misterio": "…", "reto_foto": "…",
     "acertijo": { "pregunta": "…", "opciones": ["…"], "correcta": 1, "explicacion": "…" }
   }]
