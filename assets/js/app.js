@@ -123,7 +123,13 @@
       });
       
       if (!filtrado.length) {
-        grid.innerHTML = `<div class="col-span-2 text-center py-8 text-slate-400 text-sm">No se encontraron resultados para "${filtro}"</div>`;
+        // `filtro` es texto del usuario: interpolarlo en innerHTML permitía
+        // ejecutar script escribiendo <img src=x onerror=...> en el buscador.
+        // Aquí no hace falta marcado, así que se monta el nodo y se usa textContent.
+        const vacio = document.createElement('div');
+        vacio.className = 'col-span-2 text-center py-8 text-slate-400 text-sm';
+        vacio.textContent = `No se encontraron resultados para "${filtro}"`;
+        grid.replaceChildren(vacio);
         return;
       }
       
