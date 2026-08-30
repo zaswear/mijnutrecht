@@ -45,8 +45,11 @@
       });
     }
 
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · © <a href="https://carto.com/attributions">CARTO</a>',
+    /* CARTO empezó a exigir API key y estampa "API KEY REQUIRED" sobre cada tile
+     (HTTP 200 con la marca ya dibujada, no hay error que capturar).
+     Esri no pide clave. OJO: ordena la ruta {z}/{y}/{x}, no {z}/{x}/{y}. */
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Teselas © <a href="https://www.esri.com/">Esri</a>',
       maxZoom: 19
     }).addTo(map);
 

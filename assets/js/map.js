@@ -47,9 +47,30 @@
     });
   }
 
-  var attr = '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> · © <a href="https://carto.com/attributions">CARTO</a>';
-  var dayTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', { attribution: attr, maxZoom: 19 });
-  var nightTiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', { attribution: attr, maxZoom: 19 });
+  /* Teselas: CARTO empezó a exigir API key y ahora estampa "API KEY REQUIRED"
+     sobre cada tile. No falla — devuelve HTTP 200 con la marca de agua ya
+     dibujada — así que no hay error que capturar, solo se ve el mapa marcado.
+     Se cambia a Esri, que no pide clave.
+     OJO: Esri ordena la ruta {z}/{y}/{x}, no {z}/{x}/{y} como CARTO. */
+  var attr = 'Teselas © <a href="https://www.esri.com/">Esri</a>';
+  var ESRI = 'https://server.arcgisonline.com/ArcGIS/rest/services';
+
+  var dayTiles = L.tileLayer(ESRI + '/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+    attribution: attr, maxZoom: 19
+  });
+
+  /* El Dark Gray Canvas no tiene teselas por encima de z16: devuelve un tile
+     gris con "Map data not yet available". Con maxNativeZoom se reescala desde
+     la 16 en lugar de perder el zoom de calle, así el modo noche conserva el
+     mismo rango que el de día. La base solo rotula países, por eso se superpone
+     la capa de referencia con los nombres de calle y ciudad. */
+  var nightOpts = { maxZoom: 19, maxNativeZoom: 16 };
+  var nightTiles = L.layerGroup([
+    L.tileLayer(ESRI + '/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}',
+      { attribution: attr, maxZoom: nightOpts.maxZoom, maxNativeZoom: nightOpts.maxNativeZoom }),
+    L.tileLayer(ESRI + '/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}', nightOpts)
+  ]);
+
   dayTiles.addTo(map);
 
   /* Modo noche del mapa */
