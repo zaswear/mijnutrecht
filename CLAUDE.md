@@ -282,7 +282,10 @@ sea el hero. El hero lleva `fetchpriority="high"`, `srcset` y su `<link rel="pre
 ---
 
 ## GitHub Pages
-- Se publica automáticamente desde rama `main`, carpeta raíz `/`.
+- El código se mantiene en `apps/sites/mijnutrecht` del monorepo.
+- `pages-mirror.yml` sincroniza esta carpeta al repo `zaswear/mijnutrecht`;
+  GitHub Pages publica allí desde `main`, carpeta raíz `/`.
+- El espejo excluye `.github/`: los workflows del destino se mantienen allí.
 - No hay build step — todo es HTML/CSS/JS/JSON estático.
 - El workflow `.github/workflows/gallery.yml` está **desactivado** (no se usa).
 
