@@ -87,7 +87,8 @@ mijnutrecht/
 ```
 
 Restos del diseño anterior (SPA con Tailwind), **ya no se cargan desde ninguna página** y se
-pueden borrar cuando el rediseño esté asentado: `index.html.bak`, `assets/js/app.js` y
+pueden borrar cuando el rediseño esté asentado (referencias comprobadas de nuevo
+el 2026-09-05; se conservan como originales históricos): `index.html.bak`, `assets/js/app.js` y
 `assets/css/style.css`.
 
 ---
