@@ -54,7 +54,20 @@
             html += '</ol>';
           });
 
+          html += '<div class="plan-controls"><button type="button" class="btn btn-primary" data-save-days="' + key + '">Guardar este itinerario</button><a class="btn btn-ghost" href="mi-plan.html">Abrir mi itinerario →</a></div><p role="status" data-save-status></p>';
           panel.innerHTML = html;
+          panel.querySelector('[data-save-days]').addEventListener('click', function () {
+            var items = [];
+            plan.dias.forEach(function (dia, di) {
+              dia.paradas.forEach(function (p, pi) {
+                items.push({id: 'dias-' + key + '-' + di + '-' + pi, title: p.titulo,
+                  time: dia.nombre + ' · ' + p.hora + (p.hop ? ' · ' + p.hop : ''),
+                  text: p.texto, map: p.titulo + ' Utrecht'});
+              });
+            });
+            var ok = window.MUPlan && MUPlan.add(items);
+            panel.querySelector('[data-save-status]').textContent = ok ? 'Guardado en este navegador. Abre Mi itinerario para organizar las paradas.' : 'No se pudo guardar. Comprueba el almacenamiento del navegador.';
+          });
         });
         done();
       })

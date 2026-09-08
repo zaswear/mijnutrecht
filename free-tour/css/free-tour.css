@@ -43,9 +43,11 @@
 }
 .progress-bar__fill {
   height: 100%;
-  width: 0%;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
   background: var(--color-ladrillo);
-  transition: width 0.35s var(--ease-out, ease);
+  transition: transform 0.2s var(--ease-out, ease);
 }
 
 .tour-top__row {
@@ -660,3 +662,26 @@
 .ft-reanudar__texto span { color: var(--color-texto-suave); font-size: 0.82rem; }
 .ft-reanudar .btn-soft { background: var(--color-ladrillo); border-color: var(--color-ladrillo); color: #fff; }
 .ft-reanudar .btn-soft:hover { background: var(--color-ladrillo-dark); border-color: var(--color-ladrillo-dark); color: #fff; }
+
+/* Preparación verificable y orientación también sin teselas de mapa. */
+.ft-preparation { max-width: 640px; margin: 1rem auto; padding: 1rem 1.25rem; border-block: 1px solid var(--color-borde); }
+.ft-preparation summary { min-height: 44px; cursor: pointer; font-weight: 600; color: var(--color-canal); }
+.ft-preparation p { margin-block: 1rem; }
+.ft-preparation h2 { font-size: 1.3rem; margin-top: 1.5rem; }
+.ft-schematic { margin-block: 1rem; }
+.ft-schematic svg { display: block; width: 100%; background: var(--color-piedra-dark); border-radius: var(--radius); }
+.ft-schematic polyline { fill: none; stroke: var(--color-canal); stroke-width: 3; }
+.ft-schematic circle { fill: var(--color-ladrillo); }
+.ft-schematic text { fill: var(--color-blanco); text-anchor: middle; font-size: 14px; font-weight: 600; }
+.ft-schematic figcaption, .ft-stop-list p, .ft-map-note { font-size: .85rem; color: var(--color-texto-suave); }
+.ft-stop-list { list-style: none; padding: 0; }
+.ft-stop-list li { border-left: 3px solid var(--color-verde); padding-left: .75rem; margin-block: 1rem; }
+.ft-stop-list [aria-current] { background: var(--color-ladrillo); color: var(--color-blanco); }
+.ft-map-note { padding: 1rem; }
+.ft-plan-link { margin-bottom: 1.5rem; }
+@media (prefers-reduced-motion: reduce) { .progress-bar__fill { transition: none; } }
+
+.stop-photo { margin: 0; }
+.stop-card__image--credited { object-fit: contain; background: var(--color-piedra-dark); }
+.stop-photo figcaption { font-size: .8rem; color: var(--color-texto-suave); margin: -.5rem 0 1.25rem; }
+.stop-photo figcaption a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; }

@@ -44,10 +44,11 @@
       var all = readStore();
       all[route.id] = {
         routeId: route.id,
+        routeRevision: route.revision || 1,
         currentStop: index,
         completedStops: completed,
         answers: answers,
-        completedAt: finished ? new Date().toISOString() : null
+        completedAt: finished && completed.length === stops.length ? new Date().toISOString() : null
       };
       localStorage.setItem(STORE_KEY, JSON.stringify(all));
     } catch (e) { /* modo privado o sin espacio */ }
@@ -55,7 +56,8 @@
 
   function loadProgress() {
     var all = readStore();
-    return all[route.id] || null;
+    var saved = all[route.id];
+    return saved && (saved.routeRevision || 1) === (route.revision || 1) ? saved : null;
   }
 
   function resetProgress() {
@@ -68,14 +70,19 @@
 
   /* ───────── render ───────── */
   function updateProgress() {
-    var pct = finished ? 100 : Math.round(((index + 1) / stops.length) * 100);
+    var pct = Math.round((completed.length / stops.length) * 100);
     var fill = $('progress-fill');
     if (fill) {
-      fill.style.width = pct + '%';
+      fill.style.transform = 'scaleX(' + pct / 100 + ')';
+      fill.parentElement.setAttribute('aria-valuetext', completed.length + ' de ' + stops.length + ' paradas visitadas');
       fill.parentElement.setAttribute('aria-valuenow', String(pct));
     }
     var count = $('tour-count');
-    if (count) count.textContent = finished ? '¡Completado!' : (index + 1) + '/' + stops.length;
+    if (count) count.textContent = finished ? completed.length + '/' + stops.length + ' visitadas' : (index + 1) + '/' + stops.length;
+    document.querySelectorAll('[data-stop-index]').forEach(function (button) {
+      if (Number(button.dataset.stopIndex) === index && !finished) button.setAttribute('aria-current', 'step');
+      else button.removeAttribute('aria-current');
+    });
 
     var dots = $('nav-dots');
     if (dots) {
@@ -90,9 +97,10 @@
 
   function mediaBlock(stop) {
     if (stop.foto) {
-      return '<img class="stop-card__image" src="' + esc(stop.foto) + '" alt="' + esc(stop.foto_alt || stop.titulo) +
-             '" loading="lazy" decoding="async" width="800" height="600" ' +
-             'onerror="this.outerHTML=\'<div class=&quot;stop-card__placeholder&quot;>' + stop.numero + '</div>\'" />';
+      var credit = stop.foto_credito;
+      return '<figure class="stop-photo"><img class="stop-card__image' + (credit ? ' stop-card__image--credited' : '') + '" src="' + esc(stop.foto) + '" alt="' + esc(stop.foto_alt || stop.titulo) +
+        '" loading="lazy" decoding="async" width="' + (stop.foto_width || 800) + '" height="' + (stop.foto_height || 600) + '" />' +
+        (credit ? '<figcaption>' + esc(credit.nota) + ' <a href="' + esc(credit.fuente) + '">Foto: ' + esc(credit.autor) + '</a> · <a href="' + esc(credit.url) + '">' + esc(credit.licencia) + '</a>. Redimensionada y convertida a WebP; misma licencia.</figcaption>' : '') + '</figure>';
     }
     var alt = stop.numero % 2 === 0 ? ' stop-card__placeholder--alt' : '';
     return '<div class="stop-card__placeholder' + alt + '" aria-hidden="true">' + stop.numero + '</div>';
@@ -183,10 +191,11 @@
         '<section class="stop-card__section stop-card__section--historia">' +
           '<h3>📜 Dato histórico</h3>' +
           '<p>' + esc(stop.dato_historico) + '</p>' +
+          (stop.fuente ? '<p><a href="' + esc(stop.fuente) + '">Consultar la fuente →</a></p>' : '') +
         '</section>' +
 
         '<section class="stop-card__section stop-card__section--misterio">' +
-          '<h3>🎭 El misterio</h3>' +
+          '<h3>' + esc(stop.misterio_titulo || '🎭 El misterio') + '</h3>' +
           '<p>' + esc(stop.misterio) + '</p>' +
         '</section>' +
 
@@ -202,7 +211,7 @@
 
         '<button type="button" class="btn-cta" id="btn-arrived" aria-label="' +
           (last ? 'Terminar el tour' : 'He llegado, ir a la siguiente parada') + '">' +
-          (last ? '🏁 Terminar el tour' : '✅ He llegado · Siguiente parada') +
+          (last ? '🏁 He llegado · Terminar' : '✅ He llegado · Siguiente parada') +
         '</button>' +
 
         (stop.distancia_siguiente || !last
@@ -210,6 +219,17 @@
           : '<p class="ft-status" style="padding:1.5rem 0 0">Última parada del recorrido.</p>') +
       '</article>';
 
+    var url = new URL(location.href);
+    url.searchParams.set('parada', String(index + 1));
+    history.replaceState(null, '', url);
+    root.querySelector('h1').tabIndex = -1;
+    root.querySelector('h1').focus({preventScroll: true});
+    var photo = root.querySelector('.stop-card__image');
+    if (photo) photo.addEventListener('error', function () {
+      var note = document.createElement('p');
+      note.className = 'ft-status'; note.textContent = 'Foto no disponible. Puedes seguir leyendo la parada.';
+      photo.replaceWith(note);
+    });
     bindStopEvents(stop);
     updateProgress();
     updateNavButtons();
@@ -389,6 +409,31 @@
     }
   }
 
+  function setupOutline() {
+    $('route-summary').textContent = route.titulo + ' · ' + route.distancia + ' · ' + route.duracion + ' (estimación con paradas)';
+    var lats = stops.map(function (s) { return s.lat; });
+    var lngs = stops.map(function (s) { return s.lng; });
+    var minLat = Math.min.apply(null, lats), maxLat = Math.max.apply(null, lats);
+    var minLng = Math.min.apply(null, lngs), maxLng = Math.max.apply(null, lngs);
+    var points = stops.map(function (s) {
+      return [30 + (s.lng - minLng) / (maxLng - minLng || 1) * 420,
+        190 - (s.lat - minLat) / (maxLat - minLat || 1) * 160];
+    });
+    $('route-outline').innerHTML = '<figure class="ft-schematic"><svg viewBox="0 0 480 220" role="img" aria-label="Esquema de las paradas, norte arriba. No es un mapa de calles.">' +
+      '<polyline points="' + points.map(function (p) { return p.join(','); }).join(' ') + '" />' +
+      points.map(function (p, i) { return '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="14" /><text x="' + p[0] + '" y="' + (p[1] + 5) + '">' + (i + 1) + '</text>'; }).join('') +
+      '</svg><figcaption>Esquema sin conexión · norte arriba · línea entre paradas, no recorrido por calles.</figcaption></figure>' +
+      '<ol class="ft-stop-list">' + stops.map(function (stop, i) {
+        return '<li><button class="btn-soft" type="button" data-stop-index="' + i + '">' + (i + 1) + '. ' + esc(stop.titulo) + '</button><p>' + esc(stop.tiempo_estimado) + ' aquí' + (stop.distancia_siguiente ? ' · ' + esc(stop.distancia_siguiente) + ' a la siguiente' : ' · Fin') + '</p></li>';
+      }).join('') + '</ol>';
+    document.querySelectorAll('[data-stop-index]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        document.querySelector('.ft-preparation').open = false;
+        renderStop(Number(button.dataset.stopIndex)); saveProgress();
+      });
+    });
+  }
+
   /* ───────── compartir ───────── */
   function feedbackBtn(btn, text) {
     var original = btn.textContent;
@@ -430,7 +475,7 @@
   /* ───────── pantalla final ───────── */
   function renderFinish() {
     finished = true;
-    stops.forEach(function (s, i) { if (completed.indexOf(i) === -1) completed.push(i); });
+    if (window.FTSpeech) FTSpeech.stopSpeaking();
     saveProgress();
 
     var total = stops.filter(function (s) { return !!s.acertijo; }).length;
@@ -442,18 +487,19 @@
     var badges = ['<span class="ft-badge">🚶 Explorador</span>'];
     if (total && aciertos === total) badges.push('<span class="ft-badge">📚 Historiador</span>');
     if (aciertos >= 1) badges.push('<span class="ft-badge">🧩 Curioso</span>');
-    badges.push('<span class="ft-badge">📸 Fotógrafo</span>');
+
 
     $('stop-root').innerHTML =
       '<article class="stop-card ft-finish">' +
         '<span class="ft-finish__medal" aria-hidden="true">🏆</span>' +
-        '<h1>¡Has completado el tour!</h1>' +
+        '<h1>' + (completed.length === stops.length ? '¡Has completado el tour!' : 'Fin de la ruta') + '</h1>' +
+        '<p>' + completed.length + ' de ' + stops.length + ' paradas marcadas como visitadas.</p>' +
         '<p class="muted">' + esc(route.titulo) + ' · ' + stops.length + ' paradas · ' + esc(route.distancia) + '</p>' +
         (total
           ? '<p class="ft-finish__score"><b>' + aciertos + '</b> de ' + total + ' acertijos correctos</p>'
           : '') +
         '<div class="ft-badges">' + badges.join('') + '</div>' +
-        '<button type="button" class="btn-cta" id="btn-share-finish">↗ Compartir que lo has hecho</button>' +
+        '<button type="button" class="btn-cta" id="btn-share-finish">↗ Compartir la ruta</button>' +
         '<div class="btn-row" style="justify-content:center;margin-top:1rem">' +
           '<button type="button" class="btn-soft" id="btn-restart">🔁 Repetir la ruta</button>' +
           '<a class="btn-soft" href="index.html">🚶 Otra ruta</a>' +
@@ -463,7 +509,8 @@
 
     updateProgress();
     updateNavButtons();
-    confetti();
+    $('stop-root').querySelector('h1').tabIndex = -1;
+    $('stop-root').querySelector('h1').focus({preventScroll: true});
 
     $('btn-restart').addEventListener('click', function () {
       resetProgress();
@@ -472,8 +519,8 @@
     $('btn-share-finish').addEventListener('click', async function () {
       var btn = this;
       var payload = {
-        title: 'He completado el free tour «' + route.titulo + '» de Utrecht',
-        text: 'Acabo de recorrer ' + route.distancia + ' por Utrecht con el free tour digital de Mijn Utrecht. #MijnUtrechtTour',
+        title: route.titulo + ' · Free Tour de Utrecht',
+        text: 'Un paseo por Utrecht: ' + route.titulo + ' · ' + route.distancia + '. #MijnUtrechtTour',
         url: location.origin + location.pathname + '?ruta=' + route.id
       };
       try {
@@ -487,22 +534,6 @@
     });
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  function confetti() {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var colors = ['#B85C3F', '#3A6B7C', '#E86A33', '#5A8F6E', '#C9A227'];
-    var wrap = document.createElement('div');
-    wrap.className = 'ft-confetti';
-    var html = '';
-    for (var i = 0; i < 60; i++) {
-      html += '<i style="left:' + Math.random() * 100 + '%;background:' + colors[i % colors.length] +
-              ';animation-duration:' + (2.2 + Math.random() * 1.8).toFixed(2) + 's;animation-delay:' +
-              (Math.random() * 0.8).toFixed(2) + 's"></i>';
-    }
-    wrap.innerHTML = html;
-    document.body.appendChild(wrap);
-    setTimeout(function () { wrap.remove(); }, 5000);
   }
 
   /* ───────── swipe y teclado ───────── */
@@ -606,6 +637,8 @@
         if (t) t.textContent = data.icono + ' ' + data.titulo;
         actualizarMetadatos(data);
 
+        setupOutline();
+        if (window.FTOffline) FTOffline.setup(data);
         setupMap();
         setupGestures();
         startGeolocation();
@@ -619,10 +652,18 @@
         var hasProgress = saved && !saved.completedAt &&
                           (saved.currentStop > 0 || (saved.completedStops || []).length > 0);
 
-        if (hasProgress) {
+        var requested = Number(getParam('parada'));
+        var hasRequested = Number.isInteger(requested) && requested >= 1 && requested <= stops.length;
+        if (hasRequested) {
+          if (saved && !saved.completedAt) {
+            answers = saved.answers || {};
+            completed = (saved.completedStops || []).filter(function (n, i, a) { return Number.isInteger(n) && n >= 0 && n < stops.length && a.indexOf(n) === i; });
+          }
+          renderStop(requested - 1);
+        } else if (hasProgress) {
           // Se pinta ya donde lo dejó y el diálogo solo ofrece empezar de cero
           answers = saved.answers || {};
-          completed = saved.completedStops || [];
+          completed = (saved.completedStops || []).filter(function (n, i, a) { return Number.isInteger(n) && n >= 0 && n < stops.length && a.indexOf(n) === i; });
           renderStop(saved.currentStop || 0);
           askResume(saved, function () { /* sigue donde estaba */ }, function () {
             resetProgress();
@@ -662,9 +703,6 @@
     if (id !== 'oculto' && id !== 'locura') id = 'oculto';
     loadRoute(id);
 
-    // Service Worker: cachea la sección para poder seguir el tour sin cobertura
-    if ('serviceWorker' in navigator && location.protocol !== 'file:') {
-      navigator.serviceWorker.register('sw.js').catch(function () { /* sin offline */ });
-    }
+
   });
 })();

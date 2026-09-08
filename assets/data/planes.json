@@ -1,0 +1,98 @@
+{
+  "checked": "2026-09-06",
+  "plans": [
+    {
+      "id": "lluvia",
+      "title": "Una mañana de lluvia entre música y ciudad",
+      "tone": "canal",
+      "summary": "Un museo como refugio y un paseo corto opcional si escampa.",
+      "tags": [
+        "Lluvia"
+      ],
+      "stops": [
+        {
+          "title": "Museum Speelklok",
+          "time": "90 min de visita · estimación",
+          "text": "Empieza bajo techo con sus instrumentos musicales. El museo indica que sus salas son accesibles mediante rampas y ascensores, y dispone de aseo adaptado. Algunas puertas son pesadas y los instrumentos producen sonido.",
+          "map": "Museum Speelklok Utrecht",
+          "source": "https://www.museumspeelklok.nl/toegankelijkheid/",
+          "access": "Edificio: accesibilidad descrita por el museo. Consulta sus apoyos si necesitas una visita con menos estímulos."
+        },
+        {
+          "title": "Domplein, si deja de llover",
+          "time": "10 min de paseo + 15 min en la plaza · estimación",
+          "text": "Termina mirando la torre desde la plaza, sin subir a ella. Si sigue lloviendo, puedes quitar esta parada del plan. El tramo entre el museo y la plaza es al aire libre.",
+          "map": "Domplein Utrecht",
+          "link": "historia.html#historia",
+          "access": "Tramo urbano sin comprobación sobre el terreno de pendientes, pavimento u obras."
+        }
+      ]
+    },
+    {
+      "id": "ninos",
+      "title": "Una mañana con los más pequeños",
+      "tone": "verde",
+      "summary": "Juego en el museo de Nijntje y un paseo opcional, al ritmo de la familia.",
+      "tags": [
+        "Con niños"
+      ],
+      "stops": [
+        {
+          "title": "Nijntje Museum",
+          "time": "90 min de visita · estimación",
+          "text": "El museo está pensado para niños de 2 a 6 años. Sus espacios admiten carritos y sillas de ruedas estándar según su información oficial. Consulta entradas y reserva la franja de visita antes de salir.",
+          "map": "Nijntje Museum Utrecht",
+          "source": "https://nijntjemuseum.nl/nl/toegankelijkheid/",
+          "access": "Edificio: el museo declara sus espacios accesibles para carritos y sillas de ruedas estándar."
+        },
+        {
+          "title": "Paseo opcional por el entorno de Agnietenstraat",
+          "time": "20 min · estimación, sin prisa",
+          "text": "Después del museo, da una vuelta corta por la calle y vuelve cuando la familia necesite parar. No hace falta completar un circuito ni bajar a los muelles.",
+          "map": "Agnietenstraat Utrecht",
+          "link": "historia.html#barrios",
+          "access": "Recorrido exterior no auditado: comprueba los cruces y el pavimento antes de continuar con carrito o silla."
+        }
+      ]
+    },
+    {
+      "id": "trenes",
+      "title": "Un día de trenes en familia",
+      "tone": "verde",
+      "summary": "Un único destino para evitar traslados entre varias atracciones.",
+      "tags": [
+        "Con niños",
+        "Lluvia"
+      ],
+      "stops": [
+        {
+          "title": "Spoorwegmuseum",
+          "time": "2–3 h de visita · estimación",
+          "text": "Organiza la visita alrededor del museo ferroviario; no todo el recorrido está bajo techo. Los andenes tienen rampas, pero muchos trenes históricos tienen entradas y pasillos difíciles o inaccesibles para una silla de ruedas. Consulta las atracciones antes de elegirlas.",
+          "map": "Spoorwegmuseum Utrecht",
+          "source": "https://www.spoorwegmuseum.nl/bezoek/toegankelijkheid/",
+          "access": "Acceso parcial: el museo informa de aseos adaptados y rampas en andenes; el interior de muchos trenes presenta barreras."
+        }
+      ]
+    },
+    {
+      "id": "acceso",
+      "title": "Música, con el acceso preparado",
+      "tone": "ladrillo",
+      "summary": "Una visita centrada en un edificio con información de accesibilidad publicada.",
+      "tags": [
+        "Accesibilidad"
+      ],
+      "stops": [
+        {
+          "title": "Museum Speelklok a tu ritmo",
+          "time": "90 min de visita · estimación",
+          "text": "Antes de salir, revisa con el museo el acceso que necesitas. Informa de rampas, dos ascensores y aseo adaptado en planta baja. Algunas puertas no son automáticas. Elige el transporte hasta la entrada según tus necesidades.",
+          "map": "Museum Speelklok Utrecht",
+          "source": "https://www.museumspeelklok.nl/toegankelijkheid/",
+          "access": "Verificación documental del edificio, no auditoría del trayecto urbano. No se garantiza un recorrido sin barreras desde tu punto de partida."
+        }
+      ]
+    }
+  ]
+}

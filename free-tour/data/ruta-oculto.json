@@ -44,20 +44,31 @@
     },
     {
       "numero": 2,
-      "titulo": "El Último Baño Medieval",
-      "subtitulo": "Un WC del siglo XV que sigue en pie",
+      "titulo": "Domstraat, ayer y hoy",
+      "subtitulo": "Una calle para mirar con una foto de 1888",
       "lat": 52.09159,
       "lng": 5.122344,
       "tiempo_estimado": "5 minutos",
       "distancia_siguiente": "3 min caminando",
-      "foto": "",
-      "foto_alt": "",
-      "guia": "Mirad esta pequeña puerta de piedra a la izquierda. Parece la entrada a un trastero, ¿no? Pues es una de las pocas puertas de baño público medieval que quedan en Europa. Sí, aquí los ciudadanos del siglo XV hacían sus necesidades. Y no, no había papel. Usaban musgo. Sí, musgo. «Países Bajos, país pionero en sostenibilidad», diría el ayuntamiento. El caso es que esto sigue siendo propiedad del municipio. Así que, si alguna vez necesitáis un baño de emergencia en Utrecht... bueno, técnicamente esto es opción histórica.",
-      "dato_historico": "Los baños públicos medievales en ciudades holandesas eran comunes. Esta estructura en Domstraat es uno de los pocos vestigios conservados en el centro de Utrecht, datado aproximadamente del siglo XV.",
-      "misterio": "En la Edad Media, los baños públicos eran también lugares de reunión social. La gente comía, bebía y discutía de política... mientras hacía sus cosas. El equivalente del siglo XV a un Starbucks con wifi.",
-      "reto_foto": "Haz una foto dramática a la puertecita de piedra con cara de descubridor de tesoros.",
+      "foto": "../fotos/optim/tour-domstraat.webp",
+      "foto_alt": "Fotografía histórica de Domstraat con raíles y personas en la calle",
+      "guia": "Detente en Domstraat sin bloquear el paso. La imagen histórica muestra esta misma calle en 1888: fíjate en las fachadas, la anchura y los raíles. Busca semejanzas con lo que ves hoy. Esta parada se hace desde la calle; no necesitas entrar en ningún edificio.",
+      "dato_historico": "El Rijksmuseum conserva esta fotografía de Domstraat fechada en 1888 y atribuida a Henry Pauw van Wieldrecht. Su ficha describe los raíles del tranvía y las personas que caminan por la calle.",
+      "misterio": "Compara la fotografía con la calle actual: ¿qué detalles siguen reconocibles? La imagen sirve para observar cambios, no para localizar un supuesto baño medieval.",
+      "reto_foto": "Fotografía la perspectiva de la calle desde un lugar donde puedas detenerte sin obstaculizar el paso.",
       "acertijo": null,
-      "coord_fuente": "Domstraat (Nominatim)"
+      "coord_fuente": "Domstraat (Nominatim)",
+      "misterio_titulo": "🔎 Mira de nuevo",
+      "fuente": "https://commons.wikimedia.org/wiki/File:Domstraat_in_Utrecht,_RP-F-2007-361-29.jpg",
+      "foto_credito": {
+        "autor": "Henry Pauw van Wieldrecht (atribuida) / Rijksmuseum",
+        "licencia": "CC0 1.0",
+        "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "fuente": "https://commons.wikimedia.org/wiki/File:Domstraat_in_Utrecht%2C_RP-F-2007-361-29.jpg",
+        "nota": "Domstraat en 1888. Imagen histórica, no representa su estado actual."
+      },
+      "foto_width": 800,
+      "foto_height": 1147
     },
     {
       "numero": 3,
@@ -110,8 +121,8 @@
       "lng": 5.11579,
       "tiempo_estimado": "5 minutos",
       "distancia_siguiente": "4 min caminando",
-      "foto": "",
-      "foto_alt": "",
+      "foto": "../fotos/optim/tour-miffy.webp",
+      "foto_alt": "Semáforo peatonal de Utrecht con la silueta roja de Nijntje",
       "guia": "Mirad arriba. Ese semáforo peatonal. ¿Veis la conejita? Eso es Miffy, o Nijntje en neerlandés. Nació aquí, en Utrecht. Pero ojo, no os fiéis de su cara dulce. Esta conejita es un fenómeno global que ha generado más de mil millones de euros. Sí, con B. Y todo empezó en esta ciudad, en un pequeño estudio de un tal Dick Bruna. El tipo dibujaba con trazos mínimos, usando solo colores primarios, y creó una iconografía que a día de hoy identifica a Utrecht en Japón mejor que en España. En Tokio hay una cola para hacerse foto con este semáforo. Aquí, los holandeses lo cruzan sin mirar, como si nada. Pero nosotros sabemos la verdad: esta conejita nos vigila. Y cobra royalties.",
       "dato_historico": "Dick Bruna (1927-2017) creó Miffy en 1955. Los semáforos de Miffy fueron instalados en Utrecht en 2016. En total hay 5 cruces peatonales con Miffy en la ciudad.",
       "misterio": "Bruna era tan perfeccionista que llegó a rechazar 100 bocetos antes de dar por buena la expresión de Miffy para una sola portada de libro. Algunos ilustradores de Utrecht juraban que Bruna podía pasar 8 horas mirando una hoja en blanco, dar un trazo... y volver a mirar durante otras 4 horas.",
@@ -126,7 +137,16 @@
         "correcta": 1,
         "explicacion": "Dick Bruna creó a Miffy en 1955. En 2016, Utrecht le dedicó estos semáforos."
       },
-      "coord_fuente": "Lange Viestraat, semáforos de Miffy (Nominatim)"
+      "coord_fuente": "Lange Viestraat, semáforos de Miffy (Nominatim)",
+      "foto_credito": {
+        "autor": "Charlie Foxtrot66",
+        "licencia": "CC BY-SA 4.0",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "fuente": "https://commons.wikimedia.org/wiki/File:Nijntje_stoplicht-Utrecht-2020.jpg",
+        "nota": "Semáforo de Nijntje fotografiado en 2020."
+      },
+      "foto_width": 569,
+      "foto_height": 1200
     },
     {
       "numero": 6,
@@ -171,5 +191,6 @@
       },
       "coord_fuente": "Catharijnesingel (Nominatim)"
     }
-  ]
+  ],
+  "revision": 2
 }

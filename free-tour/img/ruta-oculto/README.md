@@ -1,8 +1,8 @@
 # Fotos de la Ruta 1 · Utrecht Oculto
 
-Carpeta para fotos propias de cada parada. Ahora mismo la ruta reutiliza las imágenes
-optimizadas de `../../fotos/optim/`; las paradas sin foto propia muestran un bloque
-de color con el número de parada (ver `.stop-card__placeholder` en `css/free-tour.css`).
+Carpeta para fotos propias de cada parada. La ruta reutiliza imágenes optimizadas del proyecto y fotografías de Wikimedia
+Commons con créditos en `../../../fotos/creditos-tour.md`. Para sustituir una foto
+por un original propio, actualiza también su atribución; no mantengas el autor anterior.
 
 Para añadir una foto:
 
@@ -19,8 +19,8 @@ Para añadir una foto:
 2. Apunta el campo `foto` de esa parada en `../../data/ruta-oculto.json` a
    `img/ruta-oculto/02-banio.webp` y rellena `foto_alt` con una descripción real.
 
-3. Añade la ruta del archivo a la lista `CORE` de `../../sw.js` para que también
-   esté disponible sin conexión.
+3. La descarga obtiene las fotos del JSON automáticamente. Sube `CACHE_NAME` en
+   `../../sw.js` y comprueba el inventario de la ruta y la foto sin conexión.
 
 Nombres sugeridos: `01-domplein`, `02-banio`, `03-oudegracht`, `04-casa`,
 `05-miffy`, `06-olivier`, `07-catharijne`.

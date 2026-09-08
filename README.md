@@ -140,3 +140,35 @@ MIT — úsalo, fórkalo, adáptalo. Si haces algo chulo con esto, cuéntamelo.
 ---
 
 *Hecho con ☕ en Utrecht.*
+
+## Planes personales y tours sin conexión
+
+En **[Mi itinerario](mi-plan.html)** puedes elegir planes con lluvia, con niños o
+con información de acceso contrastada en las webs oficiales de los museos
+(6 de septiembre de 2026). La comprobación es documental: no certifica el trayecto
+por la calle. Los tiempos son orientativos.
+
+Guarda las propuestas o los itinerarios de 1/2/3 días, quita paradas y cambia su orden.
+La selección se conserva en este navegador, sin cuenta ni sincronización entre equipos.
+Cada parada permite abrir su lugar en un mapa y consultar sus tiempos y detalles.
+
+Para un **Free Tour sin cobertura**, abre la ruta, despliega «Preparar el paseo» y
+pulsa «Guardar ruta sin conexión». El inventario distingue archivos descargados y
+paradas sin foto. Textos, controles, fotos disponibles y esquema de paradas se guardan;
+el callejero y las indicaciones externas requieren conexión. La lectura en voz alta
+depende del dispositivo. Comprueba la descarga antes de salir: el navegador puede
+liberar espacio. Avanzar de pantalla no marca una parada como visitada.
+
+Pruebas reproducibles con Python y `agent-browser` instalados (arrancan un servidor
+aislado y lo apagan durante el recorrido para comprobar la caché sin acceso a la red):
+
+```bash
+node scripts/test-planner-tour.mjs --isolated-server
+```
+
+Las cinco paradas antes sin foto tienen ahora imágenes de Wikimedia Commons con
+atribución visible y [créditos y licencias](fotos/creditos-tour.md). Domstraat se
+ilustra con una fotografía histórica de 1888, identificada como tal. Las dos paradas
+sin localización verificable (baño medieval y callejón de grafitis) se sustituyeron
+por Domstraat y el entorno de Vaartsche Rijn. Esto no es una auditoría histórica
+completa del resto del guion heredado.

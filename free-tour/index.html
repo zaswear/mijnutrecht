@@ -48,7 +48,7 @@
       </section>
 
       <!-- Se rellena por JS si hay una ruta a medias guardada -->
-      <div id="ft-reanudar"></div>
+      <div id="ft-reanudar"></div><p class="ft-plan-link"><a class="btn-soft" href="../mi-plan.html">Planes con lluvia, con niños y mi itinerario →</a></p>
 
       <div class="ft-cards" id="rutas">
 
@@ -69,7 +69,7 @@
           </div>
         </a>
 
-        <a class="ft-card" href="ruta.html?ruta=locura" aria-label="Comenzar la ruta Canal y Locura: 6 paradas, dos horas y media">
+        <a class="ft-card" href="ruta.html?ruta=locura" aria-label="Comenzar la ruta Canal y Locura: 6 paradas, 2 h 35 min">
           <img class="ft-card__bg" src="../fotos/optim/olivier-800.webp" width="800" height="450"
                alt="" loading="lazy" decoding="async" />
           <div class="ft-card__body">
@@ -77,8 +77,8 @@
             <h2 class="ft-card__title">Ruta 2 · Canal y Locura</h2>
             <p class="ft-card__desc">Cerveza, castillos y el otro Utrecht, el que no sale en las guías.</p>
             <p class="ft-card__meta">
-              <span>⏱️ 2 h 30 min</span>
-              <span>🚶 5,4 km</span>
+              <span>⏱️ 2 h 35 min</span>
+              <span>🚶 5,7 km</span>
               <span>📍 6 paradas</span>
               <span>⭐ Dificultad media</span>
             </p>
@@ -97,7 +97,7 @@
         <ul>
           <li><strong>Activa la ubicación</strong> para ver a cuántos metros estás de la siguiente parada.</li>
           <li><strong>Se guarda solo.</strong> Puedes parar a comer y retomar el tour donde lo dejaste.</li>
-          <li><strong>Funciona sin cobertura</strong> una vez cargada la ruta: los textos quedan guardados en el móvil.</li>
+          <li><strong>Prepara la descarga:</strong> abre una ruta, despliega «Preparar el paseo» y pulsa «Guardar ruta sin conexión». Comprueba los archivos guardados antes de salir. El callejero y las indicaciones externas necesitan red.</li>
           <li><strong>Auriculares opcionales:</strong> hay botón para escuchar el texto del guía en voz alta.</li>
           <li>Los tiempos son con paradas para mirar. Sin prisa: esto no es una carrera.</li>
         </ul>
@@ -119,8 +119,7 @@
   </footer>
 
   <script>
-    // Registra el Service Worker ya desde el listado, para que la
-    // ruta esté cacheada antes de salir de casa.
+    // Prepara el Service Worker. Cada ruta ofrece su descarga explícita e inventario.
     if ('serviceWorker' in navigator && location.protocol !== 'file:') {
       navigator.serviceWorker.register('sw.js').catch(function () { /* sin offline */ });
     }

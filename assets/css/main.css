@@ -356,3 +356,36 @@ p, li { text-wrap: pretty; }
     transition-duration: 0.001ms !important;
   }
 }
+
+/* Orientación compartida y plan personal: ladrillo = visita, verde = vida, canal = contexto. */
+.guide-paths { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .75rem; padding-block: 1.25rem; }
+.guide-paths a { display: flex; flex-direction: column; justify-content: center; min-height: 64px; padding: .65rem .85rem; border-bottom: 3px solid var(--color-borde); color: var(--color-texto); text-decoration: none; font-weight: 600; }
+.guide-paths a span { font-size: .8rem; font-weight: 400; color: var(--color-texto-suave); }
+.guide-paths a:hover, .guide-paths a[aria-current] { background: var(--color-piedra-dark); }
+.guide-paths [data-guide="turista"], .guide-paths [data-guide="plan"] { border-color: var(--color-ladrillo); }
+.guide-paths [data-guide="expat"] { border-color: var(--color-verde); }
+.guide-paths [data-guide="historia"] { border-color: var(--color-canal); }
+.plan-brand { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-block: 1.5rem; flex-wrap: wrap; }
+.plan-brand a { min-height: 44px; display: inline-flex; align-items: center; }
+.plan-page { max-width: 960px; padding-block: 2rem; }
+.plan-page > header { max-width: 700px; margin-bottom: 3rem; }
+.plan-page h1 { font-size: clamp(2rem, 6vw, 3.5rem); text-wrap: balance; line-height: 1.15; margin-bottom: 1rem; }
+.plan-page h2 { margin-bottom: 1rem; }
+.plan-page p { margin-block: .65rem; }
+.plan-invitation, .saved-plan { padding: clamp(1rem, 3vw, 2rem); margin-block: 2rem; background: var(--color-piedra-dark); border-left: 4px solid var(--color-ladrillo); border-radius: var(--radius); }
+.plan-invitation .btn { margin-top: 1rem; }
+.plan-filters, .plan-controls, .plan-links { display: flex; flex-wrap: wrap; gap: .65rem; margin-block: 1rem; }
+.plan-filters [aria-pressed="true"] { background: var(--color-canal); color: var(--color-blanco); }
+.plan-controls button:disabled { opacity: .5; cursor: default; }
+.plan-option { border-top: 4px solid var(--color-ladrillo); padding-block: 1.5rem; margin-top: 2rem; }
+.plan-option--canal { border-color: var(--color-canal); }
+.plan-option--verde { border-color: var(--color-verde); }
+.plan-stops { padding-left: 1.5rem; }
+.plan-stops > li { padding: 1rem 0 1.5rem .5rem; border-bottom: 1px solid var(--color-borde); }
+.plan-stops > li::marker { color: var(--color-ladrillo-texto); font-weight: 600; }
+.plan-access { border-left: 3px solid var(--color-verde); padding-left: .8rem; }
+.plan-links a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: .2em; }
+.plan-empty { padding-block: 1rem; }
+@media (max-width: 600px) { .guide-paths { grid-template-columns: repeat(2, minmax(0, 1fr)); } .guide-paths a { padding-inline: .5rem; } }
+@media print { .plan-controls, .plan-filters, #plan-ideas, .guide-paths, .plan-brand { display: none; } .saved-plan { border: 0; padding: 0; } }
+.plan-page .plan-invitation a { display: inline-flex; align-items: center; min-height: 44px; }

@@ -20,7 +20,7 @@ Web personal estática publicada en GitHub Pages que documenta mi vida en Utrech
 - **GitHub Pages** — hosting gratuito desde rama `main`
 
 > Rediseño completo (2026-08). Antes era un SPA de pestañas con Tailwind CDN en un
-> único `index.html`. Ahora son tres páginas con CSS y JS propios.
+> único `index.html`. Ahora son tres páginas principales y `mi-plan.html`, con CSS y JS propios.
 
 ---
 
@@ -36,6 +36,7 @@ mijnutrecht/
 │                             agenda y flora
 ├── expat.html              ← Modo EXPAT: BSN/DigiD, seguro, piso, trabajo,
 │                             coste de vida, bici, integración, calendario
+├── mi-plan.html            ← Planes con lluvia/niños/acceso y selección personal local
 ├── free-tour/              ← Free Tour Digital (sección propia, ver más abajo)
 │   ├── index.html          ← Listado de rutas
 │   ├── ruta.html           ← Reproductor de ruta (?ruta=oculto | ?ruta=locura)
@@ -168,13 +169,22 @@ reset y tipografía) y las fotos de `../fotos/optim/`.
   `FTSpeech` (speech.js, Web Speech API) y `free-tour.js` con la lógica y el render.
 - **Progreso** en `localStorage`, clave `mijnutrecht-tour-progress`, con **un objeto por
   ruta**: `{ oculto: {...}, locura: {...} }`. Al volver se ofrece continuar o empezar de
-  cero; al terminar se marca `completedAt` y la siguiente visita arranca limpia.
+  cero; `completedAt` solo se marca cuando se han confirmado todas las paradas.
+  Pasar de pantalla no suma visitas. `?parada=N` permite abrir y compartir una parada concreta.
 - **Service Worker en `free-tour/sw.js`, no en `js/`**: un SW solo controla su propio
   directorio hacia abajo y GitHub Pages no deja mandar `Service-Worker-Allowed`. Si se
   moviera a `js/` dejaría de cachear `ruta.html`. Al añadir archivos nuevos a la sección,
   añádelos a la lista `CORE` y **sube la versión de `CACHE_NAME`**.
-  Estrategia: **red primero para HTML y JSON** (un deploy se ve en el acto) y **caché
-  primero para CSS, JS e imágenes** (la ruta abre al instante en mitad de la calle).
+  Descarga **explícita por ruta** mediante `js/offline.js` y mensajes `DOWNLOAD` / `STATUS`.
+  `CORE` contiene la carcasa; el JSON se deriva del id autorizado en `ROUTES` y las
+  fotos se extraen de ese JSON (solo `img/` o `../fotos/optim/`, mismo origen).
+  La pantalla informa de archivos presentes y paradas sin imagen. No promete descarga
+  completa si falta un recurso. HTML/JSON usan red primero y fallback exacto a caché;
+  CSS/JS/fotos usan caché primero. Al cambiar código, subir `CACHE_NAME`.
+  Las consultas `?ruta=` y `?parada=` reutilizan solo la carcasa `ruta.html`; los JSON
+  nunca reciben HTML ni datos de otra ruta como fallback. El esquema SVG y la lista
+  funcionan sin red; las teselas, direcciones externas y fuentes remotas no se descargan.
+  La voz depende de las voces disponibles en el dispositivo.
 - **Metadatos por ruta**: las dos rutas comparten `ruta.html`, así que `free-tour.js`
   reescribe `canonical` y las etiquetas Open Graph según `?ruta=`.
 - **Punto de encuentro**: `punto_encuentro` se pinta solo en la parada 1 y debe coincidir
@@ -183,16 +193,16 @@ reset y tipografía) y las fotos de `../fotos/optim/`.
   pinta un bloque de color con el número de parada. Instrucciones para añadir fotos
   propias en `img/ruta-*/README.md`.
 - **Coordenadas**: geocodificadas con Nominatim (sin API key). Cada parada guarda su
-  procedencia en `coord_fuente`. Las paradas de lugares inventados por el guion (el baño
-  medieval, la casa del siglo XVII, el callejón de los grafitis) van sobre la calle que
-  nombra el texto y su `coord_fuente` lo dice.
+  procedencia en `coord_fuente`. El baño y el callejón no verificables se sustituyeron por
+  Domstraat y Vaartsche Rijn. La historia de la casa privada del siglo XVII sigue
+  siendo parte del guion anterior, no una visita interior verificada.
 - **Distancia y duración son datos derivados**: salen de sumar los saltos entre paradas
   (haversine × 1,35 de rodeo, a 4,5 km/h) más el `tiempo_estimado` de cada una. Si mueves
   una parada, recalcula `distancia_siguiente`, `distancia` y `duracion` — y acuérdate de
   que esas cifras también están escritas a mano en las tarjetas de `free-tour/index.html`
   y en la sección Free Tour de `index.html`.
 - Añadir una ruta nueva = crear `data/ruta-<id>.json` con el mismo esquema, una card en
-  `index.html`, el id en la validación de `free-tour.js` y el JSON en `CORE` de `sw.js`.
+  `index.html`, el id en la validación de `free-tour.js` y el id en `ROUTES` de `sw.js`.
 
 ### Esquema de `data/ruta-*.json`
 ```json
@@ -328,3 +338,30 @@ Test visual de regresión con `agent-browser diff screenshot`
   objetivos táctiles de 44px, contraste AA y respeto a `prefers-reduced-motion`.
 - Nada de promesas falsas en la UI: el botón de PDF abre `window.print()` con la hoja
   de impresión (que despliega pestañas y acordeones), no un PDF inexistente.
+
+
+## Mi itinerario y planes según el día (2026-09)
+
+- `mi-plan.html` ofrece cuatro propuestas de lluvia, familias y acceso preparado.
+  El contenido vive en `assets/data/planes.json`; incluye fuentes oficiales y fecha
+  de contraste documental. No confundir accesibilidad del edificio con auditoría del
+  recorrido urbano. Los tiempos son estimaciones editoriales, no horarios de apertura.
+- `assets/js/plan-store.js` expone `MUPlan`: persistencia local en
+  `mijnutrecht:itinerary:v1`, máximo 100 paradas, deduplicación por id y validación de
+  enlaces. Fallar al guardar debe mostrar un mensaje, nunca un éxito ficticio.
+- `assets/js/planner.js` renderiza filtros y selección personal con quitar/subir/bajar.
+  `landing.js` permite añadir los itinerarios de 1/2/3 días al mismo almacén.
+  No requiere cuenta, no sincroniza dispositivos y no promete que la página del
+  plan completo esté disponible offline: para eso está la descarga del Free Tour.
+- La navegación `.guide-paths` une Visitar, Vivir, Historia y Mi itinerario en HTML
+  estático. Reutiliza las secciones existentes mediante enlaces, sin duplicar su contenido.
+- Comprobación de regresión: ejecutar `node scripts/test-planner-tour.mjs --isolated-server`.
+  Requiere `agent-browser` y Python; arranca y apaga su propio servidor de prueba
+  para garantizar que el service worker no llega a la red. Usa sesión aislada y prueba almacenamiento, filtros,
+  navegación, móvil/desktop, descarga y un recorrido completo con red desactivada.
+- Las cinco paradas que no tenían foto usan ahora imágenes de Wikimedia Commons,
+  autorizadas por el usuario, con `foto_credito`, dimensiones y atribución visible.
+  Licencias y fuentes: `fotos/creditos-tour.md`. No llamarlas fotos propias.
+  Domstraat usa una imagen histórica de 1888, señalada como tal. Se reemplazaron
+  el baño y el callejón ficticios por Domstraat y Vaartsche Rijn; la ruta Locura
+  se recalculó a 5,7 km / 2 h 35 min. `revision: 2` invalida el progreso del trazado anterior.

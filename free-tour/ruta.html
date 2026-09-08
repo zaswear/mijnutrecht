@@ -58,7 +58,7 @@
       <span class="map-collapsible__chevron" aria-hidden="true">⌄</span>
     </button>
     <div class="map-collapsible__content" id="map-panel">
-      <div id="tour-map"></div>
+      <p class="ft-map-note">Callejero en línea. La línea une las paradas: no son indicaciones peatonales. Sin red, usa el esquema de paradas.</p><div id="tour-map"></div>
     </div>
     <div class="map-actions">
       <button class="btn-soft" type="button" id="btn-directions"
@@ -69,8 +69,22 @@
   </section>
 
   <p class="ft-offline-note" id="offline-note" role="status">
-    📴 Sin conexión. Sigues viendo la ruta guardada en el móvil.
+    Sin conexión. Consulta abajo qué recursos están guardados; los mapas externos necesitan red.
   </p>
+
+  <details class="ft-preparation">
+    <summary>Preparar el paseo y consultar las paradas</summary>
+    <p id="route-summary"></p>
+    <p>Los tiempos son estimaciones. Los recorridos urbanos no están auditados en accesibilidad: los muelles pueden requerir escaleras. Puedes observar el canal desde la calle superior.</p>
+    <div id="route-outline"></div>
+    <h2>Para salir sin cobertura</h2>
+    <p id="download-status" role="status">Comprobando archivos guardados…</p>
+    <p id="download-inventory"></p>
+    <button type="button" class="btn-soft" id="download-route" disabled>Guardar ruta sin conexión</button>
+    <p>Se guardan los textos, los controles, el esquema de paradas y las fotos disponibles. El callejero, las indicaciones de Google Maps y los enlaces externos necesitan conexión. La voz depende de las voces instaladas en tu dispositivo.</p>
+    <p>El navegador puede liberar el almacenamiento. Comprueba la descarga antes de salir y vuelve a abrir esta ruta sin red.</p>
+    <a class="btn-soft" href="../mi-plan.html">Mi itinerario personal →</a>
+  </details>
 
   <!-- ══════════ Parada actual (render por JS) ══════════ -->
   <main id="stop-root">
@@ -100,6 +114,7 @@
   <script src="js/geolocation.js" defer></script>
   <script src="js/map.js" defer></script>
   <script src="js/speech.js" defer></script>
+  <script src="js/offline.js" defer></script>
   <script src="js/free-tour.js" defer></script>
 </body>
 </html>
