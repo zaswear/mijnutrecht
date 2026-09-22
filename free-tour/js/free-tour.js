@@ -71,11 +71,19 @@
   /* ───────── render ───────── */
   function updateProgress() {
     var pct = Math.round((completed.length / stops.length) * 100);
-    var fill = $('progress-fill');
-    if (fill) {
-      fill.style.transform = 'scaleX(' + pct / 100 + ')';
-      fill.parentElement.setAttribute('aria-valuetext', completed.length + ' de ' + stops.length + ' paradas visitadas');
-      fill.parentElement.setAttribute('aria-valuenow', String(pct));
+    var bar = document.querySelector('.progress-bar');
+    if (bar) {
+      /* Los tramos se crean una vez y luego solo cambian de clase: repintar
+         el innerHTML en cada parada cortaría la transición de color. */
+      if (bar.children.length !== stops.length) {
+        bar.innerHTML = stops.map(function () { return '<span class="progress-tick"></span>'; }).join('');
+      }
+      [].forEach.call(bar.children, function (tick, i) {
+        tick.className = 'progress-tick' +
+          (completed.indexOf(i) > -1 ? ' is-done' : (i === index && !finished ? ' is-current' : ''));
+      });
+      bar.setAttribute('aria-valuetext', completed.length + ' de ' + stops.length + ' paradas visitadas');
+      bar.setAttribute('aria-valuenow', String(pct));
     }
     var count = $('tour-count');
     if (count) count.textContent = finished ? completed.length + '/' + stops.length + ' visitadas' : (index + 1) + '/' + stops.length;

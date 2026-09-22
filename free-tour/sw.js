@@ -1,5 +1,5 @@
 /* Offline explícito por ruta. El scope se mantiene en /free-tour/. */
-const CACHE_NAME = 'mijnutrecht-tour-v5';
+const CACHE_NAME = 'mijnutrecht-tour-v6';
 const ROUTES = ['oculto', 'locura'];
 const CORE = ['index.html', 'ruta.html', 'css/free-tour.css', 'js/free-tour.js',
   'js/geolocation.js', 'js/map.js', 'js/speech.js', 'js/offline.js', '../assets/css/main.css'];

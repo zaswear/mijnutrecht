@@ -140,6 +140,14 @@ Ritmo: `--gap-section` 6rem (8rem en ≥1280px), radios 12px (`--radius`) y 20px
   quede uno abierto), trigger `.accordion__trigger` con `aria-expanded` + `aria-controls`.
 - **Filtros**: `.chip` con `aria-pressed`; los contenedores llevan `data-map-filter`,
   `data-agenda-filter` o `data-flora-filter`.
+- **Las 7 experiencias son un acordeón, no una rejilla.** `.exp-grid` es un flex de
+  siete `.exp-card`; el que lleva `data-abierto` se queda con el espacio y el resto
+  quedan en una franja con el título en vertical (horizontal en móvil, donde la fila
+  pasa a columna). Siempre hay **exactamente uno abierto**, para que la sección nunca
+  se quede sin texto visible. El texto colapsado se oculta con `height: 0` y
+  `opacity`, nunca con `display` ni `visibility`: así Ctrl+F lo sigue encontrando.
+  El área clicable es el `::before` estirado del `.exp-card__trigger`, no el botón,
+  que si no taparía el cuerpo.
 - **Mapa**: además de los pines hay buscador + lista (`#puntos-search`, `#puntos-list`),
   porque pinchando pines no se encuentra un sitio concreto. La búsqueda ignora tildes.
   Los marcadores viven en la capa `markerClusterGroup`, **no en el mapa**: al filtrar hay
@@ -171,6 +179,11 @@ reset y tipografía) y las fotos de `../fotos/optim/`.
   ruta**: `{ oculto: {...}, locura: {...} }`. Al volver se ofrece continuar o empezar de
   cero; `completedAt` solo se marca cuando se han confirmado todas las paradas.
   Pasar de pantalla no suma visitas. `?parada=N` permite abrir y compartir una parada concreta.
+- **La barra de progreso va por tramos**, uno por parada (`.progress-tick`, con
+  `is-done` e `is-current`), en vez de un relleno continuo: caminando se lee «voy por
+  la tercera de siete», que es el dato útil, y no un porcentaje. Los tramos los crea
+  `updateProgress()` una sola vez y después solo les cambia la clase — repintar el
+  `innerHTML` en cada parada cortaría la transición de color.
 - **Service Worker en `free-tour/sw.js`, no en `js/`**: un SW solo controla su propio
   directorio hacia abajo y GitHub Pages no deja mandar `Service-Worker-Allowed`. Si se
   moviera a `js/` dejaría de cachear `ruta.html`. Al añadir archivos nuevos a la sección,
@@ -349,7 +362,14 @@ Test visual de regresión con `agent-browser diff screenshot`
 - `assets/js/plan-store.js` expone `MUPlan`: persistencia local en
   `mijnutrecht:itinerary:v1`, máximo 100 paradas, deduplicación por id y validación de
   enlaces. Fallar al guardar debe mostrar un mensaje, nunca un éxito ficticio.
-- `assets/js/planner.js` renderiza filtros y selección personal con quitar/subir/bajar.
+- `assets/js/planner.js` renderiza filtros y selección personal con quitar/subir/bajar,
+  y además deja **reordenar arrastrando** el asa `.plan-drag` (Pointer Events, sin
+  librería). Los botones ↑/↓ son la vía accesible y no se tocan: el asa va
+  `aria-hidden` porque duplica una función que ya existe con teclado. Durante el
+  arrastre solo se mueven `transform`, así que soltar fuera o cancelar no escribe
+  nada; el orden se guarda en `MUPlan.write` al soltar. El umbral para pasar a un
+  vecino es `>=` su punto medio: con `>` estricto el último hueco de la lista no se
+  alcanza nunca.
   `landing.js` permite añadir los itinerarios de 1/2/3 días al mismo almacén.
   No requiere cuenta, no sincroniza dispositivos y no promete que la página del
   plan completo esté disponible offline: para eso está la descarga del Free Tour.

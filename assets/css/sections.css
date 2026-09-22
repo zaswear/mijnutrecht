@@ -198,21 +198,35 @@
 }
 .itinerario__dia-title:first-child { margin-top: 0; }
 
-/* ───────── 7 experiencias ───────── */
-.exp-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+/* ───────── 7 experiencias (acordeón) ─────────
+   Los siete paneles caben en una fila; el abierto se queda con el espacio y
+   los otros se estrechan a una franja con el número y el título en vertical.
+   En móvil la fila pasa a columna (responsive.css) y todo sigue igual. */
+.exp-grid {
+  display: flex;
+  gap: 0.75rem;
+  min-height: 420px;
+}
 .exp-card {
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  min-height: 340px;
-  aspect-ratio: 4 / 3;
-  padding: 1.75rem;
+  flex: 0 1 auto;
+  /* Colapsado ocupa una franja fija; abierto se lleva el resto de la fila. */
+  width: 84px;
+  min-width: 84px;
   border-radius: var(--radius-lg);
   overflow: hidden;
   color: #fff;
   isolation: isolate;
   background: var(--color-canal);
+  transition: width 0.55s var(--ease-out), min-width 0.55s var(--ease-out);
+}
+.exp-card[data-abierto] {
+  flex: 1 1 auto;
+  width: auto;
+  min-width: 0;
 }
 .exp-card__bg {
   position: absolute; inset: 0; z-index: -2;
@@ -220,7 +234,7 @@
   object-fit: cover;
   transition: transform 0.6s var(--ease-out);
 }
-.exp-card:hover .exp-card__bg { transform: scale(1.05); }
+.exp-card[data-abierto] .exp-card__bg { transform: scale(1.05); }
 .exp-card::after {
   content: '';
   position: absolute; inset: 0; z-index: -1;
@@ -230,16 +244,77 @@
 .exp-card--ladrillo { background: linear-gradient(150deg, var(--color-ladrillo) 0%, #7E3626 100%); }
 .exp-card--verde { background: linear-gradient(150deg, var(--color-verde) 0%, #34573F 100%); }
 .exp-card--naranja { background: linear-gradient(150deg, var(--color-naranja) 0%, #A8410F 100%); }
+
+/* El disparador va en el flujo, pero su ::before se estira sobre el panel
+   entero: así el objetivo táctil es toda la franja, muy por encima de 44px,
+   sin que el botón tape el texto del cuerpo. */
+.exp-card__trigger {
+  position: static;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+  width: 100%;
+  padding: 1.75rem 1.75rem 0.75rem;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.exp-card__trigger::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+}
+.exp-card__trigger:focus-visible { outline: none; }
+.exp-card__trigger:focus-visible::before {
+  outline: 3px solid #fff;
+  outline-offset: -5px;
+  border-radius: var(--radius-lg);
+}
 .exp-card__num {
   font-family: var(--font-display);
   font-size: 3.2rem;
   line-height: 1;
   color: rgba(255, 255, 255, 0.4);
-  margin-bottom: 0.5rem;
 }
-.exp-card__title { font-size: 1.4rem; color: #fff; margin-bottom: 0.55rem; }
+.exp-card__title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  line-height: 1.2;
+  color: #fff;
+}
+/* Colapsado: el título gira y la caja se estrecha, para que quepa en la franja. */
+.exp-card:not([data-abierto]) .exp-card__trigger { padding: 1.25rem 1rem; align-items: center; }
+.exp-card:not([data-abierto]) .exp-card__num { font-size: 2.2rem; }
+.exp-card:not([data-abierto]) .exp-card__title {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  max-height: 16rem;
+  overflow: hidden;
+  font-size: 1.05rem;
+}
+/* El cuerpo deja hueco al disparador (que está por encima en absoluto): el
+   padding-bottom reserva el sitio del número y el título del panel abierto. */
+.exp-card__body {
+  padding: 0 1.75rem 1.75rem;
+  opacity: 1;
+  transition: opacity 0.4s var(--ease-out) 0.15s;
+}
+.exp-card:not([data-abierto]) .exp-card__body {
+  opacity: 0;
+  /* Sin visibility ni display: así Ctrl+F sigue encontrando el texto. */
+  height: 0;
+  padding-block: 0;
+  overflow: hidden;
+  transition-delay: 0s;
+}
 .exp-card__text { font-size: 0.9rem; color: rgba(255, 255, 255, 0.85); max-width: 42ch; }
 .exp-card__where {
+  display: block;
   margin-top: 0.9rem;
   font-size: 0.72rem;
   font-weight: 700;

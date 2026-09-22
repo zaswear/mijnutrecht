@@ -36,18 +36,24 @@
   border-bottom: 1px solid var(--color-borde);
 }
 
+/* Barra por tramos: un tramo por parada. Caminando se lee «voy por la
+   tercera de siete» de un vistazo, cosa que un 43 % no dice. */
 .progress-bar {
+  display: flex;
+  gap: 2px;
   height: var(--ft-bar-h);
   background: var(--color-piedra-dark, #EBE3D6);
   overflow: hidden;
 }
-.progress-bar__fill {
-  height: 100%;
-  width: 100%;
-  transform: scaleX(0);
-  transform-origin: left;
-  background: var(--color-ladrillo);
-  transition: transform 0.2s var(--ease-out, ease);
+.progress-tick {
+  flex: 1 1 0;
+  background: transparent;
+  transition: background-color 0.25s var(--ease-out, ease);
+}
+.progress-tick.is-done { background: var(--color-ladrillo); }
+/* La parada en curso se marca a medias, para distinguirla de una visitada. */
+.progress-tick.is-current {
+  background: linear-gradient(to right, var(--color-ladrillo) 50%, rgba(184, 92, 63, 0.3) 50%);
 }
 
 .tour-top__row {
@@ -679,7 +685,7 @@
 .ft-stop-list [aria-current] { background: var(--color-ladrillo); color: var(--color-blanco); }
 .ft-map-note { padding: 1rem; }
 .ft-plan-link { margin-bottom: 1.5rem; }
-@media (prefers-reduced-motion: reduce) { .progress-bar__fill { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .progress-tick { transition: none; } }
 
 .stop-photo { margin: 0; }
 .stop-card__image--credited { object-fit: contain; background: var(--color-piedra-dark); }

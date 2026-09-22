@@ -354,6 +354,7 @@ p, li { text-wrap: pretty; }
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+    transition-delay: 0s !important;
   }
 }
 
@@ -381,7 +382,43 @@ p, li { text-wrap: pretty; }
 .plan-option--canal { border-color: var(--color-canal); }
 .plan-option--verde { border-color: var(--color-verde); }
 .plan-stops { padding-left: 1.5rem; }
-.plan-stops > li { padding: 1rem 0 1.5rem .5rem; border-bottom: 1px solid var(--color-borde); }
+.plan-stops > li { position: relative; padding: 1rem 0 1.5rem .5rem; border-bottom: 1px solid var(--color-borde); }
+
+/* Asa para reordenar arrastrando. Es un atajo de ratón y dedo: la vía
+   accesible siguen siendo los botones ↑/↓, por eso el asa va aria-hidden. */
+#saved-stops .plan-drag {
+  position: absolute;
+  top: .75rem;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius);
+  color: var(--color-texto-suave);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: grab;
+  /* Sin esto, arrastrar en móvil hace scroll de la página en vez de mover. */
+  touch-action: none;
+  user-select: none;
+}
+#saved-stops .plan-drag:hover { background: var(--color-piedra); color: var(--color-texto); }
+#saved-stops .plan-stops > li { padding-right: 52px; }
+/* Durante el arrastre los vecinos se apartan con transición; el que se
+   mueve no la lleva, o iría a rastras del puntero. */
+.plan-stops.is-reordering > li { transition: transform .18s var(--ease-out); }
+.plan-stops > li.is-dragging {
+  position: relative;
+  z-index: 2;
+  transition: none;
+  cursor: grabbing;
+  background: var(--color-piedra);
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius);
+}
+.plan-stops > li.is-dragging .plan-drag { cursor: grabbing; }
 .plan-stops > li::marker { color: var(--color-ladrillo-texto); font-weight: 600; }
 .plan-access { border-left: 3px solid var(--color-verde); padding-left: .8rem; }
 .plan-links a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: .2em; }

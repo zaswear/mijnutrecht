@@ -77,29 +77,79 @@
       });
   }
 
-  /* ── Las 7 experiencias ── */
+  /* ── Las 7 experiencias (acordeón de paneles) ──
+     Colapsado se ve el número y el título; al abrir uno se expande y muestra
+     el texto. Horizontal en escritorio, vertical en móvil (lo decide el CSS,
+     el JS es el mismo). Siempre hay exactamente un panel abierto: así nunca
+     se queda la sección sin texto visible. */
   var expGrid = document.getElementById('experiencias-grid');
   if (expGrid) {
     fetch('./assets/data/experiencias.json')
       .then(function (r) { return r.json(); })
       .then(function (items) {
-        expGrid.innerHTML = items.map(function (e) {
+        expGrid.innerHTML = items.map(function (e, i) {
+          var abierto = i === 0;
+          var id = 'exp-panel-' + i;
           var bg = e.img
             ? '<img class="exp-card__bg" src="' + esc(e.img) + '" alt="' + esc(e.alt || '') + '" loading="lazy" decoding="async" width="800" height="600" />'
             : '';
-          return '<article class="exp-card exp-card--' + esc(e.tono || 'tinta') + ' reveal">' +
+          return '<article class="exp-card exp-card--' + esc(e.tono || 'tinta') + ' reveal" data-exp-panel' +
+            (abierto ? ' data-abierto' : '') + '>' +
             bg +
-            '<span class="exp-card__num" aria-hidden="true">' + esc(e.num) + '</span>' +
-            '<h3 class="exp-card__title">' + esc(e.titulo) + '</h3>' +
-            '<p class="exp-card__text">' + esc(e.texto) + '</p>' +
-            '<span class="exp-card__where">' + esc(e.donde) + '</span>' +
+            '<button type="button" class="exp-card__trigger" aria-expanded="' + (abierto ? 'true' : 'false') +
+              '" aria-controls="' + id + '">' +
+              '<span class="exp-card__num" aria-hidden="true">' + esc(e.num) + '</span>' +
+              '<span class="exp-card__title">' + esc(e.titulo) + '</span>' +
+            '</button>' +
+            '<div class="exp-card__body" id="' + id + '">' +
+              '<p class="exp-card__text">' + esc(e.texto) + '</p>' +
+              '<span class="exp-card__where">' + esc(e.donde) + '</span>' +
+            '</div>' +
           '</article>';
         }).join('');
+        initExpAccordion(expGrid);
         done();
       })
       .catch(function () {
         expGrid.innerHTML = '<p class="muted small">No se han podido cargar las experiencias.</p>';
       });
+  }
+
+  function initExpAccordion(root) {
+    var paneles = [].slice.call(root.querySelectorAll('[data-exp-panel]'));
+    if (!paneles.length) return;
+
+    function abrir(panel) {
+      paneles.forEach(function (p) {
+        var activo = p === panel;
+        p.toggleAttribute('data-abierto', activo);
+        p.querySelector('.exp-card__trigger').setAttribute('aria-expanded', activo ? 'true' : 'false');
+      });
+    }
+
+    root.addEventListener('click', function (ev) {
+      var trigger = ev.target.closest('.exp-card__trigger');
+      if (trigger && root.contains(trigger)) abrir(trigger.closest('[data-exp-panel]'));
+    });
+
+    /* Al tabular, el panel enfocado se abre solo: si no, el foco entraría en
+       un panel colapsado y el texto seguiría invisible. */
+    root.addEventListener('focusin', function (ev) {
+      var trigger = ev.target.closest('.exp-card__trigger');
+      if (trigger && root.contains(trigger)) abrir(trigger.closest('[data-exp-panel]'));
+    });
+
+    /* Flechas para moverse entre paneles, como en un tablist. */
+    root.addEventListener('keydown', function (ev) {
+      var trigger = ev.target.closest('.exp-card__trigger');
+      if (!trigger || !root.contains(trigger)) return;
+      var paso = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[ev.key];
+      if (!paso) return;
+      ev.preventDefault();
+      var i = paneles.indexOf(trigger.closest('[data-exp-panel]'));
+      var siguiente = paneles[(i + paso + paneles.length) % paneles.length];
+      siguiente.querySelector('.exp-card__trigger').focus();
+    });
   }
 
   /* ── Modal de rutas a pie ── */

@@ -15,11 +15,85 @@
   function renderSaved() {
     var saved = MUPlan.read();
     document.getElementById('saved-stops').innerHTML = saved.length ? '<ol class="plan-stops">' + saved.map(function (s, i) {
-      return '<li><h3>' + esc(s.title) + '</h3>' + details(s) + '<div class="plan-controls">' +
+      return '<li data-stop="' + i + '">' +
+        '<span class="plan-drag" aria-hidden="true" title="Arrastra para reordenar">⠿</span>' +
+        '<h3>' + esc(s.title) + '</h3>' + details(s) + '<div class="plan-controls">' +
         '<button type="button" class="btn btn-ghost" data-move="' + i + '" data-direction="-1" ' + (i === 0 ? 'disabled' : '') + ' aria-label="Subir ' + esc(s.title) + '">↑ Subir</button>' +
         '<button type="button" class="btn btn-ghost" data-move="' + i + '" data-direction="1" ' + (i === saved.length - 1 ? 'disabled' : '') + ' aria-label="Bajar ' + esc(s.title) + '">↓ Bajar</button>' +
         '<button type="button" class="btn btn-ghost" data-remove="' + i + '" aria-label="Quitar ' + esc(s.title) + '">Quitar</button></div></li>';
     }).join('') + '</ol>' : '<p class="plan-empty">Todavía no has guardado paradas. Añade un plan de abajo o guarda uno de los itinerarios de la guía.</p>';
+    initDrag();
+  }
+
+  /* Reordenar arrastrando. Los botones ↑/↓ siguen siendo la vía accesible:
+     esto es un atajo con ratón o dedo, no la única forma de reordenar.
+     Mientras se arrastra solo se mueven transforms; el orden real no se
+     escribe hasta soltar, así que un drag cancelado no toca el almacén. */
+  function initDrag() {
+    var lista = document.querySelector('#saved-stops .plan-stops');
+    if (!lista) return;
+    var items, rects, arrastrado, desde, hasta, inicioY, altura;
+
+    lista.addEventListener('pointerdown', function (ev) {
+      var asa = ev.target.closest('.plan-drag');
+      if (!asa || ev.button !== 0) return;
+      ev.preventDefault();
+      arrastrado = asa.closest('li');
+      items = [].slice.call(lista.children);
+      rects = items.map(function (li) { return li.getBoundingClientRect(); });
+      desde = items.indexOf(arrastrado);
+      hasta = desde;
+      inicioY = ev.clientY;
+      altura = rects[desde].height + 12;
+      arrastrado.classList.add('is-dragging');
+      lista.classList.add('is-reordering');
+      asa.setPointerCapture(ev.pointerId);
+    });
+
+    lista.addEventListener('pointermove', function (ev) {
+      if (!arrastrado) return;
+      var dy = ev.clientY - inicioY;
+      arrastrado.style.transform = 'translateY(' + dy + 'px)';
+      var centro = rects[desde].top + rects[desde].height / 2 + dy;
+      var nuevo = desde;
+      rects.forEach(function (r, i) {
+        if (i === desde) return;
+        /* >= y <=: si el centro queda justo en la mitad del vecino, cuenta
+           como que ya lo ha pasado. Con > estricto el último hueco de la
+           lista no se alcanza nunca. */
+        if (i < desde && centro <= r.top + r.height / 2) nuevo = Math.min(nuevo, i);
+        if (i > desde && centro >= r.top + r.height / 2) nuevo = Math.max(nuevo, i);
+      });
+      if (nuevo !== hasta) {
+        hasta = nuevo;
+        items.forEach(function (li, i) {
+          if (li === arrastrado) return;
+          var d = 0;
+          if (hasta > desde && i > desde && i <= hasta) d = -altura;
+          if (hasta < desde && i >= hasta && i < desde) d = altura;
+          li.style.transform = d ? 'translateY(' + d + 'px)' : '';
+        });
+      }
+    });
+
+    function soltar() {
+      if (!arrastrado) return;
+      items.forEach(function (li) { li.style.transform = ''; li.classList.remove('is-dragging'); });
+      lista.classList.remove('is-reordering');
+      var mover = hasta !== desde;
+      var origen = desde;
+      arrastrado = null;
+      if (!mover) return;
+      var guardadas = MUPlan.read();
+      guardadas.splice(hasta, 0, guardadas.splice(origen, 1)[0]);
+      var ok = MUPlan.write(guardadas);
+      status.textContent = ok
+        ? 'Parada movida a la posición ' + (hasta + 1) + ' de ' + guardadas.length + '.'
+        : 'No se pudo guardar el nuevo orden. Tu itinerario anterior se conserva.';
+      if (!ok) renderSaved();
+    }
+    lista.addEventListener('pointerup', soltar);
+    lista.addEventListener('pointercancel', soltar);
   }
   function renderIdeas() {
     document.getElementById('plan-ideas').innerHTML = plans.filter(function (p) { return filter === 'Todos' || p.tags.indexOf(filter) !== -1; }).map(function (p) {
